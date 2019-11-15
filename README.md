@@ -1,4 +1,4 @@
-# encodable
+# 🎭 encodable
 
 [![Codecov branch](https://img.shields.io/codecov/c/github/apache-superset/encodable/master.svg?style=flat-square)](https://codecov.io/gh/apache-superset/encodable/branch/master)
 [![Build Status](https://img.shields.io/travis/com/apache-superset/encodable/master.svg?style=flat-square
