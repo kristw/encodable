@@ -1,6 +1,6 @@
 {
   "name": "encodable",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "almost-vega-lite grammar for custom visualization component",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -42,8 +42,8 @@
     "vega-lite": "3.4.0"
   },
   "devDependencies": {
-    "@superset-ui/core": "^0.12.4",
     "@superset-ui/color": "^0.12.0",
+    "@superset-ui/core": "^0.12.4",
     "@superset-ui/number-format": "^0.12.0",
     "@superset-ui/time-format": "^0.12.0"
   },
