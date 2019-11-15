@@ -14,7 +14,9 @@
     "url": "git+https://github.com/apache-superset/encodable.git"
   },
   "keywords": [
-    "superset"
+    "grammar",
+    "encodable",
+    "vega-lite"
   ],
   "author": "Superset",
   "license": "Apache-2.0",
