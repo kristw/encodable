@@ -73,7 +73,7 @@
         "<rootDir>/test/setupTests.ts"
       ],
       "projects": [
-        "<rootDir>",
+        "<rootDir>"
       ]
     },
     "typescript": {
