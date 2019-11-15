@@ -4,7 +4,6 @@
 [![Build Status](https://img.shields.io/travis/com/apache-superset/encodable/master.svg?style=flat-square
 )](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/fcbfa1cb-ae3e-48a4-b86a-e803c8e6c79c/deploy-status)](https://app.netlify.com/sites/superset-ui/deploys)
 
 This package provides standardized API for encodable components and adopts the grammar from `vega-lite` grammar and copy their logic for determining  smart defaults (e.g. choosing scale type based on data type, etc.)
 In addition, it leverages sibling `superset-ui` packages to use the number and time formatters as well as color scales.
