@@ -6,7 +6,7 @@
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
 This package provides standardized API for encodable components and adopts the grammar from `vega-lite` grammar and copy their logic for determining  smart defaults (e.g. choosing scale type based on data type, etc.)
-In addition, it leverages sibling `superset-ui` packages to use the number and time formatters as well as color scales.
+In addition, it leverages `superset-ui` packages to use the number and time formatters as well as color scales.
 
 #### Example usage
 
