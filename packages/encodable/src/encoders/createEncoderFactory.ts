@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import Encoder from './Encoder';
 import { EncodingConfig, DeriveChannelTypes, DeriveEncoding } from '../types/Encoding';
 import mergeEncoding from '../utils/mergeEncoding';
@@ -32,13 +33,16 @@ export default function createEncoderFactory<Config extends EncodingConfig>(
       ? (encoding: PartialEncoding) => mergeEncoding(params.defaultEncoding, encoding)
       : params.completeEncoding;
 
+  const create = (encoding: PartialEncoding) =>
+    new Encoder<Config>({
+      channelTypes,
+      encoding: completeEncoding(encoding),
+    });
+
   return {
     channelTypes,
-    create: (encoding: PartialEncoding) =>
-      new Encoder<Config>({
-        channelTypes,
-        encoding: completeEncoding(encoding),
-      }),
+    create,
+    createSelector: () => createSelector((encoding: PartialEncoding) => encoding, create),
     DEFAULT_ENCODING: completeEncoding({}),
   };
 }
