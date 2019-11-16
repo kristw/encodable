@@ -1,9 +1,15 @@
-import { ChannelType, ChannelTypeToDefMap } from './Channel';
+import { ChannelTypeToDefMap } from './Channel';
 import { Value } from './VegaLite';
 import ChannelEncoder from '../encoders/ChannelEncoder';
 
+/**
+ * { [channelName]: [ChannelType, Output, multiple?] }
+ */
 export type EncodingConfig = {
-  [k in string]: [ChannelType, Value, 'multiple'?];
+  [k in string]:
+    | ['X' | 'Y' | 'XBand' | 'YBand' | 'Numeric', number | null, 'multiple'?]
+    | ['Color' | 'Text', string | null, 'multiple'?]
+    | ['Category', Value, 'multiple'?];
 };
 
 export type DeriveChannelTypes<Config extends EncodingConfig> = {
