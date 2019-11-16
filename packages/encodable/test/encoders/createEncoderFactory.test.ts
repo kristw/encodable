@@ -1,25 +1,25 @@
 import createEncoderFactory from '../../src/encoders/createEncoderFactory';
 
 describe('createEncoderFactory()', () => {
-  it('supports defaultEncoding as fixed value', () => {
-    const factory = createEncoderFactory<{
-      x: ['X', number];
-    }>({
-      channelTypes: {
-        x: 'X',
-      },
-      defaultEncoding: {
-        x: { type: 'quantitative', field: 'speed' },
-      },
-    });
+  const factory = createEncoderFactory<{
+    x: ['X', number];
+  }>({
+    channelTypes: {
+      x: 'X',
+    },
+    defaultEncoding: {
+      x: { type: 'quantitative', field: 'speed' },
+    },
+  });
 
+  it('supports defaultEncoding as fixed value', () => {
     const encoder = factory.create();
     expect(encoder.encoding).toEqual({
       x: { type: 'quantitative', field: 'speed' },
     });
   });
   it('supports completeEncoding for customization', () => {
-    const factory = createEncoderFactory<{
+    const factory2 = createEncoderFactory<{
       color: ['Color', string];
     }>({
       channelTypes: {
@@ -30,9 +30,25 @@ describe('createEncoderFactory()', () => {
       }),
     });
 
-    const encoder = factory.create();
+    const encoder = factory2.create();
     expect(encoder.encoding).toEqual({
       color: { value: 'red' },
+    });
+  });
+  describe('factory.create()', () => {
+    it('creates an encoder', () => {
+      const encoder = factory.create();
+      expect(encoder.encoding).toEqual({
+        x: { type: 'quantitative', field: 'speed' },
+      });
+    });
+  });
+  describe('factory.createSelector()', () => {
+    it('returns a selector', () => {
+      const encoder = factory.createSelector()();
+      expect(encoder.encoding).toEqual({
+        x: { type: 'quantitative', field: 'speed' },
+      });
     });
   });
 });
