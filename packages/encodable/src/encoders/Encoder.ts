@@ -12,7 +12,6 @@ import {
   DeriveSingleChannelEncoder,
 } from '../types/Encoding';
 import { Dataset } from '../types/Data';
-import { Value } from '../types/VegaLite';
 import { ChannelInput } from '../types/Channel';
 
 export default class Encoder<Config extends EncodingConfig> {
@@ -106,7 +105,7 @@ export default class Encoder<Config extends EncodingConfig> {
         output: channelEncoders.reduce(
           (prev: Partial<{ [k in keyof Config]: Config[k]['1'] }>, curr) => {
             const map = prev;
-            map[curr.name as keyof Config] = curr.encodeValue(input) as Value;
+            map[curr.name as keyof Config] = curr.encodeValue(input);
 
             return map;
           },

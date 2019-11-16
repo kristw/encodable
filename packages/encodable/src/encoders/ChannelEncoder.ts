@@ -20,7 +20,7 @@ import applyZero from '../parsers/scale/applyZero';
 import applyNice from '../parsers/scale/applyNice';
 import { AllScale } from '../types/Scale';
 
-type EncodeFunction<Output> = (value: ChannelInput | Output) => Output | null | undefined;
+type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
 export default class ChannelEncoder<Def extends ChannelDef<Output>, Output extends Value = Value> {
   readonly name: string | Symbol | number;
@@ -31,7 +31,8 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   readonly axis?: ChannelEncoderAxis<Def, Output>;
 
   private readonly getValue: Getter<Output>;
-  readonly encodeValue: IdentityFunction<ChannelInput | Output> | EncodeFunction<Output>;
+  private readonly encodeFunc: IdentityFunction<Output> | EncodeFunction<Output> | (() => Output);
+
   readonly formatValue: (value: ChannelInput | HasToString) => string;
 
   constructor({
@@ -54,10 +55,10 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
 
     if (this.definition.scale) {
       const scale = createScaleFromScaleConfig(this.definition.scale);
-      this.encodeValue = (value: ChannelInput) => scale(value);
+      this.encodeFunc = (value: ChannelInput) => scale(value) as Output;
       this.scale = scale;
     } else {
-      this.encodeValue =
+      this.encodeFunc =
         'value' in this.definition
           ? () => (this.definition as CompleteValueDef<Output>).value
           : identity;
@@ -68,18 +69,24 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     }
   }
 
-  encodeDatum: {
-    (datum: PlainObject): Output | null | undefined;
-    (datum: PlainObject, otherwise: Output): Output;
-  } = (datum: PlainObject, otherwise?: Output) => {
-    const value = this.getValueFromDatum(datum);
-
-    if (otherwise !== undefined && (value === null || value === undefined)) {
+  encodeValue: {
+    (value: ChannelInput | Output): Output | null | undefined;
+    (value: ChannelInput | Output, otherwise: Output): Output;
+  } = (value: ChannelInput | Output, otherwise?: Output): any => {
+    if (typeof otherwise !== 'undefined' && (value === null || typeof value === 'undefined')) {
       return otherwise;
     }
 
-    return this.encodeValue(value) as Output;
+    return this.encodeFunc(value as any);
   };
+
+  encodeDatum: {
+    (datum: PlainObject): Output | null | undefined;
+    (datum: PlainObject, otherwise: Output): Output;
+  } = (datum: PlainObject, otherwise?: Output): any =>
+    typeof otherwise === 'undefined'
+      ? this.encodeValue(this.getValueFromDatum(datum))
+      : this.encodeValue(this.getValueFromDatum(datum), otherwise);
 
   formatDatum = (datum: PlainObject): string => this.formatValue(this.getValueFromDatum(datum));
 
