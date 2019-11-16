@@ -1,5 +1,4 @@
 import { ChannelTypeToDefMap } from './Channel';
-import { Value } from './VegaLite';
 import ChannelEncoder from '../encoders/ChannelEncoder';
 
 /**
@@ -9,7 +8,7 @@ export type EncodingConfig = {
   [k in string]:
     | ['X' | 'Y' | 'XBand' | 'YBand' | 'Numeric', number | null, 'multiple'?]
     | ['Color' | 'Text', string | null, 'multiple'?]
-    | ['Category', Value, 'multiple'?];
+    | ['Category', string | boolean | null, 'multiple'?];
 };
 
 export type DeriveChannelTypes<Config extends EncodingConfig> = {
