@@ -1,3 +1,48 @@
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.0.6...v0.0.0) (2019-11-16)
+
+
+
+## [0.0.6](https://github.com/apache-superset/encodable/compare/v0.0.5...v0.0.6) (2019-11-16)
+
+
+### Features
+
+* add overloading for encode value ([#4](https://github.com/apache-superset/encodable/issues/4)) ([f48ae69](https://github.com/apache-superset/encodable/commit/f48ae69328d519849e2bd633ec7de51b450add0d))
+* be more specific about encoding config ([#3](https://github.com/apache-superset/encodable/issues/3)) ([cfefaef](https://github.com/apache-superset/encodable/commit/cfefaefaab76c9e1c9066bb236b7f16379d8b4bc))
+
+
+
+## [0.0.5](https://github.com/apache-superset/encodable/compare/v0.0.4...v0.0.5) (2019-11-16)
+
+
+### Bug Fixes
+
+* channelencoder typing ([#2](https://github.com/apache-superset/encodable/issues/2)) ([26849d1](https://github.com/apache-superset/encodable/commit/26849d1f1ff3dbc3e9eb8d2fe446815889fd1b99))
+
+
+
+## [0.0.4](https://github.com/apache-superset/encodable/compare/v0.0.3...v0.0.4) (2019-11-16)
+
+
+### Features
+
+* encoderFactory can create selector ([#1](https://github.com/apache-superset/encodable/issues/1)) ([99459f9](https://github.com/apache-superset/encodable/commit/99459f91e08e6176e598e9fb90c872fd78bb67f1))
+
+
+
+## [0.0.3](https://github.com/apache-superset/encodable/compare/v0.0.2...v0.0.3) (2019-11-15)
+
+
+### Bug Fixes
+
+* package metadata ([d8cffc4](https://github.com/apache-superset/encodable/commit/d8cffc4bded2d2e7f768ffc54ef765d1489626af))
+
+
+
+## [0.0.2](https://github.com/apache-superset/encodable/compare/v0.0.1...v0.0.2) (2019-11-15)
+
+
+
 ## [0.0.1](https://github.com/apache-superset/encodable/compare/1e2c50abd7d1b88e94d5f4a90ef1ccc58d7cc352...v0.0.1) (2019-11-15)
 
 
@@ -12,3 +57,6 @@
 ### Features
 
 * initial commit ([1e2c50a](https://github.com/apache-superset/encodable/commit/1e2c50abd7d1b88e94d5f4a90ef1ccc58d7cc352))
+
+
+
