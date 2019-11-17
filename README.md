@@ -5,8 +5,14 @@
 )](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
-This package provides standardized API for encodable components and adopts the grammar from `vega-lite` grammar and copy their logic for determining  smart defaults (e.g. choosing scale type based on data type, etc.)
-In addition, it leverages `superset-ui` packages to use the number and time formatters as well as color scales.
+> `vega-lite` gives you a grammar that you can use to create many different charts from it, but the charts you can created are limited by what `vega-lite` support. `encodable` works the opposite way. If you already have a specific visualization component in mind, it helps you **make the component "encodable"** and provide component API similar to `vega-lite`'s grammar for consumers to define their encoding.
+
+This package 
+
+* provides typings for defining visual encoding for a component 
+* provides utility functions for parsing the visual encoding and integration with your visualization component. 
+* adopts the grammar from `vega-lite` to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
+* leverages `superset-ui` packages to use the number and time formatters as well as color scales.
 
 <!-- ## Demo
 
@@ -227,7 +233,7 @@ encoder.scale // scale function (e.g. d3.scaleLinear, d3.scaleLog, depends on th
 
 Function for parsing scales from configuration object into D3 scales as well as connecting to `@superset-ui/colors` to get color schemes by name. Support most types of scale that D3/vega-lite has. See [vega-lite's scale documentation](https://vega.github.io/vega-lite/docs/scale.html for more details).
 
-### Example usage
+#### Example usage
 
 ```js
 const scale = createScaleFromScaleConfig({
