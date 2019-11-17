@@ -7,13 +7,13 @@
 
 > [`vega-lite`](https://github.com/vega/vega-lite) gives you a grammar and rendering engine that you can use to create many different visualizations from it. However, the visualizations you can created are limited by what `vega-lite` supports and you also need to figure out how to describe your visualization and its interactions in `vega-lite`'s grammar.
 
-> `encodable` works the opposite way. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide component API similar to `vega-lite`'s grammar for consumers to define their encoding.
+> `encodable` works the opposite way. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define their encoding.
 
 The `encodable` package 
 
-* provides typings for defining visual encoding for a component.
-* provides utility functions for parsing the visual encoding and integration with your visualization component. 
+* provides typings for defining visual encoding channels for a component.
 * adopts the grammar from `vega-lite` to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
+* parses incoming visual encoding into utility functions that helps how you render the visualization component. 
 * leverages `superset-ui` packages to use the number and time formatters as well as color scales.
 * does NOT render the component.
 
