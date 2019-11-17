@@ -1,4 +1,9 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.0.6...v0.0.0) (2019-11-16)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.0.6...v0.0.0) (2019-11-17)
+
+
+### Features
+
+* support number output for category channel type ([c79e7aa](https://github.com/apache-superset/encodable/commit/c79e7aad1e4ebb1bdcbef5164d9e01ac3386e8b8))
 
 
 
