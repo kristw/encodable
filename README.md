@@ -27,11 +27,13 @@ This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-
 }
 ```
 
-Although the grammar is very flexible and covers the definitions of the most common visualizations already, what you can created are still limited by what `vega-lite` supports. You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s grammar. 
+Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for full syntax explanation.
 
-At this point, many people choose to develop their own standalone components. Each component ends up having very different API. If you develop a word cloud component, how would you let user specify the `fontSize`, `color`, `text` etc.?
+Although the grammar is very flexible and covers the definitions of the most common visualizations already, what you can created are still limited by what `vega-lite` supports. (`vega-lite` has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s grammar. 
 
-One common way is to accept accessor functions as arguments, but then you punt most of the implementation responsibilities to the library consumer. The configuration is also not serializable. 
+At this point, many people, including those who are not aware of `vega-lite` in the first place, choose to develop their own standalone components. Each component ends up having very different API. If you develop a word cloud component, how would you let user specify the `fontSize`, `color`, `text` etc.?
+
+One common approach is to accept accessor functions as arguments, but then you punt most of the implementation responsibilities to the library consumer. The configuration is also not serializable. 
 
 ```js
 {
@@ -39,30 +41,34 @@ One common way is to accept accessor functions as arguments, but then you punt m
 }
 ```
 
-Then there are alternatives such as exposing a number of arbitrarily-chosen fields, e.g. `fontSizeField`, `fontSizeRange`, `fontSizeScaleType`, which you have to handle inside the component.
+Then there are alternatives such as exposing a number of arbitrarily chosen fields, e.g. `fontSizeField`, `fontSizeRange`, which you have to handle inside the component. If you start from expecting `fontSize` to be using linear scale and later want to support log scale, you may have to expose new field  `fontSizeScaleType` and include new logic for creating log scale.
+
+Later on, if you start developing a suite of components, you either have to come up with a list of common properties or naming conventions, so all of your visualization components at least work similarly. After all, this is likely to be yet another standard that only applies to your components.
 
 #### Wouldn't it be nice if I can easily develop a component which provides an API that looks like `vega-lite` grammar?
 
-`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define their encoding. 
+`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized API similar to `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for consumers to define their encoding. 
 
 This is an example of how to define `color`, `fontSize` and `text` channels for a word cloud component that is powered by `encodable`.
 
 ```js
 {
-  color: {
-    field: 'name',
-    scale: {
-      scheme: 'd3Category10',
+  encoding: {
+    color: {
+      field: 'name',
+      scale: {
+        scheme: 'd3Category10',
+      },
+      type: 'nominal',
     },
-    type: 'nominal',
-  },
-  fontSize: {
-    field: 'numberOfStudents',
-    scale: { range: [0, 72] },
-    type: 'quantitative',
-  },
-  text: {
-    field: 'name',
+    fontSize: {
+      field: 'numberOfStudents',
+      scale: { range: [0, 72] },
+      type: 'quantitative',
+    },
+    text: {
+      field: 'name',
+    }
   }
 }
 ```
@@ -70,8 +76,8 @@ This is an example of how to define `color`, `fontSize` and `text` channels for 
 More specifically, the `encodable` package 
 
 * provides typings for defining visual encoding channels for a component.
-* adopts the grammar from `vega-lite` (not 100%) to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
-* parses incoming visual encoding into utility functions that helps how you render the visualization component. 
+* adopts the [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) grammar from `vega-lite` (not 100%) to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
+* parses incoming visual encoding into utility functions that helps you render the visualization component. 
 * leverages `superset-ui` packages to use the number and time formatters as well as color scales.
 * does NOT render the component.
 
