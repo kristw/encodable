@@ -5,6 +5,14 @@
 )](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
+> **tl;dr.** When you already have a specific visualization component, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define the visual encoding based on data. 
+
+## Packages
+
+| Package | Version |
+|--|--|
+| [encodable](https://github.com/apache-superset/encodable/tree/master/packages/encodable) | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square) |
+
 ### Why use `encodable`?
 
 This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite` gives you a grammar and rendering engine that you can use to create many different visualizations from it. For example, this is how you create a [bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in `vega-lite`:
@@ -19,21 +27,25 @@ This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-
 }
 ```
 
-Although the grammar is very flexible and covers definitions of the most common visualizations already, the visualizations you can created are still limited by what `vega-lite` supports. You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s grammar. 
+Although the grammar is very flexible and covers the definitions of the most common visualizations already, what you can created are still limited by what `vega-lite` supports. You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s grammar. 
 
 At this point, many people choose to develop their own standalone components. Each component ends up having very different API. If you develop a word cloud component, how would you let user specify the `fontSize`, `color`, `text` etc.?
 
-One common way is to accept accessor functions as arguments, but then you punt lots of the implementation responsibilities to the library consumer. The configuration is also not serializable. 
+One common way is to accept accessor functions as arguments, but then you punt most of the implementation responsibilities to the library consumer. The configuration is also not serializable. 
 
 ```js
 {
-  "fontSize": d => scale(d) // but then you have to setup a scale
+  "fontSize": d => scale(d) // you have to setup a scale, set its domain, make domain start at 0, etc.
 }
 ```
 
+Then there are alternatives such as exposing a number of arbitrarily-chosen fields, e.g. `fontSizeField`, `fontSizeRange`, `fontSizeScaleType`, which you have to handle inside the component.
+
 #### Wouldn't it be nice if I can easily develop a component which provides an API that looks like `vega-lite` grammar?
 
-This is an example of how to define `color`, `fontSize` and `text` channels for a word cloud component.
+`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define their encoding. 
+
+This is an example of how to define `color`, `fontSize` and `text` channels for a word cloud component that is powered by `encodable`.
 
 ```js
 {
@@ -55,12 +67,10 @@ This is an example of how to define `color`, `fontSize` and `text` channels for 
 }
 ```
 
-`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define their encoding. 
-
-The `encodable` package 
+More specifically, the `encodable` package 
 
 * provides typings for defining visual encoding channels for a component.
-* adopts the grammar from `vega-lite` to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
+* adopts the grammar from `vega-lite` (not 100%) to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
 * parses incoming visual encoding into utility functions that helps how you render the visualization component. 
 * leverages `superset-ui` packages to use the number and time formatters as well as color scales.
 * does NOT render the component.
@@ -70,12 +80,6 @@ The `encodable` package
 Most recent release: https://apache-superset.github.io/encodable
 
 Current master: https://superset-ui.netlify.com -->
-
-## Packages
-
-| Package | Version |
-|--|--|
-| [encodable](https://github.com/apache-superset/encodable/tree/master/packages/encodable) | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square) |
 
 ## APIs
 
