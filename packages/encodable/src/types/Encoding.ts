@@ -8,7 +8,7 @@ export type EncodingConfig = {
   [k in string]:
     | ['X' | 'Y' | 'XBand' | 'YBand' | 'Numeric', number | null, 'multiple'?]
     | ['Color' | 'Text', string | null, 'multiple'?]
-    | ['Category', string | boolean | null, 'multiple'?];
+    | ['Category', string | boolean | number | null, 'multiple'?];
 };
 
 export type DeriveChannelTypes<Config extends EncodingConfig> = {
