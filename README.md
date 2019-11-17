@@ -5,14 +5,17 @@
 )](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
-> `vega-lite` gives you a grammar that you can use to create many different charts from it, but the charts you can created are limited by what `vega-lite` supports. `encodable` works the opposite way. If you already have a specific visual component in mind, it helps you **make the component "encodable"** and provide component API similar to `vega-lite`'s grammar for consumers to define their encoding.
+> [`vega-lite`](https://github.com/vega/vega-lite) gives you a grammar and rendering engine that you can use to create many different visualizations from it. However, the visualizations you can created are limited by what `vega-lite` supports and you also need to figure out how to describe your visualization and its interactions in `vega-lite`'s grammar.
 
-This package 
+> `encodable` works the opposite way. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide component API similar to `vega-lite`'s grammar for consumers to define their encoding.
 
-* provides typings for defining visual encoding for a component 
+The `encodable` package 
+
+* provides typings for defining visual encoding for a component.
 * provides utility functions for parsing the visual encoding and integration with your visualization component. 
 * adopts the grammar from `vega-lite` to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.) 
 * leverages `superset-ui` packages to use the number and time formatters as well as color scales.
+* does NOT render the component.
 
 <!-- ## Demo
 
@@ -74,7 +77,7 @@ The `factory` encapsulates the awkward `channelTypes` and `defaultEncoding`
 * which are constants across all `Encoder` instance of this chart
 * making it convenient to create a new `Encoder` from `encoding` because `factory.create(encoding)` only needs one argument: `encoding`.
 
-This is how user-specified `encoding` may look like.
+This is how consumer-specified `encoding` may look like.
 
 ```ts
 const encoding: LineChartEncoding = {
