@@ -5,9 +5,57 @@
 )](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
-> [`vega-lite`](https://github.com/vega/vega-lite) gives you a grammar and rendering engine that you can use to create many different visualizations from it. However, the visualizations you can created are limited by what `vega-lite` supports and you also need to figure out how to describe your visualization and its interactions in `vega-lite`'s grammar.
+### Why use `encodable`?
 
-> `encodable` works the opposite way. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define their encoding.
+This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite` gives you a grammar and rendering engine that you can use to create many different visualizations from it. For example, this is how you create a [bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in `vega-lite`:
+
+```js
+{
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "country", "type": "ordinal"},
+    "y": {"field": "population", "type": "quantitative"}
+  }
+}
+```
+
+Although the grammar is very flexible and covers definitions of the most common visualizations already, the visualizations you can created are still limited by what `vega-lite` supports. You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s grammar. 
+
+At this point, many people choose to develop their own standalone components. Each component ends up having very different API. If you develop a word cloud component, how would you let user specify the `fontSize`, `color`, `text` etc.?
+
+One common way is to accept accessor functions as arguments, but then you punt lots of the implementation responsibilities to the library consumer. The configuration is also not serializable. 
+
+```js
+{
+  "fontSize": d => scale(d) // but then you have to setup a scale
+}
+```
+
+#### Wouldn't it be nice if I can easily develop a component which provides an API that looks like `vega-lite` grammar?
+
+This is an example of how to define `color`, `fontSize` and `text` channels for a word cloud component.
+
+```js
+{
+  color: {
+    field: 'name',
+    scale: {
+      scheme: 'd3Category10',
+    },
+    type: 'nominal',
+  },
+  fontSize: {
+    field: 'numberOfStudents',
+    scale: { range: [0, 72] },
+    type: 'quantitative',
+  },
+  text: {
+    field: 'name',
+  }
+}
+```
+
+`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define their encoding. 
 
 The `encodable` package 
 
@@ -73,9 +121,20 @@ const lineChartEncoderFactory = createEncoderFactory<LineChartEncodingConfig>({
 type LineChartEncoding = DeriveEncoding<LineChartEncodingConfig>;
 ```
 
-The `factory` encapsulates the awkward `channelTypes` and `defaultEncoding`
+The `factory` encapsulates `channelTypes` and `defaultEncoding`
 * which are constants across all `Encoder` instance of this chart
 * making it convenient to create a new `Encoder` from `encoding` because `factory.create(encoding)` only needs one argument: `encoding`.
+
+| ChannelType | Example channel | Output types |
+|----|----|----|
+| `X` |  bubble chart's x-position | `number \| null` |
+| `Y` |  bubble chart's y-position | `number \| null` |
+| `XBand` | vertical bar chart's x-position | `number \| null` |
+| `YBand` |  horizontal bar chart's y-position | `number \| null` |
+| `Numeric` |  bubble chart's bubble size | `number \| null` |
+| `Color` |  bubble chart's bubble color | `string \| null` |
+| `Text` |  bubble chart's bubble label | `string \| null` |
+| `Category` |  bubble chart's fill or not (`boolean`), pattern (`string`), font weight (`string \| number`) | `string \| boolean \| number \| null` |
 
 This is how consumer-specified `encoding` may look like.
 
