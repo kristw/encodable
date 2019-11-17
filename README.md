@@ -5,7 +5,7 @@
 )](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
-> **tl;dr.** When you already have a specific visualization component, this library helps you **make the component "encodable"** and provide standardized component API similar to `vega-lite`'s grammar for consumers to define the visual encoding based on data. 
+> **tl;dr.** When you have a visualization component, this library helps you defines the visual channels that you can encode data into and provide API similar to `vega-lite`'s grammar for consumers to customize the visual encoding. 
 
 ## Packages
 
