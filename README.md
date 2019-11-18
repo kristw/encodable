@@ -13,6 +13,10 @@
 |--|--|
 | [encodable](https://github.com/apache-superset/encodable/tree/master/packages/encodable) | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square) |
 
+## Example
+
+* [WordCloud demo on CodeSandbox](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
+
 ### Why use `encodable`?
 
 This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite` gives you a grammar and rendering engine that you can use to create many different visualizations from it. For example, this is how you create a [bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in `vega-lite`:
@@ -49,7 +53,7 @@ Later on, if you start developing a suite of components, you either have to come
 
 `encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized API similar to `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for consumers to define their encoding.
 
-This is an example of how to define `color`, `fontSize` and `text` channels for a word cloud component that is powered by `encodable`.
+This is an example of how component consumers define `color`, `fontSize` and `text` channels for a word cloud component that is powered by `encodable`.
 
 ```js
 {
@@ -72,6 +76,8 @@ This is an example of how to define `color`, `fontSize` and `text` channels for 
   }
 }
 ```
+
+See the full [example code](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
 
 More specifically, the `encodable` package
 
