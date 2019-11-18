@@ -15,10 +15,15 @@
   },
   "keywords": [
     "grammar",
+    "visualization",
+    "chart",
     "encodable",
     "vega-lite"
   ],
-  "author": "Krist Wongsuphasawat",
+  "contributors": [
+    "Krist Wongsuphasawat (http://kristw.yellowpigz.com)",
+    "Chris Williams"
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/apache-superset/encodable/issues"
