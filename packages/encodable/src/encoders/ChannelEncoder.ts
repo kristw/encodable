@@ -4,7 +4,7 @@ import { ChannelType, ChannelInput } from '../types/Channel';
 import { PlainObject, Dataset } from '../types/Data';
 import { ChannelDef } from '../types/ChannelDef';
 import { Value } from '../types/VegaLite';
-import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
+import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
 import ChannelEncoderAxis from './ChannelEncoderAxis';
 import createGetterFromChannelDef, { Getter } from '../parsers/createGetterFromChannelDef';
@@ -58,10 +58,9 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
       this.encodeFunc = (value: ChannelInput) => scale(value) as Output;
       this.scale = scale;
     } else {
-      this.encodeFunc =
-        'value' in this.definition
-          ? () => (this.definition as CompleteValueDef<Output>).value
-          : identity;
+      this.encodeFunc = this.hasValueDefinition()
+        ? () => (this.definition as CompleteValueDef<Output>).value
+        : identity;
     }
 
     if (this.definition.axis) {
@@ -135,7 +134,9 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   }
 
   setDomainFromDataset(data: Dataset) {
-    return this.scale ? this.setDomain(this.getDomainFromDataset(data)) : this;
+    return this.scale && 'domain' in this.scale
+      ? this.setDomain(this.getDomainFromDataset(data))
+      : this;
   }
 
   getTitle() {
@@ -171,5 +172,13 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
 
   hasLegend() {
     return this.definition.legend !== false;
+  }
+
+  hasValueDefinition() {
+    return isValueDef(this.definition);
+  }
+
+  hasFieldDefinition() {
+    return isFieldDef(this.definition);
   }
 }
