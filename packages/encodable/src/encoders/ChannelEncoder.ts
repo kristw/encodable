@@ -120,6 +120,14 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     return [];
   };
 
+  getDomain() {
+    if (this.scale && 'domain' in this.scale) {
+      return this.scale.domain();
+    }
+
+    return [];
+  }
+
   setDomain(domain: ChannelInput[]) {
     if (this.definition.scale !== false && this.scale && 'domain' in this.scale) {
       const config = this.definition.scale;

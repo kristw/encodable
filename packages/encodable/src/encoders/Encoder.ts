@@ -83,11 +83,11 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   getChannelEncoders() {
-    return this.getChannelNames().map(name => this.channels[name]);
+    return flatMap(this.getChannelNames().map(name => this.channels[name]));
   }
 
   getGroupBys() {
-    const fields = flatMap(this.getChannelEncoders())
+    const fields = this.getChannelEncoders()
       .filter(c => c.isGroupBy())
       .map(c => (c.definition as TypedFieldDef).field!);
 
@@ -143,6 +143,14 @@ export default class Encoder<Config extends EncodingConfig> {
           };
         })
     );
+  }
+
+  setDomainFromDataset(data: Dataset) {
+    this.getChannelEncoders().forEach(channelEncoder => {
+      channelEncoder.setDomainFromDataset(data);
+    });
+
+    return this;
   }
 
   hasLegend() {

@@ -232,6 +232,43 @@ describe('ChannelEncoder', () => {
     });
   });
 
+  describe('.getDomain()', () => {
+    it('returns domain if there is scale (except CategoricalColorScale)', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          type: 'quantitative',
+          field: 'speed',
+          scale: { domain: [0, 10] },
+        },
+      });
+      expect(encoder.getDomain()).toEqual([0, 10]);
+    });
+    it('returns empty array for CategoricalColorScale', () => {
+      const encoder = new ChannelEncoder({
+        name: 'color',
+        channelType: 'Color',
+        definition: {
+          type: 'nominal',
+          field: 'brand',
+          scale: { domain: ['pocky', 'hanami'] },
+        },
+      });
+      expect(encoder.getDomain()).toEqual([]);
+    });
+    it('returns empty array for value definition', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          value: 1,
+        },
+      });
+      expect(encoder.getDomain()).toEqual([]);
+    });
+  });
+
   describe('.setDomain()', () => {
     it('sets the domain', () => {
       const encoder = new ChannelEncoder({
