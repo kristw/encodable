@@ -1,4 +1,14 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.0.6...v0.0.0) (2019-11-17)
+# [0.1.0](https://github.com/apache-superset/encodable/compare/v0.0.7...v0.1.0) (2019-11-20)
+
+
+### Features
+
+* add functions and typeguards for checking definition types ([#6](https://github.com/apache-superset/encodable/issues/6)) ([7999086](https://github.com/apache-superset/encodable/commit/7999086fc6e721ace9b8b08d2b48a2dafe6eb6da))
+* encoder can set domain of all scales from dataset at once ([#7](https://github.com/apache-superset/encodable/issues/7)) ([a9ed675](https://github.com/apache-superset/encodable/commit/a9ed6758619b79ac39a578123defc59b536246c2))
+
+
+
+## [0.0.7](https://github.com/apache-superset/encodable/compare/v0.0.6...v0.0.7) (2019-11-17)
 
 
 ### Features
