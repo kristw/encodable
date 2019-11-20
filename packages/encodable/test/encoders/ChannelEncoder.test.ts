@@ -519,4 +519,52 @@ describe('ChannelEncoder', () => {
       expect(encoder.hasLegend()).toBeFalsy();
     });
   });
+
+  describe('.hasValueDefinition()', () => {
+    it('returns true if definition is ValueDef', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          value: 1,
+        },
+      });
+      expect(encoder.hasValueDefinition()).toBeTruthy();
+    });
+    it('returns false otherwise', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          type: 'quantitative',
+          field: 'speed',
+        },
+      });
+      expect(encoder.hasValueDefinition()).toBeFalsy();
+    });
+  });
+
+  describe('hasFieldDefinition()', () => {
+    it('returns true if definition is FieldDef', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          type: 'quantitative',
+          field: 'speed',
+        },
+      });
+      expect(encoder.hasFieldDefinition()).toBeTruthy();
+    });
+    it('returns false otherwise', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          value: 1,
+        },
+      });
+      expect(encoder.hasFieldDefinition()).toBeFalsy();
+    });
+  });
 });

@@ -3,7 +3,7 @@ import createFormatterFromFieldTypeAndFormat from '../parsers/format/createForma
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
 import { ChannelDef } from '../types/ChannelDef';
 import { Value, isDateTime } from '../types/VegaLite';
-import { CompleteFieldDef } from '../fillers/completeChannelDef';
+import { CompleteFieldDef } from '../types/CompleteChannelDef';
 import { ChannelInput } from '../types/Channel';
 import { HasToString } from '../types/Base';
 import parseDateTime from '../parsers/parseDateTime';

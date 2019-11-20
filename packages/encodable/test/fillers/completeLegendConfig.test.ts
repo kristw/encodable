@@ -10,21 +10,37 @@ describe('completeLegendConfig()', () => {
       }),
     ).toEqual({ a: 1 });
   });
-  it('returns default legend config if legend is undefined', () => {
-    expect(
-      completeLegendConfig('X', {
-        type: 'quantitative',
-        field: 'consumption',
-      }),
-    ).toEqual(false);
-  });
-  it('returns default legend config if legend is undefined and channel is not X or Y', () => {
-    expect(
-      completeLegendConfig('Color', {
-        type: 'nominal',
-        field: 'brand',
-      }),
-    ).toEqual({});
+  describe('if legend is undefined', () => {
+    it('returns false if channel is X or Y', () => {
+      expect(
+        completeLegendConfig('X', {
+          type: 'quantitative',
+          field: 'consumption',
+        }),
+      ).toEqual(false);
+      expect(
+        completeLegendConfig('Y', {
+          type: 'quantitative',
+          field: 'consumption',
+        }),
+      ).toEqual(false);
+    });
+    it('returns false if channel is Text', () => {
+      expect(
+        completeLegendConfig('Text', {
+          type: 'nominal',
+          field: 'name',
+        }),
+      ).toEqual(false);
+    });
+    it('returns default legend config for remaining channel types', () => {
+      expect(
+        completeLegendConfig('Color', {
+          type: 'nominal',
+          field: 'brand',
+        }),
+      ).toEqual({});
+    });
   });
   it('returns false if legend is false', () => {
     expect(

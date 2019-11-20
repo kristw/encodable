@@ -14,5 +14,5 @@ export default function completeLegendConfig<Output extends Value = Value>(
     return channelDef.legend;
   }
 
-  return isXOrY(channelType) ? false : {};
+  return isXOrY(channelType) || channelType === 'Text' ? false : {};
 }
