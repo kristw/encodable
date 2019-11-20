@@ -1,33 +1,12 @@
-import { ChannelDef, NonValueDef } from '../types/ChannelDef';
+import { ChannelDef } from '../types/ChannelDef';
 import { ChannelType } from '../types/Channel';
 import { isFieldDef, isValueDef, isTypedFieldDef } from '../typeGuards/ChannelDef';
-import completeAxisConfig, { CompleteAxisConfig } from './completeAxisConfig';
-import completeLegendConfig, { CompleteLegendConfig } from './completeLegendConfig';
-import completeScaleConfig, { CompleteScaleConfig } from './completeScaleConfig';
-import { Value, ValueDef, Type } from '../types/VegaLite';
+import completeAxisConfig from './completeAxisConfig';
+import completeLegendConfig from './completeLegendConfig';
+import completeScaleConfig from './completeScaleConfig';
+import { Value } from '../types/VegaLite';
 import inferFieldType from './inferFieldType';
-
-export interface CompleteValueDef<Output extends Value = Value> extends ValueDef<Output> {
-  axis: false;
-  legend: false;
-  scale: false;
-  title: '';
-}
-
-export type CompleteFieldDef<Output extends Value = Value> = Omit<
-  NonValueDef<Output>,
-  'title' | 'axis' | 'scale'
-> & {
-  type: Type;
-  axis: CompleteAxisConfig;
-  legend: CompleteLegendConfig;
-  scale: CompleteScaleConfig<Output>;
-  title: string;
-};
-
-export type CompleteChannelDef<Output extends Value = Value> =
-  | CompleteValueDef<Output>
-  | CompleteFieldDef<Output>;
+import { CompleteChannelDef } from '../types/CompleteChannelDef';
 
 export default function completeChannelDef<Output extends Value>(
   channelType: ChannelType,

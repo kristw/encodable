@@ -4,14 +4,11 @@ import { ChannelType, ChannelInput } from '../types/Channel';
 import { PlainObject, Dataset } from '../types/Data';
 import { ChannelDef } from '../types/ChannelDef';
 import { Value } from '../types/VegaLite';
-import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
+import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
 import ChannelEncoderAxis from './ChannelEncoderAxis';
 import createGetterFromChannelDef, { Getter } from '../parsers/createGetterFromChannelDef';
-import completeChannelDef, {
-  CompleteChannelDef,
-  CompleteValueDef,
-} from '../fillers/completeChannelDef';
+import completeChannelDef from '../fillers/completeChannelDef';
 import createFormatterFromChannelDef from '../parsers/format/createFormatterFromChannelDef';
 import createScaleFromScaleConfig from '../parsers/scale/createScaleFromScaleConfig';
 import identity from '../utils/identity';
@@ -19,6 +16,8 @@ import applyDomain from '../parsers/scale/applyDomain';
 import applyZero from '../parsers/scale/applyZero';
 import applyNice from '../parsers/scale/applyNice';
 import { AllScale } from '../types/Scale';
+import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteChannelDef';
+import { CompleteChannelDef } from '../types/CompleteChannelDef';
 
 type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
@@ -58,9 +57,8 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
       this.encodeFunc = (value: ChannelInput) => scale(value) as Output;
       this.scale = scale;
     } else {
-      this.encodeFunc = this.hasValueDefinition()
-        ? () => (this.definition as CompleteValueDef<Output>).value
-        : identity;
+      const { definition } = this;
+      this.encodeFunc = isCompleteValueDef(definition) ? () => definition.value : identity;
     }
 
     if (this.definition.axis) {
@@ -175,10 +173,10 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   }
 
   hasValueDefinition() {
-    return isValueDef(this.definition);
+    return isCompleteValueDef(this.definition);
   }
 
   hasFieldDefinition() {
-    return isFieldDef(this.definition);
+    return isCompleteFieldDef(this.definition);
   }
 }
