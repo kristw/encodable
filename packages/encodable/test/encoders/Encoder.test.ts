@@ -49,7 +49,7 @@ describe('Encoder', () => {
   });
   describe('.getChannelEncoders()', () => {
     it('returns an array of channel encoders', () => {
-      expect(encoder.getChannelEncoders()).toHaveLength(6);
+      expect(encoder.getChannelEncoders()).toHaveLength(7);
     });
   });
   describe('.getGroupBys()', () => {
@@ -193,6 +193,22 @@ describe('Encoder', () => {
         .getLegendInformation([{ brand: 'Gucci' }, { brand: 'Prada' }]);
 
       expect(stripFunction(legendInfo)).toEqual([]);
+    });
+  });
+  describe('.setDomainFromDataset', () => {
+    it('set domain for every channels', () => {
+      const enc = factory.create({
+        shape: { type: 'ordinal', field: 'brand', scale: { range: ['circle', 'diamond'] } },
+      });
+      enc.setDomainFromDataset([
+        { speed: 1, price: 2, brand: 'Nintendo', model: 'Switch' },
+        { speed: 2, price: 4, brand: 'Playstation', model: 'PS4' },
+      ]);
+
+      expect(enc.channels.x.getDomain()).toEqual([0, 2]);
+      expect(enc.channels.y.getDomain()).toEqual([0, 4]);
+      expect(enc.channels.color.getDomain()).toEqual([]);
+      expect(enc.channels.shape.getDomain()).toEqual(['Nintendo', 'Playstation']);
     });
   });
   describe('.hasLegend()', () => {
