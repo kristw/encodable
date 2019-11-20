@@ -31,9 +31,9 @@ This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-
 }
 ```
 
-Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for full syntax explanation.
+Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for full syntax explanation. For those who are less familiar with `vega-lite`, this visualization grammar is already supported on known platforms such as [Observable](https://observablehq.com/) or Jupyter Notebook (via [Altair](https://altair-viz.github.io/), its python port).
 
-Although the grammar is very flexible and covers the definitions of the most common visualizations already, what you can created are still limited by what `vega-lite` supports. (`vega-lite` has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s grammar.
+Although the grammar is very flexible and covers the definitions of the most common visualizations already, what you can created are still limited by what `vega-lite` renderer supports. (`vega-lite` has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s channels and grammar.
 
 At this point, many people, including those who are not aware of `vega-lite` in the first place, choose to develop their own standalone components. Each component ends up having very different API. If you develop a word cloud component, how would you let user specify the `fontSize`, `color`, `text` etc.?
 
@@ -51,7 +51,7 @@ Later on, if you start developing a suite of components, you either have to come
 
 #### Wouldn't it be nice if I can easily develop a component which provides an API that looks like `vega-lite` grammar?
 
-`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized API similar to `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for consumers to define their encoding.
+`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized API similar to `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for consumers to define their **encoding**.
 
 This is an example of how component consumers define `color`, `fontSize` and `text` channels for a word cloud component that is powered by `encodable`.
 
