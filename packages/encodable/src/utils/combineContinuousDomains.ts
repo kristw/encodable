@@ -12,7 +12,8 @@ export default function combineContinuousDomains(
 ) {
   if (userSpecifiedDomain.length > 0 && isEveryElementDefined(userSpecifiedDomain)) {
     return userSpecifiedDomain;
-  } else if (dataDomain) {
+  }
+  if (dataDomain) {
     if (
       userSpecifiedDomain.length === 2 &&
       dataDomain.length === 2 &&

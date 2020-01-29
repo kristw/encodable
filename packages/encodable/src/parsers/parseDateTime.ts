@@ -14,7 +14,7 @@ export default function parseDateTime(dateTime: string | number | DateTime) {
   const isUtc = code.startsWith('Date.UTC');
 
   const dateParts = code
-    .replace(/^(Date[.]UTC|new[ ]Date)\(/, '')
+    .replace(/^(Date\.UTC|new Date)\(/, '')
     .replace(/\)$/, '')
     .split(',')
     .map((chunk: string) => Number(chunk.trim())) as [

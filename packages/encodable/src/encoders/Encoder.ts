@@ -16,7 +16,9 @@ import { ChannelInput } from '../types/Channel';
 
 export default class Encoder<Config extends EncodingConfig> {
   readonly encoding: DeriveEncoding<Config>;
+
   readonly channelTypes: DeriveChannelTypes<Config>;
+
   readonly channels: DeriveChannelEncoders<Config>;
 
   readonly legends: {

@@ -12,7 +12,8 @@ export default function createFormatterFromFieldTypeAndFormat(
     const formatter = getNumberFormatter(format);
 
     return (value: any) => formatter(value);
-  } else if (type === 'temporal') {
+  }
+  if (type === 'temporal') {
     const formatter = getTimeFormatter(format);
 
     return (value: any) => formatter(value);
