@@ -4,6 +4,7 @@ describe('type guards: Base', () => {
   describe('isArray<T>(maybeArray)', () => {
     it('returns true and converts to type T[] if is array', () => {
       const x: string | string[] = ['abc'];
+      // eslint-disable-next-line jest/no-if
       if (isArray(x)) {
         // x is now known to be an array
         expect(x[0]).toEqual('abc');
@@ -16,6 +17,7 @@ describe('type guards: Base', () => {
   describe('isNotArray<T>(maybeArray)', () => {
     it('returns true and converts to type T if not array', () => {
       const x: string | string[] = 'abc';
+      // eslint-disable-next-line jest/no-if
       if (isNotArray(x)) {
         // x is now known to be a string
         expect(x.startsWith('a')).toBeTruthy();
@@ -28,6 +30,7 @@ describe('type guards: Base', () => {
   describe('isDefined<T>(value)', () => {
     it('returns true and converts to type T if value is defined', () => {
       const x: any = 'abc';
+      // eslint-disable-next-line jest/no-if
       if (isDefined<string>(x)) {
         expect(x.startsWith('a')).toBeTruthy();
       }
@@ -42,6 +45,7 @@ describe('type guards: Base', () => {
       expect(isEveryElementDefined(['a', 'b'])).toBeTruthy();
       expect(isEveryElementDefined([])).toBeTruthy();
       const array: (string | undefined)[] = ['a', 'b'];
+      // eslint-disable-next-line jest/no-if
       if (isEveryElementDefined(array)) {
         expect(array.every(a => a.length === 1)).toBeTruthy();
       }

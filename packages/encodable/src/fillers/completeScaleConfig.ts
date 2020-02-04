@@ -21,6 +21,7 @@ export default function completeScaleConfig<Output extends Value>(
       return false;
     }
 
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     const filledScale = { ...scale, type: scaleType } as ScaleConfig<Output>;
     if (isContinuousScaleConfig(filledScale)) {
       if (typeof filledScale.nice === 'undefined') {
