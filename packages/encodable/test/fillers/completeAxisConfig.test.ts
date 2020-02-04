@@ -196,6 +196,7 @@ describe('completeAxisConfig(channelDef)', () => {
   });
   it('returns false if axis is null', () => {
     expect(
+      // @ts-ignore
       completeAxisConfig('X', { type: 'quantitative', field: 'consumption', axis: null }),
     ).toEqual(false);
   });

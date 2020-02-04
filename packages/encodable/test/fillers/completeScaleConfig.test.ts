@@ -110,6 +110,7 @@ describe('completeScaleConfig(channelDef)', () => {
 
   it('returns false if scale is null', () => {
     expect(
+      // @ts-ignore
       completeScaleConfig('X', { type: 'quantitative', field: 'consumption', scale: null }),
     ).toEqual(false);
   });
