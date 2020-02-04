@@ -45,7 +45,7 @@ describe('createEncoderFactory()', () => {
   });
   describe('factory.createSelector()', () => {
     it('returns a selector', () => {
-      const encoder = factory.createSelector()();
+      const encoder = factory.createSelector()({});
       expect(encoder.encoding).toEqual({
         x: { type: 'quantitative', field: 'speed' },
       });
