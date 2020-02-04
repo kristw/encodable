@@ -282,7 +282,10 @@ describe('ChannelEncoder', () => {
         },
       });
       expect(encoder.setDomain([20, 30])).toEqual(encoder);
-      expect('domain' in encoder.scale && encoder.scale!.domain()).toEqual([20, 30]);
+      expect(encoder.scale && 'domain' in encoder.scale && encoder.scale!.domain()).toEqual([
+        20,
+        30,
+      ]);
     });
     it('sets the domain (with zero)', () => {
       const encoder = new ChannelEncoder({
@@ -295,7 +298,10 @@ describe('ChannelEncoder', () => {
         },
       });
       expect(encoder.setDomain([20, 30])).toEqual(encoder);
-      expect('domain' in encoder.scale && encoder.scale!.domain()).toEqual([0, 30]);
+      expect(encoder.scale && 'domain' in encoder.scale && encoder.scale!.domain()).toEqual([
+        0,
+        30,
+      ]);
     });
     it('sets the domain (with nice)', () => {
       const encoder = new ChannelEncoder({
@@ -309,7 +315,10 @@ describe('ChannelEncoder', () => {
         },
       });
       expect(encoder.setDomain([21.5, 30])).toEqual(encoder);
-      expect('domain' in encoder.scale && encoder.scale!.domain()).toEqual([21, 30]);
+      expect(encoder.scale && 'domain' in encoder.scale && encoder.scale!.domain()).toEqual([
+        21,
+        30,
+      ]);
     });
     it('does nothing if does not have scale', () => {
       const encoder = new ChannelEncoder({
@@ -339,7 +348,7 @@ describe('ChannelEncoder', () => {
         },
       });
       expect(encoder.setDomainFromDataset([{ price: 1 }, { price: 5 }])).toEqual(encoder);
-      expect('domain' in encoder.scale && encoder.scale!.domain()).toEqual([1, 5]);
+      expect(encoder.scale && 'domain' in encoder.scale && encoder.scale?.domain()).toEqual([1, 5]);
     });
     it('does nothing if does not have scale', () => {
       const encoder = new ChannelEncoder({
