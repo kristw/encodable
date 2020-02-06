@@ -15,7 +15,6 @@ import {
 import { ScaleConfig, CategoricalScaleInput } from '../../types/Scale';
 import { ScaleType, Value } from '../../types/VegaLite';
 
-// eslint-disable-next-line complexity
 export default function createScaleFromScaleType<Output extends Value>(
   config: ScaleConfig<Output>,
 ) {

@@ -1,6 +1,8 @@
 import createEncoderFactory from '../../src/encoders/createEncoderFactory';
 
-function stripFunction(legendInfo: any) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function stripFunction(legendInfo: any[]) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return legendInfo.map((legendGroup: any) => {
     const { createLegendItems, channelEncoders, ...rest } = legendGroup;
 

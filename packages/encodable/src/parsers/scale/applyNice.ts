@@ -43,7 +43,6 @@ const utcIntervals: {
   year: utcYear,
 };
 
-// eslint-disable-next-line complexity
 export default function applyNice<Output extends Value>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,

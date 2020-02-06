@@ -1,3 +1,3 @@
-export default function fallbackFormatter(v: any) {
+export default function fallbackFormatter(v: unknown) {
   return `${v}`;
 }

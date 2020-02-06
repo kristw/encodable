@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import isEnabled from '../utils/isEnabled';
 import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import { ChannelDef, PositionFieldDef } from '../types/ChannelDef';

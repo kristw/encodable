@@ -29,7 +29,7 @@ export default function createScaleFromScaleConfig<Output extends Value>(
     // ensure the nth item is assigned the nth color
     if (typeof domain !== 'undefined') {
       const { colors } = colorScale;
-      (reverse ? domain.slice().reverse() : domain).forEach((value: any, index: number) => {
+      (reverse ? domain.slice().reverse() : domain).forEach((value: unknown, index: number) => {
         colorScale.setColor(`${value}`, colors[index % colors.length]);
       });
     }
@@ -43,6 +43,7 @@ export default function createScaleFromScaleConfig<Output extends Value>(
     //
     // CategoricalColorScale is actually a function,
     // but TypeScript is not smart enough to realize that by itself.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (colorScale as unknown) as (val?: any) => string;
   }
 
