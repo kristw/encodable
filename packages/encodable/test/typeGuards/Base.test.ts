@@ -29,6 +29,7 @@ describe('type guards: Base', () => {
   });
   describe('isDefined<T>(value)', () => {
     it('returns true and converts to type T if value is defined', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const x: any = 'abc';
       // eslint-disable-next-line jest/no-if
       if (isDefined<string>(x)) {

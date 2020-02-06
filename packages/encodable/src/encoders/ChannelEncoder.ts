@@ -75,17 +75,20 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   encodeValue: {
     (value: ChannelInput | Output): Output | null | undefined;
     (value: ChannelInput | Output, otherwise: Output): Output;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = (value: ChannelInput | Output, otherwise?: Output): any => {
     if (typeof otherwise !== 'undefined' && (value === null || typeof value === 'undefined')) {
       return otherwise;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this.encodeFunc(value as any);
   };
 
   encodeDatum: {
     (datum: PlainObject): Output | null | undefined;
     (datum: PlainObject, otherwise: Output): Output;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = (datum: PlainObject, otherwise?: Output): any =>
     typeof otherwise === 'undefined'
       ? this.encodeValue(this.getValueFromDatum(datum))

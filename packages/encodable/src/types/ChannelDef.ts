@@ -5,13 +5,14 @@ import { WithLegend } from './Legend';
 
 export type PropertyValue =
   | {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [key: string]: any;
     }
   | boolean
   | null
   | undefined;
 
-export type Formatter = (d: any) => string;
+export type Formatter = (d: unknown) => string;
 
 export interface FieldDef {
   field: string;

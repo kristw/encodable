@@ -11,12 +11,12 @@ export default function createFormatterFromFieldTypeAndFormat(
   if (type === 'quantitative') {
     const formatter = getNumberFormatter(format);
 
-    return (value: any) => formatter(value);
+    return (value: unknown) => formatter(value);
   }
   if (type === 'temporal') {
     const formatter = getTimeFormatter(format);
 
-    return (value: any) => formatter(value);
+    return (value: unknown) => formatter(value);
   }
 
   return fallbackFormatter;

@@ -6,5 +6,6 @@ type ArrayElement<A> = A extends Array<infer Elem> ? Elem : never;
  * when using array.map
  */
 export default function inferElementTypeFromUnionOfArrayTypes<T>(array: T): ArrayElement<T>[] {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return array as any;
 }
