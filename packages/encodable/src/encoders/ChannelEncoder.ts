@@ -23,13 +23,19 @@ type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined
 
 export default class ChannelEncoder<Def extends ChannelDef<Output>, Output extends Value = Value> {
   readonly name: string | Symbol | number;
+
   readonly channelType: ChannelType;
+
   readonly originalDefinition: Def;
+
   readonly definition: CompleteChannelDef<Output>;
+
   readonly scale?: AllScale<Output>;
+
   readonly axis?: ChannelEncoderAxis<Def, Output>;
 
   private readonly getValue: Getter<Output>;
+
   private readonly encodeFunc: IdentityFunction<Output> | EncodeFunction<Output> | (() => Output);
 
   readonly formatValue: (value: ChannelInput | HasToString) => string;
@@ -105,11 +111,13 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     const { type } = this.definition;
     if (type === 'nominal' || type === 'ordinal') {
       return Array.from(new Set(data.map(d => this.getValueFromDatum(d)))) as ChannelInput[];
-    } else if (type === 'quantitative') {
+    }
+    if (type === 'quantitative') {
       const extent = d3Extent(data, d => this.getValueFromDatum<number>(d));
 
       return typeof extent[0] === 'undefined' ? [0, 1] : (extent as [number, number]);
-    } else if (type === 'temporal') {
+    }
+    if (type === 'temporal') {
       const extent = d3Extent(data, d => this.getValueFromDatum<number | Date>(d));
 
       return typeof extent[0] === 'undefined'

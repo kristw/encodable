@@ -1,6 +1,9 @@
 ## 🎭 encodable / API / `createScaleFromScaleConfig(...)`
 
-Function for parsing scales from configuration object into D3 scales as well as connecting to `@superset-ui/colors` to get color schemes by name. Support most types of scale that D3/vega-lite has. See [vega-lite's scale documentation](https://vega.github.io/vega-lite/docs/scale.html) for more details.
+Function for parsing scales from configuration object into D3 scales as well as connecting to
+`@superset-ui/colors` to get color schemes by name. Support most types of scale that D3/vega-lite
+has. See [vega-lite's scale documentation](https://vega.github.io/vega-lite/docs/scale.html) for
+more details.
 
 #### Example usage
 
@@ -42,23 +45,22 @@ expect((scale as ScaleTime<number, number>).domain()).toEqual([
 The following scale properties are supported. (See `Scale.ts`.)
 
 ```ts
-'domain'
-'range'
-'reverse'
-'align'
-'base'
-'clamp'
-'constant'
-'exponent'
-'interpolate' // add placeholder to be implemented
-'nice'
-'padding'
-'paddingInner'
-'paddingOuter'
-'reverse'
-'round'
-'scheme'
-'namespace'
-'zero'
+'domain';
+'range';
+'reverse';
+'align';
+'base';
+'clamp';
+'constant';
+'exponent';
+'interpolate'; // add placeholder to be implemented
+'nice';
+'padding';
+'paddingInner';
+'paddingOuter';
+'reverse';
+'round';
+'scheme';
+'namespace';
+'zero';
 ```
-

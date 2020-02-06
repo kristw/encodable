@@ -33,7 +33,7 @@ export default function createEncoderFactory<Config extends EncodingConfig>(
       ? (encoding: PartialEncoding) => mergeEncoding(params.defaultEncoding, encoding)
       : params.completeEncoding;
 
-  const create = (encoding: PartialEncoding) =>
+  const create = (encoding: PartialEncoding = {}) =>
     new Encoder<Config>({
       channelTypes,
       encoding: completeEncoding(encoding),

@@ -4,26 +4,29 @@
   "description": "monorepo that contains encodable",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build": "yarn run build:cjs && yarn run build:esm && yarn run type:dts && yarn run build:assets",
-    "build:cjs": "NODE_ENV=production beemo babel --extensions=\".js,.jsx,.ts,.tsx\" ./src --out-dir lib/ --delete-dir-on-start --minify --workspaces=\"*\"",
-    "build:esm": "NODE_ENV=production beemo babel --extensions=\".js,.jsx,.ts,.tsx\" ./src --out-dir esm/ --delete-dir-on-start --esm --minify --workspaces=\"*\"",
+    "postpublish": "git push; git push --tags",
+    "build": "yarn babel && yarn type && yarn build:assets",
+    "babel": "yarn babel:cjs && yarn babel:esm",
+    "babel:cjs": "nimbus babel --clean --workspaces=\"*\" --config-file=../../babel.config.js",
+    "babel:esm": "nimbus babel --clean --workspaces=\"*\" --esm --config-file=../../babel.config.js",
     "build:assets": "node ./scripts/buildAssets.js",
+    "clean": "rm -rf ./packages/**/{lib,esm}",
     "commit": "superset-commit",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "type": "NODE_ENV=production beemo typescript --workspaces=\"*\" --noEmit",
-    "type:dts": "NODE_ENV=production beemo typescript --workspaces=\"*\" --emitDeclarationOnly",
-    "lint": "beemo create-config prettier && beemo eslint \"./packages/*/{src,test,storybook}/**/*.{js,jsx,ts,tsx}\"",
-    "lint:fix": "beemo create-config prettier && beemo eslint --fix \"./packages/*/{src,test,storybook}/**/*.{js,jsx,ts,tsx}\"",
-    "jest": "beemo jest --color --coverage --react",
+    "format": "yarn prettier --write",
+    "jest": "NODE_ENV=test nimbus jest --coverage --verbose",
+    "lint": "nimbus eslint",
+    "lint:fix": "yarn lint --fix",
+    "prettier": "nimbus prettier",
+    "test": "yarn jest",
+    "test:watch": "yarn lint:fix && yarn jest --watch",
+    "type": "nimbus typescript --build --reference-workspaces",
+    "prepare-release": "git checkout master && git pull --rebase origin master && yarn && yarn test",
+    "prerelease": "yarn build",
+    "pretest": "yarn lint",
+    "release": "yarn prepare-release && lerna publish --exact && yarn postrelease",
     "postrelease": "lerna run deploy-demo",
-    "prepare-release": "git checkout master && git pull --rebase origin master && lerna bootstrap && yarn install && yarn run test",
-    "prerelease": "yarn run build",
-    "pretest": "yarn run lint",
-    "prettier": "beemo prettier \"./packages/*/{src,test,storybook}/**/*.{js,jsx,ts,tsx,json,md}\"",
-    "release": "yarn run prepare-release && lerna publish && yarn run postrelease",
-    "test": "yarn run jest",
-    "test:watch": "yarn run lint:fix && beemo create-config jest --react && jest --watch"
+    "storybook": "cd packages/react-vega-demo && yarn storybook"
   },
   "repository": "https://github.com/apache-superset/encodable.git",
   "keywords": [
@@ -38,48 +41,84 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@superset-ui/build-config": "^0.2.0",
+    "@airbnb/config-babel": "^2.2.2",
+    "@airbnb/config-eslint": "^2.5.1",
+    "@airbnb/config-jest": "^2.2.2",
+    "@airbnb/config-prettier": "^2.1.1",
+    "@airbnb/config-typescript": "^2.2.2",
+    "@airbnb/nimbus": "^2.2.3",
+    "@babel/runtime-corejs3": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@superset-ui/commit-config": "^0.0.9",
-    "fast-glob": "^3.0.1",
-    "fs-extra": "^8.0.1",
-    "husky": "^3.0.1",
-    "lerna": "^3.2.1",
-    "lint-staged": "^9.2.1",
-    "react": "^16.9.0",
-    "yarn": "^1.9.4"
+    "@types/enzyme": "^3.10.4",
+    "@types/jest": "^25.1.0",
+    "@types/jsdom": "^12.2.4",
+    "@types/react-test-renderer": "^16.9.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.3",
+    "fast-glob": "^3.1.1",
+    "fs-extra": "^8.1.0",
+    "husky": "^4.2.1",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.0.3",
+    "react-test-renderer": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react": "^16.12.0"
   },
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10.10.0",
+    "npm": ">=6.8.0",
+    "yarn": ">=1.13.0"
   },
-  "beemo": {
-    "module": "@superset-ui/build-config",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "nimbus": {
     "drivers": [
-      "babel",
+      { "driver": "babel", "strategy": "none" },
       "eslint",
-      {
-        "driver": "jest",
-        "env": {
-          "NODE_ENV": "test"
-        }
-      },
+      "jest",
       "prettier",
       "typescript"
     ],
+    "settings": {
+      "library": true,
+      "react": true,
+      "next": true,
+      "env": {
+        "corejs": 3,
+        "useBuiltIns": "usage"
+      }
+    },
+    "babel": {
+      "plugins": [["@babel/plugin-transform-runtime", { "corejs": 3 }]]
+    },
     "jest": {
-      "globals": {
-        "caches": true
-      },
-      "setupFiles": [
-        "<rootDir>/test/setupTests.ts"
+      "timers": "real",
+      "setupFilesAfterEnv": [
+        "@airbnb/config-jest/enzyme"
       ],
-      "projects": [
-        "<rootDir>"
+      "transformIgnorePatterns": [
+        "node_modules/(?!(vega-lite))"
+      ]
+    },
+    "eslint": {
+      "overrides": [
+        {
+          "files": "*.{js,jsx,ts,tsx}",
+          "rules": {
+            "@typescript-eslint/no-explicit-any": ["warn", { "fixToUnknown": false }]
+          }
+        }
       ]
     },
     "typescript": {
       "compilerOptions": {
+        "emitDeclarationOnly": true,
         "typeRoots": [
-          "../../node_modules/vega-lite/typings"
+          "./node_modules/@types",
+          "./node_modules/vega-lite/typings"
         ]
       },
       "include": [
@@ -87,9 +126,6 @@
       ]
     }
   },
-  "workspaces": [
-    "./packages/*"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -98,7 +134,7 @@
   },
   "lint-staged": {
     "./packages/*/{src,test,storybook}/**/*.{js,jsx,ts,tsx,json,md}": [
-      "yarn run prettier --write",
+      "yarn prettier --write",
       "git add"
     ]
   }

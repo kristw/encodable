@@ -25,7 +25,7 @@ export default function completeChannelDef<Output extends Value>(
   // Fill top-level properties
   const copy = {
     ...channelDef,
-    title: isFieldDef(channelDef) ? channelDef.title || channelDef.field : '',
+    title: isFieldDef(channelDef) ? channelDef.title ?? channelDef.field : '',
     type: isTypedFieldDef(channelDef)
       ? channelDef.type
       : inferFieldType(channelType, channelDef.field),

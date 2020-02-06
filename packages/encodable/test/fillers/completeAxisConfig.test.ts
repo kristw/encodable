@@ -126,6 +126,8 @@ describe('completeAxisConfig(channelDef)', () => {
           ...DEFAULT_OUTPUT,
           labelOverlap: strategy,
         });
+        // type guard
+        // eslint-disable-next-line jest/no-if
         if (output !== false) {
           expect(output.labelOverlap).not.toBe(strategy);
         }
@@ -196,6 +198,7 @@ describe('completeAxisConfig(channelDef)', () => {
   });
   it('returns false if axis is null', () => {
     expect(
+      // @ts-ignore
       completeAxisConfig('X', { type: 'quantitative', field: 'consumption', axis: null }),
     ).toEqual(false);
   });

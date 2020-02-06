@@ -23,12 +23,11 @@ export default function applyDomain<Output extends Value>(
 
   const order = createOrderFunction(reverse);
 
-  const inputDomain =
-    domainFromDataset && domainFromDataset.length
-      ? inferElementTypeFromUnionOfArrayTypes(domainFromDataset)
-      : undefined;
+  const inputDomain = domainFromDataset?.length
+    ? inferElementTypeFromUnionOfArrayTypes(domainFromDataset)
+    : undefined;
 
-  if (domain && domain.length) {
+  if (domain?.length) {
     const fixedDomain = inferElementTypeFromUnionOfArrayTypes(domain).map(parseDateTimeIfPossible);
 
     if (isContinuousScale(scale, type)) {

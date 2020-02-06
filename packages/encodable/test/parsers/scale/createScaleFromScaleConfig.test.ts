@@ -181,7 +181,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           type: 'linear',
           interpolate: 'cubehelix',
         }),
-      ).toThrowError('"scale.interpolate" is not supported yet.');
+      ).toThrow('"scale.interpolate" is not supported yet.');
     });
   });
 
@@ -236,7 +236,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('symlog scale', () => {
     it('is not supported yet', () => {
-      expect(() => createScaleFromScaleConfig({ type: 'symlog' })).toThrowError(
+      expect(() => createScaleFromScaleConfig({ type: 'symlog' })).toThrow(
         '"scale.type = symlog" is not supported yet.',
       );
     });
@@ -570,7 +570,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('bin-ordinal scale', () => {
     it('is not supported yet', () => {
-      expect(() => createScaleFromScaleConfig({ type: 'bin-ordinal' })).toThrowError(
+      expect(() => createScaleFromScaleConfig({ type: 'bin-ordinal' })).toThrow(
         '"scale.type = bin-ordinal" is not supported yet.',
       );
     });

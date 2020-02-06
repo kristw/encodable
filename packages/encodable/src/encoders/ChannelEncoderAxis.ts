@@ -14,7 +14,9 @@ export default class ChannelEncoderAxis<
   Output extends Value = Value
 > {
   readonly channelEncoder: ChannelEncoder<Def, Output>;
+
   readonly config: Exclude<CompleteAxisConfig, false>;
+
   readonly formatValue: (value: ChannelInput | HasToString) => string;
 
   constructor(channelEncoder: ChannelEncoder<Def, Output>) {
@@ -22,7 +24,7 @@ export default class ChannelEncoderAxis<
     this.config = channelEncoder.definition.axis as Exclude<CompleteAxisConfig, false>;
     this.formatValue = createFormatterFromFieldTypeAndFormat(
       (channelEncoder.definition as CompleteFieldDef<Output>).type,
-      this.config.format || '',
+      this.config.format ?? '',
     );
   }
 

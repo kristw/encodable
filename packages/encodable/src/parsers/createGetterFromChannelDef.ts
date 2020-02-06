@@ -12,7 +12,8 @@ export default function createGetterFromChannelDef<Output extends Value>(
 ): Getter<Output> {
   if (isValueDef(definition)) {
     return () => definition.value;
-  } else if (typeof definition.field !== 'undefined') {
+  }
+  if (typeof definition.field !== 'undefined') {
     return get(definition.field);
   }
 

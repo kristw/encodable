@@ -2,8 +2,9 @@
 
 An `Encoder` is a utility class created once per chart type.
 
-* It consists of one or more `ChannelEncoder`
-* It takes users' definitions of the channels (`vega-lite` syntax), then resolves ambiguity and produce complete definition and actionable utility functions.
+- It consists of one or more `ChannelEncoder`
+- It takes users' definitions of the channels (`vega-lite` syntax), then resolves ambiguity and
+  produce complete definition and actionable utility functions.
 
 #### Example Usage
 
@@ -19,42 +20,44 @@ type LineChartEncodingConfig = {
 };
 
 const lineChartEncoderFactory = createEncoderFactory<LineChartEncodingConfig>({
-    // This part is manual work to convert the `ChannelType` defined in `LineChartEncodingConfig` above
-    // from `type` to `value`. `LineChartEncodingConfig` is the source of truth
-    // and because it is generic for this function, type checking will ensure the only compatible value
-    // for channelTypes is exactly like the one below.
-    channelTypes: {
-      x: 'X',
-      y: 'Y',
-      color: 'Color',
-      tooltip: 'Text',
-    },
-    // Define default definition for each channel
-    defaultEncoding: {
-      x: { type: 'quantitative', field: 'x' },
-      y: { type: 'quantitative', field: 'y' },
-      color: { value: 'black' },
-      tooltip: [],
-    },
-  });
+  // This part is manual work to convert the `ChannelType` defined in `LineChartEncodingConfig` above
+  // from `type` to `value`. `LineChartEncodingConfig` is the source of truth
+  // and because it is generic for this function, type checking will ensure the only compatible value
+  // for channelTypes is exactly like the one below.
+  channelTypes: {
+    x: 'X',
+    y: 'Y',
+    color: 'Color',
+    tooltip: 'Text',
+  },
+  // Define default definition for each channel
+  defaultEncoding: {
+    x: { type: 'quantitative', field: 'x' },
+    y: { type: 'quantitative', field: 'y' },
+    color: { value: 'black' },
+    tooltip: [],
+  },
+});
 
 type LineChartEncoding = DeriveEncoding<LineChartEncodingConfig>;
 ```
 
 The `factory` encapsulates `channelTypes` and `defaultEncoding`
-* which are constants across all `Encoder` instance of this chart
-* making it convenient to create a new `Encoder` from `encoding` because `factory.create(encoding)` only needs one argument: `encoding`.
 
-| ChannelType | Example channel | Output types |
-|----|----|----|
-| `X` |  bubble chart's x-position | `number \| null` |
-| `Y` |  bubble chart's y-position | `number \| null` |
-| `XBand` | vertical bar chart's x-position | `number \| null` |
-| `YBand` |  horizontal bar chart's y-position | `number \| null` |
-| `Numeric` |  bubble chart's bubble size | `number \| null` |
-| `Color` |  bubble chart's bubble color | `string \| null` |
-| `Text` |  bubble chart's bubble label | `string \| null` |
-| `Category` |  bubble chart's fill or not (`boolean`), pattern (`string`), font weight (`string \| number`) | `string \| boolean \| number \| null` |
+- which are constants across all `Encoder` instance of this chart
+- making it convenient to create a new `Encoder` from `encoding` because `factory.create(encoding)`
+  only needs one argument: `encoding`.
+
+| ChannelType | Example channel                                                                              | Output types                          |
+| ----------- | -------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `X`         | bubble chart's x-position                                                                    | `number \| null`                      |
+| `Y`         | bubble chart's y-position                                                                    | `number \| null`                      |
+| `XBand`     | vertical bar chart's x-position                                                              | `number \| null`                      |
+| `YBand`     | horizontal bar chart's y-position                                                            | `number \| null`                      |
+| `Numeric`   | bubble chart's bubble size                                                                   | `number \| null`                      |
+| `Color`     | bubble chart's bubble color                                                                  | `string \| null`                      |
+| `Text`      | bubble chart's bubble label                                                                  | `string \| null`                      |
+| `Category`  | bubble chart's fill or not (`boolean`), pattern (`string`), font weight (`string \| number`) | `string \| boolean \| number \| null` |
 
 This is how consumer-specified `encoding` may look like.
 
@@ -88,7 +91,7 @@ const legendInfo = factory
     color: {
       type: 'nominal',
       field: 'brand',
-      scale: { range: ['red', 'green', 'blue'] }
+      scale: { range: ['red', 'green', 'blue'] },
     },
     radius: { value: 5 },
     shape: { value: 'circle' },
@@ -142,9 +145,11 @@ const legendInfo = factory
   .getLegendInformation();
 ```
 
-Unlike the nominal field, `items` is not included in the output, so you cannot use `legendInfo[0].items` directly. Have to create legend items manually from inputs.
+Unlike the nominal field, `items` is not included in the output, so you cannot use
+`legendInfo[0].items` directly. Have to create legend items manually from inputs.
 
-In the future we can implement logic to infer the appropriate inputs from continuous domain and output items the same way the nominal field does.
+In the future we can implement logic to infer the appropriate inputs from continuous domain and
+output items the same way the nominal field does.
 
 ```ts
 legendInfo[0].createLegendItems([0, 10, 20]);
@@ -176,4 +181,3 @@ legendInfo[0].createLegendItems([0, 10, 20]);
 //   },
 // ]
 ```
-

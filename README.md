@@ -1,25 +1,30 @@
 # 🎭 encodable
 
 [![Codecov branch](https://img.shields.io/codecov/c/github/apache-superset/encodable/master.svg?style=flat-square)](https://codecov.io/gh/apache-superset/encodable/branch/master)
-[![Build Status](https://img.shields.io/travis/com/apache-superset/encodable/master.svg?style=flat-square
-)](https://travis-ci.com/apache-superset/encodable)
+[![Build Status](https://img.shields.io/travis/com/apache-superset/encodable/master.svg?style=flat-square)](https://travis-ci.com/apache-superset/encodable)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
-> **tl;dr.** When you have a visualization component, this library helps you defines the visual channels that you can encode data into and provide API similar to `vega-lite`'s grammar for consumers to customize the visual encoding.
+> **tl;dr.** When you have a visualization component, this library helps you defines the visual
+> channels that you can encode data into and provide API similar to `vega-lite`'s grammar for
+> consumers to customize the visual encoding.
 
 ## Packages
 
-| Package | Version |
-|--|--|
+| Package                                                                                  | Version                                                                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | [encodable](https://github.com/apache-superset/encodable/tree/master/packages/encodable) | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square) |
 
 ## Example
 
-* [WordCloud demo on CodeSandbox](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
+- [WordCloud demo on CodeSandbox](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
 
 ### Why use `encodable`?
 
-This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite` gives you a grammar and rendering engine that you can use to create many different visualizations from it. For example, this is how you create a [bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in `vega-lite`:
+This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite`
+gives you a grammar and rendering engine that you can use to create many different visualizations
+from it. For example, this is how you create a
+[bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in
+`vega-lite`:
 
 ```js
 {
@@ -31,13 +36,26 @@ This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-
 }
 ```
 
-Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for full syntax explanation. For those who are less familiar with `vega-lite`, this visualization grammar is already supported on known platforms such as [Observable](https://observablehq.com/) or Jupyter Notebook (via [Altair](https://altair-viz.github.io/), its python port).
+Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s
+[channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for
+full syntax explanation. For those who are less familiar with `vega-lite`, this visualization
+grammar is already supported on known platforms such as [Observable](https://observablehq.com/) or
+Jupyter Notebook (via [Altair](https://altair-viz.github.io/), its python port).
 
-Although the grammar is very flexible and covers the definitions of the most common visualizations already, what you can created are still limited by what `vega-lite` renderer supports. (`vega-lite` has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional component that cannot be described in `vega-lite`, or a traditional component with many subtle details that you struggle to describe the visualization and its interactions in `vega-lite`'s channels and grammar.
+Although the grammar is very flexible and covers the definitions of the most common visualizations
+already, what you can created are still limited by what `vega-lite` renderer supports. (`vega-lite`
+has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional
+component that cannot be described in `vega-lite`, or a traditional component with many subtle
+details that you struggle to describe the visualization and its interactions in `vega-lite`'s
+channels and grammar.
 
-At this point, many people, including those who are not aware of `vega-lite` in the first place, choose to develop their own standalone components. Each component ends up having very different API. If you develop a word cloud component, how would you let user specify the `fontSize`, `color`, `text` etc.?
+At this point, many people, including those who are not aware of `vega-lite` in the first place,
+choose to develop their own standalone components. Each component ends up having very different API.
+If you develop a word cloud component, how would you let user specify the `fontSize`, `color`,
+`text` etc.?
 
-One common approach is to accept accessor functions as arguments, but then you punt most of the implementation responsibilities to the library consumer. The configuration is also not serializable.
+One common approach is to accept accessor functions as arguments, but then you punt most of the
+implementation responsibilities to the library consumer. The configuration is also not serializable.
 
 ```js
 {
@@ -45,15 +63,26 @@ One common approach is to accept accessor functions as arguments, but then you p
 }
 ```
 
-Then there are alternatives such as exposing a number of arbitrarily chosen fields, e.g. `fontSizeField`, `fontSizeRange`, which you have to handle inside the component. If you start from expecting `fontSize` to be using linear scale and later want to support log scale, you may have to expose new field  `fontSizeScaleType` and include new logic for creating log scale.
+Then there are alternatives such as exposing a number of arbitrarily chosen fields, e.g.
+`fontSizeField`, `fontSizeRange`, which you have to handle inside the component. If you start from
+expecting `fontSize` to be using linear scale and later want to support log scale, you may have to
+expose new field `fontSizeScaleType` and include new logic for creating log scale.
 
-Later on, if you start developing a suite of components, you either have to come up with a list of common properties or naming conventions, so all of your visualization components at least work similarly. After all, this is likely to be yet another standard that only applies to your components.
+Later on, if you start developing a suite of components, you either have to come up with a list of
+common properties or naming conventions, so all of your visualization components at least work
+similarly. After all, this is likely to be yet another standard that only applies to your
+components.
 
 #### Wouldn't it be nice if I can easily develop a component which provides an API that looks like `vega-lite` grammar?
 
-`encodable` was created to address this need. When you already have a specific visualization in mind and know how to build it, this library helps you **make the component "encodable"** and provide standardized API similar to `vega-lite`'s [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for consumers to define their **encoding**.
+`encodable` was created to address this need. When you already have a specific visualization in mind
+and know how to build it, this library helps you **make the component "encodable"** and provide
+standardized API similar to `vega-lite`'s
+[channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for
+consumers to define their **encoding**.
 
-This is an example of how component consumers define `color`, `fontSize` and `text` channels for a word cloud component that is powered by `encodable`.
+This is an example of how component consumers define `color`, `fontSize` and `text` channels for a
+word cloud component that is powered by `encodable`.
 
 ```js
 {
@@ -77,15 +106,20 @@ This is an example of how component consumers define `color`, `fontSize` and `te
 }
 ```
 
-See the full [example code](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
+See the full
+[example code](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
 
 More specifically, the `encodable` package
 
-* provides typings for defining visual encoding channels for a component.
-* adopts the [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) grammar from `vega-lite` (not 100%) to define visual encoding channels as well as logic for determining smart defaults (e.g. choosing scale type based on data type, etc.)
-* parses incoming visual encoding into utility functions that helps you render the visualization component.
-* leverages `superset-ui` packages to use the number and time formatters as well as color scales.
-* does NOT render the component.
+- provides typings for defining visual encoding channels for a component.
+- adopts the
+  [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition)
+  grammar from `vega-lite` (not 100%) to define visual encoding channels as well as logic for
+  determining smart defaults (e.g. choosing scale type based on data type, etc.)
+- parses incoming visual encoding into utility functions that helps you render the visualization
+  component.
+- leverages `superset-ui` packages to use the number and time formatters as well as color scales.
+- does NOT render the component.
 
 <!-- ## Demo
 
@@ -95,14 +129,14 @@ Current master: https://superset-ui.netlify.com -->
 
 ## API documentation
 
-* [Encoder](docs/Encoder.md)
-* [ChannelEncoder](docs/ChannelEncoder.md)
-* [createScaleFromScaleConfig](docs/createScaleFromScaleConfig.md)
+- [Encoder](docs/Encoder.md)
+- [ChannelEncoder](docs/ChannelEncoder.md)
+- [createScaleFromScaleConfig](docs/createScaleFromScaleConfig.md)
 
 ## Contribution and development guide
 
-Please read the [contributing guidelines](CONTRIBUTING.md) which include development environment setup
-and other things you should know about coding in this repo.
+Please read the [contributing guidelines](CONTRIBUTING.md) which include development environment
+setup and other things you should know about coding in this repo.
 
 ### License
 
