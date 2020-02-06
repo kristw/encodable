@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "postpublish": "git push; git push --tags",
-    "build": "yarn babel && yarn type:dts && yarn build:assets",
+    "build": "yarn babel && yarn type && yarn build:assets",
     "babel": "yarn babel:cjs && yarn babel:esm",
     "babel:cjs": "nimbus babel --clean --workspaces=\"*\"",
     "babel:esm": "nimbus babel --clean --workspaces=\"*\" --esm",
@@ -20,7 +20,7 @@
     "prettier": "nimbus prettier",
     "test": "yarn jest",
     "test:watch": "yarn lint:fix && yarn jest --watch",
-    "type:dts": "nimbus typescript --build --reference-workspaces",
+    "type": "nimbus typescript --build --reference-workspaces",
     "prepare-release": "git checkout master && git pull --rebase origin master && yarn && yarn test",
     "prerelease": "yarn build",
     "pretest": "yarn lint",
@@ -98,6 +98,9 @@
       "timers": "real",
       "setupFilesAfterEnv": [
         "@airbnb/config-jest/enzyme"
+      ],
+      "transformIgnorePatterns": [
+        "node_modules/(?!(vega-lite))"
       ]
     },
     "eslint": {
