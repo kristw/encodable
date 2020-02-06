@@ -43,7 +43,8 @@ export default function createScaleFromScaleConfig<Output extends Value>(
     //
     // CategoricalColorScale is actually a function,
     // but TypeScript is not smart enough to realize that by itself.
-    return (colorScale as unknown) as (val?: unknown) => string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (colorScale as unknown) as (val?: any) => string;
   }
 
   const scale = createScaleFromScaleType(config);
