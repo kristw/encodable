@@ -5,6 +5,7 @@ const config = getConfig({
   library: true,
   react: true,
   next: true,
+  node: process.env.NODE_ENV === 'test',
   typescript: true,
   env: {
     corejs: 3,
