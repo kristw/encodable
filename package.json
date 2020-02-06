@@ -76,7 +76,7 @@
   ],
   "nimbus": {
     "drivers": [
-      "babel",
+      { "driver": "babel", "strategy": "none" },
       "eslint",
       "jest",
       "prettier",
