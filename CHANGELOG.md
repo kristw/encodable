@@ -1,3 +1,17 @@
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.2.0...v0.0.0) (2020-02-06)
+
+
+
+# [0.2.0](https://github.com/apache-superset/encodable/compare/v0.1.0...v0.2.0) (2020-02-06)
+
+
+### Bug Fixes
+
+* build ([#8](https://github.com/apache-superset/encodable/issues/8)) ([5475b9c](https://github.com/apache-superset/encodable/commit/5475b9c4f4b6a3b0a864ea711c306fc593273be1))
+* remove `vega-expression` dependency ([#9](https://github.com/apache-superset/encodable/issues/9)) ([c040a26](https://github.com/apache-superset/encodable/commit/c040a2663519d9f276dddde6eb87d39448671084))
+
+
+
 # [0.1.0](https://github.com/apache-superset/encodable/compare/v0.0.7...v0.1.0) (2019-11-20)
 
 
