@@ -9,7 +9,6 @@ import { ChannelType } from '../types/Channel';
  * @param fieldType type of the field
  * @param bin is value binned
  */
-// eslint-disable-next-line complexity
 export default function inferScaleType(
   channelType: ChannelType,
   fieldType?: Type,
