@@ -13,13 +13,6 @@ const config = getConfig({
   },
 });
 
-config.plugins.push([
-  '@babel/plugin-transform-runtime',
-  {
-    corejs: 3,
-  },
-]);
-
 // Override to allow transpile es modules inside vega-lite
 config.ignore = config.ignore.filter(item => item !== 'node_modules/');
 config.ignore.push('node_modules/(?!vega-lite)');

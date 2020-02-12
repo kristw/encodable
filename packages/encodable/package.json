@@ -44,8 +44,8 @@
     "d3-time": "^1.0.11",
     "lodash": "^4.17.15",
     "reselect": "^4.0.0",
-    "vega": "^5.8.1",
-    "vega-lite": "^4.0.0-beta.12"
+    "vega": "^5.9.1",
+    "vega-lite": "~4.1.0"
   },
   "devDependencies": {
     "@superset-ui/superset-ui": "^0.12.5"
