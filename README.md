@@ -16,7 +16,7 @@
 
 ## Example
 
-- [WordCloud demo on CodeSandbox](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
+- [WordCloud demo on CodeSandbox](https://codesandbox.io/s/encodable-wordcloud-demo-k66ui?fontsize=14&hidenavigation=1&theme=dark).
 
 ### Why use `encodable`?
 
