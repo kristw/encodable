@@ -107,7 +107,7 @@ word cloud component that is powered by `encodable`.
 ```
 
 See the full
-[example code](https://codesandbox.io/embed/encodable-example-word-cloud-ig88p?fontsize=14&hidenavigation=1&theme=dark).
+[example code](https://codesandbox.io/s/encodable-wordcloud-demo-k66ui?fontsize=14&hidenavigation=1&theme=dark).
 
 More specifically, the `encodable` package
 
