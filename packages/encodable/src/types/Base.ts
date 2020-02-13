@@ -17,3 +17,6 @@ export type RequiredSome<T, RequiredFields extends keyof T> = {
 
 /** Signature of an identity function */
 export type IdentityFunction<T> = (value: T) => T;
+
+/** Union types of all values from a map type */
+export type ValueOf<T> = T[keyof T];
