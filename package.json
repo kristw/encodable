@@ -33,11 +33,7 @@
     "data",
     "analytics",
     "analysis",
-    "visualization",
-    "react",
-    "d3",
-    "data-ui",
-    "vx"
+    "visualization"
   ],
   "license": "Apache-2.0",
   "devDependencies": {
