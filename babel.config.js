@@ -8,8 +8,7 @@ const config = getConfig({
   node: process.env.NODE_ENV === 'test',
   typescript: true,
   env: {
-    corejs: 3,
-    useBuiltIns: 'usage',
+    targets: false,
   },
 });
 
