@@ -1,4 +1,22 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.2.0...v0.0.0) (2020-02-06)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.2.2...v0.0.0) (2020-02-13)
+
+
+
+## [0.2.2](https://github.com/apache-superset/encodable/compare/v0.2.1...v0.2.2) (2020-02-13)
+
+
+### Bug Fixes
+
+* namespace issue ([#12](https://github.com/apache-superset/encodable/issues/12)) ([b5e31cb](https://github.com/apache-superset/encodable/commit/b5e31cb9d7473722f03861596375219c2c1ff379))
+
+
+
+## [0.2.1](https://github.com/apache-superset/encodable/compare/v0.2.0...v0.2.1) (2020-02-12)
+
+
+### Bug Fixes
+
+* remove babel transform runtime ([#10](https://github.com/apache-superset/encodable/issues/10)) ([0545fe6](https://github.com/apache-superset/encodable/commit/0545fe6bcad390e720486ac0a181bb82ec07456f))
 
 
 
