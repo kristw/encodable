@@ -91,7 +91,7 @@
       "react": true,
       "next": true,
       "env": {
-        "target": false
+        "targets": false
       }
     },
     "jest": {
