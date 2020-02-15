@@ -96,7 +96,7 @@
         "@airbnb/config-jest/enzyme"
       ],
       "transformIgnorePatterns": [
-        "node_modules/(?!(vega-lite))"
+        "node_modules/(?!(vega-lite|lodash-es))"
       ]
     },
     "eslint": {

@@ -1,4 +1,4 @@
-import { flatMap } from 'lodash';
+import flatMap from 'lodash-es/flatMap';
 import { ChannelDef, TypedFieldDef } from '../types/ChannelDef';
 import { MayBeArray } from '../types/Base';
 import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
