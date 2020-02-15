@@ -31,10 +31,17 @@ export default function completeChannelDef<Output extends Value>(
       : inferFieldType(channelType, channelDef.field),
   };
 
+  // Scale needs the top-level properties to be filled.
+  const scale = completeScaleConfig(channelType, copy);
+  const copy2 = { ...copy, scale };
+
+  // These two rely on scale
+  const axis = completeAxisConfig(channelType, copy2);
+  const legend = completeLegendConfig(channelType, copy2);
+
   return {
-    ...copy,
-    axis: completeAxisConfig(channelType, copy),
-    legend: completeLegendConfig(channelType, copy),
-    scale: completeScaleConfig(channelType, copy),
+    ...copy2,
+    axis,
+    legend,
   };
 }
