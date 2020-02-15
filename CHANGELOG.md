@@ -1,4 +1,31 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.2.2...v0.0.0) (2020-02-13)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.2.5...v0.0.0) (2020-02-15)
+
+
+
+## [0.2.5](https://github.com/apache-superset/encodable/compare/v0.2.4...v0.2.5) (2020-02-15)
+
+
+### Features
+
+* export type LegendGroupInformation ([06957c6](https://github.com/apache-superset/encodable/commit/06957c6a7fe66586eed32f8054a08f583e281e6f))
+
+
+
+## [0.2.4](https://github.com/apache-superset/encodable/compare/v0.2.3...v0.2.4) (2020-02-15)
+
+
+### Features
+
+* export STRATEGY_FLAT ([f2df1d2](https://github.com/apache-superset/encodable/commit/f2df1d2e0f11e9b1fb8f15b2d37d8f0b019cfa43))
+
+
+
+## [0.2.3](https://github.com/apache-superset/encodable/compare/v0.2.2...v0.2.3) (2020-02-15)
+
+
+### Features
+
+* use lodash-es instead of lodash ([#13](https://github.com/apache-superset/encodable/issues/13)) ([a98a020](https://github.com/apache-superset/encodable/commit/a98a0207caad6b8c96c186bc9bc16f716eb70048))
 
 
 
