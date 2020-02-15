@@ -8,24 +8,21 @@ export interface WithLegend {
   legend?: boolean | Legend;
 }
 
+export type LegendItemInformation<Config extends EncodingConfig> = {
+  input: ChannelInput;
+  output: Partial<{ [k in keyof Config]: Config[k]['1'] }>;
+};
+
 interface BaseLegendGroupInformation<Config extends EncodingConfig> {
   field: string;
   channelEncoders: DeriveSingleChannelEncoder<Config, keyof Config>[];
-  createLegendItems: (
-    domain: ChannelInput[],
-  ) => {
-    input: ChannelInput;
-    output: Partial<{ [k in keyof Config]: Config[k]['1'] }>;
-  }[];
+  createLegendItems: (domain: ChannelInput[]) => LegendItemInformation<Config>[];
 }
 
 export interface NominalLegendGroupInformation<Config extends EncodingConfig>
   extends BaseLegendGroupInformation<Config> {
   type: 'nominal';
-  items: {
-    input: ChannelInput;
-    output: Partial<{ [k in keyof Config]: Config[k]['1'] }>;
-  }[];
+  items: LegendItemInformation<Config>[];
 }
 
 export interface NonNominalLegendGroupInformation<Config extends EncodingConfig>
