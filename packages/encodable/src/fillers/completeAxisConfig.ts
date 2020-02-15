@@ -4,11 +4,11 @@ import { RequiredSome } from '../types/Base';
 import { ChannelDef, PositionFieldDef } from '../types/ChannelDef';
 import { ChannelType } from '../types/Channel';
 import { isXOrY, isX } from '../typeGuards/Channel';
-import { isContinuousScaleConfig } from '../typeGuards/Scale';
 import { AxisConfig, LabelOverlapStrategy } from '../types/Axis';
 import expandLabelOverlapStrategy from './expandLabelOverlapStrategy';
 import { CompleteScaleConfig } from './completeScaleConfig';
 import { HalfCompleteChannelDef } from '../types/CompleteChannelDef';
+import { continuousToContinuousScaleTypesSet } from '../parsers/scale/scaleCategories';
 
 type PositionFieldDefWithCompleteScaleConfig = Omit<PositionFieldDef, 'scale'> & {
   scale: CompleteScaleConfig;
@@ -66,7 +66,9 @@ export default function completeAxisConfig(
       labelAngle,
       labelFlush:
         typeof labelFlush === 'undefined'
-          ? channelDef.scale && isContinuousScaleConfig(channelDef.scale)
+          ? channelDef.scale &&
+            typeof channelDef.scale.type !== 'undefined' &&
+            continuousToContinuousScaleTypesSet.has(channelDef.scale.type)
           : labelFlush,
       labelOverlap: expandLabelOverlapStrategy(channelType, labelOverlap),
       labelPadding,

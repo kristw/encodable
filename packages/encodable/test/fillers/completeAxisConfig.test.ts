@@ -1,5 +1,12 @@
 import completeAxisConfig from '../../src/fillers/completeAxisConfig';
 
+const DEFAULT_INPUT = {
+  type: 'quantitative',
+  field: 'consumption',
+  scale: { type: 'linear' },
+  title: 'King in the North',
+} as const;
+
 const DEFAULT_OUTPUT = {
   format: undefined,
   labelAngle: 0,
@@ -12,24 +19,21 @@ const DEFAULT_OUTPUT = {
   orient: 'bottom',
   tickCount: 5,
   ticks: true,
+  title: 'King in the North',
   titlePadding: 4,
 };
 
 describe('completeAxisConfig(channelDef)', () => {
   it('returns axis config with type', () => {
-    expect(completeAxisConfig('X', { type: 'quantitative', field: 'consumption' })).toEqual(
-      DEFAULT_OUTPUT,
-    );
+    expect(completeAxisConfig('X', DEFAULT_INPUT)).toEqual(DEFAULT_OUTPUT);
   });
   describe('default settings', () => {
     describe('format and title', () => {
       it('inherit from channel if not specified', () => {
         expect(
           completeAxisConfig('X', {
-            type: 'quantitative',
-            field: 'consumption',
+            ...DEFAULT_INPUT,
             format: '.2f',
-            title: 'King in the North',
           }),
         ).toEqual({
           ...DEFAULT_OUTPUT,
@@ -40,10 +44,8 @@ describe('completeAxisConfig(channelDef)', () => {
       it('does not change if already specified', () => {
         expect(
           completeAxisConfig('X', {
-            type: 'quantitative',
-            field: 'consumption',
+            ...DEFAULT_INPUT,
             format: '.2f',
-            title: 'King in the North',
             axis: { format: '.3f', title: 'Mother of Dragons' },
           }),
         ).toEqual({
@@ -58,8 +60,7 @@ describe('completeAxisConfig(channelDef)', () => {
         it('flat', () => {
           expect(
             completeAxisConfig('X', {
-              type: 'quantitative',
-              field: 'consumption',
+              ...DEFAULT_INPUT,
               axis: { labelOverlap: 'flat' },
             }),
           ).toEqual({
@@ -72,8 +73,7 @@ describe('completeAxisConfig(channelDef)', () => {
         it('rotate', () => {
           expect(
             completeAxisConfig('X', {
-              type: 'quantitative',
-              field: 'consumption',
+              ...DEFAULT_INPUT,
               axis: { labelOverlap: 'rotate' },
             }),
           ).toEqual({
@@ -87,8 +87,7 @@ describe('completeAxisConfig(channelDef)', () => {
         it('auto for X', () => {
           expect(
             completeAxisConfig('X', {
-              type: 'quantitative',
-              field: 'consumption',
+              ...DEFAULT_INPUT,
               axis: { labelOverlap: 'auto' },
             }),
           ).toEqual({
@@ -102,8 +101,7 @@ describe('completeAxisConfig(channelDef)', () => {
         it('auto for Y', () => {
           expect(
             completeAxisConfig('Y', {
-              type: 'quantitative',
-              field: 'consumption',
+              ...DEFAULT_INPUT,
               axis: { labelOverlap: 'auto' },
             }),
           ).toEqual({
@@ -118,8 +116,7 @@ describe('completeAxisConfig(channelDef)', () => {
       it('if given a strategy object, clone and return', () => {
         const strategy = { strategy: 'flat' as const };
         const output = completeAxisConfig('X', {
-          type: 'quantitative',
-          field: 'consumption',
+          ...DEFAULT_INPUT,
           axis: { labelOverlap: strategy },
         });
         expect(output).toEqual({
@@ -135,26 +132,21 @@ describe('completeAxisConfig(channelDef)', () => {
     });
     describe('orient', () => {
       it('uses default for X', () => {
-        expect(completeAxisConfig('X', { type: 'quantitative', field: 'consumption' })).toEqual(
-          DEFAULT_OUTPUT,
-        );
+        expect(completeAxisConfig('X', DEFAULT_INPUT)).toEqual(DEFAULT_OUTPUT);
       });
       it('uses default for Y', () => {
-        expect(completeAxisConfig('YBand', { type: 'quantitative', field: 'consumption' })).toEqual(
-          {
-            ...DEFAULT_OUTPUT,
-            labelOverlap: {
-              strategy: 'flat',
-            },
-            orient: 'left',
+        expect(completeAxisConfig('YBand', DEFAULT_INPUT)).toEqual({
+          ...DEFAULT_OUTPUT,
+          labelOverlap: {
+            strategy: 'flat',
           },
-        );
+          orient: 'left',
+        });
       });
       it('does not change if already specified', () => {
         expect(
           completeAxisConfig('X', {
-            type: 'quantitative',
-            field: 'consumption',
+            ...DEFAULT_INPUT,
             axis: { orient: 'top' },
           }),
         ).toEqual({
@@ -163,12 +155,58 @@ describe('completeAxisConfig(channelDef)', () => {
         });
       });
     });
+    describe('labelFlush', () => {
+      it('does not change if already specified', () => {
+        expect(
+          completeAxisConfig('X', {
+            ...DEFAULT_INPUT,
+            axis: {
+              labelFlush: false,
+            },
+          }),
+        ).toEqual({
+          ...DEFAULT_OUTPUT,
+          labelFlush: false,
+        });
+        expect(
+          completeAxisConfig('X', {
+            ...DEFAULT_INPUT,
+            axis: {
+              labelFlush: true,
+            },
+          }),
+        ).toEqual({
+          ...DEFAULT_OUTPUT,
+          labelFlush: true,
+        });
+      });
+      it('if not specified, set to true for continuous scales', () => {
+        expect(
+          completeAxisConfig('X', {
+            ...DEFAULT_INPUT,
+          }),
+        ).toEqual({
+          ...DEFAULT_OUTPUT,
+          labelFlush: true,
+        });
+      });
+      it('if not specified, set to false for non-continuous scales', () => {
+        expect(
+          completeAxisConfig('X', {
+            ...DEFAULT_INPUT,
+            scale: { type: 'band' },
+          }),
+        ).toEqual({
+          ...DEFAULT_OUTPUT,
+          labelFlush: false,
+        });
+      });
+    });
     describe('others', () => {
       it('does not change if already specified', () => {
         expect(
           completeAxisConfig('X', {
-            type: 'quantitative',
-            field: 'consumption',
+            ...DEFAULT_INPUT,
             axis: {
               labelAngle: 30,
               labelFlush: false,
@@ -192,21 +230,18 @@ describe('completeAxisConfig(channelDef)', () => {
   });
 
   it('returns false if not XY channel', () => {
-    expect(completeAxisConfig('Color', { type: 'quantitative', field: 'consumption' })).toEqual(
-      false,
-    );
+    expect(completeAxisConfig('Color', DEFAULT_INPUT)).toEqual(false);
   });
   it('returns false if axis is null', () => {
     expect(
       // @ts-ignore
-      completeAxisConfig('X', { type: 'quantitative', field: 'consumption', axis: null }),
+      completeAxisConfig('X', { ...DEFAULT_INPUT, axis: null }),
     ).toEqual(false);
   });
   it('returns false if axis is false', () => {
     expect(
       completeAxisConfig('X', {
-        type: 'quantitative',
-        field: 'consumption',
+        ...DEFAULT_INPUT,
         axis: false,
       }),
     ).toEqual(false);
