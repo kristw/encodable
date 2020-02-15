@@ -14,7 +14,7 @@ const config = getConfig({
 
 // Override to allow transpile es modules inside vega-lite
 config.ignore = config.ignore.filter(item => item !== 'node_modules/');
-config.ignore.push('node_modules/(?!vega-lite)');
+config.ignore.push('node_modules/(?!(vega-lite|lodash-es))');
 
 // eslint-disable-next-line no-undef
 module.exports = config;

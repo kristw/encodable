@@ -1,4 +1,4 @@
-import { get } from 'lodash/fp';
+import get from 'lodash-es/get';
 import { ChannelDef } from '../types/ChannelDef';
 import { isValueDef } from '../typeGuards/ChannelDef';
 import { PlainObject } from '../types/Data';
@@ -14,7 +14,7 @@ export default function createGetterFromChannelDef<Output extends Value>(
     return () => definition.value;
   }
   if (typeof definition.field !== 'undefined') {
-    return get(definition.field);
+    return (x?: PlainObject) => get(x, definition.field);
   }
 
   return () => undefined;
