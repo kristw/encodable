@@ -13,6 +13,7 @@ import {
 } from '../types/Encoding';
 import { Dataset } from '../types/Data';
 import { ChannelInput } from '../types/Channel';
+import { LegendGroupInformation } from '../types/Legend';
 
 export default class Encoder<Config extends EncodingConfig> {
   readonly encoding: DeriveEncoding<Config>;
@@ -116,7 +117,7 @@ export default class Encoder<Config extends EncodingConfig> {
       }));
   }
 
-  getLegendInformation(data: Dataset = []) {
+  getLegendInformation(data: Dataset = []): LegendGroupInformation<Config>[] {
     return (
       Object.keys(this.legends)
         // for each field that was encoded
