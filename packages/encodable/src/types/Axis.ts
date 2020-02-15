@@ -25,9 +25,7 @@ export interface BaseAxisConfig
     | 'format'
     | 'labelAngle'
     | 'labelFlush'
-    | 'labelPadding'
     | 'tickCount'
-    | 'tickSize'
     | 'ticks'
     | 'title'
     | 'titlePadding'
@@ -35,7 +33,11 @@ export interface BaseAxisConfig
   > {
   /** Strategy for handling label overlap */
   labelOverlap?: LabelOverlapType;
+  // Override to allow only number and disable ConditionalAxisNumber
+  labelPadding?: number;
   orient?: AxisOrient;
+  // Override to allow only number and disable ConditionalAxisNumber
+  tickSize?: number;
 }
 
 export interface XAxisConfig extends BaseAxisConfig {

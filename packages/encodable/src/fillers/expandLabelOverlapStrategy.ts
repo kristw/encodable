@@ -2,7 +2,7 @@ import { LabelOverlapStrategy, LabelOverlapType } from '../types/Axis';
 import { ChannelType } from '../types/Channel';
 import { isX } from '../typeGuards/Channel';
 
-const STRATEGY_FLAT = { strategy: 'flat' } as const;
+export const STRATEGY_FLAT = { strategy: 'flat' } as const;
 const STRATEGY_ROTATE = { labelAngle: 40, strategy: 'rotate' } as const;
 
 export default function expandLabelOverlapStrategy(
