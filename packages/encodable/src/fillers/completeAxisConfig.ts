@@ -1,16 +1,23 @@
 import isEnabled from '../utils/isEnabled';
 import { isTypedFieldDef } from '../typeGuards/ChannelDef';
+import { RequiredSome } from '../types/Base';
 import { ChannelDef, PositionFieldDef } from '../types/ChannelDef';
 import { ChannelType } from '../types/Channel';
 import { isXOrY, isX } from '../typeGuards/Channel';
-import { RequiredSome } from '../types/Base';
+import { isContinuousScaleConfig } from '../typeGuards/Scale';
 import { AxisConfig, LabelOverlapStrategy } from '../types/Axis';
 import expandLabelOverlapStrategy from './expandLabelOverlapStrategy';
+import { CompleteScaleConfig } from './completeScaleConfig';
+import { HalfCompleteChannelDef } from '../types/CompleteChannelDef';
+
+type PositionFieldDefWithCompleteScaleConfig = Omit<PositionFieldDef, 'scale'> & {
+  scale: CompleteScaleConfig;
+};
 
 function isChannelDefWithAxisSupport(
   channelType: ChannelType,
   channelDef: ChannelDef,
-): channelDef is PositionFieldDef {
+): channelDef is PositionFieldDefWithCompleteScaleConfig {
   return isTypedFieldDef(channelDef) && isXOrY(channelType);
 }
 
@@ -32,7 +39,7 @@ export type CompleteAxisConfig =
 
 export default function completeAxisConfig(
   channelType: ChannelType,
-  channelDef: ChannelDef,
+  channelDef: HalfCompleteChannelDef,
 ): CompleteAxisConfig {
   if (isChannelDefWithAxisSupport(channelType, channelDef) && isEnabled(channelDef.axis)) {
     const axis =
@@ -43,7 +50,7 @@ export default function completeAxisConfig(
     const {
       format = channelDef.format,
       labelAngle = 0,
-      labelFlush = true,
+      labelFlush,
       labelOverlap,
       labelPadding = 4,
       orient = isXChannel ? 'bottom' : 'left',
@@ -57,7 +64,10 @@ export default function completeAxisConfig(
       ...axis,
       format,
       labelAngle,
-      labelFlush,
+      labelFlush:
+        typeof labelFlush === 'undefined'
+          ? channelDef.scale && isContinuousScaleConfig(channelDef.scale)
+          : labelFlush,
       labelOverlap: expandLabelOverlapStrategy(channelType, labelOverlap),
       labelPadding,
       orient,

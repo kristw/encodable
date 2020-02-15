@@ -11,6 +11,17 @@ export interface CompleteValueDef<Output extends Value = Value> extends ValueDef
   title: '';
 }
 
+export interface HalfCompleteFieldDef<Output extends Value = Value>
+  extends Omit<NonValueDef<Output>, 'title' | 'scale'> {
+  type: Type;
+  scale: CompleteScaleConfig<Output>;
+  title: string;
+}
+
+export type HalfCompleteChannelDef<Output extends Value = Value> =
+  | CompleteValueDef<Output>
+  | HalfCompleteFieldDef<Output>;
+
 export type CompleteFieldDef<Output extends Value = Value> = Omit<
   NonValueDef<Output>,
   'title' | 'axis' | 'scale'
