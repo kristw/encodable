@@ -45,7 +45,7 @@
     "lodash": "^4.17.15",
     "reselect": "^4.0.0",
     "vega": "^5.9.1",
-    "vega-lite": "~4.1.0"
+    "vega-lite": "^4.10.1"
   },
   "devDependencies": {
     "@superset-ui/superset-ui": "^0.12.5"
