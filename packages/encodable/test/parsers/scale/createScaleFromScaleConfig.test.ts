@@ -243,7 +243,7 @@ describe('createScaleFromScaleConfig(config)', () => {
   });
 
   describe('time scale', () => {
-    it('basic', () => {
+    it('basic - does not nice by default', () => {
       const scale = createScaleFromScaleConfig({
         type: 'time',
         domain: [
@@ -255,10 +255,36 @@ describe('createScaleFromScaleConfig(config)', () => {
           {
             year: 2019,
             month: 7,
-            date: 31,
+            date: 30,
           },
         ],
         range: [0, 100],
+      });
+      expect(scale(new Date(2019, 6, 1))).toEqual(0);
+      expect(
+        scale(new Date(2019, 6, 16))
+          ?.toString()
+          .slice(0, 6),
+      ).toEqual('51.724');
+      expect(scale(new Date(2019, 6, 30))).toEqual(100);
+    });
+    it('with nice=true', () => {
+      const scale = createScaleFromScaleConfig({
+        type: 'time',
+        domain: [
+          {
+            year: 2019,
+            month: 7,
+            date: 1,
+          },
+          {
+            year: 2019,
+            month: 7,
+            date: 30,
+          },
+        ],
+        range: [0, 100],
+        nice: true,
       });
       expect(scale(new Date(2019, 6, 1))).toEqual(0);
       expect(scale(new Date(2019, 6, 16))).toEqual(50);

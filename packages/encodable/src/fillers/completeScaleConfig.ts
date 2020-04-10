@@ -6,6 +6,7 @@ import { ChannelDef } from '../types/ChannelDef';
 import isEnabled from '../utils/isEnabled';
 import { ChannelType } from '../types/Channel';
 import { Value } from '../types/VegaLite';
+import { timeScaleTypesSet } from '../parsers/scale/scaleCategories';
 
 export type CompleteScaleConfig<Output extends Value = Value> = false | ScaleConfig<Output>;
 
@@ -25,7 +26,7 @@ export default function completeScaleConfig<Output extends Value>(
     const filledScale = { ...scale, type: scaleType } as ScaleConfig<Output>;
     if (isContinuousScaleConfig(filledScale)) {
       if (typeof filledScale.nice === 'undefined') {
-        filledScale.nice = true;
+        filledScale.nice = !timeScaleTypesSet.has(scaleType);
       }
       if (typeof filledScale.clamp === 'undefined') {
         filledScale.clamp = true;
