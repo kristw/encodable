@@ -18,6 +18,9 @@ export {
 export { isCompleteFieldDef, isCompleteValueDef } from './typeGuards/CompleteChannelDef';
 
 // Export types
+export * from './types/Axis';
+export * from './types/Channel';
+export * from './types/ChannelDef';
 export * from './types/Data';
 export * from './types/Encoding';
 export * from './types/Legend';
