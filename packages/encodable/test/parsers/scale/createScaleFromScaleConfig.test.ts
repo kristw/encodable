@@ -554,7 +554,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       });
       expect(scale('fish')).toEqual('pink');
       expect(scale('dinosaur')).toEqual('charcoal');
-      expect(scale('whale')).toEqual('pink');
+      expect(scale('whale')).toEqual('orange');
     });
     it('with color scheme and reversed domain', () => {
       const scale = createScaleFromScaleConfig({

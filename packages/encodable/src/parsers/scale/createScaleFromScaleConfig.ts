@@ -1,6 +1,7 @@
 import { CategoricalColorNamespace } from '@superset-ui/color';
+import { ScaleOrdinal } from 'd3-scale';
 import { ScaleType, Value } from '../../types/VegaLite';
-import { ScaleConfig } from '../../types/Scale';
+import { ScaleConfig, CategoricalScaleInput } from '../../types/Scale';
 import createScaleFromScaleType from './createScaleFromScaleType';
 import applyNice from './applyNice';
 import applyZero from './applyZero';
@@ -15,7 +16,7 @@ import applyClamp from './applyClamp';
 export default function createScaleFromScaleConfig<Output extends Value>(
   config: ScaleConfig<Output>,
 ) {
-  const { domain, range, reverse } = config;
+  const { range } = config;
 
   // Handle categorical color scales
   // An ordinal scale without specified range
@@ -25,26 +26,9 @@ export default function createScaleFromScaleConfig<Output extends Value>(
     const namespace = 'namespace' in config ? config.namespace : undefined;
     const colorScale = CategoricalColorNamespace.getScale(scheme, namespace);
 
-    // If domain is also provided,
-    // ensure the nth item is assigned the nth color
-    if (typeof domain !== 'undefined') {
-      const { colors } = colorScale;
-      (reverse ? domain.slice().reverse() : domain).forEach((value: unknown, index: number) => {
-        colorScale.setColor(`${value}`, colors[index % colors.length]);
-      });
-    }
+    applyDomain(config, (colorScale as unknown) as ScaleOrdinal<CategoricalScaleInput, Output>);
 
-    // Need to manually cast here to make the unioned output types
-    // considered function.
-    // Otherwise have to add type guards before using the scale function.
-    //
-    //   const scaleFn = createScaleFromScaleConfig(...)
-    //   if (isAFunction(scaleFn)) const encodedValue = scaleFn(10)
-    //
-    // CategoricalColorScale is actually a function,
-    // but TypeScript is not smart enough to realize that by itself.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (colorScale as unknown) as (val?: any) => string;
+    return colorScale;
   }
 
   const scale = createScaleFromScaleType(config);
