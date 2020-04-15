@@ -61,6 +61,7 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
 
     if (this.definition.scale) {
       const scale = createScaleFromScaleConfig(this.definition.scale);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.encodeFunc = (value: ChannelInput) => scale(value as any) as Output;
       this.scale = scale;
     } else {

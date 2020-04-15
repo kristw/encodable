@@ -4,7 +4,6 @@ import {
   getCategoricalSchemeRegistry,
   CategoricalScheme,
 } from '@superset-ui/color';
-import { ScaleLinear, ScaleTime } from 'd3-scale';
 import createScaleFromScaleConfig from '../../../src/parsers/scale/createScaleFromScaleConfig';
 
 describe('createScaleFromScaleConfig(config)', () => {
@@ -145,7 +144,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
         nice: 3,
       });
-      expect((scale as ScaleLinear<number, number>).ticks(3)).toEqual([0, 5, 10]);
+      expect(scale.ticks(3)).toEqual([0, 5, 10]);
     });
     it('with clamp', () => {
       const scale = createScaleFromScaleConfig({
@@ -308,10 +307,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
         nice: 'month',
       });
-      expect((scale as ScaleTime<number, number>).domain()).toEqual([
-        new Date(2019, 6, 1),
-        new Date(2019, 7, 1),
-      ]);
+      expect(scale.domain()).toEqual([new Date(2019, 6, 1), new Date(2019, 7, 1)]);
     });
     it('with nice is interval object', () => {
       const scale = createScaleFromScaleConfig({
@@ -331,10 +327,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
         nice: { interval: 'month', step: 2 },
       });
-      expect((scale as ScaleTime<number, number>).domain()).toEqual([
-        new Date(2019, 6, 1),
-        new Date(2019, 8, 1),
-      ]);
+      expect(scale.domain()).toEqual([new Date(2019, 6, 1), new Date(2019, 8, 1)]);
     });
   });
 
@@ -382,7 +375,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
         nice: 'month',
       });
-      expect((scale as ScaleTime<number, number>).domain()).toEqual([
+      expect(scale.domain()).toEqual([
         new Date(Date.UTC(2019, 6, 1)),
         new Date(Date.UTC(2019, 7, 1)),
       ]);
@@ -407,7 +400,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
         nice: { interval: 'month', step: 2 },
       });
-      expect((scale as ScaleTime<number, number>).domain()).toEqual([
+      expect(scale.domain()).toEqual([
         new Date(Date.UTC(2019, 6, 1)),
         new Date(Date.UTC(2019, 8, 1)),
       ]);
@@ -432,7 +425,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
         nice: { interval: 'month', step: 0.5 },
       });
-      expect((scale as ScaleTime<number, number>).domain()).toEqual([
+      expect(scale.domain()).toEqual([
         new Date(Date.UTC(2019, 6, 5)),
         new Date(Date.UTC(2019, 6, 30)),
       ]);

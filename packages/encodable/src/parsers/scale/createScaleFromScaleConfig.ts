@@ -1,7 +1,36 @@
-import { CategoricalColorNamespace } from '@superset-ui/color';
-import { ScaleOrdinal } from 'd3-scale';
+import { CategoricalColorNamespace, CategoricalColorScale } from '@superset-ui/color';
+import {
+  ScaleLinear,
+  ScaleLogarithmic,
+  ScalePower,
+  ScaleTime,
+  ScaleQuantile,
+  ScaleQuantize,
+  ScaleThreshold,
+  ScaleOrdinal,
+  ScalePoint,
+  ScaleBand,
+} from 'd3-scale';
 import { ScaleType, Value } from '../../types/VegaLite';
-import { ScaleConfig, CategoricalScaleInput } from '../../types/Scale';
+import {
+  ScaleConfig,
+  CategoricalScaleInput,
+  LinearScaleConfig,
+  LogScaleConfig,
+  PowScaleConfig,
+  SqrtScaleConfig,
+  SymlogScaleConfig,
+  TimeScaleConfig,
+  UtcScaleConfig,
+  QuantileScaleConfig,
+  QuantizeScaleConfig,
+  ThresholdScaleConfig,
+  BinOrdinalScaleConfig,
+  OrdinalScaleConfig,
+  PointScaleConfig,
+  BandScaleConfig,
+  AllScale,
+} from '../../types/Scale';
 import createScaleFromScaleType from './createScaleFromScaleType';
 import applyNice from './applyNice';
 import applyZero from './applyZero';
@@ -13,9 +42,55 @@ import applyPadding from './applyPadding';
 import applyAlign from './applyAlign';
 import applyClamp from './applyClamp';
 
-export default function createScaleFromScaleConfig<Output extends Value>(
+function createScaleFromScaleConfig<Output extends Value>(
+  config: LinearScaleConfig<Output>,
+): ScaleLinear<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: LogScaleConfig<Output> | SymlogScaleConfig<Output>,
+): ScaleLogarithmic<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: PowScaleConfig<Output> | SqrtScaleConfig<Output>,
+): ScalePower<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: TimeScaleConfig<Output> | UtcScaleConfig<Output>,
+): ScaleTime<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: QuantileScaleConfig<Output>,
+): ScaleQuantile<Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: QuantizeScaleConfig<Output>,
+): ScaleQuantize<Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: ThresholdScaleConfig<Output>,
+): ScaleThreshold<number | string | Date, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: BinOrdinalScaleConfig<Output>,
+): ScaleOrdinal<CategoricalScaleInput, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: OrdinalScaleConfig<Output>,
+): ScaleOrdinal<CategoricalScaleInput, Output> | CategoricalColorScale;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: PointScaleConfig<Output>,
+): ScalePoint<CategoricalScaleInput>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: BandScaleConfig<Output>,
+): ScaleBand<CategoricalScaleInput>;
+
+function createScaleFromScaleConfig<Output extends Value>(
   config: ScaleConfig<Output>,
-) {
+): AllScale<Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Output>) {
   const { range } = config;
 
   // Handle categorical color scales
@@ -46,3 +121,5 @@ export default function createScaleFromScaleConfig<Output extends Value>(
 
   return scale;
 }
+
+export default createScaleFromScaleConfig;
