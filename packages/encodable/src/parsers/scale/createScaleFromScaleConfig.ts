@@ -1,6 +1,36 @@
-import { CategoricalColorNamespace } from '@superset-ui/color';
+import { CategoricalColorNamespace, CategoricalColorScale } from '@superset-ui/color';
+import {
+  ScaleLinear,
+  ScaleLogarithmic,
+  ScalePower,
+  ScaleTime,
+  ScaleQuantile,
+  ScaleQuantize,
+  ScaleThreshold,
+  ScaleOrdinal,
+  ScalePoint,
+  ScaleBand,
+} from 'd3-scale';
 import { ScaleType, Value } from '../../types/VegaLite';
-import { ScaleConfig } from '../../types/Scale';
+import {
+  ScaleConfig,
+  CategoricalScaleInput,
+  LinearScaleConfig,
+  LogScaleConfig,
+  PowScaleConfig,
+  SqrtScaleConfig,
+  SymlogScaleConfig,
+  TimeScaleConfig,
+  UtcScaleConfig,
+  QuantileScaleConfig,
+  QuantizeScaleConfig,
+  ThresholdScaleConfig,
+  BinOrdinalScaleConfig,
+  OrdinalScaleConfig,
+  PointScaleConfig,
+  BandScaleConfig,
+  AllScale,
+} from '../../types/Scale';
 import createScaleFromScaleType from './createScaleFromScaleType';
 import applyNice from './applyNice';
 import applyZero from './applyZero';
@@ -12,10 +42,56 @@ import applyPadding from './applyPadding';
 import applyAlign from './applyAlign';
 import applyClamp from './applyClamp';
 
-export default function createScaleFromScaleConfig<Output extends Value>(
+function createScaleFromScaleConfig<Output extends Value>(
+  config: LinearScaleConfig<Output>,
+): ScaleLinear<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: LogScaleConfig<Output> | SymlogScaleConfig<Output>,
+): ScaleLogarithmic<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: PowScaleConfig<Output> | SqrtScaleConfig<Output>,
+): ScalePower<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: TimeScaleConfig<Output> | UtcScaleConfig<Output>,
+): ScaleTime<Output, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: QuantileScaleConfig<Output>,
+): ScaleQuantile<Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: QuantizeScaleConfig<Output>,
+): ScaleQuantize<Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: ThresholdScaleConfig<Output>,
+): ScaleThreshold<number | string | Date, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: BinOrdinalScaleConfig<Output>,
+): ScaleOrdinal<CategoricalScaleInput, Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: OrdinalScaleConfig<Output>,
+): ScaleOrdinal<CategoricalScaleInput, Output> | CategoricalColorScale;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: PointScaleConfig<Output>,
+): ScalePoint<CategoricalScaleInput>;
+
+function createScaleFromScaleConfig<Output extends Value>(
+  config: BandScaleConfig<Output>,
+): ScaleBand<CategoricalScaleInput>;
+
+function createScaleFromScaleConfig<Output extends Value>(
   config: ScaleConfig<Output>,
-) {
-  const { domain, range, reverse } = config;
+): AllScale<Output>;
+
+function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Output>) {
+  const { range } = config;
 
   // Handle categorical color scales
   // An ordinal scale without specified range
@@ -25,26 +101,9 @@ export default function createScaleFromScaleConfig<Output extends Value>(
     const namespace = 'namespace' in config ? config.namespace : undefined;
     const colorScale = CategoricalColorNamespace.getScale(scheme, namespace);
 
-    // If domain is also provided,
-    // ensure the nth item is assigned the nth color
-    if (typeof domain !== 'undefined') {
-      const { colors } = colorScale;
-      (reverse ? domain.slice().reverse() : domain).forEach((value: unknown, index: number) => {
-        colorScale.setColor(`${value}`, colors[index % colors.length]);
-      });
-    }
+    applyDomain(config, (colorScale as unknown) as ScaleOrdinal<CategoricalScaleInput, Output>);
 
-    // Need to manually cast here to make the unioned output types
-    // considered function.
-    // Otherwise have to add type guards before using the scale function.
-    //
-    //   const scaleFn = createScaleFromScaleConfig(...)
-    //   if (isAFunction(scaleFn)) const encodedValue = scaleFn(10)
-    //
-    // CategoricalColorScale is actually a function,
-    // but TypeScript is not smart enough to realize that by itself.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (colorScale as unknown) as (val?: any) => string;
+    return colorScale;
   }
 
   const scale = createScaleFromScaleType(config);
@@ -62,3 +121,5 @@ export default function createScaleFromScaleConfig<Output extends Value>(
 
   return scale;
 }
+
+export default createScaleFromScaleConfig;

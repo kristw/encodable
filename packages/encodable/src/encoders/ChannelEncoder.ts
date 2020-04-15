@@ -18,6 +18,7 @@ import applyNice from '../parsers/scale/applyNice';
 import { AllScale } from '../types/Scale';
 import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteChannelDef';
 import { CompleteChannelDef } from '../types/CompleteChannelDef';
+import { isCategoricalColorScale } from '../typeGuards/Scale';
 
 type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
@@ -60,7 +61,8 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
 
     if (this.definition.scale) {
       const scale = createScaleFromScaleConfig(this.definition.scale);
-      this.encodeFunc = (value: ChannelInput) => scale(value) as Output;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.encodeFunc = (value: ChannelInput) => scale(value as any) as Output;
       this.scale = scale;
     } else {
       const { definition } = this;
@@ -140,7 +142,12 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   }
 
   setDomain(domain: ChannelInput[]) {
-    if (this.definition.scale !== false && this.scale && 'domain' in this.scale) {
+    if (
+      this.definition.scale !== false &&
+      this.scale &&
+      !isCategoricalColorScale(this.scale) &&
+      'domain' in this.scale
+    ) {
       const config = this.definition.scale;
       applyDomain(config, this.scale, domain);
       applyZero(config, this.scale);

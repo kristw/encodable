@@ -245,7 +245,7 @@ describe('ChannelEncoder', () => {
       });
       expect(encoder.getDomain()).toEqual([0, 10]);
     });
-    it('returns empty array for CategoricalColorScale', () => {
+    it('returns domain for CategoricalColorScale', () => {
       const encoder = new ChannelEncoder({
         name: 'color',
         channelType: 'Color',
@@ -255,7 +255,7 @@ describe('ChannelEncoder', () => {
           scale: { domain: ['pocky', 'hanami'] },
         },
       });
-      expect(encoder.getDomain()).toEqual([]);
+      expect(encoder.getDomain()).toEqual(['pocky', 'hanami']);
     });
     it('returns empty array for value definition', () => {
       const encoder = new ChannelEncoder({
