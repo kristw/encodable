@@ -48,11 +48,11 @@
     "vega-lite": "~4.1.0"
   },
   "devDependencies": {
-    "@superset-ui/superset-ui": "^0.12.15"
+    "@superset-ui/superset-ui": "^0.13.2"
   },
   "peerDependencies": {
-    "@superset-ui/color": "^0.12.15",
-    "@superset-ui/number-format": "^0.12.15",
-    "@superset-ui/time-format": "^0.12.15"
+    "@superset-ui/color": "^0.13.2",
+    "@superset-ui/number-format": "^0.13.2",
+    "@superset-ui/time-format": "^0.13.2"
   }
 }
