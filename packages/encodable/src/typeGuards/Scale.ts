@@ -12,7 +12,7 @@ import {
   UtcScaleConfig,
   ContinuousD3Scale,
 } from '../types/Scale';
-import { Value, ScaleType } from '../types/VegaLite';
+import { Value, ScaleType, SchemeParams } from '../types/VegaLite';
 import { timeScaleTypesSet, continuousScaleTypesSet } from '../parsers/scale/scaleCategories';
 import isPropertySupportedByScaleType from '../parsers/scale/isPropertySupportedByScaleType';
 
@@ -63,4 +63,10 @@ export function isTimeScale<Output extends Value = Value>(
   scaleType: ScaleType,
 ): scale is ScaleTime<Output, Output> {
   return scale && timeScaleTypesSet.has(scaleType);
+}
+
+export function isSchemeParams(scheme: string | SchemeParams): scheme is SchemeParams {
+  return (
+    Object.prototype.toString.call(scheme) !== '[object String]' && !!(scheme as SchemeParams).name
+  );
 }

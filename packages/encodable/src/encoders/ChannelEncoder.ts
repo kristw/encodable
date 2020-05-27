@@ -19,6 +19,7 @@ import { AllScale } from '../types/Scale';
 import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteChannelDef';
 import { CompleteChannelDef } from '../types/CompleteChannelDef';
 import { isCategoricalColorScale } from '../typeGuards/Scale';
+import applyRange from '../parsers/scale/applyRange';
 
 type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
@@ -150,6 +151,7 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     ) {
       const config = this.definition.scale;
       applyDomain(config, this.scale, domain);
+      applyRange(config, this.scale);
       applyZero(config, this.scale);
       applyNice(config, this.scale);
     }
