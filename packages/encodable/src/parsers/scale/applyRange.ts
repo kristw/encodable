@@ -32,10 +32,7 @@ export default function applyRange<Output extends Value>(
 
       const colorScheme = getSequentialSchemeRegistry().get(name);
       if (typeof colorScheme !== 'undefined') {
-        scale.range(colorScheme.getColors(count) as Output[]);
-
-        if (extent) {
-        }
+        scale.range(colorScheme.getColors(count, extent) as Output[]);
       }
     }
   } else {
