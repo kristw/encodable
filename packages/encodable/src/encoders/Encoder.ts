@@ -72,10 +72,11 @@ export default class Encoder<Config extends EncodingConfig> {
       .forEach(c => {
         if (isNotArray(c) && c.hasLegend() && isTypedFieldDef(c.definition)) {
           const { field } = c.definition;
+          const channelEncoder = (c as unknown) as DeriveSingleChannelEncoder<Config>;
           if (this.legends[field]) {
-            this.legends[field].push(c);
+            this.legends[field].push(channelEncoder);
           } else {
-            this.legends[field] = [c];
+            this.legends[field] = [channelEncoder];
           }
         }
       });

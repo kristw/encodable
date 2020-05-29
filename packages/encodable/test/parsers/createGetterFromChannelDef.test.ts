@@ -16,6 +16,7 @@ describe('createGetterFromChannelDef(definition)', () => {
   it('otherwise return identity', () => {
     // @ts-ignore
     const getter = createGetterFromChannelDef({});
+    // @ts-ignore
     expect(getter(300)).toBeUndefined();
   });
 });

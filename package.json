@@ -40,12 +40,12 @@
   ],
   "license": "Apache-2.0",
   "devDependencies": {
-    "@airbnb/config-babel": "^2.2.2",
-    "@airbnb/config-eslint": "^2.5.1",
-    "@airbnb/config-jest": "^2.2.2",
-    "@airbnb/config-prettier": "^2.1.1",
-    "@airbnb/config-typescript": "^2.2.2",
-    "@airbnb/nimbus": "^2.2.3",
+    "@airbnb/config-babel": "^3.1.0",
+    "@airbnb/config-eslint": "^3.1.0",
+    "@airbnb/config-jest": "^3.0.2",
+    "@airbnb/config-prettier": "^3.1.0",
+    "@airbnb/config-typescript": "^3.0.1",
+    "@airbnb/nimbus": "^3.1.4",
     "@superset-ui/commit-config": "^0.0.9",
     "@types/enzyme": "^3.10.4",
     "@types/jest": "^25.1.0",
@@ -55,13 +55,14 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
     "fast-glob": "^3.1.1",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "husky": "^4.2.1",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.3",
     "react-test-renderer": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react": "^16.12.0"
+    "react": "^16.12.0",
+    "typescript": "^3.9.3"
   },
   "engines": {
     "node": ">=10.10.0",
@@ -102,7 +103,16 @@
         "node_modules/(?!(vega-lite|lodash-es))"
       ]
     },
+    "prettier": {
+      "arrowParens": "avoid"
+    },
     "eslint": {
+      "rules": {
+        "arrow-parens": [
+          "warn",
+          "as-needed"
+        ]
+      },
       "overrides": [
         {
           "files": "*.{js,jsx,ts,tsx}",

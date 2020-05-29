@@ -334,11 +334,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         range: [0, 100],
       });
       expect(scale(new Date(2019, 6, 1))).toEqual(0);
-      expect(
-        scale(new Date(2019, 6, 16))
-          ?.toString()
-          .slice(0, 6),
-      ).toEqual('51.724');
+      expect(scale(new Date(2019, 6, 16))?.toString().slice(0, 6)).toEqual('51.724');
       expect(scale(new Date(2019, 6, 30))).toEqual(100);
     });
     it('with nice=true', () => {
