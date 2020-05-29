@@ -1,4 +1,71 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.2.5...v0.0.0) (2020-02-15)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.3.6...v0.0.0) (2020-05-29)
+
+
+
+## [0.3.6](https://github.com/apache-superset/encodable/compare/v0.3.5...v0.3.6) (2020-05-29)
+
+
+### Features
+
+* support schemeparams similar to vega-lite ([#21](https://github.com/apache-superset/encodable/issues/21)) ([2ff8323](https://github.com/apache-superset/encodable/commit/2ff83230d54a885a94da8c07152318e46daf5f07))
+
+
+
+## [0.3.5](https://github.com/apache-superset/encodable/compare/v0.3.4...v0.3.5) (2020-04-30)
+
+
+
+## [0.3.4](https://github.com/apache-superset/encodable/compare/v0.3.3...v0.3.4) (2020-04-15)
+
+
+### Features
+
+* add overloading for createScaleFromScaleConfig ([#20](https://github.com/apache-superset/encodable/issues/20)) ([f2d7f06](https://github.com/apache-superset/encodable/commit/f2d7f06469b1ce17d8638a902d81b59273d112cd))
+
+
+
+## [0.3.3](https://github.com/apache-superset/encodable/compare/v0.3.2...v0.3.3) (2020-04-10)
+
+
+### Features
+
+* export more types ([#19](https://github.com/apache-superset/encodable/issues/19)) ([0659c14](https://github.com/apache-superset/encodable/commit/0659c14a5138f06f04dc9db0527938cda07ada6e))
+
+
+
+## [0.3.2](https://github.com/apache-superset/encodable/compare/v0.3.1...v0.3.2) (2020-04-10)
+
+
+### Bug Fixes
+
+* do not nice time scale by default ([#18](https://github.com/apache-superset/encodable/issues/18)) ([0e70fb3](https://github.com/apache-superset/encodable/commit/0e70fb3ff1a0d44e17cb331b4706806a5b6ca83c))
+
+
+
+## [0.3.1](https://github.com/apache-superset/encodable/compare/v0.3.0...v0.3.1) (2020-04-10)
+
+
+### Features
+
+* export types typeguards and merge encoding utils ([#17](https://github.com/apache-superset/encodable/issues/17)) ([37d46c6](https://github.com/apache-superset/encodable/commit/37d46c604a5800f0381e14f05cef1342757b07c1))
+
+
+
+# [0.3.0](https://github.com/apache-superset/encodable/compare/v0.2.6...v0.3.0) (2020-04-09)
+
+
+### Features
+
+* change dependency back to lodash ([#15](https://github.com/apache-superset/encodable/issues/15)) ([b85c284](https://github.com/apache-superset/encodable/commit/b85c2845795b58eb3b9da75c2d5e8dc6accbe69a))
+
+
+
+## [0.2.6](https://github.com/apache-superset/encodable/compare/v0.2.5...v0.2.6) (2020-02-15)
+
+
+### Features
+
+* export type LegendItemInformation ([9707f5c](https://github.com/apache-superset/encodable/commit/9707f5c7be3d0c16ae94d3ad7e17d8de2c090bb0))
 
 
 
