@@ -61,7 +61,8 @@
     "lint-staged": "^10.0.3",
     "react-test-renderer": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react": "^16.12.0"
+    "react": "^16.12.0",
+    "typescript": "^3.9.3"
   },
   "engines": {
     "node": ">=10.10.0",
