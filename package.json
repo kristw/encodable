@@ -103,7 +103,16 @@
         "node_modules/(?!(vega-lite|lodash-es))"
       ]
     },
+    "prettier": {
+      "arrowParens": "avoid"
+    },
     "eslint": {
+      "rules": {
+        "arrow-parens": [
+          "warn",
+          "as-needed"
+        ]
+      },
       "overrides": [
         {
           "files": "*.{js,jsx,ts,tsx}",

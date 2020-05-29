@@ -42,7 +42,7 @@ export default class ChannelEncoderAxis<
     const { tickCount, values } = this.config;
 
     if (typeof values !== 'undefined') {
-      return inferElementTypeFromUnionOfArrayTypes(values).map((v) =>
+      return inferElementTypeFromUnionOfArrayTypes(values).map(v =>
         this.formatValue(isDateTime(v) ? parseDateTime(v) : v),
       );
     }

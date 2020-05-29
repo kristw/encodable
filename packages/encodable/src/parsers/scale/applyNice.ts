@@ -50,7 +50,7 @@ export default function applyNice<Output extends Value>(
   if ('nice' in config && typeof config.nice !== 'undefined' && 'nice' in scale) {
     const { nice } = config;
     if (typeof nice === 'boolean') {
-      if (nice === true) {
+      if (nice) {
         scale.nice();
       }
     } else if (typeof nice === 'number') {
