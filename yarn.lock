@@ -2560,6 +2560,14 @@
     conventional-changelog-cli "^2.0.12"
     cz-conventional-changelog "^2.1.0"
 
+"@superset-ui/core@^0.13.21":
+  version "0.13.21"
+  resolved "https://registry.yarnpkg.com/@superset-ui/core/-/core-0.13.21.tgz#ffa83cc752115c145348b85aebfb4d3e9c5727c9"
+  integrity sha512-OTNATb0qN4lo6YPLcaADXlv6bhabuAWzc9UE7ueSj6cQhF0ZfE4DVsQ2+iRUpSxMAdgLgN8ycDb/bsw3xTeECA==
+  dependencies:
+    "@types/lodash" "^4.14.149"
+    lodash "^4.17.11"
+
 "@superset-ui/number-format@^0.13.3":
   version "0.13.21"
   resolved "https://registry.yarnpkg.com/@superset-ui/number-format/-/number-format-0.13.21.tgz#93226be159e53c944b560c262653c27473140cd2"
