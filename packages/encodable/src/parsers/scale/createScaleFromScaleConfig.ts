@@ -41,6 +41,7 @@ import applyRange from './applyRange';
 import applyPadding from './applyPadding';
 import applyAlign from './applyAlign';
 import applyClamp from './applyClamp';
+import { isSchemeParams } from '../../typeGuards/Scale';
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: LinearScaleConfig<Output>,
@@ -99,7 +100,10 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
   if (config.type === ScaleType.ORDINAL && typeof range === 'undefined') {
     const scheme = 'scheme' in config ? config.scheme : undefined;
     const namespace = 'namespace' in config ? config.namespace : undefined;
-    const colorScale = CategoricalColorNamespace.getScale(scheme, namespace);
+    const colorScale = CategoricalColorNamespace.getScale(
+      scheme && isSchemeParams(scheme) ? scheme.name : scheme,
+      namespace,
+    );
 
     applyDomain(config, (colorScale as unknown) as ScaleOrdinal<CategoricalScaleInput, Output>);
 

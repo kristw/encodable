@@ -7,6 +7,38 @@ import {
 import createScaleFromScaleConfig from '../../../src/parsers/scale/createScaleFromScaleConfig';
 
 describe('createScaleFromScaleConfig(config)', () => {
+  beforeAll(() => {
+    getSequentialSchemeRegistry()
+      .registerValue(
+        'test-scheme',
+        new SequentialScheme({
+          id: 'test-scheme',
+          colors: ['#ff0000', '#ffff00'],
+        }),
+      )
+      .registerValue(
+        'red-blue',
+        new SequentialScheme({
+          id: 'red-blue',
+          colors: [
+            '#67001f',
+            '#b2182b',
+            '#d6604d',
+            '#f4a582',
+            '#fddbc7',
+            '#d1e5f0',
+            '#92c5de',
+            '#4393c3',
+            '#2166ac',
+            '#053061',
+          ],
+        }),
+      );
+  });
+  afterAll(() => {
+    getSequentialSchemeRegistry().remove('test-scheme');
+  });
+
   describe('default', () => {
     it('returns linear scale', () => {
       // @ts-ignore
@@ -87,38 +119,80 @@ describe('createScaleFromScaleConfig(config)', () => {
         });
       });
     });
-    it('with color scheme as range', () => {
-      getSequentialSchemeRegistry().registerValue(
-        'test-scheme',
-        new SequentialScheme({
-          id: 'test-scheme',
-          colors: ['#ff0000', '#ffff00'],
-        }),
-      );
+    describe('with color scheme specified', () => {
+      it('uses color scheme as range', () => {
+        const scale = createScaleFromScaleConfig({
+          type: 'linear',
+          domain: [0, 10],
+          scheme: 'test-scheme',
+        });
 
-      const scale = createScaleFromScaleConfig({
-        type: 'linear',
-        domain: [0, 10],
-        scheme: 'test-scheme',
+        expect(scale(0)).toEqual('rgb(255, 0, 0)');
+        expect(scale(10)).toEqual('rgb(255, 255, 0)');
       });
 
-      expect(scale(0)).toEqual('rgb(255, 0, 0)');
-      expect(scale(10)).toEqual('rgb(255, 255, 0)');
+      describe('creates piecewise scale', () => {
+        it('domain has more elements', () => {
+          const scale = createScaleFromScaleConfig({
+            type: 'linear',
+            domain: [0, 5, 10],
+            scheme: { name: 'test-scheme' },
+          });
 
-      getSequentialSchemeRegistry().remove('test-scheme');
-    });
-    it('with color scheme as range, but no color scheme available', () => {
-      getSequentialSchemeRegistry().clearDefaultKey();
+          expect(scale.range()).toHaveLength(3);
+          expect(scale(0)).toEqual('rgb(255, 0, 0)');
+          expect(scale(10)).toEqual('rgb(255, 255, 0)');
+        });
+        it('range has more elements', () => {
+          const scale = createScaleFromScaleConfig({
+            type: 'linear',
+            domain: [0, 5, 10],
+            scheme: { name: 'red-blue' },
+          });
 
-      const scale = createScaleFromScaleConfig({
-        type: 'linear',
-        domain: [0, 10],
-        scheme: 'test-scheme',
+          expect(scale.range()).toHaveLength(3);
+          expect(scale(0)).toEqual('rgb(103, 0, 31)');
+          expect(scale(10)).toEqual('rgb(5, 48, 97)');
+        });
       });
 
-      expect(scale(0)).toEqual(0);
-      expect(scale(10)).toEqual(1);
+      describe('when scheme is SchemeParams object', () => {
+        it('handles scheme name correctly', () => {
+          const scale = createScaleFromScaleConfig({
+            type: 'linear',
+            domain: [0, 10],
+            scheme: { name: 'test-scheme' },
+          });
+
+          expect(scale(0)).toEqual('rgb(255, 0, 0)');
+          expect(scale(10)).toEqual('rgb(255, 255, 0)');
+        });
+        it('handles scheme extent', () => {
+          const scale = createScaleFromScaleConfig({
+            type: 'linear',
+            domain: [0, 10],
+            scheme: { name: 'test-scheme', extent: [0.5, 1] },
+          });
+
+          expect(scale(0)).toEqual('rgb(255, 160, 0)');
+          expect(scale(10)).toEqual('rgb(255, 255, 0)');
+        });
+      });
+
+      it('uses default range when specified scheme is not available', () => {
+        getSequentialSchemeRegistry().clearDefaultKey();
+
+        const scale = createScaleFromScaleConfig({
+          type: 'linear',
+          domain: [0, 10],
+          scheme: 'test-invalid-scheme',
+        });
+
+        expect(scale(0)).toEqual(0);
+        expect(scale(10)).toEqual(1);
+      });
     });
+
     it('with nice', () => {
       const scale = createScaleFromScaleConfig({
         type: 'linear',
@@ -483,32 +557,46 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(1)).toEqual('green');
       expect(scale(1000)).toEqual('green');
     });
+    it('handles scheme count', () => {
+      const scale = createScaleFromScaleConfig({
+        type: 'threshold',
+        domain: [0, 1],
+        scheme: { name: 'test-scheme', count: 3 },
+      });
+
+      expect(scale.range()).toHaveLength(3);
+      expect(scale(-1)).toEqual('rgb(255, 0, 0)');
+      expect(scale(0)).toEqual('rgb(255, 160, 0)');
+      expect(scale(0.5)).toEqual('rgb(255, 160, 0)');
+      expect(scale(1)).toEqual('rgb(255, 255, 0)');
+      expect(scale(1000)).toEqual('rgb(255, 255, 0)');
+    });
   });
 
   describe('ordinal scale', () => {
     beforeEach(() => {
       getCategoricalSchemeRegistry()
         .registerValue(
-          'test-scheme',
+          'test-category-scheme',
           new CategoricalScheme({
-            id: 'test-scheme',
+            id: 'test-category-scheme',
             colors: ['red', 'white', 'green'],
           }),
         )
         .registerValue(
-          'test-scheme2',
+          'test-category-scheme2',
           new CategoricalScheme({
-            id: 'test-scheme',
+            id: 'test-category-scheme2',
             colors: ['pink', 'charcoal', 'orange'],
           }),
         )
-        .setDefaultKey('test-scheme');
+        .setDefaultKey('test-category-scheme');
     });
 
     afterEach(() => {
       getCategoricalSchemeRegistry()
-        .remove('test-scheme')
-        .remove('test-scheme2')
+        .remove('test-category-scheme')
+        .remove('test-category-scheme2')
         .clearDefaultKey();
     });
 
@@ -530,20 +618,31 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('dinosaur')).toEqual('white');
       expect(scale('whale')).toEqual('green');
     });
-    it('with color scheme', () => {
-      const scale = createScaleFromScaleConfig({
-        type: 'ordinal',
-        scheme: 'test-scheme',
+    describe('with color scheme', () => {
+      it('scheme is string', () => {
+        const scale = createScaleFromScaleConfig({
+          type: 'ordinal',
+          scheme: 'test-category-scheme',
+        });
+        expect(scale('fish')).toEqual('red');
+        expect(scale('dinosaur')).toEqual('white');
+        expect(scale('whale')).toEqual('green');
       });
-      expect(scale('fish')).toEqual('red');
-      expect(scale('dinosaur')).toEqual('white');
-      expect(scale('whale')).toEqual('green');
+      it('scheme is SchemeParams object', () => {
+        const scale = createScaleFromScaleConfig({
+          type: 'ordinal',
+          scheme: { name: 'test-category-scheme' },
+        });
+        expect(scale('fish')).toEqual('red');
+        expect(scale('dinosaur')).toEqual('white');
+        expect(scale('whale')).toEqual('green');
+      });
     });
     it('with color scheme and domain', () => {
       const scale = createScaleFromScaleConfig({
         type: 'ordinal',
         domain: ['fish', 'dinosaur'],
-        scheme: 'test-scheme2',
+        scheme: 'test-category-scheme2',
       });
       expect(scale('fish')).toEqual('pink');
       expect(scale('dinosaur')).toEqual('charcoal');
@@ -554,7 +653,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         type: 'ordinal',
         domain: ['pig', 'panda'],
         reverse: true,
-        scheme: 'test-scheme2',
+        scheme: 'test-category-scheme2',
       });
       expect(scale('pig')).toEqual('charcoal');
       expect(scale('panda')).toEqual('pink');

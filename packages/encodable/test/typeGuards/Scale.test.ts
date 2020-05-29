@@ -7,6 +7,7 @@ import {
   isContinuousScaleConfig,
   isScaleConfigWithZero,
   isContinuousScale,
+  isSchemeParams,
 } from '../../src/typeGuards/Scale';
 import { HasToString } from '../../src/types/Base';
 
@@ -60,6 +61,14 @@ describe('type guards', () => {
     it('returns false otherwise', () => {
       expect(isTimeScale(scaleLinear(), 'linear')).toBeFalsy();
       expect(isTimeScale(scaleLog(), 'log')).toBeFalsy();
+    });
+  });
+  describe('isSchemeParams(scheme)', () => {
+    it('returns true if it is a SchemeParams object', () => {
+      expect(isSchemeParams({ name: 'my-palette ' })).toBeTruthy();
+    });
+    it('returns false for string', () => {
+      expect(isSchemeParams('my-palette')).toBeFalsy();
     });
   });
 });
