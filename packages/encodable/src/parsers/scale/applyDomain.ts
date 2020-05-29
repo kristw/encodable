@@ -1,7 +1,7 @@
 import { Value } from '../../types/VegaLite';
 import { ScaleConfig, D3Scale } from '../../types/Scale';
 import inferElementTypeFromUnionOfArrayTypes from '../../utils/inferElementTypeFromUnionOfArrayTypes';
-import { isContinuousScale } from '../../typeGuards/Scale';
+import { isContinuousScale, isDiscretizingScale } from '../../typeGuards/Scale';
 import combineCategories from '../../utils/combineCategories';
 import parseDateTimeIfPossible from '../parseDateTimeIfPossible';
 import parseContinuousDomain from '../domain/parseContinuousDomain';
@@ -38,6 +38,10 @@ export default function applyDomain<Output extends Value>(
       if (combined) {
         scale.domain(order(combined));
       }
+    } else if (isDiscretizingScale(scale, type)) {
+      // For discretizing scales, if the domain is specified in config,
+      // use that and ignore the domain from dataset
+      scale.domain(order(parseContinuousDomain(fixedDomain, type)));
     } else {
       scale.domain(
         order(
@@ -51,6 +55,8 @@ export default function applyDomain<Output extends Value>(
   } else if (inputDomain) {
     if (isContinuousScale(scale, type)) {
       scale.domain(order(removeUndefinedAndNull(parseContinuousDomain(inputDomain, type))));
+    } else if (isDiscretizingScale(scale, type)) {
+      scale.domain(order(parseContinuousDomain(inputDomain, type)));
     } else {
       scale.domain(order(parseDiscreteDomain(inputDomain)));
     }
