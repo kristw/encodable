@@ -30,7 +30,7 @@ export default function applyDomain<Output extends Value>(
   if (domain?.length) {
     const fixedDomain = inferElementTypeFromUnionOfArrayTypes(domain).map(parseDateTimeIfPossible);
 
-    if (isContinuousScale(scale, type)) {
+    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
       const combined = combineContinuousDomains(
         parseContinuousDomain(fixedDomain, type),
         inputDomain && removeUndefinedAndNull(parseContinuousDomain(inputDomain, type)),
@@ -38,10 +38,6 @@ export default function applyDomain<Output extends Value>(
       if (combined) {
         scale.domain(order(combined));
       }
-    } else if (isDiscretizingScale(scale, type)) {
-      // For discretizing scales, if the domain is specified in config,
-      // use that and ignore the domain from dataset
-      scale.domain(order(parseContinuousDomain(fixedDomain, type)));
     } else {
       scale.domain(
         order(
@@ -53,10 +49,8 @@ export default function applyDomain<Output extends Value>(
       );
     }
   } else if (inputDomain) {
-    if (isContinuousScale(scale, type)) {
+    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
       scale.domain(order(removeUndefinedAndNull(parseContinuousDomain(inputDomain, type))));
-    } else if (isDiscretizingScale(scale, type)) {
-      scale.domain(order(parseContinuousDomain(inputDomain, type)));
     } else {
       scale.domain(order(parseDiscreteDomain(inputDomain)));
     }
