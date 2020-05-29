@@ -48,7 +48,7 @@
     "vega-lite": "~4.1.0"
   },
   "devDependencies": {
-    "@superset-ui/superset-ui": "^0.13.3"
+    "@superset-ui/superset-ui": "^0.13.24"
   },
   "peerDependencies": {
     "@superset-ui/color": "^0.13.24",
