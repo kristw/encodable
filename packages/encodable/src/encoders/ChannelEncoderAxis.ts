@@ -42,14 +42,16 @@ export default class ChannelEncoderAxis<
     const { tickCount, values } = this.config;
 
     if (typeof values !== 'undefined') {
-      return inferElementTypeFromUnionOfArrayTypes(values).map(v =>
+      return inferElementTypeFromUnionOfArrayTypes(values).map((v) =>
         this.formatValue(isDateTime(v) ? parseDateTime(v) : v),
       );
     }
 
     const { scale } = this.channelEncoder;
     if (scale && 'domain' in scale) {
-      return ('ticks' in scale ? scale.ticks(tickCount) : scale.domain()).map(this.formatValue);
+      const ticks: (string | number | Date | HasToString)[] =
+        'ticks' in scale ? scale.ticks(tickCount) : scale.domain();
+      return ticks.map(this.formatValue);
     }
 
     return [];

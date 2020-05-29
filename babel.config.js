@@ -12,6 +12,11 @@ const config = getConfig({
   },
 });
 
+const index = config.plugins.indexOf('@babel/plugin-proposal-class-properties');
+if (index >= 0) {
+  config.plugins.splice(index, 1, ['@babel/plugin-proposal-class-properties', { loose: true }]);
+}
+
 // Override to allow transpile es modules inside vega-lite
 config.ignore = config.ignore.filter(item => item !== 'node_modules/');
 config.ignore.push('node_modules/(?!(vega-lite|lodash-es))');

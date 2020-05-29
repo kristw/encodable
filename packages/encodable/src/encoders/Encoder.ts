@@ -40,7 +40,7 @@ export default class Encoder<Config extends EncodingConfig> {
     // Create channel encoders
     const channels: { [k in keyof Config]?: MayBeArray<ChannelEncoder<ChannelDef>> } = {};
 
-    channelNames.forEach(name => {
+    channelNames.forEach((name) => {
       const channelEncoding = encoding[name] as MayBeArray<ChannelDef>;
       if (Array.isArray(channelEncoding)) {
         const definitions = channelEncoding;
@@ -68,14 +68,15 @@ export default class Encoder<Config extends EncodingConfig> {
     // so they can share the same legend.
     this.legends = {};
     channelNames
-      .map(name => this.channels[name])
-      .forEach(c => {
+      .map((name) => this.channels[name])
+      .forEach((c) => {
         if (isNotArray(c) && c.hasLegend() && isTypedFieldDef(c.definition)) {
           const { field } = c.definition;
+          const channelEncoder = (c as unknown) as DeriveSingleChannelEncoder<Config>;
           if (this.legends[field]) {
-            this.legends[field].push(c);
+            this.legends[field].push(channelEncoder);
           } else {
-            this.legends[field] = [c];
+            this.legends[field] = [channelEncoder];
           }
         }
       });
@@ -86,20 +87,20 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   getChannelEncoders() {
-    return flatMap(this.getChannelNames().map(name => this.channels[name]));
+    return flatMap(this.getChannelNames().map((name) => this.channels[name]));
   }
 
   getGroupBys() {
     const fields = this.getChannelEncoders()
-      .filter(c => c.isGroupBy())
-      .map(c => (c.definition as TypedFieldDef).field!);
+      .filter((c) => c.isGroupBy())
+      .map((c) => (c.definition as TypedFieldDef).field!);
 
     return Array.from(new Set(fields));
   }
 
   private createLegendItemsFactory(field: string) {
     const channelEncoders = flatMap(
-      this.getChannelEncoders().filter(e => isNotArray(e) && isValueDef(e.definition)),
+      this.getChannelEncoders().filter((e) => isNotArray(e) && isValueDef(e.definition)),
     ).concat(this.legends[field]);
 
     return (domain: ChannelInput[]) =>
@@ -149,7 +150,7 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   setDomainFromDataset(data: Dataset) {
-    this.getChannelEncoders().forEach(channelEncoder => {
+    this.getChannelEncoders().forEach((channelEncoder) => {
       channelEncoder.setDomainFromDataset(data);
     });
 
