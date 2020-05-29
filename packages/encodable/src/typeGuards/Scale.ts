@@ -11,9 +11,18 @@ import {
   TimeScaleConfig,
   UtcScaleConfig,
   ContinuousD3Scale,
+  DiscretizingD3Scale,
+  ThresholdScaleConfig,
+  QuantileScaleConfig,
+  QuantizeScaleConfig,
+  BinOrdinalScaleConfig,
 } from '../types/Scale';
 import { Value, ScaleType, SchemeParams } from '../types/VegaLite';
-import { timeScaleTypesSet, continuousScaleTypesSet } from '../parsers/scale/scaleCategories';
+import {
+  timeScaleTypesSet,
+  continuousScaleTypesSet,
+  discretizingScaleTypesSet,
+} from '../parsers/scale/scaleCategories';
 import isPropertySupportedByScaleType from '../parsers/scale/isPropertySupportedByScaleType';
 
 export function isContinuousScaleConfig<Output extends Value = Value>(
@@ -27,6 +36,16 @@ export function isContinuousScaleConfig<Output extends Value = Value>(
   | TimeScaleConfig<Output>
   | UtcScaleConfig<Output> {
   return continuousScaleTypesSet.has(config.type);
+}
+
+export function isDiscretizingScaleConfig<Output extends Value = Value>(
+  config: ScaleConfig,
+): config is
+  | ThresholdScaleConfig<Output>
+  | QuantileScaleConfig<Output>
+  | QuantizeScaleConfig<Output>
+  | BinOrdinalScaleConfig<Output> {
+  return discretizingScaleTypesSet.has(config.type);
 }
 
 export function isScaleConfigWithZero<Output extends Value = Value>(
@@ -56,6 +75,13 @@ export function isContinuousScale<Output extends Value = Value>(
   scaleType: ScaleType,
 ): scale is ContinuousD3Scale<Output> {
   return scale && continuousScaleTypesSet.has(scaleType);
+}
+
+export function isDiscretizingScale<Output extends Value = Value>(
+  scale: D3Scale<Output> | CategoricalColorScale,
+  scaleType: ScaleType,
+): scale is DiscretizingD3Scale<Output> {
+  return scale && discretizingScaleTypesSet.has(scaleType);
 }
 
 export function isTimeScale<Output extends Value = Value>(

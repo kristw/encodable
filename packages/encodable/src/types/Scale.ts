@@ -224,6 +224,12 @@ export type ContinuousD3Scale<Output extends Value = Value> =
   | ScalePower<Output, Output>
   | ScaleTime<Output, Output>;
 
+export type DiscretizingD3Scale<Output extends Value = Value> =
+  | ScaleQuantile<Output>
+  | ScaleQuantize<Output>
+  | ScaleThreshold<number | string | Date, Output>
+  | ScaleOrdinal<CategoricalScaleInput, Output>;
+
 export type D3Scale<Output extends Value = Value> =
   | ContinuousD3Scale<Output>
   | ScaleQuantile<Output>

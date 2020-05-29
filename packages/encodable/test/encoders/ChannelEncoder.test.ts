@@ -147,6 +147,32 @@ describe('ChannelEncoder', () => {
       });
     });
 
+    describe('for quantile scale', () => {
+      it('returns all possible values', () => {
+        const encoder = new ChannelEncoder({
+          name: 'pieColor',
+          channelType: 'Color',
+          definition: {
+            type: 'quantitative',
+            field: 'price',
+            scale: {
+              type: 'quantile',
+            },
+          },
+        });
+        expect(
+          encoder.getDomainFromDataset([
+            { price: 1 },
+            { price: 1 },
+            { price: 2 },
+            { price: 3 },
+            { price: 5 },
+            { price: 5 },
+          ]),
+        ).toEqual([1, 1, 2, 3, 5, 5]);
+      });
+    });
+
     describe('for ordinal field', () => {
       it('returns all possible values', () => {
         const encoder = new ChannelEncoder({

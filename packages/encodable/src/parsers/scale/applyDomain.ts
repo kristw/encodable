@@ -1,7 +1,7 @@
 import { Value } from '../../types/VegaLite';
 import { ScaleConfig, D3Scale } from '../../types/Scale';
 import inferElementTypeFromUnionOfArrayTypes from '../../utils/inferElementTypeFromUnionOfArrayTypes';
-import { isContinuousScale } from '../../typeGuards/Scale';
+import { isContinuousScale, isDiscretizingScale } from '../../typeGuards/Scale';
 import combineCategories from '../../utils/combineCategories';
 import parseDateTimeIfPossible from '../parseDateTimeIfPossible';
 import parseContinuousDomain from '../domain/parseContinuousDomain';
@@ -30,7 +30,7 @@ export default function applyDomain<Output extends Value>(
   if (domain?.length) {
     const fixedDomain = inferElementTypeFromUnionOfArrayTypes(domain).map(parseDateTimeIfPossible);
 
-    if (isContinuousScale(scale, type)) {
+    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
       const combined = combineContinuousDomains(
         parseContinuousDomain(fixedDomain, type),
         inputDomain && removeUndefinedAndNull(parseContinuousDomain(inputDomain, type)),
@@ -49,7 +49,7 @@ export default function applyDomain<Output extends Value>(
       );
     }
   } else if (inputDomain) {
-    if (isContinuousScale(scale, type)) {
+    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
       scale.domain(order(removeUndefinedAndNull(parseContinuousDomain(inputDomain, type))));
     } else {
       scale.domain(order(parseDiscreteDomain(inputDomain)));
