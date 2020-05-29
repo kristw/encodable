@@ -26,7 +26,8 @@
     "pretest": "yarn lint",
     "release": "yarn prepare-release && lerna publish --exact && yarn postrelease",
     "postrelease": "lerna run deploy-demo",
-    "storybook": "cd packages/react-vega-demo && yarn storybook"
+    "storybook": "cd packages/react-vega-demo && yarn storybook",
+    "ci:release-from-package": "lerna publish from-package --yes"
   },
   "repository": "https://github.com/apache-superset/encodable.git",
   "keywords": [
