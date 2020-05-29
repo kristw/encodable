@@ -11,6 +11,7 @@ import {
   ScaleBand,
 } from 'd3-scale';
 import { CategoricalColorScale } from '@superset-ui/color';
+import { SchemeParams } from 'vega-lite/build/src/scale';
 import { Value, DateTime, NiceTime, ScaleType, Scale as VegaLiteScale } from './VegaLite';
 import { HasToString } from './Base';
 
@@ -57,7 +58,7 @@ export interface CombinedScaleConfig<Output extends Value = Value>
    * vega-lite also support SchemeParams object
    * but encodable only accepts string at the moment
    */
-  scheme?: string;
+  scheme?: string | SchemeParams;
   /**
    * color namespace.
    * vega-lite does not have this field
