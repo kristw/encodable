@@ -119,6 +119,13 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
       return Array.from(new Set(data.map(d => this.getValueFromDatum(d)))) as ChannelInput[];
     }
     if (type === 'quantitative') {
+      // Quantile scale needs all items
+      // because it treats domain as a discrete set of sample values
+      // for computing the quantiles
+      if (this.definition.scale && this.definition.scale.type === 'quantile') {
+        return data.map(d => this.getValueFromDatum<number>(d));
+      }
+
       const extent = d3Extent(data, d => this.getValueFromDatum<number>(d));
 
       return typeof extent[0] === 'undefined' ? [0, 1] : (extent as [number, number]);
