@@ -29,6 +29,7 @@
     "storybook": "cd packages/react-vega-demo && yarn storybook",
     "ci:create-patch-version": "lerna version patch --yes",
     "ci:create-minor-version": "lerna version minor --yes",
+    "ci:create-major-version": "lerna version major --yes",
     "ci:release-from-package": "lerna publish from-package --yes"
   },
   "repository": "https://github.com/apache-superset/encodable.git",
