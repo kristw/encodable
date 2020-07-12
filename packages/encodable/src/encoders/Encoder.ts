@@ -1,4 +1,3 @@
-import flatMap from 'lodash/flatMap';
 import { ChannelDef, TypedFieldDef } from '../types/ChannelDef';
 import { MayBeArray } from '../types/Base';
 import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
@@ -87,7 +86,7 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   getChannelEncoders() {
-    return flatMap(this.getChannelNames().map(name => this.channels[name]));
+    return this.getChannelNames().flatMap(name => this.channels[name]);
   }
 
   getGroupBys() {
