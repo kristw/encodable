@@ -22,9 +22,6 @@ describe('Store', () => {
     it('return undefined if not', () => {
       expect(store.get<number | string>('invalid-key')).toBeUndefined();
     });
-    // it('should not not pass typecheck', () => {
-    //   expect(() => store.get<string>('random-key').toLocaleLowerCase()).toThrow('mm');
-    // });
   });
   describe('getOrCreate()', () => {
     it('gets if exists', () => {

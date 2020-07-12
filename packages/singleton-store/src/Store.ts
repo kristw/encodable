@@ -13,15 +13,15 @@ export default class Store {
     return item != null;
   }
 
-  get<T>(key: string): T | undefined {
-    const value = this.items[key];
+  get<T>(key: string) {
+    const value = this.items[key] as T | undefined;
 
-    return typeof value === 'undefined' ? undefined : (value as T);
+    return value;
   }
 
   getOrCreate<T>(key: string, factory: () => T) {
     if (this.has(key)) {
-      return this.get<T>(key);
+      return this.get<T>(key) as T;
     }
     const value = factory();
     this.set(key, value);
