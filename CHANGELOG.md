@@ -1,4 +1,13 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.3.7...v0.0.0) (2020-07-12)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.0...v0.0.0) (2020-07-12)
+
+
+### Features
+
+* support color interpolator ([#25](https://github.com/apache-superset/encodable/issues/25)) ([32a3eb7](https://github.com/apache-superset/encodable/commit/32a3eb74a653d617dc394cc36034c6fa766b6d40))
+
+
+
+# [0.4.0](https://github.com/apache-superset/encodable/compare/v0.3.7...v0.4.0) (2020-07-12)
 
 
 ### Features
