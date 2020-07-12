@@ -1,4 +1,18 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.3.6...v0.0.0) (2020-05-29)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.3.7...v0.0.0) (2020-07-12)
+
+
+### Features
+
+* replace vega-lite and vega imports with lean copies ([#24](https://github.com/apache-superset/encodable/issues/24)) ([6095ce6](https://github.com/apache-superset/encodable/commit/6095ce67bc454b1392af72bb974c9d906d4d6854))
+
+
+
+## [0.3.7](https://github.com/apache-superset/encodable/compare/v0.3.6...v0.3.7) (2020-05-29)
+
+
+### Bug Fixes
+
+* correctly handle input domain for quantile and discretizing scales ([#23](https://github.com/apache-superset/encodable/issues/23)) ([82fb1b4](https://github.com/apache-superset/encodable/commit/82fb1b4868dd870331ffc953de3d4e9962055a0f))
 
 
 
