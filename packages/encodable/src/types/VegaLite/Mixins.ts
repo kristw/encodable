@@ -11,7 +11,7 @@ export interface TitleMixins {
    *
    * 2) If both field definition's `title` and axis, header, or legend `title` are defined, axis/header/legend title will be used.
    */
-  title?: string | Text | null;
+  title?: string | null;
 }
 
 export interface FormatMixins {
