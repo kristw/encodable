@@ -1,3 +1,4 @@
+// Also allow string in title
 export interface TitleMixins {
   /**
    * A title for the field. If `null`, the title will be removed.
@@ -10,7 +11,7 @@ export interface TitleMixins {
    *
    * 2) If both field definition's `title` and axis, header, or legend `title` are defined, axis/header/legend title will be used.
    */
-  title?: Text | null;
+  title?: string | Text | null;
 }
 
 export interface FormatMixins {
