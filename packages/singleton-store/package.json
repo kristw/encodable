@@ -1,0 +1,36 @@
+{
+  "name": "singleton-store",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A simple key-value store that is a singleton",
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "esm",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache-superset/encodable.git"
+  },
+  "keywords": [
+    "singleton",
+    "key-value store",
+    "storage"
+  ],
+  "contributors": [
+    "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/apache-superset/encodable/issues"
+  },
+  "homepage": "https://github.com/apache-superset/encodable#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "jest-mock-console": "^1.0.1"
+  }
+}
