@@ -1,12 +1,8 @@
-// Types imported from vega-lite
-export { SchemeParams, Scale, NiceTime } from 'vega-lite/build/src/scale';
-export { Axis } from 'vega-lite/build/src/axis';
-
 // Same with vega-lite version
 /** Possible values */
 export type Value = number | string | boolean | null;
 
-// Override and exclude gradient type
+// Override: exclude gradient type
 /**
  * Definition object for a constant value of an encoding channel.
  */
@@ -17,9 +13,13 @@ export interface ValueDef<V extends Value | Value[] = Value> {
   value: V;
 }
 
-// Override and exclude geojson type
+// Override: exclude geojson type
 /** field type */
 export type Type = 'quantitative' | 'ordinal' | 'temporal' | 'nominal';
 
-export { DateTime } from './DateTime';
-export { ScaleType } from './ScaleType';
+export * from './Axis';
+export * from './DateTime';
+export * from './Mixins';
+export * from './Scale';
+export * from './ScaleType';
+export * from './SchemeParams';

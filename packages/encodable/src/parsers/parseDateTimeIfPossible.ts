@@ -1,4 +1,5 @@
-import { DateTime, isDateTime } from '../types/VegaLite';
+import { DateTime } from '../types/VegaLite';
+import { isDateTime } from '../typeGuards/DateTime';
 import parseDateTime from './parseDateTime';
 
 export default function parseDateTimeIfPossible<T>(d: DateTime | T) {
