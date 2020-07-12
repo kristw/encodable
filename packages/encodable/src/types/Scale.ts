@@ -11,8 +11,14 @@ import {
   ScaleBand,
 } from 'd3-scale';
 import { CategoricalColorScale } from '@superset-ui/color';
-import { SchemeParams } from 'vega-lite/build/src/scale';
-import { Value, DateTime, NiceTime, ScaleType, Scale as VegaLiteScale } from './VegaLite';
+import {
+  Value,
+  DateTime,
+  NiceTime,
+  ScaleType,
+  Scale as VegaLiteScale,
+  SchemeParams,
+} from './VegaLite';
 import { HasToString } from './Base';
 
 // Pick properties inherited from vega-lite
