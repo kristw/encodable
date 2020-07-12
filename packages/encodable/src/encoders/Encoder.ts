@@ -1,4 +1,3 @@
-import flatMap from 'lodash/flatMap';
 import { ChannelDef, TypedFieldDef } from '../types/ChannelDef';
 import { MayBeArray } from '../types/Base';
 import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
@@ -87,7 +86,7 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   getChannelEncoders() {
-    return flatMap(this.getChannelNames().map(name => this.channels[name]));
+    return this.getChannelNames().flatMap(name => this.channels[name]);
   }
 
   getGroupBys() {
@@ -99,9 +98,10 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   private createLegendItemsFactory(field: string) {
-    const channelEncoders = flatMap(
-      this.getChannelEncoders().filter(e => isNotArray(e) && isValueDef(e.definition)),
-    ).concat(this.legends[field]);
+    const channelEncoders = this.getChannelEncoders()
+      .filter(e => isNotArray(e) && isValueDef(e.definition))
+      .flat()
+      .concat(this.legends[field]);
 
     return (domain: ChannelInput[]) =>
       domain.map((input: ChannelInput) => ({
