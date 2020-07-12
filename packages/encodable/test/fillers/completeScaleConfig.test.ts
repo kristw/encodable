@@ -115,6 +115,7 @@ describe('completeScaleConfig(channelDef)', () => {
     ).toEqual(false);
   });
   it('returns false if cannot infer scale type', () => {
+    // @ts-expect-error
     expect(completeScaleConfig('X', { type: 'geojson', field: 'lat' })).toEqual(false);
   });
 });
