@@ -67,7 +67,7 @@ function isNumeric(value: number | string): boolean {
   return !isNaN(value as any) && !isNaN(parseFloat(value));
 }
 
-function normalizeQuarter(q: number | string): number {
+export function normalizeQuarter(q: number | string): number {
   if (isNumeric(q)) {
     q = Number(q);
   }
@@ -84,7 +84,7 @@ function normalizeQuarter(q: number | string): number {
   throw new Error(invalidTimeUnit('quarter', q));
 }
 
-function normalizeMonth(m: string | number): number {
+export function normalizeMonth(m: string | number): number {
   if (isNumeric(m)) {
     m = Number(m);
   }
@@ -108,7 +108,7 @@ function normalizeMonth(m: string | number): number {
   throw new Error(invalidTimeUnit('month', m));
 }
 
-function normalizeDay(d: string | number): number {
+export function normalizeDay(d: string | number): number {
   if (isNumeric(d)) {
     d = Number(d);
   }
@@ -137,7 +137,7 @@ function normalizeDay(d: string | number): number {
  * @param normalize whether to normalize quarter, month, day. This should probably be true if d is a DateTime.
  * @returns array of date time parts [year, month, day, hours, minutes, seconds, milliseconds]
  */
-function dateTimeParts(d: DateTime | DateTimeExpr, normalize: boolean) {
+export function dateTimeParts(d: DateTime | DateTimeExpr, normalize: boolean) {
   const parts: (string | number)[] = [];
 
   if (normalize && d.day !== undefined) {

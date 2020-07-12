@@ -44,6 +44,7 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
+    "jest-mock-console": "^1.0.1",
     "@superset-ui/color": "^0.13.24",
     "@superset-ui/core": "^0.13.21",
     "@superset-ui/number-format": "^0.13.3",
