@@ -1,4 +1,4 @@
-import get from 'lodash.get';
+import get from 'lodash/get';
 import { ChannelDef } from '../types/ChannelDef';
 import { isValueDef } from '../typeGuards/ChannelDef';
 import { PlainObject } from '../types/Data';
