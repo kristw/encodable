@@ -5,18 +5,16 @@ import dateTimeToTimestamp, {
   normalizeMonth,
   dateTimeParts,
 } from '../../src/parsers/dateTimeToTimestamp';
-import { DateTime } from '../../lib';
+import { DateTime } from '../../src/types/VegaLite';
 
 describe('dateTimeToTimestamp()', () => {
   let restoreConsole: RestoreConsole;
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     restoreConsole = mockConsole();
   });
 
   afterEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     restoreConsole();
   });
 
@@ -27,6 +25,7 @@ describe('dateTimeToTimestamp()', () => {
     });
     it('warns if quarter is more than 4', () => {
       normalizeQuarter('5');
+      // eslint-disable-next-line no-console
       expect(console.warn).toHaveBeenCalled();
     });
     it('throws invalid quarter', () => {
