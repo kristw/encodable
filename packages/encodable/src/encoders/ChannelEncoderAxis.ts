@@ -2,12 +2,13 @@ import ChannelEncoder from './ChannelEncoder';
 import createFormatterFromFieldTypeAndFormat from '../parsers/format/createFormatterFromFieldTypeAndFormat';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
 import { ChannelDef } from '../types/ChannelDef';
-import { Value, isDateTime } from '../types/VegaLite';
+import { Value } from '../types/VegaLite';
 import { CompleteFieldDef } from '../types/CompleteChannelDef';
 import { ChannelInput } from '../types/Channel';
 import { HasToString } from '../types/Base';
 import parseDateTime from '../parsers/parseDateTime';
 import inferElementTypeFromUnionOfArrayTypes from '../utils/inferElementTypeFromUnionOfArrayTypes';
+import { isDateTime } from '../typeGuards/DateTime';
 
 export default class ChannelEncoderAxis<
   Def extends ChannelDef<Output>,

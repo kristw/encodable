@@ -1,13 +1,6 @@
-import { ValueOf } from './Base';
+import { ValueOf } from '../Base';
 
-// Types imported from vega-lite
-export { ValueDef, Value } from 'vega-lite/build/src/channeldef';
-export { isDateTime, DateTime } from 'vega-lite/build/src/datetime';
-export { SchemeParams, Scale, NiceTime } from 'vega-lite/build/src/scale';
-export { Axis } from 'vega-lite/build/src/axis';
-export { Type } from 'vega-lite/build/src/type';
-
-// Override this implementation
+// Modified from vega-lite
 // because vega-lite uses namespace which has issues with babel and typescript
 export const ScaleType = {
   // Continuous - Quantitative
