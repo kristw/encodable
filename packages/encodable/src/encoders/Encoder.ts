@@ -98,9 +98,10 @@ export default class Encoder<Config extends EncodingConfig> {
   }
 
   private createLegendItemsFactory(field: string) {
-    const channelEncoders = flatMap(
-      this.getChannelEncoders().filter(e => isNotArray(e) && isValueDef(e.definition)),
-    ).concat(this.legends[field]);
+    const channelEncoders = this.getChannelEncoders()
+      .filter(e => isNotArray(e) && isValueDef(e.definition))
+      .flat()
+      .concat(this.legends[field]);
 
     return (domain: ChannelInput[]) =>
       domain.map((input: ChannelInput) => ({
