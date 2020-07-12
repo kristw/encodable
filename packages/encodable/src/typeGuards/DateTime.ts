@@ -1,17 +1,21 @@
 import { DateTime } from '../types/VegaLite/DateTime';
 
-// eslint-disable-next-line import/prefer-default-export, @typescript-eslint/no-explicit-any
-export function isDateTime(o: any): o is DateTime {
+// eslint-disable-next-line import/prefer-default-export
+export function isDateTime(o: string | number | boolean | DateTime): o is DateTime {
   return (
     !!o &&
-    (!!o.year ||
-      !!o.quarter ||
-      !!o.month ||
-      !!o.date ||
-      !!o.day ||
-      !!o.hours ||
-      !!o.minutes ||
-      !!o.seconds ||
-      !!o.milliseconds)
+    !(o instanceof Date) &&
+    typeof o !== 'string' &&
+    typeof o !== 'boolean' &&
+    typeof o !== 'number' &&
+    (('year' in o && o.year != null) ||
+      ('quarter' in o && o.quarter != null) ||
+      ('month' in o && o.month != null) ||
+      ('date' in o && o.date != null) ||
+      ('day' in o && o.day != null) ||
+      ('hours' in o && o.hours != null) ||
+      ('minutes' in o && o.minutes != null) ||
+      ('seconds' in o && o.seconds != null) ||
+      ('milliseconds' in o && o.milliseconds != null))
   );
 }
