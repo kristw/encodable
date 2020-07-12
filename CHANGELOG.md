@@ -1,4 +1,13 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.0...v0.0.0) (2020-07-12)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.1...v0.0.0) (2020-07-12)
+
+
+### Features
+
+* reduce lodash dependency ([#26](https://github.com/apache-superset/encodable/issues/26)) ([35d4010](https://github.com/apache-superset/encodable/commit/35d4010e91c16f49cc0fb41499407dfdc2dc04b4))
+
+
+
+## [0.4.1](https://github.com/apache-superset/encodable/compare/v0.4.0...v0.4.1) (2020-07-12)
 
 
 ### Features
