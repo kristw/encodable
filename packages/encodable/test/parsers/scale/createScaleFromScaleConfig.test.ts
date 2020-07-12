@@ -248,14 +248,6 @@ describe('createScaleFromScaleConfig(config)', () => {
       });
       expect(scale(5)).toEqual(5);
     });
-    it('with interpolate', () => {
-      expect(() =>
-        createScaleFromScaleConfig({
-          type: 'linear',
-          interpolate: 'cubehelix',
-        }),
-      ).toThrow('"scale.interpolate" is not supported yet.');
-    });
   });
 
   describe('log scale', () => {
