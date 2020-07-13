@@ -18,6 +18,8 @@
 
 - [WordCloud demo on CodeSandbox](https://codesandbox.io/s/encodable-wordcloud-demo-k66ui?fontsize=14&hidenavigation=1&theme=dark).
 
+[more demo...](https://github.com/apache-superset/encodable/blob/master/DEMO.md)
+
 ### Why use `encodable`?
 
 This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite`
