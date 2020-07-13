@@ -10,6 +10,9 @@ export const COUNTER = '__SINGLETON_STORE_COUNT__';
 
 let store: Store | undefined;
 
+/**
+ * Retrive the singleton store
+ */
 export default function getStore() {
   if (typeof store === 'undefined') {
     const oldCount = window[COUNTER];
@@ -28,7 +31,10 @@ export default function getStore() {
   return store;
 }
 
-/** Only expose for testing */
+/**
+ * Only expose for testing
+ * Do not use if you don't know what you are doing.
+ */
 export function dangerouslyResetStore() {
   store = undefined;
 }

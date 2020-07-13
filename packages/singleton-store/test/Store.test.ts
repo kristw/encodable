@@ -73,6 +73,10 @@ describe('Store', () => {
       store.remove('key5');
       expect(store.has('key5')).toBeFalsy();
     });
+    it('does nothing if key does not exist', () => {
+      store.remove('key-103957820');
+      expect(store.has('key-103957820')).toBeFalsy();
+    });
     it('returns store', () => {
       expect(store.remove('key6')).toBe(store);
     });
