@@ -1,5 +1,2 @@
-import Store from './Store';
-
-const store = new Store();
-
-export default store;
+// eslint-disable-next-line import/prefer-default-export
+export { default as getStore } from './getStore';
