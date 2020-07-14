@@ -23,10 +23,11 @@ export default class ChannelEncoderAxis<
   constructor(channelEncoder: ChannelEncoder<Def, Output>) {
     this.channelEncoder = channelEncoder;
     this.config = channelEncoder.definition.axis as Exclude<CompleteAxisConfig, false>;
-    this.formatValue = createFormatterFromFieldTypeAndFormat(
-      (channelEncoder.definition as CompleteFieldDef<Output>).type,
-      this.config.format ?? '',
-    );
+    this.formatValue = createFormatterFromFieldTypeAndFormat({
+      type: (channelEncoder.definition as CompleteFieldDef<Output>).type,
+      format: this.config.format,
+      formatType: this.config.formatType,
+    });
   }
 
   getTitle() {

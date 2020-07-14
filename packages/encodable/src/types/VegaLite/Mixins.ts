@@ -14,6 +14,8 @@ export interface TitleMixins {
   title?: string | null;
 }
 
+export type FormatType = 'number' | 'time';
+
 export interface FormatMixins {
   /**
    * The text formatting pattern for labels of guides (axes, legends, headers) and text marks.
@@ -34,12 +36,5 @@ export interface FormatMixins {
    * - `"time"` for temporal fields and ordinal and nomimal fields with `timeUnit`.
    * - `"number"` for quantitative fields as well as ordinal and nomimal fields without `timeUnit`.
    */
-  formatType?: 'number' | 'time';
-
-  /**
-   * [Vega expression](https://vega.github.io/vega/docs/expressions/) for customizing labels text.
-   *
-   * __Note:__ The label text and value can be assessed via the `label` and `value` properties of the axis's backing `datum` object.
-   */
-  labelExpr?: string;
+  formatType?: FormatType;
 }
