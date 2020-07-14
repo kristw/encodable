@@ -19,7 +19,7 @@ export default function getStore() {
     if (typeof oldCount === 'number') {
       // eslint-disable-next-line no-console
       console.warn(
-        `Found ${oldCount} existing instance(s) of singleton-store. This may cause unexpected behaviors. There should be only one singleton-store in your node_modules. Check your dependencies. All libraries should list singleton-store as peerDependencies and only install it as dependencies at the application level.`,
+        `Found ${oldCount} existing instance(s) of global-storage. This may cause unexpected behaviors. There should be only one global-storage in your node_modules. Check your dependencies. All libraries should list global-storage as peerDependencies and only install it as dependencies at the application level.`,
       );
       window[COUNTER] = oldCount + 1;
     } else {

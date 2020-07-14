@@ -3,7 +3,7 @@ import { getStore } from '../src';
 import Store from '../src/Store';
 import { COUNTER, dangerouslyResetStore } from '../src/getStore';
 
-describe('singleton-store', () => {
+describe('global-storage', () => {
   let restoreConsole: RestoreConsole;
 
   beforeEach(() => {
