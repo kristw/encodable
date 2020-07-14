@@ -3,6 +3,7 @@
 [![Codecov branch](https://img.shields.io/codecov/c/github/apache-superset/encodable/master.svg?style=flat-square)](https://codecov.io/gh/apache-superset/encodable/branch/master)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/apache-superset/encodable/build-and-test-workflow?style=flat-square)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
+[![TypeScript](https://badges.frapsoft.com/typescript/awesome/typescript.png?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
 > **tl;dr.** When you have a visualization component, this library helps you defines the visual
 > channels that you can encode data into and provide API similar to `vega-lite`'s grammar for
