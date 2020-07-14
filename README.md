@@ -16,10 +16,12 @@
 
 ## Example
 
-- [Demo on CodeSandbox](https://codesandbox.io/s/encodable-demo-wvhj3?file=/src/App.tsx)
-- [WordCloud demo on CodeSandbox](https://codesandbox.io/s/encodable-wordcloud-demo-k66ui?fontsize=14&hidenavigation=1&theme=dark).
+![Preview](https://raw.githubusercontent.com/apache-superset/encodable/master/images/preview.png)
 
-[more demo...](https://github.com/apache-superset/encodable/blob/master/DEMO.md)
+[![Edit encodable Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/encodable-demo-wvhj3?fontsize=14&hidenavigation=1&theme=dark)
+
+- [Demo on CodeSandbox](https://codesandbox.io/s/encodable-demo-wvhj3?file=/src/App.tsx)
+- [more demo...](https://github.com/apache-superset/encodable/blob/master/DEMO.md)
 
 ### Why use `encodable`?
 
