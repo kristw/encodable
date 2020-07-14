@@ -1,7 +1,7 @@
 # 🎭 encodable
 
 [![Codecov branch](https://img.shields.io/codecov/c/github/apache-superset/encodable/master.svg?style=flat-square)](https://codecov.io/gh/apache-superset/encodable/branch/master)
-[![Build Status](https://img.shields.io/travis/com/apache-superset/encodable/master.svg?style=flat-square)](https://travis-ci.com/apache-superset/encodable)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/apache-superset/encodable/build-and-test-workflow?style=flat-square)
 [![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
 
 > **tl;dr.** When you have a visualization component, this library helps you defines the visual
