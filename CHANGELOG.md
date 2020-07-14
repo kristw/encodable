@@ -1,4 +1,19 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.1...v0.0.0) (2020-07-12)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.2...v0.0.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* fielddef formatting ([#30](https://github.com/apache-superset/encodable/issues/30)) ([09754a9](https://github.com/apache-superset/encodable/commit/09754a9ae8bac329767ebbf70e170ef71b17db04))
+
+
+### Features
+
+* add getStore ([#28](https://github.com/apache-superset/encodable/issues/28)) ([fb1ec79](https://github.com/apache-superset/encodable/commit/fb1ec79e6ebd6d9a638f944eb1bb9363d2ced6a4))
+* create singleton-store ([#27](https://github.com/apache-superset/encodable/issues/27)) ([7d51b37](https://github.com/apache-superset/encodable/commit/7d51b37f5e21cb964e0118bdf44c9ff74778d019))
+
+
+
+## [0.4.2](https://github.com/apache-superset/encodable/compare/v0.4.1...v0.4.2) (2020-07-12)
 
 
 ### Features
