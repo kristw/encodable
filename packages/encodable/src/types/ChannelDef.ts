@@ -1,4 +1,4 @@
-import { ValueDef, Value, Type } from './VegaLite';
+import { ValueDef, Value, Type, FormatMixins } from './VegaLite';
 import { WithScale } from './Scale';
 import { WithXAxis, WithYAxis } from './Axis';
 import { WithLegend } from './Legend';
@@ -14,9 +14,8 @@ export type PropertyValue =
 
 export type Formatter = (d: unknown) => string;
 
-export interface FieldDef {
+export interface FieldDef extends FormatMixins {
   field: string;
-  format?: string;
   title?: string;
   bin?: boolean;
 }

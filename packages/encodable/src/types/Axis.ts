@@ -23,6 +23,7 @@ export interface BaseAxisConfig
   extends Pick<
     VegaLiteAxis,
     | 'format'
+    | 'formatType'
     | 'labelAngle'
     | 'labelFlush'
     | 'tickCount'

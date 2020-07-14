@@ -1,6 +1,37 @@
 import createFormatterFromChannelDef from '../../../src/parsers/format/createFormatterFromChannelDef';
 
 describe('createFormatterFromChannelDef(type, format)', () => {
+  describe('creates formatter for FieldDef', () => {
+    it('number', () => {
+      const formatter = createFormatterFromChannelDef({
+        field: 'price',
+        formatType: 'number',
+        format: '.2f',
+      });
+      expect(formatter(5324)).toEqual('5324.00');
+    });
+    it('time', () => {
+      const formatter = createFormatterFromChannelDef({
+        field: 'lunchTime',
+        formatType: 'time',
+        format: '%b %d, %Y',
+      });
+      expect(formatter(new Date(Date.UTC(2019, 5, 20)))).toEqual('Jun 20, 2019');
+    });
+    it('format with unspecified formatType', () => {
+      const formatter = createFormatterFromChannelDef({
+        field: 'price',
+        format: '.2f',
+      });
+      expect(formatter(5324)).toEqual('5324.00');
+    });
+    it('no formatting', () => {
+      const formatter = createFormatterFromChannelDef({
+        field: 'price',
+      });
+      expect(formatter(5324)).toEqual('5324');
+    });
+  });
   it('handles when format is defined', () => {
     const formatter = createFormatterFromChannelDef({
       field: 'lunchTime',
