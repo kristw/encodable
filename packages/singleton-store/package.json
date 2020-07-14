@@ -1,6 +1,6 @@
 {
   "name": "singleton-store",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple key-value store that is a singleton",
   "sideEffects": false,
   "main": "lib/index.js",
