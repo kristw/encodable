@@ -10,6 +10,7 @@
     "babel:cjs": "nimbus babel --clean --workspaces=\"*\" --config-file=../../babel.config.js",
     "babel:esm": "nimbus babel --clean --workspaces=\"*\" --esm --config-file=../../babel.config.js",
     "build:assets": "node ./scripts/buildAssets.js",
+    "bump-version": "lerna version",
     "clean": "rm -rf ./packages/**/{lib,esm}",
     "commit": "superset-commit",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
@@ -144,8 +145,7 @@
   },
   "lint-staged": {
     "./packages/*/{src,test,storybook}/**/*.{js,jsx,ts,tsx,json,md}": [
-      "yarn prettier --write",
-      "git add"
+      "yarn prettier --write"
     ]
   }
 }

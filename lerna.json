@@ -5,5 +5,21 @@
     "packages/*"
   ],
   "useWorkspaces": true,
-  "version": "independent"
+  "version": "independent",
+  "ignoreChanges": [
+    "**/*.md",
+    "**/*.spec.tsx?",
+    "**/*.spec.jsx?",
+    "**/__mocks__/**"
+  ],
+  "command": {
+    "publish": {
+      "message": "chore: publish",
+      "graphType": "all"
+    },
+    "version": {
+      "message": "chore: publish",
+      "exact": true
+    }
+  }
 }
