@@ -1,7 +1,7 @@
 {
   "name": "singleton-store",
   "version": "0.1.0",
-  "description": "A simple key-value store that is a singleton",
+  "description": "A simple key-value store that is truly a singleton. Use this to as an alternative to sticking values into global.",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/apache-superset/encodable/issues"
   },
-  "homepage": "https://github.com/apache-superset/encodable#readme",
+  "homepage": "https://github.com/apache-superset/encodable/tree/master/packages/singleton-store",
   "publishConfig": {
     "access": "public"
   },
