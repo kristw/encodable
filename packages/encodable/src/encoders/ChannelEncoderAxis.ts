@@ -1,14 +1,13 @@
 import ChannelEncoder from './ChannelEncoder';
-import createFormatterFromFieldTypeAndFormat from '../parsers/format/createFormatterFromFieldTypeAndFormat';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
 import { ChannelDef } from '../types/ChannelDef';
 import { Value } from '../types/VegaLite';
-import { CompleteFieldDef } from '../types/CompleteChannelDef';
 import { ChannelInput } from '../types/Channel';
 import { HasToString } from '../types/Base';
 import parseDateTime from '../parsers/parseDateTime';
 import inferElementTypeFromUnionOfArrayTypes from '../utils/inferElementTypeFromUnionOfArrayTypes';
 import { isDateTime } from '../typeGuards/DateTime';
+import createFormatter from '../parsers/format/createFormatter';
 
 export default class ChannelEncoderAxis<
   Def extends ChannelDef<Output>,
@@ -23,8 +22,7 @@ export default class ChannelEncoderAxis<
   constructor(channelEncoder: ChannelEncoder<Def, Output>) {
     this.channelEncoder = channelEncoder;
     this.config = channelEncoder.definition.axis as Exclude<CompleteAxisConfig, false>;
-    this.formatValue = createFormatterFromFieldTypeAndFormat({
-      type: (channelEncoder.definition as CompleteFieldDef<Output>).type,
+    this.formatValue = createFormatter({
       format: this.config.format,
       formatType: this.config.formatType,
     });
