@@ -9,11 +9,13 @@ import {
   CategoricalColorScaleResolver,
 } from '../types/Options';
 
+const CACHE_KEY = 'encodable:options';
+
 let options: EncodableOptions;
 
 function getOptions() {
   if (!options) {
-    options = getStore().getOrCreate<EncodableOptions>('encodable:options', () => ({}));
+    options = getStore().getOrCreate<EncodableOptions>(CACHE_KEY, () => ({}));
   }
   return options;
 }
