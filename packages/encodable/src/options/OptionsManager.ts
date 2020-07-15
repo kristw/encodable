@@ -1,12 +1,14 @@
 import { getStore } from 'global-box';
 import defaultNumberFormatResolver from '../parsers/format/defaultNumberFormatResolver';
 import defaultTimeFormatResolver from '../parsers/format/defaultTimeFormatResolver';
+import defaultColorSchemeResolver from '../parsers/scale/defaultColorSchemeResolver';
 import defaultCategoricalColorScaleResolver from '../parsers/scale/defaultCategoricalColorScaleResolver';
 import {
   EncodableOptions,
   NumberFormatResolver,
   TimeFormatResolver,
   CategoricalColorScaleResolver,
+  ColorSchemeResolver,
 } from '../types/Options';
 
 const CACHE_KEY = 'encodable:options';
@@ -41,6 +43,13 @@ const OptionsManager = {
   },
   setCategoricalColorScaleResolver(resolver: CategoricalColorScaleResolver | undefined) {
     getOptions().categoricalColorScaleResolver = resolver;
+    return this;
+  },
+  getColorSchemeResolver(): ColorSchemeResolver {
+    return getOptions().colorSchemeResolver ?? defaultColorSchemeResolver;
+  },
+  setColorSchemeResolver(resolver: ColorSchemeResolver | undefined) {
+    getOptions().colorSchemeResolver = resolver;
     return this;
   },
 };

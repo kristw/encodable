@@ -1,7 +1,8 @@
-import { getSequentialSchemeRegistry } from '@superset-ui/color';
+import { SequentialScheme } from '@superset-ui/color';
 import { Value } from '../../types/VegaLite';
 import { ScaleConfig, D3Scale } from '../../types/Scale';
 import { isContinuousScaleConfig, isSchemeParams } from '../../typeGuards/Scale';
+import OptionsManager from '../../options/OptionsManager';
 
 export default function applyRange<Output extends Value>(
   config: ScaleConfig<Output>,
@@ -30,8 +31,9 @@ export default function applyRange<Output extends Value>(
         name = scheme;
       }
 
-      const colorScheme = getSequentialSchemeRegistry().get(name);
-      if (typeof colorScheme !== 'undefined') {
+      const colors = OptionsManager.getColorSchemeResolver()({ name, type: 'sequential' });
+      if (typeof colors !== 'undefined') {
+        const colorScheme = new SequentialScheme({ id: name ?? '', colors });
         scale.range(colorScheme.getColors(count, extent) as Output[]);
       }
     }

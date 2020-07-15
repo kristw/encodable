@@ -12,6 +12,11 @@ export type CategoricalColorScaleResolver = (params: {
   namespace?: string;
 }) => ScaleOrdinal<CategoricalScaleInput, string>;
 
+export type ColorSchemeResolver = (params: {
+  name?: string;
+  type?: 'sequential' | 'diverging' | 'categorical';
+}) => string[] | undefined;
+
 /**
  * All fields are optional.
  */
@@ -19,4 +24,5 @@ export type EncodableOptions = Partial<{
   numberFormatResolver: NumberFormatResolver;
   timeFormatResolver: TimeFormatResolver;
   categoricalColorScaleResolver: CategoricalColorScaleResolver;
+  colorSchemeResolver: ColorSchemeResolver;
 }>;
