@@ -1,4 +1,3 @@
-import { CategoricalColorScale } from '@superset-ui/color';
 import { ScaleTime } from 'd3-scale';
 import {
   D3Scale,
@@ -58,34 +57,22 @@ export function isScaleConfigWithZero<Output extends Value = Value>(
   return isPropertySupportedByScaleType('zero', config.type);
 }
 
-export function isCategoricalColorScale<Output extends Value = Value>(
-  scale: D3Scale<Output> | CategoricalColorScale,
-): scale is CategoricalColorScale {
-  return scale instanceof CategoricalColorScale;
-}
-
-export function isD3Scale<Output extends Value = Value>(
-  scale: D3Scale<Output> | CategoricalColorScale,
-): scale is D3Scale<Output> {
-  return !isCategoricalColorScale(scale);
-}
-
 export function isContinuousScale<Output extends Value = Value>(
-  scale: D3Scale<Output> | CategoricalColorScale,
+  scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is ContinuousD3Scale<Output> {
   return scale && continuousScaleTypesSet.has(scaleType);
 }
 
 export function isDiscretizingScale<Output extends Value = Value>(
-  scale: D3Scale<Output> | CategoricalColorScale,
+  scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is DiscretizingD3Scale<Output> {
   return scale && discretizingScaleTypesSet.has(scaleType);
 }
 
 export function isTimeScale<Output extends Value = Value>(
-  scale: D3Scale<Output> | CategoricalColorScale,
+  scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is ScaleTime<Output, Output> {
   return scale && timeScaleTypesSet.has(scaleType);
