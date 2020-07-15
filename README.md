@@ -116,13 +116,15 @@ See the full
 
 More specifically, the `encodable` package
 
-- provides configuration for defining your own grammar for the encoding channels of your component. The resulting grammar is a TypeScript type, which can be used to type-check the specification from component users.
+- provides configuration for defining your own grammar for the encoding channels of your component.
+  The resulting grammar is a TypeScript type, which can be used to type-check the specification from
+  component users.
 - adopts the
   [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition)
-  grammar from `vega-lite` (only key features) to define visual encoding channels as well as logic for
-  determining smart defaults (e.g. choosing scale type based on data type, etc.)
-- parses incoming specification from component users into utility functions that helps you render the visualization
-  component.
+  grammar from `vega-lite` (only key features) to define visual encoding channels as well as logic
+  for determining smart defaults (e.g. choosing scale type based on data type, etc.)
+- parses incoming specification from component users into utility functions that helps you render
+  the visualization component.
 - does NOT render the component. You can use anything you want (D3, React, Vue, etc.).
 
 <!-- ## Demo
