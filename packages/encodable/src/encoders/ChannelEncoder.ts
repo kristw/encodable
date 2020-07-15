@@ -3,7 +3,7 @@ import { HasToString, IdentityFunction } from '../types/Base';
 import { ChannelType, ChannelInput } from '../types/Channel';
 import { PlainObject, Dataset } from '../types/Data';
 import { ChannelDef } from '../types/ChannelDef';
-import { Value } from '../types/VegaLite';
+import { Value, ScaleType } from '../types/VegaLite';
 import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
 import ChannelEncoderAxis from './ChannelEncoderAxis';
@@ -17,7 +17,6 @@ import applyNice from '../parsers/scale/applyNice';
 import { AllScale } from '../types/Scale';
 import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteChannelDef';
 import { CompleteChannelDef } from '../types/CompleteChannelDef';
-import { isCategoricalColorScale } from '../typeGuards/Scale';
 import applyRange from '../parsers/scale/applyRange';
 import fallbackFormatter from '../parsers/format/fallbackFormatter';
 import createFormatter from '../parsers/format/createFormatter';
@@ -156,7 +155,7 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     if (
       this.definition.scale !== false &&
       this.scale &&
-      !isCategoricalColorScale(this.scale) &&
+      !this.hasCategoricalColorScale() &&
       'domain' in this.scale
     ) {
       const config = this.definition.scale;
@@ -204,6 +203,28 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
 
   isY() {
     return isY(this.channelType);
+  }
+
+  private hasCategoricalColorScale() {
+    const config = this.definition.scale;
+
+    // Scale type is ordinal with not given range
+    // (may have optional scheme)
+    // will become a categorical scale
+    // of named color scheme.
+    // A color scale from named color scheme may be shared among multiple components
+    // in the same namespace by default, so changing its domain affect all components.
+    // (Sounds like a bad idea.)
+    // This function is currently only being used to check
+    // whether to apply domain from dataset or not.
+    // An ordinal scale with user-specified color scheme as range array
+    // will return false from this function and be excluded from it.
+    return (
+      this.scale &&
+      config &&
+      config.type === ScaleType.ORDINAL &&
+      typeof config.range === 'undefined'
+    );
   }
 
   hasLegend() {

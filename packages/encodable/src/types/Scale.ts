@@ -10,7 +10,6 @@ import {
   ScalePoint,
   ScaleBand,
 } from 'd3-scale';
-import { CategoricalColorScale } from '@superset-ui/color';
 import {
   Value,
   DateTime,
@@ -61,8 +60,6 @@ export interface CombinedScaleConfig<Output extends Value = Value>
   range?: Output[];
   /**
    * name of the color scheme.
-   * vega-lite also support SchemeParams object
-   * but encodable only accepts string at the moment
    */
   scheme?: string | SchemeParams;
   /**
@@ -245,4 +242,4 @@ export type D3Scale<Output extends Value = Value> =
   | ScalePoint<CategoricalScaleInput>
   | ScaleBand<CategoricalScaleInput>;
 
-export type AllScale<Output extends Value = Value> = D3Scale<Output> | CategoricalColorScale;
+export type AllScale<Output extends Value = Value> = D3Scale<Output>;
