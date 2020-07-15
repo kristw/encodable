@@ -17,8 +17,6 @@ export default function createFormatterFromFieldTypeAndFormat({
     finalType = 'number';
   } else if (type === 'temporal') {
     finalType = 'time';
-  } else if (typeof format !== 'undefined' && format.length > 0) {
-    finalType = 'number';
   }
 
   return createFormatter({
