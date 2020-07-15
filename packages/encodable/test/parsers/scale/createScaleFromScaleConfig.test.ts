@@ -649,15 +649,15 @@ describe('createScaleFromScaleConfig(config)', () => {
     it('with namespace', () => {
       const scale1 = createScaleFromScaleConfig({
         type: 'ordinal',
-        namespace: 'abc',
+        scheme: { namespace: 'abc' },
       });
       const scale2 = createScaleFromScaleConfig({
         type: 'ordinal',
-        namespace: 'def',
+        scheme: { namespace: 'def' },
       });
       const scale3 = createScaleFromScaleConfig({
         type: 'ordinal',
-        namespace: 'def',
+        scheme: { namespace: 'def' },
       });
 
       expect(scale1('fish')).toEqual('red');

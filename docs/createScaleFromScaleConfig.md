@@ -61,6 +61,5 @@ The following scale properties are supported. (See `Scale.ts`.)
 'reverse';
 'round';
 'scheme';
-'namespace';
 'zero';
 ```

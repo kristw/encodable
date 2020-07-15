@@ -79,7 +79,5 @@ export function isTimeScale<Output extends Value = Value>(
 }
 
 export function isSchemeParams(scheme: string | SchemeParams): scheme is SchemeParams {
-  return (
-    Object.prototype.toString.call(scheme) !== '[object String]' && !!(scheme as SchemeParams).name
-  );
+  return Object.prototype.toString.call(scheme) !== '[object String]';
 }

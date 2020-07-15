@@ -1,4 +1,3 @@
-import { CategoricalColorNamespace } from '@superset-ui/color';
 import {
   ScaleLinear,
   ScaleLogarithmic,
@@ -42,6 +41,7 @@ import applyPadding from './applyPadding';
 import applyAlign from './applyAlign';
 import applyClamp from './applyClamp';
 import { isSchemeParams } from '../../typeGuards/Scale';
+import OptionsManager from '../../options/OptionsManager';
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: LinearScaleConfig<Output>,
@@ -95,15 +95,21 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
   // is assumed to be a color scale.
   if (config.type === ScaleType.ORDINAL && typeof range === 'undefined') {
     const scheme = 'scheme' in config ? config.scheme : undefined;
-    const namespace = 'namespace' in config ? config.namespace : undefined;
-    const colorScale = CategoricalColorNamespace.getScale(
-      scheme && isSchemeParams(scheme) ? scheme.name : scheme,
-      namespace,
-    );
+    const resolve = OptionsManager.getCategoricalColorScaleResolver();
 
-    applyDomain(config, (colorScale as unknown) as ScaleOrdinal<CategoricalScaleInput, Output>);
+    let colorScale: ScaleOrdinal<CategoricalScaleInput, string>;
+    if (typeof scheme === 'undefined') {
+      colorScale = resolve({});
+    } else if (isSchemeParams(scheme)) {
+      colorScale = resolve(scheme);
+    } else {
+      colorScale = resolve({ name: scheme });
+    }
 
-    return colorScale;
+    const castedColorScale = (colorScale as unknown) as ScaleOrdinal<CategoricalScaleInput, Output>;
+    applyDomain(config, castedColorScale);
+
+    return castedColorScale;
   }
 
   const scale = createScaleFromScaleType(config);

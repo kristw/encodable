@@ -11,7 +11,7 @@ export default function applyRange<Output extends Value>(
   if (typeof range === 'undefined') {
     if ('scheme' in config && typeof config.scheme !== 'undefined') {
       const { scheme } = config;
-      let name: string;
+      let name: string | undefined;
       let count: number | undefined;
 
       if (isContinuousScaleConfig(config) && domain) {

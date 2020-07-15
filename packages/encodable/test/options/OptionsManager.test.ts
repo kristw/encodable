@@ -1,12 +1,15 @@
-import { OptionsManager } from '../../src';
+import { scaleOrdinal } from 'd3-scale';
+import { OptionsManager, CategoricalScaleInput } from '../../src';
 
 const dummyFormatter = () => 'haha';
+const dummyScaleResolver = () => scaleOrdinal<CategoricalScaleInput, string>(['haha']);
 
 describe('OptionsManager', () => {
   afterEach(() => {
     // reset format resolvers
-    OptionsManager.setNumberFormatResolver(undefined);
-    OptionsManager.setTimeFormatResolver(undefined);
+    OptionsManager.setNumberFormatResolver(undefined)
+      .setTimeFormatResolver(undefined)
+      .setCategoricalColorScaleResolver(undefined);
   });
 
   describe('.getNumberFormatResolver(resolver)', () => {
@@ -43,6 +46,26 @@ describe('OptionsManager', () => {
     });
     it('returns OptionsManager', () => {
       expect(OptionsManager.setTimeFormatResolver(() => dummyFormatter)).toBe(OptionsManager);
+    });
+  });
+  describe('.getCategoricalColorScaleResolver(resolver)', () => {
+    it('returns a resolver', () => {
+      const resolver = OptionsManager.getCategoricalColorScaleResolver();
+      expect(resolver).toBeDefined();
+      expect(typeof resolver({})('abc')).toBe('string');
+    });
+  });
+  describe('.setCategoricalColorScaleResolver(resolver)', () => {
+    it('sets a resolver', () => {
+      OptionsManager.setCategoricalColorScaleResolver(dummyScaleResolver);
+      const resolver = OptionsManager.getCategoricalColorScaleResolver();
+      expect(resolver).toBeDefined();
+      expect(resolver({})('abc')).toEqual('haha');
+    });
+    it('returns OptionsManager', () => {
+      expect(OptionsManager.setCategoricalColorScaleResolver(dummyScaleResolver)).toBe(
+        OptionsManager,
+      );
     });
   });
 });
