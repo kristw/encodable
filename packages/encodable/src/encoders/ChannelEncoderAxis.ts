@@ -22,10 +22,7 @@ export default class ChannelEncoderAxis<
   constructor(channelEncoder: ChannelEncoder<Def, Output>) {
     this.channelEncoder = channelEncoder;
     this.config = channelEncoder.definition.axis as Exclude<CompleteAxisConfig, false>;
-    this.formatValue = createFormatter({
-      format: this.config.format,
-      formatType: this.config.formatType,
-    });
+    this.formatValue = createFormatter(this.config);
   }
 
   getTitle() {
