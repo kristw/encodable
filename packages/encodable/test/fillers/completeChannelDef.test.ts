@@ -21,6 +21,7 @@ const DEFAULT_OUTPUT = {
   },
   format: undefined,
   formatType: 'number',
+  legend: false,
   scale: { type: 'linear', nice: true, clamp: true, zero: true },
 };
 
