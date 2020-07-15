@@ -6,10 +6,11 @@ const dummyScaleResolver = () => scaleOrdinal<CategoricalScaleInput, string>(['h
 
 describe('OptionsManager', () => {
   afterEach(() => {
-    // reset format resolvers
+    // reset all resolvers
     OptionsManager.setNumberFormatResolver(undefined)
       .setTimeFormatResolver(undefined)
-      .setCategoricalColorScaleResolver(undefined);
+      .setCategoricalColorScaleResolver(undefined)
+      .setColorSchemeResolver(undefined);
   });
 
   describe('.getNumberFormatResolver(resolver)', () => {
@@ -46,6 +47,24 @@ describe('OptionsManager', () => {
     });
     it('returns OptionsManager', () => {
       expect(OptionsManager.setTimeFormatResolver(() => dummyFormatter)).toBe(OptionsManager);
+    });
+  });
+  describe('.getColorScaleResolver()', () => {
+    it('returns a resolver', () => {
+      const resolver = OptionsManager.getColorSchemeResolver();
+      expect(resolver).toBeDefined();
+      expect(resolver({ name: '', type: 'sequential' })).toBeUndefined();
+    });
+  });
+  describe('.setColorScaleResolver(resolver)', () => {
+    it('sets a resolver', () => {
+      OptionsManager.setColorSchemeResolver(() => ['#222', '#eee']);
+      const resolver = OptionsManager.getColorSchemeResolver();
+      expect(resolver).toBeDefined();
+      expect(resolver({ name: '', type: 'sequential' })).toEqual(['#222', '#eee']);
+    });
+    it('returns OptionsManager', () => {
+      expect(OptionsManager.setColorSchemeResolver(() => [])).toBe(OptionsManager);
     });
   });
   describe('.getCategoricalColorScaleResolver(resolver)', () => {
