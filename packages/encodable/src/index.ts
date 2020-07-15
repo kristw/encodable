@@ -5,6 +5,10 @@ export { default as completeChannelDef } from './fillers/completeChannelDef';
 export { default as createScaleFromScaleConfig } from './parsers/scale/createScaleFromScaleConfig';
 export { default as mergeEncoding } from './utils/mergeEncoding';
 
+export { default as defaultNumberFormatResolver } from './parsers/format/defaultNumberFormatResolver';
+export { default as defaultTimeFormatResolver } from './parsers/format/defaultTimeFormatResolver';
+export { default as OptionsManager } from './options/OptionsManager';
+
 // Export type guards
 export {
   isFieldDef,
@@ -24,5 +28,6 @@ export * from './types/ChannelDef';
 export * from './types/Data';
 export * from './types/Encoding';
 export * from './types/Legend';
+export * from './types/Options';
 export * from './types/Scale';
 export * from './types/VegaLite';
