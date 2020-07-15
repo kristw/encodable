@@ -63,11 +63,6 @@ export interface CombinedScaleConfig<Output extends Value = Value>
    */
   scheme?: string | SchemeParams;
   /**
-   * color namespace.
-   * vega-lite does not have this field
-   */
-  namespace?: string;
-  /**
    * Extending the domain so that it starts and ends on nice round values. This method typically modifies the scale’s domain, and may only extend the bounds to the nearest round value. Nicing is useful if the domain is computed from data and may be irregular. For example, for a domain of _[0.201479…, 0.996679…]_, a nice domain might be _[0.2, 1.0]_.
    *
    * For quantitative scales such as linear, `nice` can be either a boolean flag or a number. If `nice` is a number, it will represent a desired tick count. This allows greater control over the step size used to extend the bounds, guaranteeing that the returned ticks will exactly cover the domain.
@@ -162,7 +157,7 @@ export interface BinOrdinalScaleConfig<Output extends Value = Value>
 }
 
 export interface OrdinalScaleConfig<Output extends Value = Value>
-  extends PickFromCombinedScaleConfig<Output, 'interpolate' | 'scheme' | 'namespace'> {
+  extends PickFromCombinedScaleConfig<Output, 'interpolate' | 'scheme'> {
   type: 'ordinal';
 }
 

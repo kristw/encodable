@@ -33,7 +33,6 @@ const supportedScaleTypes: Record<keyof CombinedScaleConfig, Set<ScaleType>> = {
   domain: allScaleTypesSet,
   exponent: new Set([ScaleType.POW]),
   interpolate: exceptPointOrBandSet,
-  namespace: new Set([ScaleType.ORDINAL]),
   nice: new Set(continuousScaleTypes.concat([ScaleType.QUANTIZE, ScaleType.THRESHOLD])),
   padding: continuousOrPointOrBandSet,
   paddingInner: new Set([ScaleType.BAND]),
