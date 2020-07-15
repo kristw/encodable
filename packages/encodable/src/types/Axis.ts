@@ -22,8 +22,6 @@ export type LabelOverlapType = 'auto' | LabelOverlapStrategy['strategy'] | Label
 export interface BaseAxisConfig
   extends Pick<
     VegaLiteAxis,
-    | 'format'
-    | 'formatType'
     | 'labelAngle'
     | 'labelFlush'
     | 'tickCount'
@@ -31,6 +29,9 @@ export interface BaseAxisConfig
     | 'title'
     | 'titlePadding'
     | 'values'
+    | 'format'
+    | 'formatType'
+    | 'formatInLocalTime'
   > {
   /** Strategy for handling label overlap */
   labelOverlap?: LabelOverlapType;

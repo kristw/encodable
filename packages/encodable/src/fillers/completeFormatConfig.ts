@@ -1,10 +1,10 @@
 import { FormatMixins, Type, ScaleType, FormatType } from '../types/VegaLite';
 
-export type CompleteFormatConfig = {
+export interface CompleteFormatConfig {
   formatType: 'time' | 'number' | undefined;
   formatInLocalTime?: boolean;
   format: string | undefined;
-};
+}
 
 export default function completeFormatConfig(
   config: FormatMixins & {

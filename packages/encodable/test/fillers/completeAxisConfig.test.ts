@@ -3,12 +3,15 @@ import completeAxisConfig from '../../src/fillers/completeAxisConfig';
 const DEFAULT_INPUT = {
   type: 'quantitative',
   field: 'consumption',
+  format: '.2f',
+  formatType: 'number',
   scale: { type: 'linear' },
   title: 'King in the North',
 } as const;
 
 const DEFAULT_OUTPUT = {
-  format: undefined,
+  format: '.2f',
+  formatType: 'number',
   labelAngle: 0,
   labelFlush: true,
   labelOverlap: {

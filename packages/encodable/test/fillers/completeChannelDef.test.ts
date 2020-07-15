@@ -6,6 +6,7 @@ const DEFAULT_OUTPUT = {
   title: 'speed',
   axis: {
     format: undefined,
+    formatType: 'number',
     labelAngle: 0,
     labelFlush: true,
     labelOverlap: {

@@ -2,7 +2,7 @@ import { Value, ValueDef, Type } from './VegaLite';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
 import { CompleteLegendConfig } from '../fillers/completeLegendConfig';
 import { CompleteScaleConfig } from '../fillers/completeScaleConfig';
-import { NonValueDef } from './ChannelDef';
+import { NonValueDef, XFieldDef, YFieldDef } from './ChannelDef';
 import { CompleteFormatConfig } from '../fillers/completeFormatConfig';
 
 export interface CompleteValueDef<Output extends Value = Value> extends ValueDef<Output> {
@@ -17,6 +17,7 @@ export type HalfCompleteFieldDef<Output extends Value = Value> = Omit<
   'formatType' | 'format' | 'formatInLocalTime' | 'scale' | 'title'
 > & {
   type: Type;
+  axis?: XFieldDef<Output>['axis'] | YFieldDef<Output>['axis'];
   scale: CompleteScaleConfig<Output>;
   title: string;
 } & CompleteFormatConfig;
