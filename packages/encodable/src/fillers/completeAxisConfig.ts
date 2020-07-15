@@ -49,6 +49,8 @@ export default function completeAxisConfig(
 
     const {
       format = channelDef.format,
+      formatType = channelDef.formatType,
+      formatInLocalTime = channelDef.formatInLocalTime,
       labelAngle = 0,
       labelFlush,
       labelOverlap,
@@ -60,9 +62,10 @@ export default function completeAxisConfig(
       titlePadding = 4,
     } = axis;
 
-    return {
+    const output = {
       ...axis,
       format,
+      formatType,
       labelAngle,
       labelFlush:
         typeof labelFlush === 'undefined'
@@ -78,6 +81,12 @@ export default function completeAxisConfig(
       title,
       titlePadding,
     };
+
+    if (typeof formatInLocalTime !== 'undefined') {
+      output.formatInLocalTime = formatInLocalTime;
+    }
+
+    return output;
   }
 
   return false as const;

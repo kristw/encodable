@@ -4,12 +4,11 @@ import { ChannelType, ChannelInput } from '../types/Channel';
 import { PlainObject, Dataset } from '../types/Data';
 import { ChannelDef } from '../types/ChannelDef';
 import { Value } from '../types/VegaLite';
-import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
+import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
 import ChannelEncoderAxis from './ChannelEncoderAxis';
 import createGetterFromChannelDef, { Getter } from '../parsers/createGetterFromChannelDef';
 import completeChannelDef from '../fillers/completeChannelDef';
-import createFormatterFromChannelDef from '../parsers/format/createFormatterFromChannelDef';
 import createScaleFromScaleConfig from '../parsers/scale/createScaleFromScaleConfig';
 import identity from '../utils/identity';
 import applyDomain from '../parsers/scale/applyDomain';
@@ -20,6 +19,8 @@ import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteCh
 import { CompleteChannelDef } from '../types/CompleteChannelDef';
 import { isCategoricalColorScale } from '../typeGuards/Scale';
 import applyRange from '../parsers/scale/applyRange';
+import fallbackFormatter from '../parsers/format/fallbackFormatter';
+import createFormatter from '../parsers/format/createFormatter';
 
 type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
@@ -58,7 +59,9 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     this.definition = completeChannelDef(this.channelType, originalDefinition);
 
     this.getValue = createGetterFromChannelDef(this.definition);
-    this.formatValue = createFormatterFromChannelDef(this.definition);
+    this.formatValue = isFieldDef(this.definition)
+      ? createFormatter(this.definition)
+      : fallbackFormatter;
 
     if (this.definition.scale) {
       const scale = createScaleFromScaleConfig(this.definition.scale);

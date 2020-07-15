@@ -17,6 +17,7 @@ export type Formatter = (d: unknown) => string;
 export interface FieldDef extends FormatMixins {
   field: string;
   title?: string;
+  /** not used at the moment */
   bin?: boolean;
 }
 

@@ -22,19 +22,22 @@ export interface FormatMixins {
    *
    * - If the format type is `"number"` (e.g., for quantitative fields), this is D3's [number format pattern](https://github.com/d3/d3-format#locale_format).
    * - If the format type is `"time"` (e.g., for temporal fields), this is D3's [time format pattern](https://github.com/d3/d3-time-format#locale_format).
-   *
-   * See the [format documentation](https://vega.github.io/vega-lite/docs/format.html) for more examples.
-   *
-   * __Default value:__  Derived from [numberFormat](https://vega.github.io/vega-lite/docs/config.html#format) config for number format and from [timeFormat](https://vega.github.io/vega-lite/docs/config.html#format) config for time format.
    */
   format?: string;
-
   /**
    * The format type for labels (`"number"` or `"time"`).
    *
    * __Default value:__
-   * - `"time"` for temporal fields and ordinal and nomimal fields with `timeUnit`.
-   * - `"number"` for quantitative fields as well as ordinal and nomimal fields without `timeUnit`.
+   * - `"time"` for temporal fields and ordinal and nominal fields with `timeUnit`.
+   * - `"number"` for quantitative fields as well as ordinal and nominal fields without `timeUnit`.
    */
   formatType?: FormatType;
+  // Not in vega-lite
+  /**
+   * Format in local time instead of UTC
+   * only applicable if formatType is time
+   *
+   * __Default value:__ false
+   */
+  formatInLocalTime?: boolean;
 }
