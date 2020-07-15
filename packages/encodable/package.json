@@ -44,6 +44,7 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
+    "global-box": "^0.1.0",
     "@superset-ui/color": "^0.13.24",
     "@superset-ui/core": "^0.13.21",
     "@superset-ui/number-format": "^0.13.3",
@@ -51,6 +52,7 @@
     "jest-mock-console": "^1.0.1"
   },
   "peerDependencies": {
+    "global-box": "*",
     "@superset-ui/color": "^0.13.24",
     "@superset-ui/number-format": "^0.13.3",
     "@superset-ui/time-format": "^0.13.3"
