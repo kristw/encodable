@@ -19,7 +19,8 @@ const DEFAULT_OUTPUT = {
     title: 'speed',
     titlePadding: 4,
   },
-  legend: false,
+  format: undefined,
+  formatType: 'number',
   scale: { type: 'linear', nice: true, clamp: true, zero: true },
 };
 

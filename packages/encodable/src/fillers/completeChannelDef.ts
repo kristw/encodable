@@ -2,6 +2,7 @@ import { ChannelDef } from '../types/ChannelDef';
 import { ChannelType } from '../types/Channel';
 import { isFieldDef, isValueDef, isTypedFieldDef } from '../typeGuards/ChannelDef';
 import completeAxisConfig from './completeAxisConfig';
+import completeFormatConfig from './completeFormatConfig';
 import completeLegendConfig from './completeLegendConfig';
 import completeScaleConfig from './completeScaleConfig';
 import { Value } from '../types/VegaLite';
@@ -33,9 +34,11 @@ export default function completeChannelDef<Output extends Value>(
 
   // Scale needs the top-level properties to be filled.
   const scale = completeScaleConfig(channelType, copy);
-  const copy2 = { ...copy, scale };
+  // Format needs scale.
+  const format = completeFormatConfig({ ...channelDef, scaleType: scale ? scale.type : undefined });
+  const copy2 = { ...copy, ...format, scale };
 
-  // These two rely on scale
+  // These need scale and format
   const axis = completeAxisConfig(channelType, copy2);
   const legend = completeLegendConfig(channelType, copy2);
 
