@@ -1,4 +1,4 @@
-import { CategoricalColorNamespace, CategoricalColorScale } from '@superset-ui/color';
+import { CategoricalColorNamespace } from '@superset-ui/color';
 import {
   ScaleLinear,
   ScaleLogarithmic,
@@ -72,12 +72,8 @@ function createScaleFromScaleConfig<Output extends Value>(
 ): ScaleThreshold<number | string | Date, Output>;
 
 function createScaleFromScaleConfig<Output extends Value>(
-  config: BinOrdinalScaleConfig<Output>,
+  config: OrdinalScaleConfig<Output> | BinOrdinalScaleConfig<Output>,
 ): ScaleOrdinal<CategoricalScaleInput, Output>;
-
-function createScaleFromScaleConfig<Output extends Value>(
-  config: OrdinalScaleConfig<Output>,
-): ScaleOrdinal<CategoricalScaleInput, Output> | CategoricalColorScale;
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: PointScaleConfig<Output>,
