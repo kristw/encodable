@@ -1,6 +1,7 @@
 import { Value } from '../../types/VegaLite';
-import { ScaleConfig, D3Scale } from '../../types/Scale';
+import { D3Scale } from '../../types/Scale';
 import { isContinuousScale } from '../../typeGuards/Scale';
+import { ScaleConfig } from '../../types/ScaleConfig';
 
 export default function applyZero<Output extends Value>(
   config: ScaleConfig<Output>,

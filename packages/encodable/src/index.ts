@@ -30,5 +30,7 @@ export * from './types/Encoding';
 export * from './types/Legend';
 export * from './types/Options';
 export * from './types/Scale';
+export * from './types/scale/Nice';
+export * from './types/scale/ScaleInterpolate';
 export * from './types/ScaleConfig';
 export * from './types/VegaLite';
