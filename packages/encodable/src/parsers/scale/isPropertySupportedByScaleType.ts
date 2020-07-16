@@ -1,5 +1,4 @@
 import { ScaleType } from '../../types/VegaLite';
-import { CombinedScaleConfig } from '../../types/Scale';
 import {
   allScaleTypesSet,
   allScaleTypes,
@@ -7,6 +6,7 @@ import {
   continuousScaleTypes,
   continuousScaleTypesSet,
 } from './scaleCategories';
+import { ExtendedBaseScaleConfig } from '../../types/ScaleConfig';
 
 const pointOrBand: ScaleType[] = [ScaleType.POINT, ScaleType.BAND];
 const pointOrBandSet = new Set(pointOrBand);
@@ -25,7 +25,10 @@ zeroSet.delete(ScaleType.THRESHOLD);
 // quantile depends on distribution so zero does not matter
 zeroSet.delete(ScaleType.QUANTILE);
 
-const supportedScaleTypes: Record<keyof CombinedScaleConfig, Set<ScaleType>> = {
+const supportedScaleTypes: Record<
+  keyof ExtendedBaseScaleConfig<unknown, unknown, unknown>,
+  Set<ScaleType>
+> = {
   align: pointOrBandSet,
   base: new Set([ScaleType.LOG]),
   clamp: continuousScaleTypesSet,
@@ -41,11 +44,12 @@ const supportedScaleTypes: Record<keyof CombinedScaleConfig, Set<ScaleType>> = {
   reverse: allScaleTypesSet,
   round: continuousOrPointOrBandSet,
   scheme: exceptPointOrBandSet,
+  type: allScaleTypesSet,
   zero: zeroSet,
 };
 
 export default function isPropertySupportedByScaleType(
-  property: keyof CombinedScaleConfig,
+  property: keyof ExtendedBaseScaleConfig<unknown, unknown, unknown>,
   scaleType: ScaleType,
 ) {
   return supportedScaleTypes[property].has(scaleType);

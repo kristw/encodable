@@ -1,5 +1,5 @@
 import { Value, DateTime, SchemeParams } from './VegaLite';
-import { BaseScale } from './scale/BaseScale';
+import { BaseScaleConfig } from './scale/BaseScaleConfig';
 
 type DefaultDomain =
   | number[]
@@ -9,7 +9,7 @@ type DefaultDomain =
   | (number | undefined | null)[]
   | (DateTime | undefined | null)[];
 
-type ExtendedBaseScale<T, Range, Domain> = BaseScale<T, Range, Domain> & {
+export type ExtendedBaseScaleConfig<T, Range, Domain> = BaseScaleConfig<T, Range, Domain> & {
   /**
    * name of the color scheme.
    */
@@ -22,10 +22,13 @@ type ExtendedBaseScale<T, Range, Domain> = BaseScale<T, Range, Domain> & {
 // and add `type` property as discriminant of union type.
 type CreateScaleConfig<
   T,
-  Fields extends keyof ExtendedBaseScale<T, Range, Domain>,
+  Fields extends keyof ExtendedBaseScaleConfig<T, Range, Domain>,
   Range,
   Domain = DefaultDomain
-> = Pick<ExtendedBaseScale<T, Range, Domain>, 'type' | 'domain' | 'range' | 'reverse' | Fields>;
+> = Pick<
+  ExtendedBaseScaleConfig<T, Range, Domain>,
+  'type' | 'domain' | 'range' | 'reverse' | Fields
+>;
 
 export type LinearScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'linear',

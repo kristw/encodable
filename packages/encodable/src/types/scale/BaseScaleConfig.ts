@@ -1,7 +1,7 @@
 import { ScaleInterpolate, ScaleInterpolateParams } from './ScaleInterpolate';
 import { NiceTime } from './Nice';
 
-export type BaseScale<T, Range, Domain> = {
+export type BaseScaleConfig<T, Range, Domain> = {
   type: T;
 
   // Override: Made generic
