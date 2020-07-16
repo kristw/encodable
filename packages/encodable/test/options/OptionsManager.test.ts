@@ -35,7 +35,7 @@ describe('OptionsManager', () => {
     it('returns a resolver', () => {
       const resolver = OptionsManager.getTimeFormatResolver();
       expect(resolver).toBeDefined();
-      expect(typeof resolver('%Y-%m')(new Date())).toBe('string');
+      expect(typeof resolver({ format: '%Y-%m' })(new Date())).toBe('string');
     });
   });
   describe('.setTimeFormatResolver(resolver)', () => {
@@ -43,7 +43,7 @@ describe('OptionsManager', () => {
       OptionsManager.setTimeFormatResolver(() => dummyFormatter);
       const resolver = OptionsManager.getTimeFormatResolver();
       expect(resolver).toBeDefined();
-      expect(resolver('%Y-%m')(new Date())).toEqual('haha');
+      expect(resolver({ format: '%Y-%m' })(new Date())).toEqual('haha');
     });
     it('returns OptionsManager', () => {
       expect(OptionsManager.setTimeFormatResolver(() => dummyFormatter)).toBe(OptionsManager);
