@@ -47,13 +47,14 @@ export type DiscretizingD3Scale<Output extends Value = Value> =
   | ScaleThreshold<number | string | Date, Output>
   | ScaleOrdinal<CategoricalScaleInput, Output>;
 
-export type D3Scale<Output extends Value = Value> =
-  | ContinuousD3Scale<Output>
-  | ScaleQuantile<Output>
-  | ScaleQuantize<Output>
-  | ScaleThreshold<number | string | Date, Output>
+export type DiscreteD3Scale<Output extends Value = Value> =
   | ScaleOrdinal<CategoricalScaleInput, Output>
   | ScalePoint<CategoricalScaleInput>
   | ScaleBand<CategoricalScaleInput>;
+
+export type D3Scale<Output extends Value = Value> =
+  | ContinuousD3Scale<Output>
+  | DiscretizingD3Scale<Output>
+  | DiscreteD3Scale<Output>;
 
 export type AllScale<Output extends Value = Value> = D3Scale<Output>;

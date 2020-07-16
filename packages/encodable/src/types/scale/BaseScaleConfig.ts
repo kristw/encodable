@@ -10,34 +10,6 @@ export type BaseScaleConfig<T, Output, Input> = {
   domain?: Input[];
 
   /**
-   * Fix minimum value for the domain.
-   * If set, this is always used instead of `domain[0]`.
-   *
-   * Also can be used in a situation
-   * when you want to later set domain programmatically
-   * after the scale was created.
-   * Calling `scale.domain(newDomain)`
-   * uses maximum value from the incoming domain
-   * but still fix the minimum to this value,
-   * so the final domain is `[domainMin, newDomain[1]]`
-   */
-  domainMin?: Input;
-
-  /**
-   * Fix maximum value for the domain.
-   * If set, this is used instead of `domain[1]`.
-   *
-   * Also can be used in a situation
-   * when you want to later set domain programmatically
-   * after the scale was created.
-   * Calling `scale.domain(newDomain)`
-   * uses minimum value from the incoming domain
-   * but still fix the maximum to this value,
-   * so the final domain is `[newDomain[0], domainMax]`
-   */
-  domainMax?: Input;
-
-  /**
    * The range of the scale.
    */
   range?: Output[];

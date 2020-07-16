@@ -39,8 +39,8 @@ import applyRange from './applyRange';
 import applyPadding from './applyPadding';
 import applyAlign from './applyAlign';
 import applyClamp from './applyClamp';
-import { isSchemeParams } from '../../typeGuards/Scale';
 import OptionsManager from '../../options/OptionsManager';
+import { isSchemeParams } from '../../typeGuards/SchemeParams';
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: LinearScaleConfig<Output>,

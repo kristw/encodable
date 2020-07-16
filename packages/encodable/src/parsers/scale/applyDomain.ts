@@ -10,6 +10,7 @@ import parseDiscreteDomain from '../domain/parseDiscreteDomain';
 import combineContinuousDomains from '../../utils/combineContinuousDomains';
 import { ChannelInput } from '../../types/Channel';
 import removeUndefinedAndNull from '../../utils/removeUndefinedAndNull';
+import { isContinuousScaleConfig, isDiscretizingScaleConfig } from '../../typeGuards/ScaleConfig';
 
 function createOrderFunction(reverse: boolean | undefined) {
   return reverse ? <T>(array: T[]) => array.concat().reverse() : <T>(array: T[]) => array;
@@ -29,17 +30,24 @@ export default function applyDomain<Output extends Value>(
     : undefined;
 
   if (domain?.length) {
-    const fixedDomain = inferElementTypeFromUnionOfArrayTypes(domain).map(parseDateTimeIfPossible);
-
-    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
+    if (
+      (isContinuousScale(scale, type) && isContinuousScaleConfig(config)) ||
+      (isDiscretizingScale(scale, type) && isDiscretizingScaleConfig(config))
+    ) {
+      const fixedDomain = inferElementTypeFromUnionOfArrayTypes(config.domain).map(
+        parseDateTimeIfPossible,
+      );
       const combined = combineContinuousDomains(
         parseContinuousDomain(fixedDomain, type),
-        inputDomain && removeUndefinedAndNull(parseContinuousDomain(inputDomain, type)),
+        inputDomain && parseContinuousDomain(removeUndefinedAndNull(inputDomain), type),
       );
       if (combined) {
         scale.domain(order(combined));
       }
     } else {
+      const fixedDomain = inferElementTypeFromUnionOfArrayTypes(config.domain).map(
+        parseDateTimeIfPossible,
+      );
       scale.domain(
         order(
           combineCategories(
@@ -51,7 +59,7 @@ export default function applyDomain<Output extends Value>(
     }
   } else if (inputDomain) {
     if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
-      scale.domain(order(removeUndefinedAndNull(parseContinuousDomain(inputDomain, type))));
+      scale.domain(order(parseContinuousDomain(removeUndefinedAndNull(inputDomain), type)));
     } else {
       scale.domain(order(parseDiscreteDomain(inputDomain)));
     }

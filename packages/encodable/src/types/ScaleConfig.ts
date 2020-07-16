@@ -2,11 +2,40 @@ import { Value, DateTime, SchemeParams } from './VegaLite';
 import { BaseScaleConfig } from './scale/BaseScaleConfig';
 import { HasToString } from './Base';
 
-type TimeInput = string | number | Date | DateTime | { valueOf(): number } | undefined | null;
-type ContinuousInput = TimeInput | boolean;
-type DiscreteInput = HasToString;
+// TODO: Consider including { valueOf(): number }
+export type TimeInput = string | number | Date | DateTime;
+export type ContinuousInput = TimeInput | boolean;
+export type DiscreteInput = HasToString;
 
-export type ExtendedBaseScaleConfig<T, Range, Domain> = BaseScaleConfig<T, Range, Domain> & {
+export type ExtendedBaseScaleConfig<T, Output, Input> = BaseScaleConfig<T, Output, Input> & {
+  /**
+   * Fix minimum value for the domain.
+   * If set, this is always used instead of `domain[0]`.
+   *
+   * Also can be used in a situation
+   * when you want to later set domain programmatically
+   * after the scale was created.
+   * Calling `scale.domain(newDomain)`
+   * uses maximum value from the incoming domain
+   * but still fix the minimum to this value,
+   * so the final domain is `[domainMin, newDomain[1]]`
+   */
+  domainMin?: Input;
+
+  /**
+   * Fix maximum value for the domain.
+   * If set, this is used instead of `domain[1]`.
+   *
+   * Also can be used in a situation
+   * when you want to later set domain programmatically
+   * after the scale was created.
+   * Calling `scale.domain(newDomain)`
+   * uses minimum value from the incoming domain
+   * but still fix the maximum to this value,
+   * so the final domain is `[newDomain[0], domainMax]`
+   */
+  domainMax?: Input;
+
   /**
    * name of the color scheme.
    */
@@ -125,21 +154,30 @@ export type UtcScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   TimeInput
 >;
 
-export type ScaleConfig<Output extends Value = Value> =
+export type ContinuousScaleConfig<Output extends Value = Value> =
   | LinearScaleConfig<Output>
   | LogScaleConfig<Output>
   | PowScaleConfig<Output>
   | SqrtScaleConfig<Output>
   | SymlogScaleConfig<Output>
   | TimeScaleConfig<Output>
-  | UtcScaleConfig<Output>
+  | UtcScaleConfig<Output>;
+
+export type DiscretizingScaleConfig<Output extends Value = Value> =
   | QuantileScaleConfig<Output>
   | QuantizeScaleConfig<Output>
   | ThresholdScaleConfig<Output>
-  | BinOrdinalScaleConfig<Output>
+  | BinOrdinalScaleConfig<Output>;
+
+export type DiscreteScaleConfig<Output extends Value = Value> =
   | OrdinalScaleConfig<Output>
   | PointScaleConfig<Output>
   | BandScaleConfig<Output>;
+
+export type ScaleConfig<Output extends Value = Value> =
+  | ContinuousScaleConfig<Output>
+  | DiscretizingScaleConfig<Output>
+  | DiscreteScaleConfig<Output>;
 
 export interface WithScale<Output extends Value = Value> {
   scale?: Partial<ScaleConfig<Output>>;
