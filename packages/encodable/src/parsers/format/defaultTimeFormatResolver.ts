@@ -2,7 +2,9 @@ import { getTimeFormatter, LOCAL_PREFIX } from '@superset-ui/time-format';
 import { TimeFormatResolver } from '../../types/Options';
 
 const defaultTimeFormatResolver: TimeFormatResolver = ({ format, formatInLocalTime = false }) => {
-  const formatString = formatInLocalTime ? LOCAL_PREFIX + format : format;
+  const formatString = formatInLocalTime
+    ? LOCAL_PREFIX + format?.replace(LOCAL_PREFIX, '')
+    : format;
   return getTimeFormatter(formatString);
 };
 
