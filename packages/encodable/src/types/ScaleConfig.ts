@@ -94,7 +94,7 @@ export type PointScaleConfig<Output extends Value = Value> = CreateScaleConfig<
 >;
 
 export type BandScaleConfig<Output extends Value = Value> = CreateScaleConfig<
-  'ordinal',
+  'band',
   'align' | 'padding' | 'paddingInner' | 'paddingOuter' | 'round',
   Output[]
 >;
