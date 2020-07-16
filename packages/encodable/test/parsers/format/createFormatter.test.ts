@@ -16,6 +16,14 @@ describe('createFormatter(type, format)', () => {
       });
       expect(formatter(new Date(Date.UTC(2019, 5, 20)))).toEqual('Jun 20, 2019');
     });
+    it('local time', () => {
+      const formatter = createFormatter({
+        formatType: 'time',
+        format: '%b %d, %Y %H',
+        formatInLocalTime: true,
+      });
+      expect(formatter(new Date(Date.UTC(2019, 5, 20)))).toEqual('Jun 20, 2019 00');
+    });
   });
   it('uses number formatter if format is specified without formatType', () => {
     const formatter = createFormatter({

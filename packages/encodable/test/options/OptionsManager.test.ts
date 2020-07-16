@@ -6,10 +6,11 @@ const dummyScaleResolver = () => scaleOrdinal<CategoricalScaleInput, string>(['h
 
 describe('OptionsManager', () => {
   afterEach(() => {
-    // reset format resolvers
+    // reset all resolvers
     OptionsManager.setNumberFormatResolver(undefined)
       .setTimeFormatResolver(undefined)
-      .setCategoricalColorScaleResolver(undefined);
+      .setCategoricalColorScaleResolver(undefined)
+      .setColorSchemeResolver(undefined);
   });
 
   describe('.getNumberFormatResolver(resolver)', () => {
@@ -34,7 +35,7 @@ describe('OptionsManager', () => {
     it('returns a resolver', () => {
       const resolver = OptionsManager.getTimeFormatResolver();
       expect(resolver).toBeDefined();
-      expect(typeof resolver('%Y-%m')(new Date())).toBe('string');
+      expect(typeof resolver({ format: '%Y-%m' })(new Date())).toBe('string');
     });
   });
   describe('.setTimeFormatResolver(resolver)', () => {
@@ -42,10 +43,28 @@ describe('OptionsManager', () => {
       OptionsManager.setTimeFormatResolver(() => dummyFormatter);
       const resolver = OptionsManager.getTimeFormatResolver();
       expect(resolver).toBeDefined();
-      expect(resolver('%Y-%m')(new Date())).toEqual('haha');
+      expect(resolver({ format: '%Y-%m' })(new Date())).toEqual('haha');
     });
     it('returns OptionsManager', () => {
       expect(OptionsManager.setTimeFormatResolver(() => dummyFormatter)).toBe(OptionsManager);
+    });
+  });
+  describe('.getColorScaleResolver()', () => {
+    it('returns a resolver', () => {
+      const resolver = OptionsManager.getColorSchemeResolver();
+      expect(resolver).toBeDefined();
+      expect(resolver({ name: '', type: 'sequential' })).toBeUndefined();
+    });
+  });
+  describe('.setColorScaleResolver(resolver)', () => {
+    it('sets a resolver', () => {
+      OptionsManager.setColorSchemeResolver(() => ['#222', '#eee']);
+      const resolver = OptionsManager.getColorSchemeResolver();
+      expect(resolver).toBeDefined();
+      expect(resolver({ name: '', type: 'sequential' })).toEqual(['#222', '#eee']);
+    });
+    it('returns OptionsManager', () => {
+      expect(OptionsManager.setColorSchemeResolver(() => [])).toBe(OptionsManager);
     });
   });
   describe('.getCategoricalColorScaleResolver(resolver)', () => {

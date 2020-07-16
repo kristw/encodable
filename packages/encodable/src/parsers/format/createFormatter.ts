@@ -3,9 +3,16 @@ import { Formatter } from '../../types/ChannelDef';
 import fallbackFormatter from './fallbackFormatter';
 import OptionsManager from '../../options/OptionsManager';
 
-export default function createFormatter({ formatType, format }: FormatMixins): Formatter {
+export default function createFormatter({
+  formatType,
+  format,
+  formatInLocalTime,
+}: FormatMixins): Formatter {
   if (formatType === 'time') {
-    const formatter = OptionsManager.getTimeFormatResolver()(format);
+    const formatter = OptionsManager.getTimeFormatResolver()({
+      format,
+      formatInLocalTime,
+    });
 
     return (value: unknown) => formatter(value as Date | number | null | undefined);
   }
