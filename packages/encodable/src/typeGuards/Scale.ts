@@ -1,6 +1,6 @@
 import { ScaleTime } from 'd3-scale';
+import { D3Scale, ContinuousD3Scale, DiscretizingD3Scale } from '../types/Scale';
 import {
-  D3Scale,
   ScaleConfig,
   LinearScaleConfig,
   LogScaleConfig,
@@ -9,13 +9,11 @@ import {
   SymlogScaleConfig,
   TimeScaleConfig,
   UtcScaleConfig,
-  ContinuousD3Scale,
-  DiscretizingD3Scale,
   ThresholdScaleConfig,
   QuantileScaleConfig,
   QuantizeScaleConfig,
   BinOrdinalScaleConfig,
-} from '../types/Scale';
+} from '../types/ScaleConfig';
 import { Value, ScaleType, SchemeParams } from '../types/VegaLite';
 import {
   timeScaleTypesSet,

@@ -1,5 +1,6 @@
 import { Value } from '../../types/VegaLite';
-import { ScaleConfig, D3Scale } from '../../types/Scale';
+import { D3Scale } from '../../types/Scale';
+import { ScaleConfig } from '../../types/ScaleConfig';
 import inferElementTypeFromUnionOfArrayTypes from '../../utils/inferElementTypeFromUnionOfArrayTypes';
 import { isContinuousScale, isDiscretizingScale } from '../../typeGuards/Scale';
 import combineCategories from '../../utils/combineCategories';

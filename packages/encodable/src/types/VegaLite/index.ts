@@ -20,6 +20,5 @@ export type Type = 'quantitative' | 'ordinal' | 'temporal' | 'nominal';
 export * from './Axis';
 export * from './DateTime';
 export * from './Mixins';
-export * from './Scale';
 export * from './ScaleType';
 export * from './SchemeParams';

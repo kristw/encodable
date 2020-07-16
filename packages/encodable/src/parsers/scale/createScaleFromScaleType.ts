@@ -12,7 +12,8 @@ import {
   scalePoint,
   scaleBand,
 } from 'd3-scale';
-import { ScaleConfig, CategoricalScaleInput } from '../../types/Scale';
+import { CategoricalScaleInput } from '../../types/Scale';
+import { ScaleConfig } from '../../types/ScaleConfig';
 import { ScaleType, Value } from '../../types/VegaLite';
 
 export default function createScaleFromScaleType<Output extends Value>(

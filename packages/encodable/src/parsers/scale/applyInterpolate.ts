@@ -9,8 +9,10 @@ import {
   interpolateCubehelixLong,
 } from 'd3-interpolate';
 import { InterpolatorFactory } from 'd3-scale';
-import { Value, ScaleInterpolate, ScaleInterpolateParams } from '../../types/VegaLite';
-import { ScaleConfig, D3Scale } from '../../types/Scale';
+import { Value } from '../../types/VegaLite';
+import { D3Scale } from '../../types/Scale';
+import { ScaleInterpolateParams, ScaleInterpolate } from '../../types/scale/ScaleInterpolate';
+import { ScaleConfig } from '../../types/ScaleConfig';
 
 const interpolatorMap = {
   lab: interpolateLab,
