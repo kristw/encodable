@@ -1,5 +1,5 @@
 import { ValueDef, Value, Type, FormatMixins } from './VegaLite';
-import { WithScale } from './Scale';
+import { WithScale } from './ScaleConfig';
 import { WithXAxis, WithYAxis } from './Axis';
 import { WithLegend } from './Legend';
 

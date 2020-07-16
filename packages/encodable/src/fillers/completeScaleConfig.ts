@@ -1,7 +1,7 @@
 import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import inferScaleType from './inferScaleType';
 import { isContinuousScaleConfig, isScaleConfigWithZero } from '../typeGuards/Scale';
-import { ScaleConfig } from '../types/Scale';
+import { ScaleConfig } from '../types/ScaleConfig';
 import { ChannelDef } from '../types/ChannelDef';
 import isEnabled from '../utils/isEnabled';
 import { ChannelType } from '../types/Channel';
