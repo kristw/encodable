@@ -1,5 +1,5 @@
-import { ChannelInput } from '../../types/Channel';
 import { ScaleType } from '../../types/VegaLite';
+import { ContinuousInput } from '../../types/ScaleConfig';
 import { timeScaleTypesSet } from '../scale/scaleCategories';
 
 /**
@@ -9,7 +9,7 @@ import { timeScaleTypesSet } from '../scale/scaleCategories';
  * @param domain
  * @param scaleType
  */
-export default function parseContinuousDomain<T extends ChannelInput>(
+export default function parseContinuousDomain<T extends ContinuousInput | null | undefined>(
   domain: T[],
   scaleType: ScaleType,
 ) {

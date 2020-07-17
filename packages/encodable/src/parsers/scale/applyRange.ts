@@ -1,9 +1,10 @@
 import { SequentialScheme } from '@superset-ui/color';
 import { Value } from '../../types/VegaLite';
 import { D3Scale } from '../../types/Scale';
-import { isContinuousScaleConfig, isSchemeParams } from '../../typeGuards/Scale';
 import OptionsManager from '../../options/OptionsManager';
 import { ScaleConfig } from '../../types/ScaleConfig';
+import { isContinuousScaleConfig } from '../../typeGuards/ScaleConfig';
+import { isSchemeParams } from '../../typeGuards/SchemeParams';
 
 export default function applyRange<Output extends Value>(
   config: ScaleConfig<Output>,

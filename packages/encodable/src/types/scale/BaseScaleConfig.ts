@@ -1,20 +1,18 @@
 import { ScaleInterpolate, ScaleInterpolateParams } from './ScaleInterpolate';
 import { NiceTime } from './Nice';
 
-export type BaseScaleConfig<T, Range, Domain> = {
+export type BaseScaleConfig<T, R, D> = {
   type: T;
 
-  // Override: Made generic
   /**
    * The domain of the scale.
    */
-  domain?: Domain;
+  domain?: D;
 
-  // Override: Made generic
   /**
    * The range of the scale.
    */
-  range?: Range;
+  range?: R;
 
   /**
    * The alignment of the steps within the scale range.
@@ -70,7 +68,7 @@ export type BaseScaleConfig<T, Range, Domain> = {
 
   /**
    * For _[continuous](https://vega.github.io/vega-lite/docs/scale.html#continuous)_ scales, expands the scale domain to accommodate the specified number of pixels on each of the scale range. The scale range must represent pixels for this parameter to function as intended.
-   * Padding adjustment is performed prior to all other adjustments, including the effects of the `zero`, `nice`, `domainMin`, and `domainMax` properties.
+   * Padding adjustment is performed prior to all other adjustments, including the effects of the `zero`, `nice` properties.
    *
    * For _[band](https://vega.github.io/vega-lite/docs/scale.html#band)_ scales, shortcut for setting `paddingInner` and `paddingOuter` to the same value.
    *

@@ -1,59 +1,79 @@
 import { Value } from '../../types/VegaLite';
 import { D3Scale } from '../../types/Scale';
-import { ScaleConfig } from '../../types/ScaleConfig';
-import inferElementTypeFromUnionOfArrayTypes from '../../utils/inferElementTypeFromUnionOfArrayTypes';
-import { isContinuousScale, isDiscretizingScale } from '../../typeGuards/Scale';
-import combineCategories from '../../utils/combineCategories';
-import parseDateTimeIfPossible from '../parseDateTimeIfPossible';
+import { ChannelInput } from '../../types/Channel';
+import { ScaleConfig, Bounds } from '../../types/ScaleConfig';
+import { isContinuousScale, isDiscretizingScale, isDiscreteScale } from '../../typeGuards/Scale';
+import {
+  isContinuousScaleConfig,
+  isDiscretizingScaleConfig,
+  isDiscreteScaleConfig,
+} from '../../typeGuards/ScaleConfig';
 import parseContinuousDomain from '../domain/parseContinuousDomain';
 import parseDiscreteDomain from '../domain/parseDiscreteDomain';
+import combineCategories from '../../utils/combineCategories';
 import combineContinuousDomains from '../../utils/combineContinuousDomains';
-import { ChannelInput } from '../../types/Channel';
 import removeUndefinedAndNull from '../../utils/removeUndefinedAndNull';
+import parseDateTimeIn from '../parseDateTimeIn';
 
 function createOrderFunction(reverse: boolean | undefined) {
   return reverse ? <T>(array: T[]) => array.concat().reverse() : <T>(array: T[]) => array;
 }
 
+function isCompleteDomain<T>(domain: T[] | Bounds<T>): domain is T[] {
+  return domain.length !== 2 || (domain[0] != null && domain[1] != null);
+}
+
 export default function applyDomain<Output extends Value>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
-  domainFromDataset?: ChannelInput[],
+  /** domain from dataset */
+  dataDomain?: ChannelInput[],
 ) {
-  const { domain, reverse, type } = config;
+  const { reverse, type } = config;
 
   const order = createOrderFunction(reverse);
 
-  const inputDomain = domainFromDataset?.length
-    ? inferElementTypeFromUnionOfArrayTypes(domainFromDataset)
-    : undefined;
-
-  if (domain?.length) {
-    const fixedDomain = inferElementTypeFromUnionOfArrayTypes(domain).map(parseDateTimeIfPossible);
-
-    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
-      const combined = combineContinuousDomains(
-        parseContinuousDomain(fixedDomain, type),
-        inputDomain && removeUndefinedAndNull(parseContinuousDomain(inputDomain, type)),
-      );
-      if (combined) {
-        scale.domain(order(combined));
+  if (
+    (isContinuousScale(scale, type) && isContinuousScaleConfig(config)) ||
+    (isDiscretizingScale(scale, type) && isDiscretizingScaleConfig(config))
+  ) {
+    // For continuous and discretizing scales
+    if (config.domain) {
+      // If config.domain is specified
+      if (isCompleteDomain(config.domain)) {
+        // If the config.domain is completed
+        // ignores the dataDomain
+        scale.domain(order(parseDateTimeIn(config.domain)));
+      } else if (dataDomain) {
+        // If it is incompleted, then try to combine
+        // with the dataDomain
+        scale.domain(
+          order(
+            combineContinuousDomains(
+              parseContinuousDomain(parseDateTimeIn(config.domain), type),
+              parseContinuousDomain(removeUndefinedAndNull(dataDomain), type),
+            ),
+          ),
+        );
       }
-    } else {
+    } else if (dataDomain) {
+      // If no config.domain then just use the dataDomain if any
+      scale.domain(order(parseContinuousDomain(removeUndefinedAndNull(dataDomain), type)));
+    }
+  } else if (isDiscreteScale(scale, type) && isDiscreteScaleConfig(config)) {
+    // For discrete scales
+    if (config.domain) {
+      const fixedDomain = parseDiscreteDomain(parseDateTimeIn(config.domain));
       scale.domain(
         order(
-          combineCategories(
-            parseDiscreteDomain(fixedDomain),
-            inputDomain && parseDiscreteDomain(inputDomain),
-          ),
+          dataDomain
+            ? combineCategories(fixedDomain, parseDiscreteDomain(dataDomain))
+            : fixedDomain,
         ),
       );
-    }
-  } else if (inputDomain) {
-    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
-      scale.domain(order(removeUndefinedAndNull(parseContinuousDomain(inputDomain, type))));
-    } else {
-      scale.domain(order(parseDiscreteDomain(inputDomain)));
+    } else if (dataDomain) {
+      // If no config.domain then just use the dataDomain if any
+      scale.domain(order(parseDiscreteDomain(dataDomain)));
     }
   }
 }
