@@ -2,7 +2,7 @@ import { InterpolatorFactory } from 'd3-scale';
 import { Value } from '../../types/VegaLite';
 import { D3Scale } from '../../types/Scale';
 import { ScaleConfig } from '../../types/ScaleConfig';
-import createInterpolator from './createInterpolator';
+import createColorInterpolator from './createColorInterpolator';
 
 export default function applyInterpolate<Output extends Value>(
   config: ScaleConfig<Output>,
@@ -14,7 +14,10 @@ export default function applyInterpolate<Output extends Value>(
     'interpolate' in scale
   ) {
     scale.interpolate(
-      (createInterpolator(config.interpolate) as unknown) as InterpolatorFactory<Output, Output>,
+      (createColorInterpolator(config.interpolate) as unknown) as InterpolatorFactory<
+        Output,
+        Output
+      >,
     );
   }
 }

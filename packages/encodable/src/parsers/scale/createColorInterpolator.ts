@@ -21,7 +21,9 @@ const interpolatorMap = {
   rgb: interpolateRgb,
 } as const;
 
-export default function createInterpolator(interpolate: ScaleInterpolate | ScaleInterpolateParams) {
+export default function createColorInterpolator(
+  interpolate: ScaleInterpolate | ScaleInterpolateParams,
+) {
   switch (interpolate) {
     case 'lab':
     case 'hcl':
