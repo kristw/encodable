@@ -9,37 +9,9 @@ export type DiscreteInput = HasToString;
 
 export type Bounds<T> = [T | null | undefined, T | null | undefined];
 export type ContinuousDomain = ContinuousInput[] | Bounds<ContinuousInput>;
-export type TimeDomain = TimeInput[];
+export type TimeDomain = TimeInput[] | Bounds<TimeInput>;
 
 export type ExtendedBaseScaleConfig<T, R, D> = BaseScaleConfig<T, R, D> & {
-  // /**
-  //  * Fix minimum value for the domain.
-  //  * If set, this is always used instead of `domain[0]`.
-  //  *
-  //  * Also can be used in a situation
-  //  * when you want to later set domain programmatically
-  //  * after the scale was created.
-  //  * Calling `scale.domain(newDomain)`
-  //  * uses maximum value from the incoming domain
-  //  * but still fix the minimum to this value,
-  //  * so the final domain is `[domainMin, newDomain[1]]`
-  //  */
-  // domainMin?: Input | null;
-
-  // /**
-  //  * Fix maximum value for the domain.
-  //  * If set, this is used instead of `domain[1]`.
-  //  *
-  //  * Also can be used in a situation
-  //  * when you want to later set domain programmatically
-  //  * after the scale was created.
-  //  * Calling `scale.domain(newDomain)`
-  //  * uses minimum value from the incoming domain
-  //  * but still fix the maximum to this value,
-  //  * so the final domain is `[newDomain[0], domainMax]`
-  //  */
-  // domainMax?: Input | null;
-
   /**
    * name of the color scheme.
    */
