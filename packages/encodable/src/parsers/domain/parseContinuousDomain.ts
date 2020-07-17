@@ -9,7 +9,7 @@ import { timeScaleTypesSet } from '../scale/scaleCategories';
  * @param domain
  * @param scaleType
  */
-export default function parseContinuousDomain<T extends ContinuousInput>(
+export default function parseContinuousDomain<T extends ContinuousInput | null | undefined>(
   domain: T[],
   scaleType: ScaleType,
 ) {

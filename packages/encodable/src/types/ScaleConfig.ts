@@ -20,7 +20,7 @@ export type ExtendedBaseScaleConfig<T, Output, Input> = BaseScaleConfig<T, Outpu
    * but still fix the minimum to this value,
    * so the final domain is `[domainMin, newDomain[1]]`
    */
-  domainMin?: Input;
+  domainMin?: Input | null;
 
   /**
    * Fix maximum value for the domain.
@@ -34,7 +34,7 @@ export type ExtendedBaseScaleConfig<T, Output, Input> = BaseScaleConfig<T, Outpu
    * but still fix the maximum to this value,
    * so the final domain is `[newDomain[0], domainMax]`
    */
-  domainMax?: Input;
+  domainMax?: Input | null;
 
   /**
    * name of the color scheme.
@@ -58,35 +58,43 @@ type CreateScaleConfig<
 
 export type LinearScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'linear',
-  'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme' | 'zero',
+  'domainMin' | 'domainMax' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
   Output,
   ContinuousInput
 >;
 
 export type LogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'log',
-  'base' | 'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme',
+  'domainMin' | 'domainMax' | 'base' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme',
   Output,
   ContinuousInput
 >;
 
 export type PowScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'pow',
-  'clamp' | 'exponent' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme' | 'zero',
+  | 'domainMin'
+  | 'domainMax'
+  | 'clamp'
+  | 'exponent'
+  | 'interpolate'
+  | 'nice'
+  | 'round'
+  | 'scheme'
+  | 'zero',
   Output,
   ContinuousInput
 >;
 
 export type SqrtScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'sqrt',
-  'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme' | 'zero',
+  'domainMin' | 'domainMax' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
   Output,
   ContinuousInput
 >;
 
 export type SymlogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'symlog',
-  'clamp' | 'constant' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme' | 'zero',
+  'domainMin' | 'domainMax' | 'clamp' | 'constant' | 'nice' | 'round' | 'scheme' | 'zero',
   Output,
   ContinuousInput
 >;
@@ -100,14 +108,14 @@ export type QuantileScaleConfig<Output extends Value = Value> = CreateScaleConfi
 
 export type QuantizeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'quantize',
-  'interpolate' | 'nice' | 'scheme' | 'zero',
+  'domainMin' | 'domainMax' | 'interpolate' | 'nice' | 'scheme' | 'zero',
   Output,
   ContinuousInput
 >;
 
 export type ThresholdScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'threshold',
-  'interpolate' | 'nice' | 'scheme',
+  'domainMin' | 'domainMax' | 'interpolate' | 'nice' | 'scheme',
   Output,
   ContinuousInput
 >;

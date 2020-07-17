@@ -1,6 +1,6 @@
 import { Value } from '../../types/VegaLite';
 import { D3Scale } from '../../types/Scale';
-import { ScaleConfig } from '../../types/ScaleConfig';
+import { ContinuousInput, ScaleConfig } from '../../types/ScaleConfig';
 import inferElementTypeFromUnionOfArrayTypes from '../../utils/inferElementTypeFromUnionOfArrayTypes';
 import { isContinuousScale, isDiscretizingScale } from '../../typeGuards/Scale';
 import combineCategories from '../../utils/combineCategories';
@@ -25,43 +25,49 @@ export default function applyDomain<Output extends Value>(
 
   const order = createOrderFunction(reverse);
 
-  const inputDomain = domainFromDataset?.length
-    ? inferElementTypeFromUnionOfArrayTypes(domainFromDataset)
-    : undefined;
+  if (
+    (isContinuousScale(scale, type) && isContinuousScaleConfig(config)) ||
+    (isDiscretizingScale(scale, type) && isDiscretizingScaleConfig(config))
+  ) {
+    let userSpecifiedDomain: (ContinuousInput | null | undefined)[] = config.domain?.concat() ?? [];
 
-  if (domain?.length) {
-    if (
-      (isContinuousScale(scale, type) && isContinuousScaleConfig(config)) ||
-      (isDiscretizingScale(scale, type) && isDiscretizingScaleConfig(config))
-    ) {
-      const fixedDomain = inferElementTypeFromUnionOfArrayTypes(config.domain).map(
+    if (userSpecifiedDomain.length === 0) {
+      userSpecifiedDomain = [undefined, undefined];
+      if ('domainMin' in config && config.domainMin != null) {
+        userSpecifiedDomain[0] = config.domainMin;
+      }
+      if ('domainMax' in config && config.domainMax != null) {
+        userSpecifiedDomain[1] = config.domainMax;
+      }
+    }
+
+    if (userSpecifiedDomain.length > 0) {
+      const fixedDomain = inferElementTypeFromUnionOfArrayTypes(userSpecifiedDomain).map(
         parseDateTimeIfPossible,
       );
       const combined = combineContinuousDomains(
         parseContinuousDomain(fixedDomain, type),
-        inputDomain && parseContinuousDomain(removeUndefinedAndNull(inputDomain), type),
+        domainFromDataset && parseContinuousDomain(removeUndefinedAndNull(domainFromDataset), type),
       );
       if (combined) {
         scale.domain(order(combined));
       }
-    } else {
-      const fixedDomain = inferElementTypeFromUnionOfArrayTypes(config.domain).map(
-        parseDateTimeIfPossible,
-      );
-      scale.domain(
-        order(
-          combineCategories(
-            parseDiscreteDomain(fixedDomain),
-            inputDomain && parseDiscreteDomain(inputDomain),
-          ),
+    } else if (domainFromDataset) {
+      scale.domain(order(parseContinuousDomain(removeUndefinedAndNull(domainFromDataset), type)));
+    }
+  } else if (domain?.length) {
+    const fixedDomain = inferElementTypeFromUnionOfArrayTypes(config.domain).map(
+      parseDateTimeIfPossible,
+    );
+    scale.domain(
+      order(
+        combineCategories(
+          parseDiscreteDomain(fixedDomain),
+          domainFromDataset && parseDiscreteDomain(domainFromDataset),
         ),
-      );
-    }
-  } else if (inputDomain) {
-    if (isContinuousScale(scale, type) || isDiscretizingScale(scale, type)) {
-      scale.domain(order(parseContinuousDomain(removeUndefinedAndNull(inputDomain), type)));
-    } else {
-      scale.domain(order(parseDiscreteDomain(inputDomain)));
-    }
+      ),
+    );
+  } else if (domainFromDataset) {
+    scale.domain(order(parseDiscreteDomain(domainFromDataset)));
   }
 }

@@ -30,18 +30,10 @@ import {
   BandScaleConfig,
 } from '../../types/ScaleConfig';
 import createScaleFromScaleType from './createScaleFromScaleType';
-import applyNice from './applyNice';
-import applyZero from './applyZero';
-import applyInterpolate from './applyInterpolate';
-import applyRound from './applyRound';
-import applyDomain from './applyDomain';
-import applyRange from './applyRange';
-import applyPadding from './applyPadding';
-import applyAlign from './applyAlign';
-import applyClamp from './applyClamp';
+import updateScale from './updateScale';
 import OptionsManager from '../../options/OptionsManager';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
-import applyExponent from './applyExponent';
+import applyDomain from './applyDomain';
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: LinearScaleConfig<Output>,
@@ -112,23 +104,9 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
     return castedColorScale;
   }
 
-  const scale = createScaleFromScaleType(config);
-  // domain and range apply to all scales
-  applyDomain(config, scale);
-  applyRange(config, scale);
-  // Sort other properties alphabetically.
-  applyAlign(config, scale);
-  applyClamp(config, scale);
-  applyExponent(config, scale);
-  applyInterpolate(config, scale);
-  // Nice depends on domain.
-  applyNice(config, scale);
-  applyPadding(config, scale);
-  applyRound(config, scale);
-  // Zero depends on domain and nice.
-  applyZero(config, scale);
+  const scale = createScaleFromScaleType<Output>(config.type);
 
-  return scale;
+  return updateScale(scale, config);
 }
 
 export default createScaleFromScaleConfig;

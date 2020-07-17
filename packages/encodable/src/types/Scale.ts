@@ -9,6 +9,7 @@ import {
   ScaleThreshold,
   ScalePoint,
   ScaleBand,
+  ScaleSymLog,
 } from 'd3-scale';
 import { Value, ScaleType } from './VegaLite';
 import { HasToString } from './Base';
@@ -39,7 +40,8 @@ export type ContinuousD3Scale<Output extends Value = Value> =
   | ScaleLinear<Output, Output>
   | ScaleLogarithmic<Output, Output>
   | ScalePower<Output, Output>
-  | ScaleTime<Output, Output>;
+  | ScaleTime<Output, Output>
+  | ScaleSymLog<Output, Output>;
 
 export type DiscretizingD3Scale<Output extends Value = Value> =
   | ScaleQuantile<Output>

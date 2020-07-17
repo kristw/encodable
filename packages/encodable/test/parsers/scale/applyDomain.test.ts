@@ -7,7 +7,7 @@ describe('applyDomain()', () => {
     describe('with domainFromDataset', () => {
       it('continuous scales', () => {
         const scale = scaleLinear();
-        applyDomain({ type: 'linear', domain: [null, 10] }, scale, [1, 20]);
+        applyDomain({ type: 'linear', domainMax: 10 }, scale, [1, 20]);
         expect(scale.domain()).toEqual([1, 10]);
       });
       describe('discretizing scales', () => {
@@ -33,7 +33,7 @@ describe('applyDomain()', () => {
       });
       it('continuous scales (reverse)', () => {
         const scale = scaleLinear();
-        applyDomain({ type: 'linear', domain: [null, 10], reverse: true }, scale, [1, 20]);
+        applyDomain({ type: 'linear', domainMax: 10, reverse: true }, scale, [1, 20]);
         expect(scale.domain()).toEqual([10, 1]);
       });
       it('discrete scales (reverse)', () => {

@@ -16,7 +16,7 @@ export default function applyRound<Output extends Value>(
       | ScaleBand<HasToString>;
     if ('round' in roundableScale) {
       roundableScale.round(config.round);
-    } else {
+    } else if ('interpolate' in roundableScale) {
       roundableScale.interpolate(interpolateRound);
     }
   }
