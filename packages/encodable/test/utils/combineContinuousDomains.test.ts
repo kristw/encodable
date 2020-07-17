@@ -27,7 +27,4 @@ describe('combineContinuousDomains()', () => {
     expect(combineContinuousDomains([null, null], [2, 10])).toEqual([2, 10]);
     expect(combineContinuousDomains([], [2, 10])).toEqual([2, 10]);
   });
-  it('returns undefined if there is also no inputDomain', () => {
-    expect(combineContinuousDomains([null, null])).toBeUndefined();
-  });
 });

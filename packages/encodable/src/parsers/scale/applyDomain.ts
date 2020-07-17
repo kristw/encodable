@@ -50,13 +50,14 @@ export default function applyDomain<Output extends Value>(
       } else if (dataDomain) {
         // If it is incompleted, then try to combine
         // with the dataDomain
-        const combined = combineContinuousDomains(
-          parseContinuousDomain(config.domain.map(parseDateTimeIfPossible), type),
-          parseContinuousDomain(removeUndefinedAndNull(dataDomain), type),
+        scale.domain(
+          order(
+            combineContinuousDomains(
+              parseContinuousDomain(config.domain.map(parseDateTimeIfPossible), type),
+              parseContinuousDomain(removeUndefinedAndNull(dataDomain), type),
+            ),
+          ),
         );
-        if (combined) {
-          scale.domain(order(combined));
-        }
       }
     } else if (dataDomain) {
       // If no config.domain then just use the dataDomain if any
