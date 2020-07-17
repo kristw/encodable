@@ -7,34 +7,38 @@ export type TimeInput = string | number | Date | DateTime;
 export type ContinuousInput = TimeInput | boolean;
 export type DiscreteInput = HasToString;
 
-export type ExtendedBaseScaleConfig<T, Output, Input> = BaseScaleConfig<T, Output, Input> & {
-  /**
-   * Fix minimum value for the domain.
-   * If set, this is always used instead of `domain[0]`.
-   *
-   * Also can be used in a situation
-   * when you want to later set domain programmatically
-   * after the scale was created.
-   * Calling `scale.domain(newDomain)`
-   * uses maximum value from the incoming domain
-   * but still fix the minimum to this value,
-   * so the final domain is `[domainMin, newDomain[1]]`
-   */
-  domainMin?: Input | null;
+export type Bounds<T> = [T | null | undefined, T | null | undefined];
+export type ContinuousDomain = ContinuousInput[] | Bounds<ContinuousInput>;
+export type TimeDomain = TimeInput[];
 
-  /**
-   * Fix maximum value for the domain.
-   * If set, this is used instead of `domain[1]`.
-   *
-   * Also can be used in a situation
-   * when you want to later set domain programmatically
-   * after the scale was created.
-   * Calling `scale.domain(newDomain)`
-   * uses minimum value from the incoming domain
-   * but still fix the maximum to this value,
-   * so the final domain is `[newDomain[0], domainMax]`
-   */
-  domainMax?: Input | null;
+export type ExtendedBaseScaleConfig<T, R, D> = BaseScaleConfig<T, R, D> & {
+  // /**
+  //  * Fix minimum value for the domain.
+  //  * If set, this is always used instead of `domain[0]`.
+  //  *
+  //  * Also can be used in a situation
+  //  * when you want to later set domain programmatically
+  //  * after the scale was created.
+  //  * Calling `scale.domain(newDomain)`
+  //  * uses maximum value from the incoming domain
+  //  * but still fix the minimum to this value,
+  //  * so the final domain is `[domainMin, newDomain[1]]`
+  //  */
+  // domainMin?: Input | null;
+
+  // /**
+  //  * Fix maximum value for the domain.
+  //  * If set, this is used instead of `domain[1]`.
+  //  *
+  //  * Also can be used in a situation
+  //  * when you want to later set domain programmatically
+  //  * after the scale was created.
+  //  * Calling `scale.domain(newDomain)`
+  //  * uses minimum value from the incoming domain
+  //  * but still fix the maximum to this value,
+  //  * so the final domain is `[newDomain[0], domainMax]`
+  //  */
+  // domainMax?: Input | null;
 
   /**
    * name of the color scheme.
@@ -46,120 +50,107 @@ export type ExtendedBaseScaleConfig<T, Output, Input> = BaseScaleConfig<T, Outpu
 // from same base type to share property documentation
 // (which is useful for auto-complete/intellisense)
 // and add `type` property as discriminant of union type.
-type CreateScaleConfig<
-  T,
-  Fields extends keyof ExtendedBaseScaleConfig<T, Output, Input>,
-  Output,
-  Input
-> = Pick<
-  ExtendedBaseScaleConfig<T, Output, Input>,
+type CreateScaleConfig<T, Fields extends keyof ExtendedBaseScaleConfig<T, R, D>, R, D> = Pick<
+  ExtendedBaseScaleConfig<T, R, D>,
   'type' | 'domain' | 'range' | 'reverse' | Fields
 >;
 
 export type LinearScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'linear',
-  'domainMin' | 'domainMax' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
-  Output,
-  ContinuousInput
+  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
+  Output[],
+  ContinuousDomain
 >;
 
 export type LogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'log',
-  'domainMin' | 'domainMax' | 'base' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme',
-  Output,
-  ContinuousInput
+  'base' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme',
+  Output[],
+  ContinuousDomain
 >;
 
 export type PowScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'pow',
-  | 'domainMin'
-  | 'domainMax'
-  | 'clamp'
-  | 'exponent'
-  | 'interpolate'
-  | 'nice'
-  | 'round'
-  | 'scheme'
-  | 'zero',
-  Output,
-  ContinuousInput
+  'clamp' | 'exponent' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
+  Output[],
+  ContinuousDomain
 >;
 
 export type SqrtScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'sqrt',
-  'domainMin' | 'domainMax' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
-  Output,
-  ContinuousInput
+  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
+  Output[],
+  ContinuousDomain
 >;
 
 export type SymlogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'symlog',
-  'domainMin' | 'domainMax' | 'clamp' | 'constant' | 'nice' | 'round' | 'scheme' | 'zero',
-  Output,
-  ContinuousInput
+  'clamp' | 'constant' | 'nice' | 'round' | 'scheme' | 'zero',
+  Output[],
+  ContinuousDomain
 >;
 
 export type QuantileScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'quantile',
   'interpolate' | 'scheme',
-  Output,
-  ContinuousInput
+  Output[],
+  ContinuousDomain
 >;
 
 export type QuantizeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'quantize',
-  'domainMin' | 'domainMax' | 'interpolate' | 'nice' | 'scheme' | 'zero',
-  Output,
-  ContinuousInput
+  'interpolate' | 'nice' | 'scheme' | 'zero',
+  Output[],
+  ContinuousDomain
 >;
 
 export type ThresholdScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'threshold',
-  'domainMin' | 'domainMax' | 'interpolate' | 'nice' | 'scheme',
-  Output,
-  ContinuousInput
+  'interpolate' | 'nice' | 'scheme',
+  Output[],
+  ContinuousDomain
 >;
 
 export type BinOrdinalScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'bin-ordinal',
   'interpolate' | 'scheme',
-  Output,
-  ContinuousInput
+  Output[],
+  ContinuousDomain
 >;
 
 export type OrdinalScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'ordinal',
   'interpolate' | 'scheme',
-  Output,
-  DiscreteInput
+  Output[],
+  DiscreteInput[]
 >;
 
 export type PointScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'point',
   'align' | 'padding' | 'round',
-  Output,
-  DiscreteInput
+  Output[],
+  DiscreteInput[]
 >;
 
 export type BandScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'band',
   'align' | 'padding' | 'paddingInner' | 'paddingOuter' | 'round',
-  Output,
-  DiscreteInput
+  Output[],
+  DiscreteInput[]
 >;
 
 export type TimeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'time',
   'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme',
-  Output,
-  TimeInput
+  Output[],
+  TimeDomain
 >;
 
 export type UtcScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'utc',
   'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme',
-  Output,
-  TimeInput
+  Output[],
+  TimeDomain
 >;
 
 export type ContinuousScaleConfig<Output extends Value = Value> =

@@ -6,11 +6,13 @@ import {
   SymlogScaleConfig,
   ContinuousScaleConfig,
   DiscretizingScaleConfig,
+  DiscreteScaleConfig,
 } from '../types/ScaleConfig';
 import isPropertySupportedByScaleType from '../parsers/scale/isPropertySupportedByScaleType';
 import {
   continuousScaleTypesSet,
   discretizingScaleTypesSet,
+  discreteScaleTypesSet,
 } from '../parsers/scale/scaleCategories';
 import { Value } from '../types/VegaLite';
 
@@ -24,6 +26,12 @@ export function isDiscretizingScaleConfig<Output extends Value = Value>(
   config: ScaleConfig,
 ): config is DiscretizingScaleConfig<Output> {
   return discretizingScaleTypesSet.has(config.type);
+}
+
+export function isDiscreteScaleConfig<Output extends Value = Value>(
+  config: ScaleConfig,
+): config is DiscreteScaleConfig<Output> {
+  return discreteScaleTypesSet.has(config.type);
 }
 
 export function isScaleConfigWithZero<Output extends Value = Value>(

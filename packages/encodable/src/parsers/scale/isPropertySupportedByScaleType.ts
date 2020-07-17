@@ -34,8 +34,6 @@ const supportedScaleTypes: Record<
   clamp: continuousScaleTypesSet,
   constant: new Set([ScaleType.SYMLOG]),
   domain: allScaleTypesSet,
-  domainMin: continuousScaleTypesSet,
-  domainMax: continuousScaleTypesSet,
   exponent: new Set([ScaleType.POW]),
   interpolate: exceptPointOrBandSet,
   nice: new Set(continuousScaleTypes.concat([ScaleType.QUANTIZE, ScaleType.THRESHOLD])),

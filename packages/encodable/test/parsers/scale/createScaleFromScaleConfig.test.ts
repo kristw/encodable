@@ -70,7 +70,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         it('min', () => {
           const scale = createScaleFromScaleConfig({
             type: 'linear',
-            domainMax: 30,
+            domain: [null, 30],
             range: [0, 100],
           });
           expect(scale(10)).toEqual(1000);
@@ -78,7 +78,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         it('max', () => {
           const scale = createScaleFromScaleConfig({
             type: 'linear',
-            domainMin: 0,
+            domain: [0, null],
             range: [0, 100],
           });
           expect(scale(10)).toEqual(1000);
@@ -95,7 +95,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         it('min', () => {
           const scale = createScaleFromScaleConfig({
             type: 'linear',
-            domainMax: 30,
+            domain: [null, 30],
             range: [0, 100],
           });
           expect(scale(10)).toEqual(1000);
@@ -103,7 +103,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         it('max', () => {
           const scale = createScaleFromScaleConfig({
             type: 'linear',
-            domainMin: 0,
+            domain: [0, null],
             range: [0, 100],
           });
           expect(scale(10)).toEqual(1000);
@@ -111,8 +111,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         it('both', () => {
           const scale = createScaleFromScaleConfig({
             type: 'linear',
-            domainMin: null,
-            domainMax: null,
+            domain: [null, null],
             range: [0, 100],
           });
           expect(scale(10)).toEqual(1000);
