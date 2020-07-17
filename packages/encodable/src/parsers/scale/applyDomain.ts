@@ -1,20 +1,19 @@
 import { Value } from '../../types/VegaLite';
 import { D3Scale } from '../../types/Scale';
-import { ScaleConfig, Bounds } from '../../types/ScaleConfig';
-import inferElementTypeFromUnionOfArrayTypes from '../../utils/inferElementTypeFromUnionOfArrayTypes';
-import { isContinuousScale, isDiscretizingScale, isDiscreteScale } from '../../typeGuards/Scale';
-import combineCategories from '../../utils/combineCategories';
-import parseDateTimeIfPossible from '../parseDateTimeIfPossible';
-import parseContinuousDomain from '../domain/parseContinuousDomain';
-import parseDiscreteDomain from '../domain/parseDiscreteDomain';
-import combineContinuousDomains from '../../utils/combineContinuousDomains';
 import { ChannelInput } from '../../types/Channel';
-import removeUndefinedAndNull from '../../utils/removeUndefinedAndNull';
+import { ScaleConfig, Bounds } from '../../types/ScaleConfig';
+import { isContinuousScale, isDiscretizingScale, isDiscreteScale } from '../../typeGuards/Scale';
 import {
   isContinuousScaleConfig,
   isDiscretizingScaleConfig,
   isDiscreteScaleConfig,
 } from '../../typeGuards/ScaleConfig';
+import parseContinuousDomain from '../domain/parseContinuousDomain';
+import parseDiscreteDomain from '../domain/parseDiscreteDomain';
+import combineCategories from '../../utils/combineCategories';
+import combineContinuousDomains from '../../utils/combineContinuousDomains';
+import removeUndefinedAndNull from '../../utils/removeUndefinedAndNull';
+import parseDateTimeIn from '../parseDateTimeIn';
 
 function createOrderFunction(reverse: boolean | undefined) {
   return reverse ? <T>(array: T[]) => array.concat().reverse() : <T>(array: T[]) => array;
@@ -44,16 +43,14 @@ export default function applyDomain<Output extends Value>(
       if (isCompleteDomain(config.domain)) {
         // If the config.domain is completed
         // ignores the dataDomain
-        scale.domain(
-          order(inferElementTypeFromUnionOfArrayTypes(config.domain).map(parseDateTimeIfPossible)),
-        );
+        scale.domain(order(parseDateTimeIn(config.domain)));
       } else if (dataDomain) {
         // If it is incompleted, then try to combine
         // with the dataDomain
         scale.domain(
           order(
             combineContinuousDomains(
-              parseContinuousDomain(config.domain.map(parseDateTimeIfPossible), type),
+              parseContinuousDomain(parseDateTimeIn(config.domain), type),
               parseContinuousDomain(removeUndefinedAndNull(dataDomain), type),
             ),
           ),
@@ -66,7 +63,7 @@ export default function applyDomain<Output extends Value>(
   } else if (isDiscreteScale(scale, type) && isDiscreteScaleConfig(config)) {
     // For discrete scales
     if (config.domain) {
-      const fixedDomain = parseDiscreteDomain(config.domain.map(parseDateTimeIfPossible));
+      const fixedDomain = parseDiscreteDomain(parseDateTimeIn(config.domain));
       scale.domain(
         order(
           dataDomain
