@@ -300,10 +300,12 @@ describe('createScaleFromScaleConfig(config)', () => {
   });
 
   describe('symlog scale', () => {
-    it('is not supported yet', () => {
-      expect(() => createScaleFromScaleConfig({ type: 'symlog' })).toThrow(
-        '"scale.type = symlog" is not supported yet.',
-      );
+    it('basic', () => {
+      const scale = createScaleFromScaleConfig({
+        type: 'symlog',
+      });
+      expect(scale(0)).toEqual(0);
+      expect(scale(10)).toEqual(3.4594316186372978);
     });
   });
 
@@ -677,7 +679,7 @@ describe('createScaleFromScaleConfig(config)', () => {
   describe('bin-ordinal scale', () => {
     it('is not supported yet', () => {
       expect(() => createScaleFromScaleConfig({ type: 'bin-ordinal' })).toThrow(
-        '"scale.type = bin-ordinal" is not supported yet.',
+        '"type = bin-ordinal" is not supported yet.',
       );
     });
   });
