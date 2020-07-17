@@ -23,13 +23,9 @@ export default function createScaleFromScaleType<Output extends Value>(
     case ScaleType.LINEAR:
       return scaleLinear<Output>();
     case ScaleType.LOG:
-      return typeof config.base === 'undefined'
-        ? scaleLog<Output>()
-        : scaleLog<Output>().base(config.base);
+      return scaleLog<Output>();
     case ScaleType.POW:
-      return typeof config.exponent === 'undefined'
-        ? scalePow<Output>()
-        : scalePow<Output>().exponent(config.exponent);
+      return scalePow<Output>();
     case ScaleType.SQRT:
       return scaleSqrt<Output>();
     case ScaleType.TIME:

@@ -41,6 +41,7 @@ import applyAlign from './applyAlign';
 import applyClamp from './applyClamp';
 import OptionsManager from '../../options/OptionsManager';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
+import applyExponent from './applyExponent';
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: LinearScaleConfig<Output>,
@@ -118,10 +119,13 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
   // Sort other properties alphabetically.
   applyAlign(config, scale);
   applyClamp(config, scale);
+  applyExponent(config, scale);
   applyInterpolate(config, scale);
+  // Nice depends on domain.
   applyNice(config, scale);
   applyPadding(config, scale);
   applyRound(config, scale);
+  // Zero depends on domain and nice.
   applyZero(config, scale);
 
   return scale;
