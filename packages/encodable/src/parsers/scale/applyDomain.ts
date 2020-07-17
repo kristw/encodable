@@ -19,7 +19,8 @@ function createOrderFunction(reverse: boolean | undefined) {
 export default function applyDomain<Output extends Value>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
-  domainFromDataset?: ChannelInput[],
+  /** domain from dataset */
+  dataDomain?: ChannelInput[],
 ) {
   const { domain, reverse, type } = config;
 
@@ -29,30 +30,30 @@ export default function applyDomain<Output extends Value>(
     (isContinuousScale(scale, type) && isContinuousScaleConfig(config)) ||
     (isDiscretizingScale(scale, type) && isDiscretizingScaleConfig(config))
   ) {
-    let userSpecifiedDomain: (ContinuousInput | null | undefined)[] = config.domain?.concat() ?? [];
+    let configDomain: (ContinuousInput | null | undefined)[] = config.domain?.concat() ?? [];
 
     // if `domain` is not set.
     // construct from domainMin and domainMax
-    if (userSpecifiedDomain.length === 0) {
+    if (configDomain.length === 0) {
       const min = 'domainMin' in config ? config.domainMin : undefined;
       const max = 'domainMax' in config ? config.domainMax : undefined;
 
       if (min != null || max != null) {
-        userSpecifiedDomain = [min, max];
+        configDomain = [min, max];
       }
     }
 
-    if (userSpecifiedDomain.length > 0) {
-      const fixedDomain = userSpecifiedDomain.map(parseDateTimeIfPossible);
+    if (configDomain.length > 0) {
+      const fixedDomain = configDomain.map(parseDateTimeIfPossible);
       const combined = combineContinuousDomains(
         parseContinuousDomain(fixedDomain, type),
-        domainFromDataset && parseContinuousDomain(removeUndefinedAndNull(domainFromDataset), type),
+        dataDomain && parseContinuousDomain(removeUndefinedAndNull(dataDomain), type),
       );
       if (combined) {
         scale.domain(order(combined));
       }
-    } else if (domainFromDataset) {
-      scale.domain(order(parseContinuousDomain(removeUndefinedAndNull(domainFromDataset), type)));
+    } else if (dataDomain) {
+      scale.domain(order(parseContinuousDomain(removeUndefinedAndNull(dataDomain), type)));
     }
   } else if (domain?.length) {
     const fixedDomain = inferElementTypeFromUnionOfArrayTypes(config.domain).map(
@@ -62,11 +63,11 @@ export default function applyDomain<Output extends Value>(
       order(
         combineCategories(
           parseDiscreteDomain(fixedDomain),
-          domainFromDataset && parseDiscreteDomain(domainFromDataset),
+          dataDomain && parseDiscreteDomain(dataDomain),
         ),
       ),
     );
-  } else if (domainFromDataset) {
-    scale.domain(order(parseDiscreteDomain(domainFromDataset)));
+  } else if (dataDomain) {
+    scale.domain(order(parseDiscreteDomain(dataDomain)));
   }
 }
