@@ -1,5 +1,5 @@
 import { interpolateRound } from 'd3-interpolate';
-import { ScalePoint, ScaleBand } from 'd3-scale';
+import { ScalePoint, ScaleBand, ScaleSymLog } from 'd3-scale';
 import { Value } from '../../types/VegaLite';
 import { D3Scale, ContinuousD3Scale } from '../../types/Scale';
 import { HasToString } from '../../types/Base';
@@ -11,12 +11,12 @@ export default function applyRound<Output extends Value>(
 ) {
   if ('round' in config && config.round === true) {
     const roundableScale = scale as
-      | ContinuousD3Scale<number>
+      | Exclude<ContinuousD3Scale<number>, ScaleSymLog<number, number>>
       | ScalePoint<HasToString>
       | ScaleBand<HasToString>;
     if ('round' in roundableScale) {
       roundableScale.round(config.round);
-    } else if ('interpolate' in roundableScale) {
+    } else {
       roundableScale.interpolate(interpolateRound);
     }
   }

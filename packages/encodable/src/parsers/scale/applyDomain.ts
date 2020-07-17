@@ -31,20 +31,19 @@ export default function applyDomain<Output extends Value>(
   ) {
     let userSpecifiedDomain: (ContinuousInput | null | undefined)[] = config.domain?.concat() ?? [];
 
+    // if `domain` is not set.
+    // construct from domainMin and domainMax
     if (userSpecifiedDomain.length === 0) {
-      userSpecifiedDomain = [undefined, undefined];
-      if ('domainMin' in config && config.domainMin != null) {
-        userSpecifiedDomain[0] = config.domainMin;
-      }
-      if ('domainMax' in config && config.domainMax != null) {
-        userSpecifiedDomain[1] = config.domainMax;
+      const min = 'domainMin' in config ? config.domainMin : undefined;
+      const max = 'domainMax' in config ? config.domainMax : undefined;
+
+      if (min != null || max != null) {
+        userSpecifiedDomain = [min, max];
       }
     }
 
     if (userSpecifiedDomain.length > 0) {
-      const fixedDomain = inferElementTypeFromUnionOfArrayTypes(userSpecifiedDomain).map(
-        parseDateTimeIfPossible,
-      );
+      const fixedDomain = userSpecifiedDomain.map(parseDateTimeIfPossible);
       const combined = combineContinuousDomains(
         parseContinuousDomain(fixedDomain, type),
         domainFromDataset && parseContinuousDomain(removeUndefinedAndNull(domainFromDataset), type),
