@@ -6,4 +6,7 @@ export type Value = number | string | boolean | null;
 /** field type */
 export type Type = 'quantitative' | 'ordinal' | 'temporal' | 'nominal';
 
+/** A value that has .toString() function */
+export type StringLike = { toString(): string };
+
 export type Formatter = (d: unknown) => string;

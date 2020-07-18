@@ -8,7 +8,7 @@ import {
   scaleQuantile,
 } from 'd3-scale';
 import { isTimeScale, isContinuousScale, isDiscretizingScale } from '../../src/typeGuards/Scale';
-import { StringLike } from '../../src/types/internal/Base';
+import { StringLike } from '../../src/types';
 
 describe('type guards', () => {
   describe('isContinuousScale(scale, type)', () => {

@@ -1,6 +1,6 @@
 import { BaseScaleConfig } from './BaseScaleConfig';
-import { StringLike, ValueOf } from '../internal/Base';
-import { Value } from '../Core';
+import { ValueOf } from '../internal/Base';
+import { Value, StringLike } from '../Core';
 import { NiceTime } from './Nice';
 import { SchemeParams } from './SchemeParams';
 import { DateTime } from '../DateTime';

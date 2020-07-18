@@ -13,7 +13,7 @@ import {
   scaleBand,
   scaleSymlog,
 } from 'd3-scale';
-import { CategoricalScaleInput, ScaleType, Value } from '../../types';
+import { StringLike, ScaleType, Value } from '../../types';
 
 export default function createScaleFromScaleType<Output extends Value>(type: ScaleType) {
   switch (type) {
@@ -36,11 +36,11 @@ export default function createScaleFromScaleType<Output extends Value>(type: Sca
     case ScaleType.THRESHOLD:
       return scaleThreshold<number | string | Date, Output>();
     case ScaleType.ORDINAL:
-      return scaleOrdinal<CategoricalScaleInput, Output>();
+      return scaleOrdinal<StringLike, Output>();
     case ScaleType.POINT:
-      return scalePoint<CategoricalScaleInput>();
+      return scalePoint<StringLike>();
     case ScaleType.BAND:
-      return scaleBand<CategoricalScaleInput>();
+      return scaleBand<StringLike>();
     case ScaleType.SYMLOG:
       return scaleSymlog<Output, Output>();
     case ScaleType.BIN_ORDINAL:

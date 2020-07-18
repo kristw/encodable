@@ -1,5 +1,5 @@
 import { extent as d3Extent } from 'd3-array';
-import { StringLike, IdentityFunction } from '../types/internal/Base';
+import { IdentityFunction } from '../types/internal/Base';
 import {
   Value,
   ScaleType,
@@ -9,6 +9,7 @@ import {
   ChannelType,
   ChannelInput,
   ChannelDef,
+  StringLike,
 } from '../types';
 import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';

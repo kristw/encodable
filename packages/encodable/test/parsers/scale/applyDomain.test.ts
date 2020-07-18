@@ -1,6 +1,6 @@
 import { scaleLinear, scaleOrdinal, scaleThreshold, scaleQuantile } from 'd3-scale';
 import applyDomain from '../../../src/parsers/scale/applyDomain';
-import { StringLike } from '../../../src/types/internal/Base';
+import { StringLike } from '../../../src/types';
 
 describe('applyDomain()', () => {
   describe('with scale.domain', () => {

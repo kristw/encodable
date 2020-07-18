@@ -1,5 +1,5 @@
 import { ScaleOrdinal } from 'd3-scale';
-import { CategoricalScaleInput } from './scale/Scale';
+import { StringLike } from './Core';
 
 export type NumberFormatter = (value: number | null | undefined) => string;
 export type NumberFormatResolver = (format?: string) => NumberFormatter;
@@ -13,7 +13,7 @@ export type TimeFormatResolver = (params: {
 export type CategoricalColorScaleResolver = (params: {
   name?: string;
   namespace?: string;
-}) => ScaleOrdinal<CategoricalScaleInput, string>;
+}) => ScaleOrdinal<StringLike, string>;
 
 export type ColorSchemeResolver = (params: {
   name?: string;

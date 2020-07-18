@@ -1,7 +1,6 @@
 import ChannelEncoder from './ChannelEncoder';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
-import { Value, ChannelDef, ChannelInput } from '../types';
-import { StringLike } from '../types/internal/Base';
+import { Value, ChannelDef, ChannelInput, StringLike } from '../types';
 import parseDateTime from '../parsers/parseDateTime';
 import inferElementTypeFromUnionOfArrayTypes from '../utils/inferElementTypeFromUnionOfArrayTypes';
 import { isDateTime } from '../typeGuards/DateTime';
