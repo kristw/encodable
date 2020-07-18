@@ -1,14 +1,20 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.2...v0.0.0) (2020-07-14)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.2...v0.0.0) (2020-07-18)
 
 
 ### Bug Fixes
 
 * fielddef formatting ([#30](https://github.com/apache-superset/encodable/issues/30)) ([09754a9](https://github.com/apache-superset/encodable/commit/09754a9ae8bac329767ebbf70e170ef71b17db04))
+* scale typings ([#39](https://github.com/apache-superset/encodable/issues/39)) ([34af521](https://github.com/apache-superset/encodable/commit/34af521e58b85a4fe5f2f25afc1c00208db13a19))
 
 
 ### Features
 
+* add color scheme resolver ([#36](https://github.com/apache-superset/encodable/issues/36)) ([7ef3856](https://github.com/apache-superset/encodable/commit/7ef3856b906ff4dcd19bfb6477983760ad91b7ae))
 * add getStore ([#28](https://github.com/apache-superset/encodable/issues/28)) ([fb1ec79](https://github.com/apache-superset/encodable/commit/fb1ec79e6ebd6d9a638f944eb1bb9363d2ced6a4))
+* add symlog scale and refactor domain handling ([#38](https://github.com/apache-superset/encodable/issues/38)) ([b9b7472](https://github.com/apache-superset/encodable/commit/b9b74728e6cd75e3dcd762b7c8177c319e5a3245))
+* can customize color scale resolver ([#35](https://github.com/apache-superset/encodable/issues/35)) ([f602c46](https://github.com/apache-superset/encodable/commit/f602c46467ea40b5808f21743739a417a0f16404))
+* can customize format resolvers ([#31](https://github.com/apache-superset/encodable/issues/31)) ([20d1aef](https://github.com/apache-superset/encodable/commit/20d1aef703284680b636a7e403a739abdea0112c))
+* complete format during filling and support formatInLocalTime field. ([#32](https://github.com/apache-superset/encodable/issues/32)) ([9ba66b5](https://github.com/apache-superset/encodable/commit/9ba66b5f4707dcc3211377f2b333759647c0bbbb))
 * create singleton-store ([#27](https://github.com/apache-superset/encodable/issues/27)) ([7d51b37](https://github.com/apache-superset/encodable/commit/7d51b37f5e21cb964e0118bdf44c9ff74778d019))
 
 
