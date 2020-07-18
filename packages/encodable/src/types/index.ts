@@ -2,7 +2,6 @@ export * from './Axis';
 export * from './Channel';
 export * from './ChannelDef';
 export * from './Core';
-export * from './Data';
 export * from './DateTime';
 export * from './Encoding';
 export * from './Legend';
