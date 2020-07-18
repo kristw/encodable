@@ -9,4 +9,6 @@ export type Type = 'quantitative' | 'ordinal' | 'temporal' | 'nominal';
 /** A value that has .toString() function */
 export type StringLike = { toString(): string };
 
+export type NumberLike = { valueOf(): number };
+
 export type Formatter = (d: unknown) => string;
