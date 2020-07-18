@@ -1,5 +1,4 @@
 import { ScaleInterpolate, ScaleInterpolateParams } from './ScaleInterpolate';
-import { NiceTime } from './Nice';
 import { Unarray } from '../Base';
 
 export type BaseScaleConfig<T, R, D> = {

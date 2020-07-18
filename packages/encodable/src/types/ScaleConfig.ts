@@ -172,7 +172,21 @@ export type DiscreteScaleConfig<Output extends Value = Value> = PickScaleConfig<
   Output
 >;
 
-export type ScaleConfig<Output extends Value = Value> = ValueOf<ScaleTypeToScaleConfig<Output>>;
+export type ScaleConfig<Output extends Value = Value> =
+  | LinearScaleConfig<Output>
+  | LogScaleConfig<Output>
+  | PowScaleConfig<Output>
+  | SqrtScaleConfig<Output>
+  | SymlogScaleConfig<Output>
+  | TimeScaleConfig<Output>
+  | UtcScaleConfig<Output>
+  | QuantileScaleConfig<Output>
+  | QuantizeScaleConfig<Output>
+  | ThresholdScaleConfig<Output>
+  | BinOrdinalScaleConfig<Output>
+  | OrdinalScaleConfig<Output>
+  | PointScaleConfig
+  | BandScaleConfig;
 
 export interface WithScale<Output extends Value = Value> {
   scale?: Partial<ScaleConfig<Output>>;
