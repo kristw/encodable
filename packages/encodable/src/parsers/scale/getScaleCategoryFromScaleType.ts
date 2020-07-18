@@ -1,10 +1,9 @@
-import { ScaleType } from '../../types/VegaLite';
+import { ScaleType, ScaleCategory } from '../../types';
 import {
   continuousScaleTypesSet,
   discreteScaleTypesSet,
   discretizingScaleTypesSet,
 } from './scaleCategories';
-import { ScaleCategory } from '../../types/Scale';
 
 export default function getScaleCategoryFromScaleType(
   scaleType: ScaleType,

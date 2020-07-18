@@ -5,7 +5,7 @@ import dateTimeToTimestamp, {
   normalizeMonth,
   dateTimeParts,
 } from '../../src/parsers/dateTimeToTimestamp';
-import { DateTime } from '../../src/types/VegaLite';
+import { DateTime } from '../../src/types';
 
 describe('dateTimeToTimestamp()', () => {
   let restoreConsole: RestoreConsole;

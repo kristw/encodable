@@ -2,8 +2,8 @@ import {
   CompleteChannelDef,
   CompleteValueDef,
   CompleteFieldDef,
-} from '../types/CompleteChannelDef';
-import { Value } from '../types/VegaLite';
+} from '../types/internal/CompleteChannelDef';
+import { Value } from '../types/Core';
 
 export function isCompleteValueDef<Output extends Value = Value>(
   def: CompleteChannelDef<Output>,

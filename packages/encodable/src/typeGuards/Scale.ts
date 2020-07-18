@@ -1,12 +1,18 @@
 import { ScaleTime } from 'd3-scale';
-import { D3Scale, ContinuousD3Scale, DiscretizingD3Scale, DiscreteD3Scale } from '../types/Scale';
-import { Value, ScaleType } from '../types/VegaLite';
+import {
+  D3Scale,
+  ContinuousD3Scale,
+  DiscretizingD3Scale,
+  DiscreteD3Scale,
+} from '../types/scale/Scale';
+import { ScaleType } from '../types/scale/ScaleType';
 import {
   timeScaleTypesSet,
   continuousScaleTypesSet,
   discretizingScaleTypesSet,
   discreteScaleTypesSet,
 } from '../parsers/scale/scaleCategories';
+import { Value } from '../types/Core';
 
 export function isContinuousScale<Output extends Value = Value>(
   scale: D3Scale<Output>,

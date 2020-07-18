@@ -1,4 +1,4 @@
-import { DateTime } from '../types/VegaLite/DateTime';
+import { DateTime } from '../types/DateTime';
 
 // eslint-disable-next-line import/prefer-default-export
 export function isDateTime(o: string | number | boolean | DateTime): o is DateTime {

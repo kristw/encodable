@@ -1,6 +1,6 @@
 import { scaleLinear, scaleOrdinal, scaleThreshold, scaleQuantile } from 'd3-scale';
 import applyDomain from '../../../src/parsers/scale/applyDomain';
-import { HasToString } from '../../../src/types/Base';
+import { StringLike } from '../../../src/types';
 
 describe('applyDomain()', () => {
   describe('with scale.domain', () => {
@@ -23,7 +23,7 @@ describe('applyDomain()', () => {
         });
       });
       it('discrete scales', () => {
-        const scale = scaleOrdinal<HasToString, string>();
+        const scale = scaleOrdinal<StringLike, string>();
         applyDomain(
           { type: 'ordinal', domain: ['a', 'c'], range: ['red', 'green', 'blue'] },
           scale,
@@ -37,7 +37,7 @@ describe('applyDomain()', () => {
         expect(scale.domain()).toEqual([10, 1]);
       });
       it('discrete scales (reverse)', () => {
-        const scale = scaleOrdinal<HasToString, string>();
+        const scale = scaleOrdinal<StringLike, string>();
         applyDomain(
           { type: 'ordinal', domain: ['a', 'c'], range: ['red', 'green', 'blue'], reverse: true },
           scale,
@@ -65,7 +65,7 @@ describe('applyDomain()', () => {
         });
       });
       it('discrete scales', () => {
-        const scale = scaleOrdinal<HasToString, string>();
+        const scale = scaleOrdinal<StringLike, string>();
         applyDomain(
           { type: 'ordinal', domain: ['a', 'c'], range: ['red', 'green', 'blue'] },
           scale,
@@ -93,7 +93,7 @@ describe('applyDomain()', () => {
       });
     });
     it('discrete scales', () => {
-      const scale = scaleOrdinal<HasToString, string>();
+      const scale = scaleOrdinal<StringLike, string>();
       applyDomain({ type: 'ordinal', range: ['red', 'green', 'blue'] }, scale, ['a', 'b', 'c']);
       expect(scale.domain()).toEqual(['a', 'b', 'c']);
     });

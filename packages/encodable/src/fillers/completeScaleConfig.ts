@@ -1,11 +1,8 @@
-import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import inferScaleType from './inferScaleType';
+import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import { isContinuousScaleConfig, isScaleConfigWithZero } from '../typeGuards/ScaleConfig';
-import { ScaleConfig } from '../types/ScaleConfig';
-import { ChannelDef } from '../types/ChannelDef';
+import { ScaleConfig, ChannelDef, Value, ChannelType } from '../types';
 import isEnabled from '../utils/isEnabled';
-import { ChannelType } from '../types/Channel';
-import { Value } from '../types/VegaLite';
 import { timeScaleTypesSet } from '../parsers/scale/scaleCategories';
 
 export type CompleteScaleConfig<Output extends Value = Value> = false | ScaleConfig<Output>;

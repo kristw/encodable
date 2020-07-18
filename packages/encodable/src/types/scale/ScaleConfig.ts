@@ -1,14 +1,16 @@
-import { Value, DateTime, SchemeParams } from './VegaLite';
-import { BaseScaleConfig } from './scale/BaseScaleConfig';
-import { HasToString, ValueOf } from './Base';
-import { NiceTime } from './scale/Nice';
+import { BaseScaleConfig } from './BaseScaleConfig';
+import { ValueOf } from '../internal/Base';
+import { Value, StringLike } from '../Core';
+import { NiceTime } from './Nice';
+import { SchemeParams } from './SchemeParams';
+import { DateTime } from '../DateTime';
 
 type Numeric = number | { valueOf(): number };
 
 // TODO: Consider including { valueOf(): number }
 export type TimeInput = string | number | Date | DateTime;
 export type ContinuousInput = TimeInput | boolean;
-export type DiscreteInput = HasToString;
+export type DiscreteInput = StringLike;
 
 export type Bounds<T> = [T | null | undefined, T | null | undefined];
 export type ContinuousDomain = ContinuousInput[] | Bounds<ContinuousInput>;

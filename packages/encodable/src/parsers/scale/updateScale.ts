@@ -9,9 +9,7 @@ import applyRound from './applyRound';
 import applyDomain from './applyDomain';
 import applyRange from './applyRange';
 import applyPadding from './applyPadding';
-import { D3Scale } from '../../types/Scale';
-import { ScaleConfig } from '../../types/ScaleConfig';
-import { Value } from '../../types/VegaLite';
+import { D3Scale, ScaleConfig, Value } from '../../types';
 
 export default function updateScale<
   Output extends Value,

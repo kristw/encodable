@@ -1,5 +1,4 @@
-import { Type, ScaleType } from '../types/VegaLite';
-import { ChannelType } from '../types/Channel';
+import { Type, ScaleType, ChannelType } from '../types';
 
 /**
  * Sometimes scale type is not specified but can be inferred

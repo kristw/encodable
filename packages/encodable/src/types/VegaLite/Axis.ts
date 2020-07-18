@@ -1,5 +1,5 @@
-import { DateTime } from './DateTime';
-import { TitleMixins, FormatMixins } from './Mixins';
+import { DateTime } from '../DateTime';
+import { TitleMixins, FormatMixins } from '../Mixins';
 
 interface Guide extends TitleMixins, FormatMixins {}
 

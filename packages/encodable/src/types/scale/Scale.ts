@@ -11,13 +11,12 @@ import {
   ScaleBand,
   ScaleSymLog,
 } from 'd3-scale';
-import { Value, ScaleType } from './VegaLite';
-import { HasToString, ValueOf } from './Base';
+import { ScaleType } from './ScaleType';
+import { ValueOf } from '../internal/Base';
+import { Value, StringLike } from '../Core';
 
 /** Each ScaleCategory contains one or more ScaleType */
 export type ScaleCategory = 'continuous' | 'discrete' | 'discretizing';
-
-export type CategoricalScaleInput = HasToString;
 
 export interface ScaleTypeToD3ScaleType<Output extends Value = Value> {
   [ScaleType.LINEAR]: ScaleLinear<Output, Output>;
@@ -30,10 +29,10 @@ export interface ScaleTypeToD3ScaleType<Output extends Value = Value> {
   [ScaleType.QUANTILE]: ScaleQuantile<Output>;
   [ScaleType.QUANTIZE]: ScaleQuantize<Output>;
   [ScaleType.THRESHOLD]: ScaleThreshold<number | string | Date, Output>;
-  [ScaleType.BIN_ORDINAL]: ScaleOrdinal<CategoricalScaleInput, Output>;
-  [ScaleType.ORDINAL]: ScaleOrdinal<CategoricalScaleInput, Output>;
-  [ScaleType.POINT]: ScalePoint<CategoricalScaleInput>;
-  [ScaleType.BAND]: ScaleBand<CategoricalScaleInput>;
+  [ScaleType.BIN_ORDINAL]: ScaleOrdinal<StringLike, Output>;
+  [ScaleType.ORDINAL]: ScaleOrdinal<StringLike, Output>;
+  [ScaleType.POINT]: ScalePoint<StringLike>;
+  [ScaleType.BAND]: ScaleBand<StringLike>;
 }
 
 export type PickD3Scale<
@@ -52,12 +51,12 @@ export type DiscretizingD3Scale<Output extends Value = Value> =
   | ScaleQuantile<Output>
   | ScaleQuantize<Output>
   | ScaleThreshold<number | string | Date, Output>
-  | ScaleOrdinal<CategoricalScaleInput, Output>;
+  | ScaleOrdinal<StringLike, Output>;
 
 export type DiscreteD3Scale<Output extends Value = Value> =
-  | ScaleOrdinal<CategoricalScaleInput, Output>
-  | ScalePoint<CategoricalScaleInput>
-  | ScaleBand<CategoricalScaleInput>;
+  | ScaleOrdinal<StringLike, Output>
+  | ScalePoint<StringLike>
+  | ScaleBand<StringLike>;
 
 export type D3Scale<Output extends Value = Value> = ValueOf<ScaleTypeToD3ScaleType<Output>>;
 

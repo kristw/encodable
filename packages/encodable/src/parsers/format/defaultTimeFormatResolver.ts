@@ -1,5 +1,5 @@
 import { getTimeFormatter, LOCAL_PREFIX } from '@superset-ui/time-format';
-import { TimeFormatResolver } from '../../types/Options';
+import { TimeFormatResolver } from '../../types';
 
 const defaultTimeFormatResolver: TimeFormatResolver = ({ format, formatInLocalTime = false }) => {
   const formatString = formatInLocalTime

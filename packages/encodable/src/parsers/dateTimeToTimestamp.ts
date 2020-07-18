@@ -3,7 +3,7 @@
 
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-negated-condition */
-import { DateTime } from '../types/VegaLite';
+import { DateTime } from '../types';
 import keys from '../utils/keys';
 
 /**

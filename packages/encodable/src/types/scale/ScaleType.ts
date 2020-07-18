@@ -1,4 +1,4 @@
-import { ValueOf } from '../Base';
+import { ValueOf } from '../internal/Base';
 
 // Modified from vega-lite
 // because vega-lite uses namespace which has issues with babel and typescript

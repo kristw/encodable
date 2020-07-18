@@ -10,9 +10,11 @@ import {
   ScalePoint,
   ScaleBand,
 } from 'd3-scale';
-import { ScaleType, Value } from '../../types/VegaLite';
-import { CategoricalScaleInput, AllScale } from '../../types/Scale';
 import {
+  ScaleType,
+  Value,
+  StringLike,
+  AllScale,
   ScaleConfig,
   LinearScaleConfig,
   LogScaleConfig,
@@ -28,7 +30,8 @@ import {
   OrdinalScaleConfig,
   PointScaleConfig,
   BandScaleConfig,
-} from '../../types/ScaleConfig';
+} from '../../types';
+
 import createScaleFromScaleType from './createScaleFromScaleType';
 import updateScale from './updateScale';
 import OptionsManager from '../../options/OptionsManager';
@@ -65,15 +68,15 @@ function createScaleFromScaleConfig<Output extends Value>(
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: OrdinalScaleConfig<Output> | BinOrdinalScaleConfig<Output>,
-): ScaleOrdinal<CategoricalScaleInput, Output>;
+): ScaleOrdinal<StringLike, Output>;
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: PointScaleConfig,
-): ScalePoint<CategoricalScaleInput>;
+): ScalePoint<StringLike>;
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: BandScaleConfig,
-): ScaleBand<CategoricalScaleInput>;
+): ScaleBand<StringLike>;
 
 function createScaleFromScaleConfig<Output extends Value>(
   config: ScaleConfig<Output>,
@@ -89,7 +92,7 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
     const scheme = 'scheme' in config ? config.scheme : undefined;
     const resolve = OptionsManager.getCategoricalColorScaleResolver();
 
-    let colorScale: ScaleOrdinal<CategoricalScaleInput, string>;
+    let colorScale: ScaleOrdinal<StringLike, string>;
     if (typeof scheme === 'undefined') {
       colorScale = resolve({});
     } else if (isSchemeParams(scheme)) {
@@ -98,7 +101,7 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
       colorScale = resolve({ name: scheme });
     }
 
-    const castedColorScale = (colorScale as unknown) as ScaleOrdinal<CategoricalScaleInput, Output>;
+    const castedColorScale = (colorScale as unknown) as ScaleOrdinal<StringLike, Output>;
     applyDomain(config, castedColorScale);
 
     return castedColorScale;

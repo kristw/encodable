@@ -1,13 +1,17 @@
 import isEnabled from '../utils/isEnabled';
-import { isTypedFieldDef } from '../typeGuards/ChannelDef';
-import { RequiredSome } from '../types/Base';
-import { ChannelDef, PositionFieldDef } from '../types/ChannelDef';
-import { ChannelType } from '../types/Channel';
+import { RequiredSome } from '../types/internal/Base';
+import {
+  ChannelDef,
+  PositionFieldDef,
+  ChannelType,
+  AxisConfig,
+  LabelOverlapStrategy,
+} from '../types';
 import { isXOrY, isX } from '../typeGuards/Channel';
-import { AxisConfig, LabelOverlapStrategy } from '../types/Axis';
+import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import expandLabelOverlapStrategy from './expandLabelOverlapStrategy';
 import { CompleteScaleConfig } from './completeScaleConfig';
-import { HalfCompleteChannelDef } from '../types/CompleteChannelDef';
+import { HalfCompleteChannelDef } from '../types/internal/CompleteChannelDef';
 import { continuousToContinuousScaleTypesSet } from '../parsers/scale/scaleCategories';
 
 type PositionFieldDefWithCompleteScaleConfig = Omit<PositionFieldDef, 'scale'> & {

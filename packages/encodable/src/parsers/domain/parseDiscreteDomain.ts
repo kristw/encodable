@@ -1,4 +1,4 @@
-import { DiscreteInput } from '../../types/ScaleConfig';
+import { DiscreteInput } from '../../types';
 
 /**
  * Discrete domains are converted into string[]

@@ -1,8 +1,8 @@
 import { scaleOrdinal } from 'd3-scale';
-import { OptionsManager, CategoricalScaleInput } from '../../src';
+import { OptionsManager, StringLike } from '../../src';
 
 const dummyFormatter = () => 'haha';
-const dummyScaleResolver = () => scaleOrdinal<CategoricalScaleInput, string>(['haha']);
+const dummyScaleResolver = () => scaleOrdinal<StringLike, string>(['haha']);
 
 describe('OptionsManager', () => {
   afterEach(() => {

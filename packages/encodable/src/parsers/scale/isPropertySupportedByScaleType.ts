@@ -1,4 +1,4 @@
-import { ScaleType } from '../../types/VegaLite';
+import { ScaleType, ExtendedBaseScaleConfig } from '../../types';
 import {
   allScaleTypesSet,
   allScaleTypes,
@@ -6,7 +6,6 @@ import {
   continuousScaleTypes,
   continuousScaleTypesSet,
 } from './scaleCategories';
-import { ExtendedBaseScaleConfig } from '../../types/ScaleConfig';
 
 const pointOrBand: ScaleType[] = [ScaleType.POINT, ScaleType.BAND];
 const pointOrBandSet = new Set(pointOrBand);

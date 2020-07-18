@@ -1,7 +1,4 @@
-import { Value } from '../types/VegaLite';
-import { Legend } from '../types/Legend';
-import { ChannelType } from '../types/Channel';
-import { ChannelDef } from '../types/ChannelDef';
+import { Value, Legend, ChannelType, ChannelDef } from '../types';
 import { isXOrY } from '../typeGuards/Channel';
 
 export type CompleteLegendConfig = false | Legend;

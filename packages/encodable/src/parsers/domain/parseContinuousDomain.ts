@@ -1,5 +1,4 @@
-import { ScaleType } from '../../types/VegaLite';
-import { ContinuousInput } from '../../types/ScaleConfig';
+import { ScaleType, ContinuousInput } from '../../types';
 import { timeScaleTypesSet } from '../scale/scaleCategories';
 
 /**

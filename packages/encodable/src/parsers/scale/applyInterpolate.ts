@@ -1,7 +1,5 @@
 import { InterpolatorFactory } from 'd3-scale';
-import { Value } from '../../types/VegaLite';
-import { D3Scale } from '../../types/Scale';
-import { ScaleConfig } from '../../types/ScaleConfig';
+import { Value, D3Scale, ScaleConfig } from '../../types';
 import createColorInterpolator from './createColorInterpolator';
 
 export default function applyInterpolate<Output extends Value>(

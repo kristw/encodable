@@ -1,6 +1,5 @@
-import { ChannelType } from '../types/Channel';
+import { ChannelType, Type } from '../types';
 import { isXOrY } from '../typeGuards/Channel';
-import { Type } from '../types/VegaLite';
 
 const temporalFieldNames = new Set(['time', 'date', 'datetime', 'timestamp']);
 

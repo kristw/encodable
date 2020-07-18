@@ -1,4 +1,4 @@
-import { ScaleType } from '../../types/VegaLite';
+import { ScaleType } from '../../types';
 
 // Grouped by domain and range
 

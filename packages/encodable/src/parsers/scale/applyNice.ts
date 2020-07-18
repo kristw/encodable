@@ -16,10 +16,7 @@ import {
   CountableTimeInterval,
 } from 'd3-time';
 import { ScaleTime } from 'd3-scale';
-import { Value, ScaleType } from '../../types/VegaLite';
-import { D3Scale } from '../../types/Scale';
-import { NiceTime } from '../../types/scale/Nice';
-import { ScaleConfig } from '../../types/ScaleConfig';
+import { Value, ScaleType, D3Scale, NiceTime, ScaleConfig } from '../../types';
 
 const localTimeIntervals: {
   [key in NiceTime]: CountableTimeInterval;

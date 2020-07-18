@@ -1,5 +1,4 @@
-import { FormatMixins } from '../../types/VegaLite';
-import { Formatter } from '../../types/ChannelDef';
+import { FormatMixins, Formatter } from '../../types';
 import fallbackFormatter from './fallbackFormatter';
 import OptionsManager from '../../options/OptionsManager';
 

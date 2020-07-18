@@ -1,8 +1,6 @@
 import { SequentialScheme } from '@superset-ui/color';
-import { Value } from '../../types/VegaLite';
-import { D3Scale } from '../../types/Scale';
+import { Value, D3Scale, ScaleConfig } from '../../types';
 import OptionsManager from '../../options/OptionsManager';
-import { ScaleConfig } from '../../types/ScaleConfig';
 import { isContinuousScaleConfig } from '../../typeGuards/ScaleConfig';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
 

@@ -1,7 +1,4 @@
-import { Value } from '../../types/VegaLite';
-import { D3Scale } from '../../types/Scale';
-import { ChannelInput } from '../../types/Channel';
-import { ScaleConfig, Bounds } from '../../types/ScaleConfig';
+import { Value, D3Scale, ChannelInput, ScaleConfig, Bounds } from '../../types';
 import { isContinuousScale, isDiscretizingScale, isDiscreteScale } from '../../typeGuards/Scale';
 import {
   isContinuousScaleConfig,

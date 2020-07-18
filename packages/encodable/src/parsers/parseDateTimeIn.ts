@@ -1,4 +1,4 @@
-import { DateTime } from '../types/VegaLite';
+import { DateTime } from '../types';
 import { isDateTime } from '../typeGuards/DateTime';
 import parseDateTime from './parseDateTime';
 
