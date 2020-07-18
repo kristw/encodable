@@ -1,6 +1,6 @@
 {
   "name": "encodable",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "almost-vega-lite grammar for custom visualization component",
   "sideEffects": false,
   "main": "lib/index.js",
