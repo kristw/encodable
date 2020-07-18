@@ -7,6 +7,7 @@ import {
   ContinuousScaleConfig,
   DiscretizingScaleConfig,
   DiscreteScaleConfig,
+  QuantizeScaleConfig,
 } from '../types/ScaleConfig';
 import isPropertySupportedByScaleType from '../parsers/scale/isPropertySupportedByScaleType';
 import {
@@ -40,6 +41,7 @@ export function isScaleConfigWithZero<Output extends Value = Value>(
   | LinearScaleConfig<Output>
   | PowScaleConfig<Output>
   | SqrtScaleConfig<Output>
-  | SymlogScaleConfig<Output> {
+  | SymlogScaleConfig<Output>
+  | QuantizeScaleConfig<Output> {
   return isPropertySupportedByScaleType('zero', config.type);
 }

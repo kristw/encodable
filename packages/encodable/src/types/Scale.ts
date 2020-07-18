@@ -12,7 +12,7 @@ import {
   ScaleSymLog,
 } from 'd3-scale';
 import { Value, ScaleType } from './VegaLite';
-import { HasToString } from './Base';
+import { HasToString, ValueOf } from './Base';
 
 /** Each ScaleCategory contains one or more ScaleType */
 export type ScaleCategory = 'continuous' | 'discrete' | 'discretizing';
@@ -24,7 +24,7 @@ export interface ScaleTypeToD3ScaleType<Output extends Value = Value> {
   [ScaleType.LOG]: ScaleLogarithmic<Output, Output>;
   [ScaleType.POW]: ScalePower<Output, Output>;
   [ScaleType.SQRT]: ScalePower<Output, Output>;
-  [ScaleType.SYMLOG]: ScaleLogarithmic<Output, Output>;
+  [ScaleType.SYMLOG]: ScaleSymLog<Output, Output>;
   [ScaleType.TIME]: ScaleTime<Output, Output>;
   [ScaleType.UTC]: ScaleTime<Output, Output>;
   [ScaleType.QUANTILE]: ScaleQuantile<Output>;
@@ -35,6 +35,11 @@ export interface ScaleTypeToD3ScaleType<Output extends Value = Value> {
   [ScaleType.POINT]: ScalePoint<CategoricalScaleInput>;
   [ScaleType.BAND]: ScaleBand<CategoricalScaleInput>;
 }
+
+export type PickD3Scale<
+  T extends keyof ScaleTypeToD3ScaleType<Output>,
+  Output extends Value = Value
+> = ValueOf<Pick<ScaleTypeToD3ScaleType<Output>, T>>;
 
 export type ContinuousD3Scale<Output extends Value = Value> =
   | ScaleLinear<Output, Output>
@@ -54,9 +59,6 @@ export type DiscreteD3Scale<Output extends Value = Value> =
   | ScalePoint<CategoricalScaleInput>
   | ScaleBand<CategoricalScaleInput>;
 
-export type D3Scale<Output extends Value = Value> =
-  | ContinuousD3Scale<Output>
-  | DiscretizingD3Scale<Output>
-  | DiscreteD3Scale<Output>;
+export type D3Scale<Output extends Value = Value> = ValueOf<ScaleTypeToD3ScaleType<Output>>;
 
 export type AllScale<Output extends Value = Value> = D3Scale<Output>;

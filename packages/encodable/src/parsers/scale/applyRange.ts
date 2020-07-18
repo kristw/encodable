@@ -40,6 +40,8 @@ export default function applyRange<Output extends Value>(
       }
     }
   } else {
+    // TODO: add type guard should fix this problem
+    // @ts-ignore
     scale.range(range);
   }
 }

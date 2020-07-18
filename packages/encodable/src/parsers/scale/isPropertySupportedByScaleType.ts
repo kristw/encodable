@@ -45,6 +45,7 @@ const supportedScaleTypes: Record<
   round: continuousOrPointOrBandSet,
   scheme: exceptPointOrBandSet,
   type: allScaleTypesSet,
+  unknown: new Set([ScaleType.ORDINAL]),
   zero: zeroSet,
 };
 
