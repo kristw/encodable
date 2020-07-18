@@ -1,5 +1,6 @@
 import { ScaleInterpolate, ScaleInterpolateParams } from './ScaleInterpolate';
 import { NiceTime } from './Nice';
+import { Unarray } from '../Base';
 
 export type BaseScaleConfig<T, R, D> = {
   type: T;
@@ -119,6 +120,11 @@ export type BaseScaleConfig<T, R, D> = {
    * __Default value:__ `false`.
    */
   round?: boolean;
+
+  /**
+   * Sets the output value of the scale for unknown input values.
+   */
+  unknown?: Unarray<R> | { name: 'implicit' };
 
   /**
    * If `true`, ensures that a zero baseline value is included in the scale domain.

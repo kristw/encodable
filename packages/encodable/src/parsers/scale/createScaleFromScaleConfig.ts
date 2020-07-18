@@ -68,11 +68,11 @@ function createScaleFromScaleConfig<Output extends Value>(
 ): ScaleOrdinal<CategoricalScaleInput, Output>;
 
 function createScaleFromScaleConfig<Output extends Value>(
-  config: PointScaleConfig<Output>,
+  config: PointScaleConfig,
 ): ScalePoint<CategoricalScaleInput>;
 
 function createScaleFromScaleConfig<Output extends Value>(
-  config: BandScaleConfig<Output>,
+  config: BandScaleConfig,
 ): ScaleBand<CategoricalScaleInput>;
 
 function createScaleFromScaleConfig<Output extends Value>(

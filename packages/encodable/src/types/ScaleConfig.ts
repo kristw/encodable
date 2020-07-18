@@ -2,6 +2,8 @@ import { Value, DateTime, SchemeParams } from './VegaLite';
 import { BaseScaleConfig } from './scale/BaseScaleConfig';
 import { HasToString } from './Base';
 
+type Numeric = number | { valueOf(): number };
+
 // TODO: Consider including { valueOf(): number }
 export type TimeInput = string | number | Date | DateTime;
 export type ContinuousInput = TimeInput | boolean;
@@ -96,19 +98,19 @@ export type OrdinalScaleConfig<Output extends Value = Value> = CreateScaleConfig
   'ordinal',
   Output[],
   DiscreteInput[],
-  'scheme'
+  'scheme' | 'unknown'
 >;
 
-export type PointScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type PointScaleConfig = CreateScaleConfig<
   'point',
-  Output[],
+  [Numeric, Numeric],
   DiscreteInput[],
   'align' | 'padding' | 'round'
 >;
 
-export type BandScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type BandScaleConfig = CreateScaleConfig<
   'band',
-  Output[],
+  [Numeric, Numeric],
   DiscreteInput[],
   'align' | 'padding' | 'paddingInner' | 'paddingOuter' | 'round'
 >;
@@ -144,8 +146,8 @@ export type DiscretizingScaleConfig<Output extends Value = Value> =
 
 export type DiscreteScaleConfig<Output extends Value = Value> =
   | OrdinalScaleConfig<Output>
-  | PointScaleConfig<Output>
-  | BandScaleConfig<Output>;
+  | PointScaleConfig
+  | BandScaleConfig;
 
 export type ScaleConfig<Output extends Value = Value> =
   | ContinuousScaleConfig<Output>
