@@ -1,10 +1,14 @@
 import isEnabled from '../utils/isEnabled';
-import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import { RequiredSome } from '../types/Base';
-import { ChannelDef, PositionFieldDef } from '../types/ChannelDef';
-import { ChannelType } from '../types/Channel';
+import {
+  ChannelDef,
+  PositionFieldDef,
+  ChannelType,
+  AxisConfig,
+  LabelOverlapStrategy,
+} from '../types';
 import { isXOrY, isX } from '../typeGuards/Channel';
-import { AxisConfig, LabelOverlapStrategy } from '../types/Axis';
+import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import expandLabelOverlapStrategy from './expandLabelOverlapStrategy';
 import { CompleteScaleConfig } from './completeScaleConfig';
 import { HalfCompleteChannelDef } from '../types/CompleteChannelDef';

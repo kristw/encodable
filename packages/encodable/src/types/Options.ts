@@ -1,5 +1,5 @@
 import { ScaleOrdinal } from 'd3-scale';
-import { CategoricalScaleInput } from './Scale';
+import { CategoricalScaleInput } from './scale/Scale';
 
 export type NumberFormatter = (value: number | null | undefined) => string;
 export type NumberFormatResolver = (format?: string) => NumberFormatter;

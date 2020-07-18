@@ -9,7 +9,7 @@ import {
   TimeFormatResolver,
   CategoricalColorScaleResolver,
   ColorSchemeResolver,
-} from '../types/Options';
+} from '../types';
 
 const CACHE_KEY = 'encodable:options';
 

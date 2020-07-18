@@ -1,6 +1,6 @@
 /** See https://vega.github.io/vega-lite/docs/axis.html */
 
-import { Axis as VegaLiteAxis } from './VegaLite';
+import { Axis as VegaLiteAxis } from './VegaLite/Axis';
 
 /** Axis orientation */
 export type AxisOrient = 'top' | 'bottom' | 'left' | 'right';

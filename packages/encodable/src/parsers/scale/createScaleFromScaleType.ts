@@ -13,8 +13,7 @@ import {
   scaleBand,
   scaleSymlog,
 } from 'd3-scale';
-import { CategoricalScaleInput } from '../../types/Scale';
-import { ScaleType, Value } from '../../types/VegaLite';
+import { CategoricalScaleInput, ScaleType, Value } from '../../types';
 
 export default function createScaleFromScaleType<Output extends Value>(type: ScaleType) {
   switch (type) {

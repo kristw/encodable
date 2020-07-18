@@ -1,7 +1,9 @@
-import { Value, DateTime, SchemeParams } from './VegaLite';
-import { BaseScaleConfig } from './scale/BaseScaleConfig';
-import { HasToString, ValueOf } from './Base';
-import { NiceTime } from './scale/Nice';
+import { BaseScaleConfig } from './BaseScaleConfig';
+import { HasToString, ValueOf } from '../Base';
+import { Value } from '../Core';
+import { NiceTime } from './Nice';
+import { SchemeParams } from './SchemeParams';
+import { DateTime } from '../DateTime';
 
 type Numeric = number | { valueOf(): number };
 

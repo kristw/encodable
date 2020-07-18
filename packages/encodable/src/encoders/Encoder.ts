@@ -1,18 +1,19 @@
-import { ChannelDef, TypedFieldDef } from '../types/ChannelDef';
-import { MayBeArray } from '../types/Base';
-import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
-import { isNotArray } from '../typeGuards/Base';
-import ChannelEncoder from './ChannelEncoder';
 import {
+  ChannelDef,
+  TypedFieldDef,
+  Dataset,
   EncodingConfig,
   DeriveEncoding,
   DeriveChannelTypes,
   DeriveChannelEncoders,
   DeriveSingleChannelEncoder,
-} from '../types/Encoding';
-import { Dataset } from '../types/Data';
-import { ChannelInput } from '../types/Channel';
-import { LegendGroupInformation } from '../types/Legend';
+  ChannelInput,
+  LegendGroupInformation,
+} from '../types';
+import { MayBeArray } from '../types/Base';
+import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
+import { isNotArray } from '../typeGuards/Base';
+import ChannelEncoder from './ChannelEncoder';
 
 export default class Encoder<Config extends EncodingConfig> {
   readonly encoding: DeriveEncoding<Config>;

@@ -10,9 +10,11 @@ import {
   ScalePoint,
   ScaleBand,
 } from 'd3-scale';
-import { ScaleType, Value } from '../../types/VegaLite';
-import { CategoricalScaleInput, AllScale } from '../../types/Scale';
 import {
+  ScaleType,
+  Value,
+  CategoricalScaleInput,
+  AllScale,
   ScaleConfig,
   LinearScaleConfig,
   LogScaleConfig,
@@ -28,7 +30,8 @@ import {
   OrdinalScaleConfig,
   PointScaleConfig,
   BandScaleConfig,
-} from '../../types/ScaleConfig';
+} from '../../types';
+
 import createScaleFromScaleType from './createScaleFromScaleType';
 import updateScale from './updateScale';
 import OptionsManager from '../../options/OptionsManager';

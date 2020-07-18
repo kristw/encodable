@@ -8,14 +8,14 @@ import {
   DiscretizingScaleConfig,
   DiscreteScaleConfig,
   QuantizeScaleConfig,
-} from '../types/ScaleConfig';
+} from '../types/scale/ScaleConfig';
 import isPropertySupportedByScaleType from '../parsers/scale/isPropertySupportedByScaleType';
 import {
   continuousScaleTypesSet,
   discretizingScaleTypesSet,
   discreteScaleTypesSet,
 } from '../parsers/scale/scaleCategories';
-import { Value } from '../types/VegaLite';
+import { Value } from '../types/Core';
 
 export function isContinuousScaleConfig<Output extends Value = Value>(
   config: ScaleConfig,

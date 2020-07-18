@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import Encoder from './Encoder';
-import { EncodingConfig, DeriveChannelTypes, DeriveEncoding } from '../types/Encoding';
+import { EncodingConfig, DeriveChannelTypes, DeriveEncoding } from '../types';
 import mergeEncoding from '../utils/mergeEncoding';
 
 type CreateEncoderFactoryParams<Config extends EncodingConfig> = {

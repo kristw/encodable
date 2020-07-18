@@ -1,5 +1,5 @@
-import { LabelOverlapStrategy, LabelOverlapType } from '../types/Axis';
-import { ChannelType } from '../types/Channel';
+import { LabelOverlapStrategy, LabelOverlapType, ChannelType } from '../types';
+
 import { isX } from '../typeGuards/Channel';
 
 export const STRATEGY_FLAT = { strategy: 'flat' } as const;

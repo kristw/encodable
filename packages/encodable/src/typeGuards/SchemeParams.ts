@@ -1,4 +1,4 @@
-import { SchemeParams } from '../types/VegaLite';
+import { SchemeParams } from '../types';
 
 // eslint-disable-next-line import/prefer-default-export
 export function isSchemeParams(scheme: string | SchemeParams): scheme is SchemeParams {

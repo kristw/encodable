@@ -1,9 +1,15 @@
 import { extent as d3Extent } from 'd3-array';
 import { HasToString, IdentityFunction } from '../types/Base';
-import { ChannelType, ChannelInput } from '../types/Channel';
-import { PlainObject, Dataset } from '../types/Data';
-import { ChannelDef } from '../types/ChannelDef';
-import { Value, ScaleType } from '../types/VegaLite';
+import {
+  Value,
+  ScaleType,
+  PlainObject,
+  Dataset,
+  AllScale,
+  ChannelType,
+  ChannelInput,
+  ChannelDef,
+} from '../types';
 import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
 import ChannelEncoderAxis from './ChannelEncoderAxis';
@@ -12,12 +18,11 @@ import completeChannelDef from '../fillers/completeChannelDef';
 import createScaleFromScaleConfig from '../parsers/scale/createScaleFromScaleConfig';
 import identity from '../utils/identity';
 import applyDomain from '../parsers/scale/applyDomain';
+import applyRange from '../parsers/scale/applyRange';
 import applyZero from '../parsers/scale/applyZero';
 import applyNice from '../parsers/scale/applyNice';
-import { AllScale } from '../types/Scale';
 import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteChannelDef';
 import { CompleteChannelDef } from '../types/CompleteChannelDef';
-import applyRange from '../parsers/scale/applyRange';
 import fallbackFormatter from '../parsers/format/fallbackFormatter';
 import createFormatter from '../parsers/format/createFormatter';
 

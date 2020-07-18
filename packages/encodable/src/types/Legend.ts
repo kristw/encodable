@@ -1,4 +1,4 @@
-import { Type } from './VegaLite';
+import { Type } from './Core';
 import { ChannelInput } from './Channel';
 import { EncodingConfig, DeriveSingleChannelEncoder } from './Encoding';
 

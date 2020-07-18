@@ -1,4 +1,4 @@
-import { FormatMixins, Type, ScaleType, FormatType } from '../types/VegaLite';
+import { FormatMixins, Type, ScaleType, FormatType } from '../types';
 
 export interface CompleteFormatConfig {
   formatType: 'time' | 'number' | undefined;

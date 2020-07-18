@@ -1,8 +1,6 @@
 import ChannelEncoder from './ChannelEncoder';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
-import { ChannelDef } from '../types/ChannelDef';
-import { Value } from '../types/VegaLite';
-import { ChannelInput } from '../types/Channel';
+import { Value, ChannelDef, ChannelInput } from '../types';
 import { HasToString } from '../types/Base';
 import parseDateTime from '../parsers/parseDateTime';
 import inferElementTypeFromUnionOfArrayTypes from '../utils/inferElementTypeFromUnionOfArrayTypes';

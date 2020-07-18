@@ -1,4 +1,4 @@
-import { DateTime } from '../types/VegaLite';
+import { DateTime } from '../types';
 import dateTimeToTimestamp from './dateTimeToTimestamp';
 
 export default function parseDateTime(dateTime: string | number | DateTime) {

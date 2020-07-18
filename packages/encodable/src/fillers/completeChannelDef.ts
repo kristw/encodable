@@ -1,13 +1,11 @@
-import { ChannelDef } from '../types/ChannelDef';
-import { ChannelType } from '../types/Channel';
+import { ChannelDef, ChannelType, Value } from '../types';
+import { CompleteChannelDef } from '../types/CompleteChannelDef';
 import { isFieldDef, isValueDef, isTypedFieldDef } from '../typeGuards/ChannelDef';
 import completeAxisConfig from './completeAxisConfig';
 import completeFormatConfig from './completeFormatConfig';
 import completeLegendConfig from './completeLegendConfig';
 import completeScaleConfig from './completeScaleConfig';
-import { Value } from '../types/VegaLite';
 import inferFieldType from './inferFieldType';
-import { CompleteChannelDef } from '../types/CompleteChannelDef';
 
 export default function completeChannelDef<Output extends Value>(
   channelType: ChannelType,

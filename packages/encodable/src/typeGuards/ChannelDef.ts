@@ -1,4 +1,4 @@
-import { Value, ValueDef } from '../types/VegaLite';
+import { Value } from '../types/Core';
 import {
   ChannelDef,
   NonValueDef,
@@ -6,6 +6,7 @@ import {
   TypedFieldDef,
   PositionFieldDef,
   ScaleFieldDef,
+  ValueDef,
 } from '../types/ChannelDef';
 
 export function isValueDef<Output extends Value>(

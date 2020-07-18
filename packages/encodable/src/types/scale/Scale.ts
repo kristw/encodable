@@ -11,8 +11,9 @@ import {
   ScaleBand,
   ScaleSymLog,
 } from 'd3-scale';
-import { Value, ScaleType } from './VegaLite';
-import { HasToString, ValueOf } from './Base';
+import { ScaleType } from './ScaleType';
+import { HasToString, ValueOf } from '../Base';
+import { Value } from '../Core';
 
 /** Each ScaleCategory contains one or more ScaleType */
 export type ScaleCategory = 'continuous' | 'discrete' | 'discretizing';

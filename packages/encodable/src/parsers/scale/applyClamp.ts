@@ -1,6 +1,4 @@
-import { Value } from '../../types/VegaLite';
-import { D3Scale } from '../../types/Scale';
-import { ScaleConfig } from '../../types/ScaleConfig';
+import { Value, D3Scale, ScaleConfig } from '../../types';
 
 export default function applyClamp<Output extends Value>(
   config: ScaleConfig<Output>,
