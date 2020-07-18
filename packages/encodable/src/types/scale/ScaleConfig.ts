@@ -1,5 +1,5 @@
 import { BaseScaleConfig } from './BaseScaleConfig';
-import { HasToString, ValueOf } from '../Base';
+import { StringLike, ValueOf } from '../internal/Base';
 import { Value } from '../Core';
 import { NiceTime } from './Nice';
 import { SchemeParams } from './SchemeParams';
@@ -10,7 +10,7 @@ type Numeric = number | { valueOf(): number };
 // TODO: Consider including { valueOf(): number }
 export type TimeInput = string | number | Date | DateTime;
 export type ContinuousInput = TimeInput | boolean;
-export type DiscreteInput = HasToString;
+export type DiscreteInput = StringLike;
 
 export type Bounds<T> = [T | null | undefined, T | null | undefined];
 export type ContinuousDomain = ContinuousInput[] | Bounds<ContinuousInput>;

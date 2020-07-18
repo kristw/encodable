@@ -1,7 +1,7 @@
 import ChannelEncoder from './ChannelEncoder';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
 import { Value, ChannelDef, ChannelInput } from '../types';
-import { HasToString } from '../types/Base';
+import { StringLike } from '../types/internal/Base';
 import parseDateTime from '../parsers/parseDateTime';
 import inferElementTypeFromUnionOfArrayTypes from '../utils/inferElementTypeFromUnionOfArrayTypes';
 import { isDateTime } from '../typeGuards/DateTime';
@@ -15,7 +15,7 @@ export default class ChannelEncoderAxis<
 
   readonly config: Exclude<CompleteAxisConfig, false>;
 
-  readonly formatValue: (value: ChannelInput | HasToString) => string;
+  readonly formatValue: (value: ChannelInput | StringLike) => string;
 
   constructor(channelEncoder: ChannelEncoder<Def, Output>) {
     this.channelEncoder = channelEncoder;
@@ -44,7 +44,7 @@ export default class ChannelEncoderAxis<
 
     const { scale } = this.channelEncoder;
     if (scale && 'domain' in scale) {
-      const ticks: (string | number | Date | HasToString)[] =
+      const ticks: (string | number | Date | StringLike)[] =
         'ticks' in scale ? scale.ticks(tickCount) : scale.domain();
       return ticks.map(this.formatValue);
     }

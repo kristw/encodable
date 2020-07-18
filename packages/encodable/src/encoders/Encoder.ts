@@ -10,7 +10,7 @@ import {
   ChannelInput,
   LegendGroupInformation,
 } from '../types';
-import { MayBeArray } from '../types/Base';
+import { MayBeArray } from '../types/internal/Base';
 import { isTypedFieldDef, isValueDef } from '../typeGuards/ChannelDef';
 import { isNotArray } from '../typeGuards/Base';
 import ChannelEncoder from './ChannelEncoder';

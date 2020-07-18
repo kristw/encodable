@@ -8,7 +8,7 @@ import {
   scaleQuantile,
 } from 'd3-scale';
 import { isTimeScale, isContinuousScale, isDiscretizingScale } from '../../src/typeGuards/Scale';
-import { HasToString } from '../../src/types/Base';
+import { StringLike } from '../../src/types/internal/Base';
 
 describe('type guards', () => {
   describe('isContinuousScale(scale, type)', () => {
@@ -16,7 +16,7 @@ describe('type guards', () => {
       expect(isContinuousScale(scaleLinear(), 'linear')).toBeTruthy();
     });
     it('returns false otherwise', () => {
-      expect(isContinuousScale(scaleOrdinal<HasToString, string>(), 'ordinal')).toBeFalsy();
+      expect(isContinuousScale(scaleOrdinal<StringLike, string>(), 'ordinal')).toBeFalsy();
     });
   });
   describe('isDiscretizingScale(scale, type)', () => {

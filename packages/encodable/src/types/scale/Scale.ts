@@ -12,13 +12,13 @@ import {
   ScaleSymLog,
 } from 'd3-scale';
 import { ScaleType } from './ScaleType';
-import { HasToString, ValueOf } from '../Base';
+import { StringLike, ValueOf } from '../internal/Base';
 import { Value } from '../Core';
 
 /** Each ScaleCategory contains one or more ScaleType */
 export type ScaleCategory = 'continuous' | 'discrete' | 'discretizing';
 
-export type CategoricalScaleInput = HasToString;
+export type CategoricalScaleInput = StringLike;
 
 export interface ScaleTypeToD3ScaleType<Output extends Value = Value> {
   [ScaleType.LINEAR]: ScaleLinear<Output, Output>;

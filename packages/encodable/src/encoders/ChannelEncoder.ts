@@ -1,5 +1,5 @@
 import { extent as d3Extent } from 'd3-array';
-import { HasToString, IdentityFunction } from '../types/Base';
+import { StringLike, IdentityFunction } from '../types/internal/Base';
 import {
   Value,
   ScaleType,
@@ -22,7 +22,7 @@ import applyRange from '../parsers/scale/applyRange';
 import applyZero from '../parsers/scale/applyZero';
 import applyNice from '../parsers/scale/applyNice';
 import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteChannelDef';
-import { CompleteChannelDef } from '../types/CompleteChannelDef';
+import { CompleteChannelDef } from '../types/internal/CompleteChannelDef';
 import fallbackFormatter from '../parsers/format/fallbackFormatter';
 import createFormatter from '../parsers/format/createFormatter';
 
@@ -45,7 +45,7 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
 
   private readonly encodeFunc: IdentityFunction<Output> | EncodeFunction<Output> | (() => Output);
 
-  readonly formatValue: (value: ChannelInput | HasToString) => string;
+  readonly formatValue: (value: ChannelInput | StringLike) => string;
 
   constructor({
     name,

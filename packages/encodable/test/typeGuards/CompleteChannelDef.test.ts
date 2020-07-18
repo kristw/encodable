@@ -1,5 +1,5 @@
 import { isCompleteValueDef, isCompleteFieldDef } from '../../src/typeGuards/CompleteChannelDef';
-import { CompleteChannelDef } from '../../src/types/CompleteChannelDef';
+import { CompleteChannelDef } from '../../src/types/internal/CompleteChannelDef';
 
 describe('type guards: ChannelDef', () => {
   const valueDef: CompleteChannelDef = {

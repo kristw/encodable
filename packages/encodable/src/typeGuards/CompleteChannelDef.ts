@@ -2,7 +2,7 @@ import {
   CompleteChannelDef,
   CompleteValueDef,
   CompleteFieldDef,
-} from '../types/CompleteChannelDef';
+} from '../types/internal/CompleteChannelDef';
 import { Value } from '../types/Core';
 
 export function isCompleteValueDef<Output extends Value = Value>(
