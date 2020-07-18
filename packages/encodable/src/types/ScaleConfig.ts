@@ -22,107 +22,109 @@ export type ExtendedBaseScaleConfig<T, R, D> = BaseScaleConfig<T, R, D> & {
 // from same base type to share property documentation
 // (which is useful for auto-complete/intellisense)
 // and add `type` property as discriminant of union type.
-type CreateScaleConfig<T, Fields extends keyof ExtendedBaseScaleConfig<T, R, D>, R, D> = Pick<
-  ExtendedBaseScaleConfig<T, R, D>,
-  'type' | 'domain' | 'range' | 'reverse' | Fields
->;
+type CreateScaleConfig<
+  T,
+  R,
+  D,
+  Fields extends keyof ExtendedBaseScaleConfig<T, R, D> = 'type'
+> = Pick<ExtendedBaseScaleConfig<T, R, D>, 'type' | 'domain' | 'range' | 'reverse' | Fields>;
 
 export type LinearScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'linear',
-  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
 export type LogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'log',
-  'base' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'base' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme'
 >;
 
 export type PowScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'pow',
-  'clamp' | 'exponent' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'clamp' | 'exponent' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
 export type SqrtScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'sqrt',
-  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
 export type SymlogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'symlog',
-  'clamp' | 'constant' | 'nice' | 'round' | 'scheme' | 'zero',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'clamp' | 'constant' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
 export type QuantileScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'quantile',
-  'interpolate' | 'scheme',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'interpolate' | 'scheme'
 >;
 
 export type QuantizeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'quantize',
-  'interpolate' | 'nice' | 'scheme' | 'zero',
   Output[],
-  ContinuousDomain
+  [ContinuousInput, ContinuousInput] | Bounds<ContinuousInput>,
+  'interpolate' | 'nice' | 'scheme' | 'zero'
 >;
 
 export type ThresholdScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'threshold',
-  'interpolate' | 'nice' | 'scheme',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'scheme'
 >;
 
 export type BinOrdinalScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'bin-ordinal',
-  'interpolate' | 'scheme',
   Output[],
-  ContinuousDomain
+  ContinuousDomain,
+  'scheme'
 >;
 
 export type OrdinalScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'ordinal',
-  'interpolate' | 'scheme',
   Output[],
-  DiscreteInput[]
+  DiscreteInput[],
+  'scheme'
 >;
 
 export type PointScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'point',
-  'align' | 'padding' | 'round',
   Output[],
-  DiscreteInput[]
+  DiscreteInput[],
+  'align' | 'padding' | 'round'
 >;
 
 export type BandScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'band',
-  'align' | 'padding' | 'paddingInner' | 'paddingOuter' | 'round',
   Output[],
-  DiscreteInput[]
+  DiscreteInput[],
+  'align' | 'padding' | 'paddingInner' | 'paddingOuter' | 'round'
 >;
 
 export type TimeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'time',
-  'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme',
   Output[],
-  TimeDomain
+  TimeDomain,
+  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme'
 >;
 
 export type UtcScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'utc',
-  'clamp' | 'interpolate' | 'nice' | 'padding' | 'round' | 'scheme',
   Output[],
-  TimeDomain
+  TimeDomain,
+  'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme'
 >;
 
 export type ContinuousScaleConfig<Output extends Value = Value> =

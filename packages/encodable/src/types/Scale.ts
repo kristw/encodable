@@ -24,7 +24,7 @@ export interface ScaleTypeToD3ScaleType<Output extends Value = Value> {
   [ScaleType.LOG]: ScaleLogarithmic<Output, Output>;
   [ScaleType.POW]: ScalePower<Output, Output>;
   [ScaleType.SQRT]: ScalePower<Output, Output>;
-  [ScaleType.SYMLOG]: ScaleLogarithmic<Output, Output>;
+  [ScaleType.SYMLOG]: ScaleSymLog<Output, Output>;
   [ScaleType.TIME]: ScaleTime<Output, Output>;
   [ScaleType.UTC]: ScaleTime<Output, Output>;
   [ScaleType.QUANTILE]: ScaleQuantile<Output>;
