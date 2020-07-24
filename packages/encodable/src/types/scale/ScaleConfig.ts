@@ -73,14 +73,14 @@ export type QuantileScaleConfig<Output extends Value = Value> = CreateScaleConfi
   'quantile',
   Output[],
   ContinuousDomain,
-  'interpolate' | 'scheme'
+  'scheme'
 >;
 
 export type QuantizeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
   'quantize',
   Output[],
   [ContinuousInput, ContinuousInput] | Bounds<ContinuousInput>,
-  'interpolate' | 'nice' | 'scheme' | 'zero'
+  'nice' | 'scheme' | 'zero'
 >;
 
 export type ThresholdScaleConfig<Output extends Value = Value> = CreateScaleConfig<
