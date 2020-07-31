@@ -16,7 +16,9 @@
   "keywords": [
     "superset"
   ],
-  "author": "Superset",
+  "authors": [
+    "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/apache-superset/encodable/issues"
@@ -30,6 +32,6 @@
     "global-box": "^1.0.0"
   },
   "peerDependencies": {
-    "global-box": "^1.0.0"
+    "global-box": "*"
   }
 }
