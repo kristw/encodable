@@ -1,7 +1,7 @@
 {
-  "name": "@encodable/registry",
-  "version": "0.1.0",
-  "description": "Reusable registry models",
+  "name": "@encodable/<%= name %>",
+  "version": "0.0.0",
+  "description": "Encodable <%= name %>",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -13,9 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/apache-superset/encodable.git"
   },
-  "keywords": [
-    "superset"
-  ],
+  "keywords": ["superset"],
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
   ],
@@ -26,11 +24,5 @@
   "homepage": "https://github.com/apache-superset/encodable#readme",
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {
-    "jest-mock-console": "^1.0.0"
-  },
-  "peerDependencies": {
-    "global-box": "*"
   }
 }
