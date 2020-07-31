@@ -473,9 +473,9 @@ describe('Registry', () => {
 
   describe('config.global', () => {
     it('refer to the global object with same id', () => {
-      const r1 = new Registry({ isGlobal: true, registryId: 'test1' });
+      const r1 = new Registry({ isGlobal: true, globalId: 'test1' });
       r1.registerValue('a', 100);
-      const r2 = new Registry({ isGlobal: true, registryId: 'test1' });
+      const r2 = new Registry({ isGlobal: true, globalId: 'test1' });
       expect(r2.get('a')).toEqual(100);
     });
   });
