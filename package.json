@@ -103,6 +103,20 @@
       ],
       "transformIgnorePatterns": [
         "node_modules/(?!(vega-lite|lodash-es))"
+      ],
+      "testPathIgnorePatterns": [
+        "packages/generator-encodable/generators"
+      ],
+      "projects": [
+        "<rootDir>",
+        {
+          "displayName": "node",
+          "rootDir": "<rootDir>/packages/generator-encodable",
+          "testMatch": [
+            "<rootDir>/test/**/?(*.)+(spec|test).{js,jsx,ts,tsx}"
+          ],
+          "testEnvironment": "node"
+        }
       ]
     },
     "prettier": {
@@ -116,6 +130,12 @@
         ]
       },
       "overrides": [
+        {
+          "files": "./packages/generator-encodable/**/*.test.{js,jsx,ts,tsx}",
+          "rules": {
+            "jest/expect-expect": "off"
+          }
+        },
         {
           "files": "*.{js,jsx,ts,tsx}",
           "rules": {
