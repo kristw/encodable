@@ -48,10 +48,19 @@ This repository follows
 messages and has a `commitlint` hook which will require you to have the valid commit message before
 committing. You can use `npm run commit` to help you create a commit message.
 
-### Publishing
+### Publishing (via ci)
+
+```sh
+npm run changelog
+git cm "docs: update changelog"
+npm run bump-version
+# Then follow the prompt to pick new versions for each package
+```
+
+### Publishing (manual)
 
 **Prerequisite:** You'll need an [npmjs.com](https://npmjs.com) account that is part of the
 `encodable` admin.
 
 1. Make sure you're logged in to NPM from your shell. Run `npm login` if necessary.
-2. To make the release, run `yarn run release` and follow the prompts.
+2. To make the release, run `yarn release` and follow the prompts.
