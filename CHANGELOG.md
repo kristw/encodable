@@ -1,16 +1,20 @@
-# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.2...v0.0.0) (2020-07-18)
+# [0.0.0](https://github.com/apache-superset/encodable/compare/v0.4.2...v0.0.0) (2020-07-31)
 
 
 ### Bug Fixes
 
 * fielddef formatting ([#30](https://github.com/apache-superset/encodable/issues/30)) ([09754a9](https://github.com/apache-superset/encodable/commit/09754a9ae8bac329767ebbf70e170ef71b17db04))
+* remove incompatible fields ([#41](https://github.com/apache-superset/encodable/issues/41)) ([16ebc0a](https://github.com/apache-superset/encodable/commit/16ebc0ade1ace423d193902e5bbb83fa15bc12db))
 * scale typings ([#39](https://github.com/apache-superset/encodable/issues/39)) ([34af521](https://github.com/apache-superset/encodable/commit/34af521e58b85a4fe5f2f25afc1c00208db13a19))
 
 
 ### Features
 
+* **generator-encodable:** add new generator package ([#43](https://github.com/apache-superset/encodable/issues/43)) ([fc48289](https://github.com/apache-superset/encodable/commit/fc48289dd487bdd71550d143d2854e9be74d2cd7))
+* **registry:** add makeSingleton ([#44](https://github.com/apache-superset/encodable/issues/44)) ([5251e90](https://github.com/apache-superset/encodable/commit/5251e903f54ae5cfc525e932a41543d656e3cf75))
 * add color scheme resolver ([#36](https://github.com/apache-superset/encodable/issues/36)) ([7ef3856](https://github.com/apache-superset/encodable/commit/7ef3856b906ff4dcd19bfb6477983760ad91b7ae))
 * add getStore ([#28](https://github.com/apache-superset/encodable/issues/28)) ([fb1ec79](https://github.com/apache-superset/encodable/commit/fb1ec79e6ebd6d9a638f944eb1bb9363d2ced6a4))
+* add registry package ([#42](https://github.com/apache-superset/encodable/issues/42)) ([826e0c5](https://github.com/apache-superset/encodable/commit/826e0c554a8f7e743ad0a4fea52ce34e7c04ae01))
 * add symlog scale and refactor domain handling ([#38](https://github.com/apache-superset/encodable/issues/38)) ([b9b7472](https://github.com/apache-superset/encodable/commit/b9b74728e6cd75e3dcd762b7c8177c319e5a3245))
 * can customize color scale resolver ([#35](https://github.com/apache-superset/encodable/issues/35)) ([f602c46](https://github.com/apache-superset/encodable/commit/f602c46467ea40b5808f21743739a417a0f16404))
 * can customize format resolvers ([#31](https://github.com/apache-superset/encodable/issues/31)) ([20d1aef](https://github.com/apache-superset/encodable/commit/20d1aef703284680b636a7e403a739abdea0112c))
