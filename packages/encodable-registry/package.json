@@ -1,6 +1,6 @@
 {
   "name": "@encodable/registry",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Reusable registry models",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -28,8 +28,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "jest-mock-console": "^1.0.0",
-    "global-box": "^1.0.0"
+    "global-box": "^1.0.0",
+    "jest-mock-console": "^1.0.0"
   },
   "peerDependencies": {
     "global-box": "*"
