@@ -1,7 +1,7 @@
-import { Registry, SynchronousRegistry } from '../src';
+import { Registry, SyncRegistry } from '../src';
 
 describe('index', () => {
   it('exports modules', () => {
-    [Registry, SynchronousRegistry].forEach(x => expect(x).toBeDefined());
+    [Registry, SyncRegistry].forEach(x => expect(x).toBeDefined());
   });
 });
