@@ -6051,6 +6051,11 @@ global-box@^0.1.0:
   resolved "https://registry.yarnpkg.com/global-box/-/global-box-0.1.0.tgz#9cd3d143e0726d7183a711274f8de449e9db9cd0"
   integrity sha512-fZgO8BSW6WMrjb4FqQwoSui5+DDoYWBl3EAGJO72QrZh8igPO0AjonmeNrN33I4q35K5xKMzhf0805U5wDPdkw==
 
+global-box@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/global-box/-/global-box-1.0.0.tgz#39c5d42958588d9cdf58b7b58f3bbb8a2bfae204"
+  integrity sha512-OadHivWmlv580fkXCZWc0ccMj9PSK1LQ0ip6I6HZpduHgjBs369EqrD6zuujjhYkDehHktn+MLvYtmRMzG4fQg==
+
 global-dirs@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/global-dirs/-/global-dirs-0.1.1.tgz#b319c0dd4607f353f3be9cca4c72fc148c49f445"
@@ -7152,7 +7157,7 @@ jest-message-util@^25.5.0:
     slash "^3.0.0"
     stack-utils "^1.0.1"
 
-jest-mock-console@^1.0.1:
+jest-mock-console@^1.0.0, jest-mock-console@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/jest-mock-console/-/jest-mock-console-1.0.1.tgz#07978047735a782d0d4172d1afcabd82f6de9b08"
   integrity sha512-Bn+Of/cvz9LOEEeEg5IX5Lsf8D2BscXa3Zl5+vSVJl37yiT8gMAPPKfE09jJOwwu1zbagL11QTrH+L/Gn8udOg==
