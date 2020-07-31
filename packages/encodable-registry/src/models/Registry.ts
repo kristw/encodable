@@ -1,11 +1,8 @@
 /* eslint no-console: 0 */
 import { getStore } from 'global-box';
 import OverwritePolicy from './OverwritePolicy';
-import { RegistryStore, RegistryStoreConfig } from '../types';
+import { RegistryStore, RegistryConfig } from '../types';
 import createRegistryStore from './createRegistryStore';
-
-export type RegistryConfig = RegistryStoreConfig &
-  ({ isGlobal?: false } | { isGlobal: true; registryId: string });
 
 /**
  * Registry class
@@ -23,9 +20,7 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
 
   constructor(config: RegistryConfig = {}) {
     if (config.isGlobal) {
-      this.store = getStore().getOrCreate(config.registryId, () =>
-        createRegistryStore<V, W>(config),
-      );
+      this.store = getStore().getOrCreate(config.globalId, () => createRegistryStore<V, W>(config));
     } else {
       this.store = createRegistryStore<V, W>(config);
     }

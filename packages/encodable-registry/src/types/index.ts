@@ -29,3 +29,6 @@ export interface RegistryStoreConfig {
   setFirstItemAsDefault?: boolean;
   overwritePolicy?: OverwritePolicy;
 }
+
+export type RegistryConfig = RegistryStoreConfig &
+  ({ isGlobal?: false } | { isGlobal: true; globalId: string });
