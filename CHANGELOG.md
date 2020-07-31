@@ -10,6 +10,7 @@
 
 ### Features
 
+* **format:** add number format ([#45](https://github.com/apache-superset/encodable/issues/45)) ([a5af8d6](https://github.com/apache-superset/encodable/commit/a5af8d60e7d947ccb381a96fc09f89ec266704cd))
 * **generator-encodable:** add new generator package ([#43](https://github.com/apache-superset/encodable/issues/43)) ([fc48289](https://github.com/apache-superset/encodable/commit/fc48289dd487bdd71550d143d2854e9be74d2cd7))
 * **registry:** add makeSingleton ([#44](https://github.com/apache-superset/encodable/issues/44)) ([5251e90](https://github.com/apache-superset/encodable/commit/5251e903f54ae5cfc525e932a41543d656e3cf75))
 * add color scheme resolver ([#36](https://github.com/apache-superset/encodable/issues/36)) ([7ef3856](https://github.com/apache-superset/encodable/commit/7ef3856b906ff4dcd19bfb6477983760ad91b7ae))
