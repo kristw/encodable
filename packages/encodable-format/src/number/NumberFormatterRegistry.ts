@@ -9,7 +9,7 @@ export default class NumberFormatterRegistry extends SyncRegistry<NumberFormatte
     name = 'NumberFormatter',
     overwritePolicy = OverwritePolicy.WARN,
     ...rest
-  }: RegistryConfig) {
+  }: RegistryConfig = {}) {
     super({
       name,
       overwritePolicy,

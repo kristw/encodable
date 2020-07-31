@@ -1,4 +1,4 @@
-import { NumberFormatter, NumberFormatFunction, NumberFormatterConfig } from '../../types';
+import { NumberFormatter, NumberFormatFunction, NumberFormatterConfig } from '../types';
 
 function cleanAndFormat(
   value: number | null | undefined,

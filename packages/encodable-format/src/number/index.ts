@@ -1,16 +1,13 @@
+import { makeSingleton } from '@encodable/registry';
 import NumberFormatterRegistry from './NumberFormatterRegistry';
 
-let singleton: NumberFormatterRegistry | undefined;
-
-export function getNumberFormatterRegistry() {
-  if (typeof singleton === 'undefined') {
-    singleton = new NumberFormatterRegistry({
+export const getNumberFormatterRegistry = makeSingleton(
+  () =>
+    new NumberFormatterRegistry({
       isGlobal: true,
-      registryId: '@encodable/format:NumberFormatterRegistry',
-    });
-  }
-  return singleton;
-}
+      globalId: '@encodable/format:NumberFormatterRegistry',
+    }),
+);
 
 export function getNumberFormatter(format?: string) {
   return getNumberFormatterRegistry().get(format);
@@ -20,6 +17,7 @@ export function formatNumber(format: string | undefined, value: number | null | 
   return getNumberFormatterRegistry().format(format, value);
 }
 
+export { NumberFormatterRegistry };
 export { default as NumberFormats } from './NumberFormats';
 export { default as createNumberFormatter } from './createNumberFormatter';
 export { default as previewNumber } from './previewNumber';

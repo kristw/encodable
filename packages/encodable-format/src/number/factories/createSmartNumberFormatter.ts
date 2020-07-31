@@ -1,7 +1,7 @@
 import { format as d3Format } from 'd3-format';
 import NumberFormats from '../NumberFormats';
 import createNumberFormatter from '../createNumberFormatter';
-import { NumberFormatterConfig } from '../../../types';
+import { NumberFormatterConfig } from '../../types';
 
 const siFormatter = d3Format(`.3~s`);
 const float2PointFormatter = d3Format(`.2~f`);
