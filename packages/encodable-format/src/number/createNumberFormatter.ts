@@ -26,7 +26,7 @@ export default function createNumberFormatter(
   const format: NumberFormatter = value => cleanAndFormat(value, formatFunc);
 
   if (typeof metadata !== 'undefined') {
-    const { id, label, description = '', isInvalid = false } = metadata;
+    const { id, label, description, isInvalid = false } = metadata;
     format.id = id;
     format.label = label;
     format.description = description;

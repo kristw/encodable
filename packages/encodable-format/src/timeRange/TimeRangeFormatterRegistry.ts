@@ -1,44 +1,20 @@
-import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
+import { RegistryConfig } from '@encodable/registry';
 import TimeFormats from '../time/TimeFormats';
-import { TimeRangeFormatter, TimeFormatInput } from '../types';
+import { TimeRangeFormatter } from '../types';
 import createNaiveTimeRangeFormatter from './factories/createNaiveTimeRangeFormatter';
+import FormatterRegistry from '../FormatterRegistry';
 
-export default class TimeRangeFormatterRegistry extends SyncRegistry<TimeRangeFormatter> {
+export default class TimeRangeFormatterRegistry extends FormatterRegistry<TimeRangeFormatter> {
   constructor({
     defaultKey = TimeFormats.DATABASE_DATETIME,
     name = 'TimeRangeFormatter',
-    overwritePolicy = OverwritePolicy.WARN,
     ...rest
   }: RegistryConfig = {}) {
-    super({
-      defaultKey,
-      name,
-      overwritePolicy,
-      ...rest,
-    });
+    super({ defaultKey, name, ...rest });
   }
 
-  get(format?: string) {
-    const targetFormat = `${
-      format === null || typeof format === 'undefined' || format === ''
-        ? this.getDefaultKey()
-        : format
-    }`.trim();
-
-    if (this.has(targetFormat)) {
-      return super.get(targetFormat) as TimeRangeFormatter;
-    }
-
-    // Create new formatter if does not exist
-    const formatter = createNaiveTimeRangeFormatter({
-      format: targetFormat,
-    });
-    this.registerValue(targetFormat, formatter);
-
-    return formatter;
-  }
-
-  format(format: string | undefined, value: TimeFormatInput[]): string {
-    return this.get(format)(value);
+  // eslint-disable-next-line class-methods-use-this
+  protected createFormatter(format: string) {
+    return createNaiveTimeRangeFormatter({ format });
   }
 }

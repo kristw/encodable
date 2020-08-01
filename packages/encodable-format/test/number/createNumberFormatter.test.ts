@@ -12,9 +12,6 @@ describe('createNumberFormatter(config)', () => {
       const value = 12345.67;
       expect(formatter(value)).toEqual(formatter(value));
     });
-  });
-  describe('.format(value)', () => {
-    const formatter = createNumberFormatter(value => value.toFixed(3));
     it('handles null', () => {
       expect(formatter(null)).toEqual('null');
     });
@@ -31,5 +28,9 @@ describe('createNumberFormatter(config)', () => {
     it('otherwise returns formatted value', () => {
       expect(formatter(12345.67)).toEqual('12345.670');
     });
+  });
+  it('metadata is optional', () => {
+    const formatter = createNumberFormatter(value => value.toFixed(3));
+    expect(formatter(12345.67)).toEqual('12345.670');
   });
 });

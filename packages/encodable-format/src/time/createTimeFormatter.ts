@@ -20,7 +20,7 @@ export default function createTimeFormatter(
   const format: TimeFormatter = value => cleanAndFormat(value, formatFunc);
 
   if (typeof metadata !== 'undefined') {
-    const { id, label, description = '', useLocalTime = false } = metadata;
+    const { id, label, description, useLocalTime } = metadata;
     format.id = id;
     format.label = label;
     format.description = description;

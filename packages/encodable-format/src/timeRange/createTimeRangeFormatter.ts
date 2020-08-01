@@ -7,7 +7,7 @@ export default function createTimeRangeFormatter(
   const format: TimeRangeFormatter = value => formatFunc(value);
 
   if (typeof metadata !== 'undefined') {
-    const { id, label, description = '', useLocalTime = false } = metadata;
+    const { id, label, description, useLocalTime } = metadata;
     format.id = id;
     format.label = label;
     format.description = description;
