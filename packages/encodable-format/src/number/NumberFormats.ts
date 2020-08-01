@@ -1,4 +1,4 @@
-import addSign from '../utils/addSign';
+import { addSign } from '../utils/prefix';
 
 const unsigned = {
   CURRENCY: '$,.2f',

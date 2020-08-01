@@ -2,15 +2,15 @@ import { utcFormat, timeFormat, timeFormatLocale, TimeLocaleDefinition } from 'd
 import { LOCAL_TIME_PREFIX } from '../TimeFormats';
 import createTimeFormatter from '../createTimeFormatter';
 import { TimeFormatterMetadata } from '../../types';
-import addPrefix from '../../utils/addPrefix';
+import { addPrefix } from '../../utils/prefix';
 
 interface Config extends TimeFormatterMetadata {
-  formatString: string;
+  format: string;
   locale?: TimeLocaleDefinition;
 }
 
 export default function createD3TimeFormatter({
-  formatString,
+  format,
   locale,
   useLocalTime = false,
   id,
@@ -20,17 +20,15 @@ export default function createD3TimeFormatter({
   let formatFunc;
 
   if (typeof locale === 'undefined') {
-    const format = useLocalTime ? timeFormat : utcFormat;
-    formatFunc = format(formatString);
+    const factory = useLocalTime ? timeFormat : utcFormat;
+    formatFunc = factory(format);
   } else {
     const localeObject = timeFormatLocale(locale);
-    formatFunc = useLocalTime
-      ? localeObject.format(formatString)
-      : localeObject.utcFormat(formatString);
+    formatFunc = useLocalTime ? localeObject.format(format) : localeObject.utcFormat(format);
   }
 
   return createTimeFormatter(formatFunc, {
-    id: id ?? (useLocalTime ? addPrefix(LOCAL_TIME_PREFIX, formatString) : formatString),
+    id: id ?? (useLocalTime ? addPrefix(LOCAL_TIME_PREFIX, format) : format),
     label,
     description,
     useLocalTime,

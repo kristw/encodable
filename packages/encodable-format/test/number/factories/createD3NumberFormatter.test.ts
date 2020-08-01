@@ -3,22 +3,22 @@ import createD3NumberFormatter from '../../../src/number/factories/createD3Numbe
 describe('createD3NumberFormatter(config)', () => {
   describe('config.formatString', () => {
     it('creates a NumberFormatter with the formatString as id', () => {
-      const formatter = createD3NumberFormatter({ formatString: '.2f' });
+      const formatter = createD3NumberFormatter({ format: '.2f' });
       expect(formatter.id).toEqual('.2f');
     });
     describe('if it is valid d3 formatString', () => {
       it('uses d3.format(config.formatString) as format function', () => {
-        const formatter = createD3NumberFormatter({ formatString: '.2f' });
+        const formatter = createD3NumberFormatter({ format: '.2f' });
         expect(formatter(100)).toEqual('100.00');
       });
     });
     describe('if it is invalid d3 formatString', () => {
       it('The format function displays error message', () => {
-        const formatter = createD3NumberFormatter({ formatString: 'i-am-groot' });
+        const formatter = createD3NumberFormatter({ format: 'i-am-groot' });
         expect(formatter(12345.67)).toEqual('12345.67 (Invalid format: i-am-groot)');
       });
       it('also set formatter.isInvalid to true', () => {
-        const formatter = createD3NumberFormatter({ formatString: 'i-am-groot' });
+        const formatter = createD3NumberFormatter({ format: 'i-am-groot' });
         expect(formatter.isInvalid).toEqual(true);
       });
     });
@@ -26,7 +26,7 @@ describe('createD3NumberFormatter(config)', () => {
   describe('config.label', () => {
     it('set label if specified', () => {
       const formatter = createD3NumberFormatter({
-        formatString: '.2f',
+        format: '.2f',
         label: 'float formatter',
       });
       expect(formatter.label).toEqual('float formatter');
@@ -36,7 +36,7 @@ describe('createD3NumberFormatter(config)', () => {
     it('set decription if specified', () => {
       const formatter = createD3NumberFormatter({
         description: 'lorem ipsum',
-        formatString: '.2f',
+        format: '.2f',
       });
       expect(formatter.description).toEqual('lorem ipsum');
     });
@@ -45,7 +45,7 @@ describe('createD3NumberFormatter(config)', () => {
     it('supports locale customization such as currency', () => {
       const formatter = createD3NumberFormatter({
         description: 'lorem ipsum',
-        formatString: '$.2f',
+        format: '$.2f',
         locale: {
           decimal: '.',
           thousands: ',',

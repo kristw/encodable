@@ -2,6 +2,7 @@ import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/regist
 import TimeFormats, { LOCAL_TIME_PREFIX } from './TimeFormats';
 import createD3TimeFormatter from './factories/createD3TimeFormatter';
 import { TimeFormatter } from '../types';
+import { removePrefix } from '../utils/prefix';
 
 export default class TimeFormatterRegistry extends SyncRegistry<TimeFormatter> {
   constructor({
@@ -30,9 +31,10 @@ export default class TimeFormatterRegistry extends SyncRegistry<TimeFormatter> {
     }
 
     // Create new formatter if does not exist
-    const useLocalTime = targetFormat.startsWith(LOCAL_TIME_PREFIX);
-    const formatString = targetFormat.replace(LOCAL_TIME_PREFIX, '');
-    const formatter = createD3TimeFormatter({ formatString, useLocalTime });
+    const formatter = createD3TimeFormatter({
+      format: removePrefix(LOCAL_TIME_PREFIX, targetFormat),
+      useLocalTime: targetFormat.startsWith(LOCAL_TIME_PREFIX),
+    });
     this.registerValue(targetFormat, formatter);
 
     return formatter;

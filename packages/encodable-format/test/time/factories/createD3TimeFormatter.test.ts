@@ -44,13 +44,13 @@ describe('createD3TimeFormatter(config)', () => {
   describe('config.useLocalTime', () => {
     it('if falsy, formats in UTC time', () => {
       const formatter = createD3TimeFormatter({
-        formatString: TimeFormats.DATABASE_DATETIME,
+        format: TimeFormats.DATABASE_DATETIME,
       });
       expect(formatter(PREVIEW_TIME)).toEqual('2017-02-14 11:22:33');
     });
     it('if true, formats in local time', () => {
       const formatter = createD3TimeFormatter({
-        formatString: TimeFormats.DATABASE_DATETIME,
+        format: TimeFormats.DATABASE_DATETIME,
         useLocalTime: true,
       });
       const offset = new Date().getTimezoneOffset();
@@ -67,14 +67,14 @@ describe('createD3TimeFormatter(config)', () => {
     const TEST_TIME = new Date(Date.UTC(2015, 11, 20));
     it('supports locale customization (utc time)', () => {
       const formatter = createD3TimeFormatter({
-        formatString: '%c',
+        format: '%c',
         locale: thLocale,
       });
       expect(formatter(TEST_TIME)).toEqual('อา. 20 ธ.ค. 2015 00:00:00');
     });
     it('supports locale customization (local time)', () => {
       const formatter = createD3TimeFormatter({
-        formatString: '%c',
+        format: '%c',
         locale: thLocale,
         useLocalTime: true,
       });

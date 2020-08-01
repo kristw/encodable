@@ -34,7 +34,7 @@ export default class NumberFormatterRegistry extends SyncRegistry<NumberFormatte
 
     // Create new formatter if does not exist
     const formatter = createD3NumberFormatter({
-      formatString: targetFormat,
+      format: targetFormat,
     });
     this.registerValue(targetFormat, formatter);
 
