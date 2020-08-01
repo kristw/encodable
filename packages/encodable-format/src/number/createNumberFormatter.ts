@@ -1,4 +1,4 @@
-import { NumberFormatter, NumberFormatFunction, NumberFormatterConfig } from '../types';
+import { NumberFormatter, NumberFormatFunction, NumberFormatterMetadata } from '../types';
 
 function cleanAndFormat(
   value: number | null | undefined,
@@ -17,20 +17,19 @@ function cleanAndFormat(
   return formatFunc(value);
 }
 
-export default function createNumberFormatter({
-  id,
-  label,
-  description = '',
-  formatFunc,
-  isInvalid = false,
-}: NumberFormatterConfig) {
-  const format: NumberFormatter = (value: number | null | undefined) =>
-    cleanAndFormat(value, formatFunc);
+export default function createNumberFormatter(
+  formatFunc: NumberFormatFunction,
+  metadata?: NumberFormatterMetadata,
+) {
+  const format: NumberFormatter = value => cleanAndFormat(value, formatFunc);
 
-  format.id = id;
-  format.label = label;
-  format.description = description;
-  format.isInvalid = isInvalid;
+  if (typeof metadata !== 'undefined') {
+    const { id, label, description = '', isInvalid = false } = metadata;
+    format.id = id;
+    format.label = label;
+    format.description = description;
+    format.isInvalid = isInvalid;
+  }
 
   return format;
 }

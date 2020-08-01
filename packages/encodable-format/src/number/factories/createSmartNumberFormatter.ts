@@ -44,10 +44,9 @@ export default function createSmartNumberFormatter({
 }: Config = {}) {
   const getSign = signed ? ADD_PLUS : BLANK;
 
-  return createNumberFormatter({
-    description,
-    formatFunc: value => `${getSign(value)}${formatValue(value)}`,
+  return createNumberFormatter(value => `${getSign(value)}${formatValue(value)}`, {
     id: id ?? signed ? NumberFormats.signed.SMART_NUMBER : NumberFormats.SMART_NUMBER,
     label: label ?? 'Adaptive formatter',
+    description,
   });
 }

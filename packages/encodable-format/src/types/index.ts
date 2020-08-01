@@ -12,10 +12,6 @@ export interface NumberFormatterMetadata extends FormatterMetadata {
   isInvalid?: boolean;
 }
 
-export interface NumberFormatterConfig extends NumberFormatterMetadata {
-  formatFunc: NumberFormatFunction;
-}
-
 export interface NumberFormatter extends NumberFormatterMetadata {
   (value: number | null | undefined): string;
 }
@@ -28,10 +24,6 @@ export interface TimeFormatterMetadata extends FormatterMetadata {
   useLocalTime?: boolean;
 }
 
-export interface TimeFormatterConfig extends TimeFormatterMetadata {
-  formatFunc: TimeFormatFunction;
-}
-
 export interface TimeFormatter extends TimeFormatterMetadata {
   (value: Date | number | null | undefined): string;
 }
@@ -39,10 +31,6 @@ export interface TimeFormatter extends TimeFormatterMetadata {
 // Time Range
 
 export type TimeRangeFormatFunction = (values: (Date | number | undefined | null)[]) => string;
-
-export interface TimeRangeFormatterConfig extends TimeFormatterMetadata {
-  formatFunc: TimeRangeFormatFunction;
-}
 
 export interface TimeRangeFormatter extends TimeFormatterMetadata {
   (value: (Date | number | null | undefined)[]): string;

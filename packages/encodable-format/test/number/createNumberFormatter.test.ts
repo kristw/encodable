@@ -2,9 +2,8 @@ import createNumberFormatter from '../../src/number/createNumberFormatter';
 
 describe('createNumberFormatter(config)', () => {
   describe('formatter is also a format function itself', () => {
-    const formatter = createNumberFormatter({
+    const formatter = createNumberFormatter(value => value.toFixed(3), {
       id: 'fixed_3',
-      formatFunc: value => value.toFixed(3),
     });
     it('returns formatted value', () => {
       expect(formatter(12345.67)).toEqual('12345.670');
@@ -15,10 +14,7 @@ describe('createNumberFormatter(config)', () => {
     });
   });
   describe('.format(value)', () => {
-    const formatter = createNumberFormatter({
-      id: 'fixed_3',
-      formatFunc: value => value.toFixed(3),
-    });
+    const formatter = createNumberFormatter(value => value.toFixed(3));
     it('handles null', () => {
       expect(formatter(null)).toEqual('null');
     });

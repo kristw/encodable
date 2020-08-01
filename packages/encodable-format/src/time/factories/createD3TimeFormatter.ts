@@ -29,11 +29,10 @@ export default function createD3TimeFormatter({
       : localeObject.utcFormat(formatString);
   }
 
-  return createTimeFormatter({
-    description,
-    formatFunc,
+  return createTimeFormatter(formatFunc, {
     id: id ?? (useLocalTime ? addPrefix(LOCAL_TIME_PREFIX, formatString) : formatString),
     label,
+    description,
     useLocalTime,
   });
 }

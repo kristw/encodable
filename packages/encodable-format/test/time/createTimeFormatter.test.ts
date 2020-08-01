@@ -3,9 +3,8 @@ import { PREVIEW_TIME } from '../../src/time/previewTime';
 
 describe('createTimeFormatter(config)', () => {
   describe('formatter is also a format function itself', () => {
-    const formatter = createTimeFormatter({
+    const formatter = createTimeFormatter((value: Date) => `${value.getFullYear()}`, {
       id: 'year_only',
-      formatFunc: (value: Date) => `${value.getFullYear()}`,
     });
     it('returns formatted value', () => {
       expect(formatter(PREVIEW_TIME)).toEqual('2017');
@@ -16,9 +15,8 @@ describe('createTimeFormatter(config)', () => {
     });
   });
   describe('.format(value)', () => {
-    const formatter = createTimeFormatter({
+    const formatter = createTimeFormatter(value => `${value.getFullYear()}`, {
       id: 'year_only',
-      formatFunc: value => `${value.getFullYear()}`,
     });
     it('handles null', () => {
       expect(formatter(null)).toEqual('null');

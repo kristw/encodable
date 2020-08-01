@@ -1,18 +1,18 @@
-import { TimeRangeFormatter, TimeRangeFormatterConfig } from '../types';
+import { TimeRangeFormatter, TimeRangeFormatFunction, TimeFormatterMetadata } from '../types';
 
-export default function createTimeRangeFormatter({
-  id,
-  label,
-  description = '',
-  formatFunc,
-  useLocalTime = false,
-}: TimeRangeFormatterConfig) {
+export default function createTimeRangeFormatter(
+  formatFunc: TimeRangeFormatFunction,
+  metadata?: TimeFormatterMetadata,
+) {
   const format: TimeRangeFormatter = value => formatFunc(value);
 
-  format.id = id;
-  format.label = label;
-  format.description = description;
-  format.useLocalTime = useLocalTime;
+  if (typeof metadata !== 'undefined') {
+    const { id, label, description = '', useLocalTime = false } = metadata;
+    format.id = id;
+    format.label = label;
+    format.description = description;
+    format.useLocalTime = useLocalTime;
+  }
 
   return format;
 }

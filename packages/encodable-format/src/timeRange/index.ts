@@ -3,15 +3,17 @@ import createTimeRangeFormatter from './createTimeRangeFormatter';
 import { getTimeFormatterRegistry } from '../time';
 
 export function getTimeRangeFormatter(formatId?: string) {
-  return createTimeRangeFormatter({
-    id: formatId || 'undefined',
-    formatFunc: (range: (Date | number | null | undefined)[]) => {
+  return createTimeRangeFormatter(
+    range => {
       const format = getTimeFormatterRegistry().get(formatId);
       const [start, end] = range.map(value => format(value));
       return start === end ? start : [start, end].join(' — ');
     },
-    useLocalTime: formatId?.startsWith(LOCAL_TIME_PREFIX),
-  });
+    {
+      id: formatId || 'undefined',
+      useLocalTime: formatId?.startsWith(LOCAL_TIME_PREFIX),
+    },
+  );
 }
 
 export function formatTimeRange(formatId: string | undefined, range: (Date | null | undefined)[]) {

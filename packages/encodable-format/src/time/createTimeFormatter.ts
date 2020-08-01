@@ -1,4 +1,4 @@
-import { TimeFormatter, TimeFormatFunction, TimeFormatterConfig } from '../types';
+import { TimeFormatter, TimeFormatFunction, TimeFormatterMetadata } from '../types';
 
 function cleanAndFormat(value: Date | number | undefined | null, formatFunc: TimeFormatFunction) {
   if (value === null || value === undefined) {
@@ -8,20 +8,19 @@ function cleanAndFormat(value: Date | number | undefined | null, formatFunc: Tim
   return formatFunc(value instanceof Date ? value : new Date(value));
 }
 
-export default function createTimeFormatter({
-  id,
-  label,
-  description = '',
-  formatFunc,
-  useLocalTime = false,
-}: TimeFormatterConfig) {
-  const format: TimeFormatter = (value: Date | number | undefined | null) =>
-    cleanAndFormat(value, formatFunc);
+export default function createTimeFormatter(
+  formatFunc: TimeFormatFunction,
+  metadata?: TimeFormatterMetadata,
+) {
+  const format: TimeFormatter = value => cleanAndFormat(value, formatFunc);
 
-  format.id = id;
-  format.label = label;
-  format.description = description;
-  format.useLocalTime = useLocalTime;
+  if (typeof metadata !== 'undefined') {
+    const { id, label, description = '', useLocalTime = false } = metadata;
+    format.id = id;
+    format.label = label;
+    format.description = description;
+    format.useLocalTime = useLocalTime;
+  }
 
   return format;
 }

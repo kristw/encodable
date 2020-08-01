@@ -81,11 +81,10 @@ export default function createMultiFormatter({
     return formatYear;
   }
 
-  return createTimeFormatter({
-    description,
-    formatFunc: (date: Date) => multiFormatFunc(date)(date),
+  return createTimeFormatter(date => multiFormatFunc(date)(date), {
     id,
     label,
+    description,
     useLocalTime,
   });
 }

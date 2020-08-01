@@ -27,11 +27,10 @@ export default function createD3NumberFormatter({
     isInvalid = true;
   }
 
-  return createNumberFormatter({
-    formatFunc,
+  return createNumberFormatter(formatFunc, {
     id: id ?? formatString,
-    isInvalid,
     label,
     description,
+    isInvalid,
   });
 }
