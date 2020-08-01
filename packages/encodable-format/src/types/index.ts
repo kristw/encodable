@@ -40,6 +40,10 @@ export interface TimeFormatter extends TimeFormatterMetadata {
 
 export type TimeRangeFormatFunction = (values: (Date | number | undefined | null)[]) => string;
 
+export interface TimeRangeFormatterConfig extends TimeFormatterMetadata {
+  formatFunc: TimeRangeFormatFunction;
+}
+
 export interface TimeRangeFormatter extends TimeFormatterMetadata {
   (value: (Date | number | null | undefined)[]): string;
 }
