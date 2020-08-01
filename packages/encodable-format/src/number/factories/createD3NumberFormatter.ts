@@ -1,11 +1,11 @@
 import { format as d3Format, formatLocale, FormatLocaleDefinition } from 'd3-format';
-import { NumberFormatterConfig, NumberFormatFunction } from '../../types';
+import { NumberFormatFunction, NumberFormatterMetadata } from '../../types';
 import createNumberFormatter from '../createNumberFormatter';
 
-type Config = Omit<NumberFormatterConfig, 'formatFunc'> & {
+interface Config extends NumberFormatterMetadata {
   formatString: string;
   locale?: FormatLocaleDefinition;
-};
+}
 
 export default function createD3NumberFormatter({
   formatString,

@@ -1,7 +1,7 @@
 import { format as d3Format } from 'd3-format';
 import NumberFormats from '../NumberFormats';
 import createNumberFormatter from '../createNumberFormatter';
-import { NumberFormatterConfig } from '../../types';
+import { NumberFormatterMetadata } from '../../types';
 
 const siFormatter = d3Format(`.3~s`);
 const float2PointFormatter = d3Format(`.2~f`);
@@ -29,9 +29,9 @@ function formatValue(value: number) {
   return siFormatter(value);
 }
 
-type Config = Omit<NumberFormatterConfig, 'formatFunc'> & {
+interface Config extends NumberFormatterMetadata {
   signed?: boolean;
-};
+}
 
 const BLANK = () => '';
 const ADD_PLUS = (value: number) => (value > 0 ? '+' : '');
