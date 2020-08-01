@@ -1,6 +1,11 @@
-import { TimeFormatter, TimeFormatFunction, TimeFormatterMetadata } from '../types';
+import {
+  TimeFormatter,
+  TimeFormatFunction,
+  TimeFormatterMetadata,
+  TimeFormatInput,
+} from '../types';
 
-function cleanAndFormat(value: Date | number | undefined | null, formatFunc: TimeFormatFunction) {
+function cleanAndFormat(value: TimeFormatInput, formatFunc: TimeFormatFunction) {
   if (value === null || value === undefined) {
     return `${value}`;
   }

@@ -1,9 +1,11 @@
-import { NumberFormatter, NumberFormatFunction, NumberFormatterMetadata } from '../types';
+import {
+  NumberFormatter,
+  NumberFormatFunction,
+  NumberFormatterMetadata,
+  NumberFormatInput,
+} from '../types';
 
-function cleanAndFormat(
-  value: number | null | undefined,
-  formatFunc: NumberFormatFunction,
-): string {
+function cleanAndFormat(value: NumberFormatInput, formatFunc: NumberFormatFunction): string {
   if (value === null || value === undefined || Number.isNaN(value)) {
     return `${value}`;
   }

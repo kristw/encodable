@@ -1,13 +1,12 @@
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
-import TimeFormats, { LOCAL_TIME_PREFIX } from './TimeFormats';
-import createD3TimeFormatter from './factories/createD3TimeFormatter';
-import { TimeFormatter, TimeFormatInput } from '../types';
-import { removePrefix } from '../utils/prefix';
+import TimeFormats from '../time/TimeFormats';
+import { TimeRangeFormatter, TimeFormatInput } from '../types';
+import createNaiveTimeRangeFormatter from './factories/createNaiveTimeRangeFormatter';
 
-export default class TimeFormatterRegistry extends SyncRegistry<TimeFormatter> {
+export default class TimeRangeFormatterRegistry extends SyncRegistry<TimeRangeFormatter> {
   constructor({
     defaultKey = TimeFormats.DATABASE_DATETIME,
-    name = 'TimeFormatter',
+    name = 'TimeRangeFormatter',
     overwritePolicy = OverwritePolicy.WARN,
     ...rest
   }: RegistryConfig = {}) {
@@ -27,20 +26,19 @@ export default class TimeFormatterRegistry extends SyncRegistry<TimeFormatter> {
     }`.trim();
 
     if (this.has(targetFormat)) {
-      return super.get(targetFormat) as TimeFormatter;
+      return super.get(targetFormat) as TimeRangeFormatter;
     }
 
     // Create new formatter if does not exist
-    const formatter = createD3TimeFormatter({
-      format: removePrefix(LOCAL_TIME_PREFIX, targetFormat),
-      useLocalTime: targetFormat.startsWith(LOCAL_TIME_PREFIX),
+    const formatter = createNaiveTimeRangeFormatter({
+      format: targetFormat,
     });
     this.registerValue(targetFormat, formatter);
 
     return formatter;
   }
 
-  format(format: string | undefined, value: TimeFormatInput): string {
+  format(format: string | undefined, value: TimeFormatInput[]): string {
     return this.get(format)(value);
   }
 }

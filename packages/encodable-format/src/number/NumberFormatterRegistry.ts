@@ -2,7 +2,7 @@ import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/regist
 import createD3NumberFormatter from './factories/createD3NumberFormatter';
 import createSmartNumberFormatter from './factories/createSmartNumberFormatter';
 import Formats from './NumberFormats';
-import { NumberFormatter } from '../types';
+import { NumberFormatter, NumberFormatInput } from '../types';
 
 export default class NumberFormatterRegistry extends SyncRegistry<NumberFormatter> {
   constructor({
@@ -21,11 +21,11 @@ export default class NumberFormatterRegistry extends SyncRegistry<NumberFormatte
     this.setDefaultKey(Formats.SMART_NUMBER);
   }
 
-  get(formatterId?: string) {
+  get(format?: string) {
     const targetFormat = `${
-      formatterId === null || typeof formatterId === 'undefined' || formatterId === ''
+      format === null || typeof format === 'undefined' || format === ''
         ? this.getDefaultKey()
-        : formatterId
+        : format
     }`.trim();
 
     if (this.has(targetFormat)) {
@@ -41,7 +41,7 @@ export default class NumberFormatterRegistry extends SyncRegistry<NumberFormatte
     return formatter;
   }
 
-  format(formatterId: string | undefined, value: number | null | undefined): string {
-    return this.get(formatterId)(value);
+  format(format: string | undefined, value: NumberFormatInput): string {
+    return this.get(format)(value);
   }
 }

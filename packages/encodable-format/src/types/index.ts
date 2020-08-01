@@ -6,6 +6,8 @@ interface FormatterMetadata {
 
 // Number
 
+export type NumberFormatInput = number | null | undefined;
+
 export type NumberFormatFunction = (value: number) => string;
 
 export interface NumberFormatterMetadata extends FormatterMetadata {
@@ -13,10 +15,12 @@ export interface NumberFormatterMetadata extends FormatterMetadata {
 }
 
 export interface NumberFormatter extends NumberFormatterMetadata {
-  (value: number | null | undefined): string;
+  (value: NumberFormatInput): string;
 }
 
 // Time
+
+export type TimeFormatInput = Date | number | null | undefined;
 
 export type TimeFormatFunction = (value: Date) => string;
 
@@ -25,13 +29,13 @@ export interface TimeFormatterMetadata extends FormatterMetadata {
 }
 
 export interface TimeFormatter extends TimeFormatterMetadata {
-  (value: Date | number | null | undefined): string;
+  (value: TimeFormatInput): string;
 }
 
 // Time Range
 
-export type TimeRangeFormatFunction = (values: (Date | number | undefined | null)[]) => string;
+export type TimeRangeFormatFunction = (values: TimeFormatInput[]) => string;
 
 export interface TimeRangeFormatter extends TimeFormatterMetadata {
-  (value: (Date | number | null | undefined)[]): string;
+  (value: TimeFormatInput[]): string;
 }

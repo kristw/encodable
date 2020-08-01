@@ -1,5 +1,6 @@
 import { makeSingleton } from '@encodable/registry';
 import NumberFormatterRegistry from './NumberFormatterRegistry';
+import { NumberFormatInput } from '../types';
 
 export const getNumberFormatterRegistry = makeSingleton(
   () =>
@@ -13,7 +14,7 @@ export function getNumberFormatter(format?: string) {
   return getNumberFormatterRegistry().get(format);
 }
 
-export function formatNumber(format: string | undefined, value: number | null | undefined) {
+export function formatNumber(format: string | undefined, value: NumberFormatInput) {
   return getNumberFormatterRegistry().format(format, value);
 }
 

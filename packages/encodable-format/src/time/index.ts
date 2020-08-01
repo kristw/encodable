@@ -1,5 +1,6 @@
 import { makeSingleton } from '@encodable/registry';
 import TimeFormatterRegistry from './TimeFormatterRegistry';
+import { TimeFormatInput } from '../types';
 
 export const getTimeFormatterRegistry = makeSingleton(
   () =>
@@ -13,7 +14,7 @@ export function getTimeFormatter(format?: string) {
   return getTimeFormatterRegistry().get(format);
 }
 
-export function formatTime(format: string | undefined, value: Date | null | undefined) {
+export function formatTime(format: string | undefined, value: TimeFormatInput) {
   return getTimeFormatterRegistry().format(format, value);
 }
 
