@@ -1,5 +1,8 @@
-describe('My Test', () => {
-  it('tests something', () => {
-    expect(1).toEqual(1);
+import { getNumberFormatterRegistry, getTimeFormatterRegistry } from '../src';
+
+describe('@encodable/format', () => {
+  it('exports', () => {
+    expect(getNumberFormatterRegistry).toBeDefined();
+    expect(getTimeFormatterRegistry).toBeDefined();
   });
 });

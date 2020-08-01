@@ -1,4 +1,4 @@
-import addSign from '../utils/addSign';
+import { addSign } from '../utils/prefix';
 
 const unsigned = {
   CURRENCY: '$,.2f',
@@ -17,7 +17,7 @@ const unsigned = {
   SI_3_DIGIT: '.3s',
   SI: '.3s',
   SMART_NUMBER: 'SMART_NUMBER',
-} as const;
+};
 
 type FormatName = keyof typeof unsigned;
 

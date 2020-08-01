@@ -1,14 +1,14 @@
 import { format as d3Format, formatLocale, FormatLocaleDefinition } from 'd3-format';
-import { NumberFormatterConfig, NumberFormatFunction } from '../../types';
+import { NumberFormatFunction, NumberFormatterMetadata } from '../../types';
 import createNumberFormatter from '../createNumberFormatter';
 
-type Config = Omit<NumberFormatterConfig, 'formatFunc'> & {
-  formatString: string;
+interface Config extends NumberFormatterMetadata {
+  format: string;
   locale?: FormatLocaleDefinition;
-};
+}
 
 export default function createD3NumberFormatter({
-  formatString,
+  format,
   locale,
   id,
   label,
@@ -19,19 +19,16 @@ export default function createD3NumberFormatter({
 
   try {
     formatFunc =
-      typeof locale === 'undefined'
-        ? d3Format(formatString)
-        : formatLocale(locale).format(formatString);
+      typeof locale === 'undefined' ? d3Format(format) : formatLocale(locale).format(format);
   } catch (error) {
-    formatFunc = value => `${value} (Invalid format: ${formatString})`;
+    formatFunc = value => `${value} (Invalid format: ${format})`;
     isInvalid = true;
   }
 
-  return createNumberFormatter({
-    formatFunc,
-    id: id ?? formatString,
-    isInvalid,
+  return createNumberFormatter(formatFunc, {
+    id: id ?? format,
     label,
     description,
+    isInvalid,
   });
 }

@@ -1,7 +1,7 @@
 import { format as d3Format } from 'd3-format';
 import NumberFormats from '../NumberFormats';
 import createNumberFormatter from '../createNumberFormatter';
-import { NumberFormatterConfig } from '../../types';
+import { NumberFormatterMetadata } from '../../types';
 
 const siFormatter = d3Format(`.3~s`);
 const float2PointFormatter = d3Format(`.2~f`);
@@ -29,9 +29,9 @@ function formatValue(value: number) {
   return siFormatter(value);
 }
 
-type Config = Omit<NumberFormatterConfig, 'formatFunc'> & {
+interface Config extends NumberFormatterMetadata {
   signed?: boolean;
-};
+}
 
 const BLANK = () => '';
 const ADD_PLUS = (value: number) => (value > 0 ? '+' : '');
@@ -44,10 +44,9 @@ export default function createSmartNumberFormatter({
 }: Config = {}) {
   const getSign = signed ? ADD_PLUS : BLANK;
 
-  return createNumberFormatter({
-    description,
-    formatFunc: value => `${getSign(value)}${formatValue(value)}`,
+  return createNumberFormatter(value => `${getSign(value)}${formatValue(value)}`, {
     id: id ?? signed ? NumberFormats.signed.SMART_NUMBER : NumberFormats.SMART_NUMBER,
     label: label ?? 'Adaptive formatter',
+    description,
   });
 }
