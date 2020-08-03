@@ -16,3 +16,5 @@ export function getTimeRangeFormatter(format?: string) {
 export function formatTimeRange(format: string | undefined, range: TimeFormatInput[]) {
   return getTimeRangeFormatter(format)(range);
 }
+
+export { TimeRangeFormatterRegistry };

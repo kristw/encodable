@@ -13,7 +13,7 @@ type FormatsByStep = Partial<{
   year: string;
 }>;
 
-export default function createMultiFormatter({
+export default function createMultiTimeFormatter({
   id,
   label,
   description,
