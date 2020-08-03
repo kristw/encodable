@@ -18,8 +18,7 @@
       "graphType": "all"
     },
     "version": {
-      "message": "chore: publish",
-      "exact": true
+      "message": "chore: publish"
     }
   }
 }

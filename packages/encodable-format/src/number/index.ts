@@ -5,7 +5,6 @@ import { NumberFormatInput } from '../types';
 export const getNumberFormatterRegistry = makeSingleton(
   () =>
     new NumberFormatterRegistry({
-      isGlobal: true,
       globalId: '@encodable/format:NumberFormatterRegistry',
     }),
 );
