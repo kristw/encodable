@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { SyncRegistry, RegistryConfig } from '@encodable/registry';
-import { ColorScheme } from './types';
+import { ColorScheme } from '../types';
 
 type ChildRegistryConfig = Pick<RegistryConfig, 'defaultKey'> & {
   name: string;
