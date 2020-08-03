@@ -1,6 +1,6 @@
-import createMultiFormatter from '../factories/createMultiFormatter';
+import createMultiTimeFormatter from '../factories/createMultiTimeFormatter';
 
-const smartDateFormatter = createMultiFormatter({
+const smartDateFormatter = createMultiTimeFormatter({
   id: 'smart_date_verbose',
   label: 'Verbose Adaptative Formatting',
   formats: {

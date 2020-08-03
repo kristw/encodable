@@ -1,8 +1,8 @@
-import createMultiFormatter from '../../../src/time/factories/createMultiFormatter';
+import createMultiTimeFormatter from '../../../src/time/factories/createMultiTimeFormatter';
 
 describe('createMultiFormatter()', () => {
   describe('creates a multi-step formatter', () => {
-    const formatter = createMultiFormatter({
+    const formatter = createMultiTimeFormatter({
       id: 'my_format',
       useLocalTime: true,
     });
