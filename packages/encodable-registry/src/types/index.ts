@@ -17,6 +17,8 @@ export interface RegistryStore<V, L extends V | Promise<V>> {
   globalId?: string;
   /** name of this registry */
   name?: string;
+  /** schema version, can be used to check compatibility */
+  version: string;
   /**
    * fallback key to use if `.get()` was called without a key
    * This was the initial value when the registry was created.
@@ -48,6 +50,8 @@ export interface RegistryConfig {
    * This will make it a true singleton and accessible via this `globalId` from any package.
    */
   globalId?: string;
+  /** schema version, can be used to check compatibility */
+  version?: string;
   /** name of this registry */
   name?: string;
   /** fallback key to use if `.get()` was called without a key */

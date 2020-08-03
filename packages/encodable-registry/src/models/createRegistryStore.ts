@@ -8,6 +8,7 @@ import OverwritePolicy from './OverwritePolicy';
 export default function createRegistryStore<V, W extends V | Promise<V>>({
   globalId,
   name,
+  version = '0.x.x',
   defaultKey,
   setFirstItemAsDefault = false,
   overwritePolicy = OverwritePolicy.ALLOW,
@@ -15,6 +16,7 @@ export default function createRegistryStore<V, W extends V | Promise<V>>({
   return {
     globalId,
     name,
+    version,
     defaultKey,
     initialDefaultKey: defaultKey,
     setFirstItemAsDefault,
