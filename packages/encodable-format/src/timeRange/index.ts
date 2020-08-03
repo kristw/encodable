@@ -5,7 +5,6 @@ import { TimeFormatInput } from '../types';
 export const getTimeRangeFormatterRegistry = makeSingleton(
   () =>
     new TimeRangeFormatterRegistry({
-      isGlobal: true,
       globalId: '@encodable/format:TimeRangeFormatterRegistry',
     }),
 );

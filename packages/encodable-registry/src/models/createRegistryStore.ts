@@ -1,13 +1,19 @@
-import { RegistryStoreConfig, RegistryStore } from '../types';
+import { RegistryConfig, RegistryStore } from '../types';
 import OverwritePolicy from './OverwritePolicy';
 
+/**
+ * Create a registry store from the given config
+ * @param config
+ */
 export default function createRegistryStore<V, W extends V | Promise<V>>({
-  name = '',
+  globalId,
+  name,
   defaultKey,
   setFirstItemAsDefault = false,
   overwritePolicy = OverwritePolicy.ALLOW,
-}: RegistryStoreConfig): RegistryStore<V, W> {
+}: RegistryConfig): RegistryStore<V, W> {
   return {
+    globalId,
     name,
     defaultKey,
     initialDefaultKey: defaultKey,

@@ -9,23 +9,27 @@ import createRegistryStore from './createRegistryStore';
  *
  * Can use generic to specify type of item in the registry
  * @type V Type of value
- * @type W Type of value returned from loader function when using registerLoader().
- * W can be either V, Promise<V> or V | Promise<V>
- * Set W=V when does not support asynchronous loader.
- * By default W is set to V | Promise<V> to support
+ * @type L Type of value returned from loader function when using `registerLoader()`.
+ * `L` can be either `V`, `Promise<V>` or `V | Promise<V>`
+ * Set `L=V` when does not support asynchronous loader.
+ * By default `L` is set to `V | Promise<V>` to support
  * both synchronous and asynchronous loaders.
  */
-export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
-  store: RegistryStore<V, W>;
+export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
+  readonly store: RegistryStore<V, L>;
 
   constructor(config: RegistryConfig = {}) {
-    if (config.isGlobal) {
-      this.store = getStore().getOrCreate(config.globalId, () => createRegistryStore<V, W>(config));
+    if (typeof config.globalId === 'undefined') {
+      this.store = createRegistryStore<V, L>(config);
     } else {
-      this.store = createRegistryStore<V, W>(config);
+      this.store = getStore().getOrCreate(config.globalId, () => createRegistryStore<V, L>(config));
     }
   }
 
+  /**
+   * Clear all item in the registry.
+   * Reset default key to initial default key (if any)
+   */
   clear() {
     this.store.items = {};
     this.store.promises = {};
@@ -34,12 +38,21 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     return this;
   }
 
+  /**
+   * Check if item with the given key exists
+   * @param key the key to look for
+   */
   has(key: string) {
     const item = this.store.items[key];
 
     return item !== null && item !== undefined;
   }
 
+  /**
+   * Register key with a value
+   * @param key
+   * @param value
+   */
   registerValue(key: string, value: V) {
     const item = this.store.items[key];
     const willOverwrite =
@@ -64,7 +77,12 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     return this;
   }
 
-  registerLoader(key: string, loader: () => W) {
+  /**
+   * Register key with a loader, a function that returns a value.
+   * @param key
+   * @param loader
+   */
+  registerLoader(key: string, loader: () => L) {
     const item = this.store.items[key];
     const willOverwrite =
       this.has(key) && (('loader' in item && item.loader !== loader) || 'value' in item);
@@ -88,7 +106,12 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     return this;
   }
 
-  get(key?: string): V | W | undefined {
+  /**
+   * Get value from the specified key.
+   * If the item contains a loader, invoke the loader and return its output.
+   * @param key
+   */
+  get(key?: string): V | L | undefined {
     const targetKey = key ?? this.store.defaultKey;
 
     if (typeof targetKey === 'undefined') return undefined;
@@ -105,6 +128,11 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     return undefined;
   }
 
+  /**
+   * Similar to `.get()` but wrap results in a `Promise`.
+   * This is useful when some items are async loaders to provide uniform output.
+   * @param key
+   */
   getAsPromise(key: string): Promise<V> {
     const promise = this.store.promises[key];
 
@@ -122,25 +150,41 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     return Promise.reject<V>(new Error(`Item with key "${key}" is not registered.`));
   }
 
+  /**
+   * Return the current default key.
+   * Default key is a fallback key to use if `.get()` was called without a key.
+   */
   getDefaultKey() {
     return this.store.defaultKey;
   }
 
+  /**
+   * Set default key to the specified key
+   * Default key is a fallback key to use if `.get()` was called without a key.
+   * @param key
+   */
   setDefaultKey(key: string) {
     this.store.defaultKey = key;
 
     return this;
   }
 
+  /**
+   * Remove default key.
+   * Default key is a fallback key to use if `.get()` was called without a key.
+   */
   clearDefaultKey() {
     this.store.defaultKey = undefined;
 
     return this;
   }
 
+  /**
+   * Return a map of all key-values in this registry.
+   */
   getMap() {
     return this.keys().reduce<{
-      [key: string]: V | W | undefined;
+      [key: string]: V | L | undefined;
     }>((prev, key) => {
       const map = prev;
       map[key] = this.get(key);
@@ -149,6 +193,9 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     }, {});
   }
 
+  /**
+   * Same with `.getMap()` but return a `Promise` that resolves when all values are resolved.
+   */
   getMapAsPromise() {
     const keys = this.keys();
 
@@ -164,25 +211,41 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     );
   }
 
+  /**
+   * Return all keys in this registry.
+   */
   keys(): string[] {
     return Object.keys(this.store.items);
   }
 
-  values(): (V | W | undefined)[] {
+  /**
+   * Return all values in this registry.
+   * For loaders, they are invoked and their outputs are returned.
+   */
+  values(): (V | L | undefined)[] {
     return this.keys().map(key => this.get(key));
   }
 
+  /**
+   * Same with `.values()` but return a `Promise` that resolves when all values are resolved.
+   */
   valuesAsPromise(): Promise<V[]> {
     return Promise.all(this.keys().map(key => this.getAsPromise(key)));
   }
 
-  entries(): { key: string; value: V | W | undefined }[] {
+  /**
+   * Return all key-value entries in this registry.
+   */
+  entries(): { key: string; value: V | L | undefined }[] {
     return this.keys().map(key => ({
       key,
       value: this.get(key),
     }));
   }
 
+  /**
+   * Same with `.entries()` but return a `Promise` that resolves when all values are resolved.
+   */
   entriesAsPromise(): Promise<{ key: string; value: V }[]> {
     const keys = this.keys();
 
@@ -194,6 +257,11 @@ export default class Registry<V, W extends V | Promise<V> = V | Promise<V>> {
     );
   }
 
+  /**
+   * Remove the item with the specified key.
+   * Do nothing if an item with the given key does not exist.
+   * @param key
+   */
   remove(key: string) {
     delete this.store.items[key];
     delete this.store.promises[key];
