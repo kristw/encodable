@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/apache-superset/encodable/compare/@encodable/format@0.3.0...@encodable/format@0.4.0) (2020-08-03)
+
+
+### Features
+
+* export timerangeformatterregistry ([#48](https://github.com/apache-superset/encodable/issues/48)) ([79c8459](https://github.com/apache-superset/encodable/commit/79c8459d6ad528a17685dc02b4cd0bdc896288cf))
+
+
+
+
+
 # [0.3.0](https://github.com/apache-superset/encodable/compare/@encodable/format@0.2.0...@encodable/format@0.3.0) (2020-08-03)
 
 

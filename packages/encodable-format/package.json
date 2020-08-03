@@ -1,6 +1,6 @@
 {
   "name": "@encodable/format",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Encodable format",
   "sideEffects": false,
   "main": "lib/index.js",
