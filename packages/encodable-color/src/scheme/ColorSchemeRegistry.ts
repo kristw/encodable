@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
-import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from './types';
+import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from '../types';
 import ChildRegistry from './ChildRegistry';
 
 export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
