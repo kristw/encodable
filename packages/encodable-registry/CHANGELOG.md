@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/apache-superset/encodable/compare/@encodable/registry@0.2.0...@encodable/registry@0.3.0) (2020-08-03)
+
+
+### Features
+
+* **registry:** store schema version ([#49](https://github.com/apache-superset/encodable/issues/49)) ([19072be](https://github.com/apache-superset/encodable/commit/19072be4ba14ea277d963499e1ff54c2f9a828ff))
+
+
+
+
+
 # [0.2.0](https://github.com/apache-superset/encodable/compare/@encodable/registry@0.1.2...@encodable/registry@0.2.0) (2020-08-03)
 
 
