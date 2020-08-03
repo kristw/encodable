@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import { getStore } from 'global-box';
+import { globalBox } from 'global-box';
 import OverwritePolicy from './OverwritePolicy';
 import { RegistryStore, RegistryConfig } from '../types';
 import createRegistryStore from './createRegistryStore';
@@ -22,7 +22,9 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
     if (typeof config.globalId === 'undefined') {
       this.store = createRegistryStore<V, L>(config);
     } else {
-      this.store = getStore().getOrCreate(config.globalId, () => createRegistryStore<V, L>(config));
+      this.store = globalBox().getOrCreate(config.globalId, () =>
+        createRegistryStore<V, L>(config),
+      );
     }
   }
 

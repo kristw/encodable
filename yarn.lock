@@ -6314,10 +6314,10 @@ glob@^7.0.0, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-global-box@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/global-box/-/global-box-1.0.0.tgz#39c5d42958588d9cdf58b7b58f3bbb8a2bfae204"
-  integrity sha512-OadHivWmlv580fkXCZWc0ccMj9PSK1LQ0ip6I6HZpduHgjBs369EqrD6zuujjhYkDehHktn+MLvYtmRMzG4fQg==
+global-box@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/global-box/-/global-box-1.1.0.tgz#14ed7ae6c7dd1bb85fe700347bf11d855d253073"
+  integrity sha512-/r54wSjD8JLOgWPn3Eql29WQUy/Lu9JFxp7K1kbiHbFXdEWqRBScYyvyWALXMZJlG2NpXPNvGkGLuNncz6S9iQ==
 
 global-dirs@^0.1.1:
   version "0.1.1"

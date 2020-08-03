@@ -406,6 +406,18 @@ describe('Registry', () => {
     });
   });
 
+  describe('config.version', () => {
+    it('sets to 0.x.x by default', () => {
+      expect(registry.store.version).toEqual('0.x.x');
+    });
+    it('sets to specified version', () => {
+      const registry2 = new Registry({
+        version: '1.x.x',
+      });
+      expect(registry2.store.version).toEqual('1.x.x');
+    });
+  });
+
   describe('config.setFirstItemAsDefault', () => {
     describe('when true', () => {
       const registry2 = new Registry({ setFirstItemAsDefault: true });
