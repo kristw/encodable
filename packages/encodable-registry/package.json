@@ -1,6 +1,6 @@
 {
   "name": "@encodable/registry",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Reusable registry models",
   "sideEffects": false,
   "main": "lib/index.js",
