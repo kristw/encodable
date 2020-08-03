@@ -1,8 +1,7 @@
-import { SyncRegistry, OverwritePolicy } from '@encodable/registry';
-import { RegistryConfig } from '@encodable/registry/lib/models/Registry';
+/* eslint-disable no-underscore-dangle */
+import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
 import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from './types';
-
-type ChildRegistry<T> = SyncRegistry<T>; // Omit<SyncRegistry<T>, 'registerLoader' | 'clear' | 'remove'>;
+import ChildRegistry from './ChildRegistry';
 
 export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   categorical: ChildRegistry<CategoricalScheme>;
@@ -19,25 +18,25 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   }: RegistryConfig = {}) {
     super({ name, overwritePolicy, setFirstItemAsDefault, ...rest });
 
-    this.categorical = new SyncRegistry<CategoricalScheme>();
-    this.sequential = new SyncRegistry<SequentialScheme>();
-    this.diverging = new SyncRegistry<DivergingScheme>();
+    this.categorical = new ChildRegistry<CategoricalScheme>(this, { name: 'categorical' });
+    this.sequential = new ChildRegistry<SequentialScheme>(this, { name: 'sequential' });
+    this.diverging = new ChildRegistry<DivergingScheme>(this, { name: 'diverging' });
   }
 
   clear() {
     super.clear();
-    this.categorical.clear();
-    this.sequential.clear();
-    this.diverging.clear();
+    this.categorical._clear();
+    this.sequential._clear();
+    this.diverging._clear();
 
     return this;
   }
 
   remove(key: string) {
     super.remove(key);
-    this.categorical.remove(key);
-    this.sequential.remove(key);
-    this.diverging.remove(key);
+    this.categorical._remove(key);
+    this.sequential._remove(key);
+    this.diverging._remove(key);
 
     return this;
   }
@@ -46,13 +45,13 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     super.registerValue(key, value);
     switch (value.type) {
       case 'categorical':
-        this.categorical.registerValue(key, value);
+        this.categorical._registerValue(key, value);
         break;
       case 'sequential':
-        this.sequential.registerValue(key, value);
+        this.sequential._registerValue(key, value);
         break;
       case 'diverging':
-        this.diverging.registerValue(key, value);
+        this.diverging._registerValue(key, value);
         break;
       default:
     }
@@ -67,13 +66,13 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
 
     switch (value.type) {
       case 'categorical':
-        this.categorical.registerValue(key, value);
+        this.categorical._registerLoader(key, loader as () => CategoricalScheme);
         break;
       case 'sequential':
-        this.sequential.registerValue(key, value);
+        this.sequential._registerLoader(key, loader as () => SequentialScheme);
         break;
       case 'diverging':
-        this.diverging.registerValue(key, value);
+        this.diverging._registerLoader(key, loader as () => DivergingScheme);
         break;
       default:
     }
