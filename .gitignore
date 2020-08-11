@@ -54,6 +54,7 @@ test-changelog.md
 
 # Configs (provided by Nimbus)
 .babelrc
+babel.config.js
 .eslintignore
 .eslintrc.js
 .flowconfig
