@@ -7,8 +7,8 @@
     "postpublish": "git push; git push --tags",
     "build": "yarn babel && yarn type && yarn build:assets",
     "babel": "yarn babel:cjs && yarn babel:esm",
-    "babel:cjs": "nimbus babel --clean --workspaces=\"(encodable|@encodable/*)\" --config-file=../../babel.config.js",
-    "babel:esm": "nimbus babel --clean --workspaces=\"(encodable|@encodable/*)\" --esm --config-file=../../babel.config.js",
+    "babel:cjs": "nimbus babel --clean --workspaces=\"(encodable|@encodable/*)\"",
+    "babel:esm": "nimbus babel --clean --workspaces=\"(encodable|@encodable/*)\" --esm",
     "build:assets": "node ./scripts/buildAssets.js",
     "bump-version": "lerna version",
     "clean": "rm -rf ./packages/**/{lib,esm}",
@@ -58,7 +58,7 @@
     "enzyme-to-json": "^3.4.3",
     "fast-glob": "^3.1.1",
     "fs-extra": "^9.0.0",
-    "global-box": "^1.1.0",
+    "global-box": "^1.1.1",
     "husky": "^4.2.1",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.3",
@@ -83,10 +83,7 @@
   ],
   "nimbus": {
     "drivers": [
-      {
-        "driver": "babel",
-        "strategy": "none"
-      },
+      "babel",
       "eslint",
       "jest",
       "prettier",
