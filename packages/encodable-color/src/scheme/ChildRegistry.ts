@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { SyncRegistry, RegistryConfig } from '@encodable/registry';
 import { ColorScheme } from '../types';
+import createWrapper from './createWrapper';
 
 type ChildRegistryConfig = Pick<RegistryConfig, 'defaultKey'> & {
   name: string;
@@ -22,6 +23,10 @@ export default class ChildRegistry<V extends ColorScheme> extends SyncRegistry<V
     });
 
     this.parent = parent;
+  }
+
+  get(key?: string) {
+    return createWrapper(super.get(key));
   }
 
   _registerValue(key: string, value: V) {

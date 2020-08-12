@@ -2,6 +2,7 @@
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
 import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from '../types';
 import ChildRegistry from './ChildRegistry';
+import createWrapper from './createWrapper';
 
 export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   categorical: ChildRegistry<CategoricalScheme>;
@@ -23,6 +24,10 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     this.diverging = new ChildRegistry<DivergingScheme>(this, { name: 'diverging' });
   }
 
+  get(key?: string) {
+    return createWrapper(super.get(key));
+  }
+
   clear() {
     super.clear();
     this.categorical._clear();
@@ -42,15 +47,17 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   }
 
   registerValue(key: string, value: ColorScheme) {
-    super.registerValue(key, value);
     switch (value.type) {
       case 'categorical':
+        super.registerValue(key, value);
         this.categorical._registerValue(key, value);
         break;
       case 'sequential':
+        super.registerValue(key, value);
         this.sequential._registerValue(key, value);
         break;
       case 'diverging':
+        super.registerValue(key, value);
         this.diverging._registerValue(key, value);
         break;
       default:
@@ -60,18 +67,19 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   }
 
   registerLoader(key: string, loader: () => ColorScheme) {
-    super.registerLoader(key, loader);
-
     const value = loader();
 
     switch (value.type) {
       case 'categorical':
+        super.registerLoader(key, loader);
         this.categorical._registerLoader(key, loader as () => CategoricalScheme);
         break;
       case 'sequential':
+        super.registerLoader(key, loader);
         this.sequential._registerLoader(key, loader as () => SequentialScheme);
         break;
       case 'diverging':
+        super.registerLoader(key, loader);
         this.diverging._registerLoader(key, loader as () => DivergingScheme);
         break;
       default:

@@ -23,3 +23,5 @@ export function getSequentialScheme(key?: string) {
 export function getDivergingScheme(key?: string) {
   return getColorSchemeRegistry().diverging.get(key);
 }
+
+export { ColorSchemeRegistry };
