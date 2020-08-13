@@ -73,25 +73,30 @@ export default class ColorNamespace {
     return typeof this.store.scales[scheme] !== 'undefined';
   }
 
-  getScale(scheme: string = getColorSchemeRegistry().categorical.getDefaultKey()) {
-    if (typeof this.store.scales[scheme] === 'undefined') {
+  getScale(scheme?: string) {
+    const schemeName =
+      scheme ?? getColorSchemeRegistry().categorical.getDefaultKey() ?? 'undefined';
+    if (typeof this.store.scales[schemeName] === 'undefined') {
       // create scale
       const scale = new ScaleCategoricalColor(
-        getCategoricalScheme(scheme)?.colors ?? [],
+        getCategoricalScheme(schemeName)?.colors ?? [],
         this.store.manualColors,
       );
       // add store to lookup
-      this.store.scales[scheme] = scale.store;
-      this.scales.registerValue(scheme, scale);
+      this.store.scales[schemeName] = scale.store;
+      this.scales.registerValue(schemeName, scale);
       return scale;
     }
-    if (!this.scales.has(scheme)) {
+    if (!this.scales.has(schemeName)) {
       // create scale
-      const scale = new ScaleCategoricalColor(this.store.scales[scheme], this.store.manualColors);
-      this.scales.registerValue(scheme, scale);
+      const scale = new ScaleCategoricalColor(
+        this.store.scales[schemeName]!,
+        this.store.manualColors,
+      );
+      this.scales.registerValue(schemeName, scale);
       return scale;
     }
 
-    return this.scales.get(scheme);
+    return this.scales.get(schemeName)!;
   }
 }

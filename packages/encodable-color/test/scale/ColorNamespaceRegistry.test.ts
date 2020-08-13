@@ -1,4 +1,5 @@
 import { ColorNamespaceRegistry } from '../../src/scale';
+import { DEFAULT_NAMESPACE } from '../../src/scale/ColorNamespaceRegistry';
 
 describe('ColorNamespaceRegistry', () => {
   describe('constructor', () => {
@@ -12,6 +13,16 @@ describe('ColorNamespaceRegistry', () => {
       const registry2 = new ColorNamespaceRegistry({ globalId: '@encodable/test-namespace-reg' });
       expect(registry2).toBeDefined();
       expect(registry2.getDefaultNamespace()).toEqual('haha');
+    });
+  });
+  describe('.getDefaultNamespace()', () => {
+    it('always return a key', () => {
+      const registry1 = new ColorNamespaceRegistry({ globalId: '@encodable/test-namespace-reg2' });
+      registry1.setDefaultNamespace('haha');
+      const registry2 = new ColorNamespaceRegistry({ globalId: '@encodable/test-namespace-reg2' });
+      // @ts-ignore
+      registry1.namespaceStores.store.defaultKey = undefined;
+      expect(registry2.getDefaultNamespace()).toEqual(DEFAULT_NAMESPACE);
     });
   });
   describe('.has(namespace)', () => {

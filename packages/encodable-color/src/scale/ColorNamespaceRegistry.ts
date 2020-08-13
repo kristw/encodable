@@ -21,7 +21,7 @@ export default class ColorNamespaceRegistry {
   }
 
   getDefaultNamespace(): string {
-    return this.namespaceStores.getDefaultKey();
+    return this.namespaceStores.getDefaultKey() ?? DEFAULT_NAMESPACE;
   }
 
   setDefaultNamespace(namespace: string) {
@@ -35,7 +35,7 @@ export default class ColorNamespaceRegistry {
     return this.namespaceStores.has(namespace);
   }
 
-  get(namespace: string = this.getDefaultNamespace()) {
+  get(namespace: string = this.getDefaultNamespace()): ColorNamespace {
     if (!this.namespaceStores.has(namespace)) {
       const ns = new ColorNamespace(namespace);
       this.namespaceStores.registerValue(namespace, ns.store);
@@ -44,12 +44,12 @@ export default class ColorNamespaceRegistry {
     }
 
     if (!this.namespaceInstances.has(namespace)) {
-      const ns = new ColorNamespace(this.namespaceStores.get(namespace));
+      const ns = new ColorNamespace(this.namespaceStores.get(namespace)!);
       this.namespaceInstances.registerValue(namespace, ns);
       return ns;
     }
 
-    return this.namespaceInstances.get(namespace);
+    return this.namespaceInstances.get(namespace)!;
   }
 
   keys() {

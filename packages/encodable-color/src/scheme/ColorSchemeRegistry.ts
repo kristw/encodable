@@ -25,7 +25,8 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   }
 
   get(key?: string) {
-    return createWrapper(super.get(key));
+    const value = super.get(key);
+    return typeof value === 'undefined' ? value : createWrapper(value);
   }
 
   clear() {

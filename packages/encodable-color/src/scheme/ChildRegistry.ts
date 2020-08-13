@@ -26,7 +26,8 @@ export default class ChildRegistry<V extends ColorScheme> extends SyncRegistry<V
   }
 
   get(key?: string) {
-    return createWrapper(super.get(key));
+    const value = super.get(key);
+    return typeof value === 'undefined' ? value : createWrapper(value);
   }
 
   _registerValue(key: string, value: V) {

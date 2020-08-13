@@ -28,7 +28,7 @@ class ScaleCategoricalColor extends ExtensibleFunction {
     if (Array.isArray(storeOrColors)) {
       this.store = {
         manualColors: {},
-        scale: scaleOrdinal(storeOrColors),
+        scale: scaleOrdinal<StringLike, string>(storeOrColors),
       };
     } else {
       this.store = storeOrColors;
