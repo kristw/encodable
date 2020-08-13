@@ -270,4 +270,11 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
 
     return this;
   }
+
+  /**
+   * Get number of items in the registry
+   */
+  size() {
+    return this.keys().length;
+  }
 }
