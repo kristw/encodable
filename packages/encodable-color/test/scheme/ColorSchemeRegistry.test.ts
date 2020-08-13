@@ -104,6 +104,19 @@ describe('ColorSchemeRegistry', () => {
       });
     });
     describe('child registries (categorical/sequential/diverging)', () => {
+      describe('.get()', () => {
+        it('returns value', () => {
+          registry.categorical.registerValue('something', {
+            id: 'something',
+            type: 'categorical',
+            colors: ['red', 'green', 'blue'],
+          });
+          expect(registry.categorical.get('something')).toBeDefined();
+        });
+        it('returns undefined otherwise', () => {
+          expect(registry.categorical.get('nothing')).toBeUndefined();
+        });
+      });
       describe('.clear() clear child registry and those items from the main registry', () => {
         beforeEach(() => {
           registry
