@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/apache-superset/encodable/compare/@encodable/registry@0.3.0...@encodable/registry@0.4.0) (2020-08-13)
+
+
+### Features
+
+* **registry:** add size and isEmpty function ([#52](https://github.com/apache-superset/encodable/issues/52)) ([3216160](https://github.com/apache-superset/encodable/commit/3216160c45776ebed6345ef0aae12b91c06c4b1e))
+
+
+
+
+
 # [0.3.0](https://github.com/apache-superset/encodable/compare/@encodable/registry@0.2.0...@encodable/registry@0.3.0) (2020-08-03)
 
 
