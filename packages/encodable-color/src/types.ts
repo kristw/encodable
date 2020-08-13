@@ -1,9 +1,9 @@
 type BaseColorScheme<T> = {
   type: T;
   id: string;
-  colors: string[];
   label?: string;
   description?: string;
+  colors: string[];
 };
 
 export type CategoricalScheme = BaseColorScheme<'categorical'>;
