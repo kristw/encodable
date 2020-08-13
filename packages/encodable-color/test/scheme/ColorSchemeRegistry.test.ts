@@ -18,6 +18,20 @@ describe('ColorSchemeRegistry', () => {
       registry = new ColorSchemeRegistry();
     });
 
+    describe('.get()', () => {
+      it('returns value', () => {
+        registry.registerValue('something', {
+          id: 'something',
+          type: 'categorical',
+          colors: ['red', 'green', 'blue'],
+        });
+        expect(registry.get('something')).toBeDefined();
+      });
+      it('returns undefined otherwise', () => {
+        expect(registry.get('nothing')).toBeUndefined();
+      });
+    });
+
     describe('.clear()', () => {
       it('clears all items and child registries', () => {
         registry.registerValue('abc', {
