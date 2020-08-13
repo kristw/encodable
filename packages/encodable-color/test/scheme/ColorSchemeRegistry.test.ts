@@ -38,8 +38,8 @@ describe('ColorSchemeRegistry', () => {
           type: 'categorical',
           colors,
         });
-        expect(registry.get('abc').colors).toEqual(colors);
-        expect(registry.categorical.get('abc').colors).toEqual(colors);
+        expect(registry.get('abc')?.colors).toEqual(colors);
+        expect(registry.categorical.get('abc')?.colors).toEqual(colors);
       });
       it('does nothing for invalid scheme', () => {
         // @ts-ignore check default case
@@ -61,8 +61,8 @@ describe('ColorSchemeRegistry', () => {
           type: 'categorical',
           colors,
         }));
-        expect(registry.get('abc').colors).toEqual(colors);
-        expect(registry.categorical.get('abc').colors).toEqual(colors);
+        expect(registry.get('abc')?.colors).toEqual(colors);
+        expect(registry.categorical.get('abc')?.colors).toEqual(colors);
       });
       it('does nothing for invalid scheme', () => {
         // @ts-ignore check default case

@@ -6,7 +6,8 @@ export type ColorLookup = {
   [key: string]: string;
 };
 
-export type AnyOrdinalScale = ScaleOrdinal<StringLike, string>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyOrdinalScale = ScaleOrdinal<any, string>;
 
 export type ScaleStore = {
   manualColors: ColorLookup;
