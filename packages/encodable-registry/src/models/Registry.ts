@@ -270,4 +270,18 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
 
     return this;
   }
+
+  /**
+   * Get number of items in the registry
+   */
+  size() {
+    return this.keys().length;
+  }
+
+  /**
+   * Returns true if there is no item in the registry
+   */
+  isEmpty() {
+    return this.size() === 0;
+  }
 }

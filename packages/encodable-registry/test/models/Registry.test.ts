@@ -303,6 +303,25 @@ describe('Registry', () => {
     });
   });
 
+  describe('.size()', () => {
+    it('returns number of items', () => {
+      registry.registerValue('a', 'testValue');
+      expect(registry.size()).toEqual(1);
+      registry.registerValue('b', 'testValue');
+      expect(registry.size()).toEqual(2);
+    });
+  });
+
+  describe('.isEmpty()', () => {
+    it('returns true if there is no item', () => {
+      expect(registry.isEmpty()).toBeTruthy();
+    });
+    it('returns false otherwise', () => {
+      registry.registerValue('a', 'testValue');
+      expect(registry.isEmpty()).toBeFalsy();
+    });
+  });
+
   describe('config.overwritePolicy', () => {
     describe('=ALLOW', () => {
       describe('.registerValue(key, value)', () => {
