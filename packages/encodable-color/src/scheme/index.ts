@@ -1,27 +1,27 @@
 import { makeSingleton } from '@encodable/registry';
 import ColorSchemeRegistry from './ColorSchemeRegistry';
+import { d3Schemes } from './presets/d3Schemes';
 
-export const getColorSchemeRegistry = makeSingleton(
-  () =>
-    new ColorSchemeRegistry({
-      globalId: '@encodable/color:ColorSchemeRegistry',
-    }),
+export const getColorSchemeRegistry = makeSingleton(() =>
+  new ColorSchemeRegistry({
+    globalId: '@encodable/color:ColorSchemeRegistry',
+  }).register(d3Schemes),
 );
 
-export function getColorScheme(key?: string) {
-  return getColorSchemeRegistry().get(key);
+export function getColorScheme(schemeId?: string) {
+  return getColorSchemeRegistry().get(schemeId);
 }
 
-export function getCategoricalScheme(key?: string) {
-  return getColorSchemeRegistry().categorical.get(key);
+export function getCategoricalScheme(schemeId?: string) {
+  return getColorSchemeRegistry().categorical.get(schemeId);
 }
 
-export function getSequentialScheme(key?: string) {
-  return getColorSchemeRegistry().sequential.get(key);
+export function getSequentialScheme(schemeId?: string) {
+  return getColorSchemeRegistry().sequential.get(schemeId);
 }
 
-export function getDivergingScheme(key?: string) {
-  return getColorSchemeRegistry().diverging.get(key);
+export function getDivergingScheme(schemeId?: string) {
+  return getColorSchemeRegistry().diverging.get(schemeId);
 }
 
 export { ColorSchemeRegistry };

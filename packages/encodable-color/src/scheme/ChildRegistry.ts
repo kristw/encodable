@@ -27,38 +27,38 @@ export default class ChildRegistry<
     this.parent = parent;
   }
 
-  get(key?: string): Wrapper | undefined {
-    const targetKey = key ?? this.getDefaultKey();
+  get(schemeId?: string): Wrapper | undefined {
+    const targetKey = schemeId ?? this.getDefaultKey();
     return typeof targetKey !== 'undefined' && this.has(targetKey)
-      ? (this.parent.get(key)! as Wrapper)
+      ? (this.parent.get(schemeId)! as Wrapper)
       : undefined;
   }
 
-  register(value: Scheme | Scheme[]) {
-    if (Array.isArray(value)) {
-      value.forEach(v => {
+  register(scheme: Scheme | Scheme[]) {
+    if (Array.isArray(scheme)) {
+      scheme.forEach(v => {
         this.registerValue(v.id, v);
       });
       return this;
     }
-    return this.registerValue(value.id, value);
+    return this.registerValue(scheme.id, scheme);
   }
 
-  _registerValue(key: string, value: Scheme) {
-    return super.registerValue(key, value);
+  _registerValue(schemeId: string, scheme: Scheme) {
+    return super.registerValue(schemeId, scheme);
   }
 
-  registerValue(key: string, value: Scheme) {
-    this.parent.registerValue(key, value);
+  registerValue(schemeId: string, scheme: Scheme) {
+    this.parent.registerValue(schemeId, scheme);
     return this;
   }
 
-  _registerLoader(key: string, loader: () => Scheme) {
-    return super.registerLoader(key, loader);
+  _registerLoader(schemeId: string, loader: () => Scheme) {
+    return super.registerLoader(schemeId, loader);
   }
 
-  registerLoader(key: string, loader: () => Scheme) {
-    this.parent.registerLoader(key, loader);
+  registerLoader(schemeId: string, loader: () => Scheme) {
+    this.parent.registerLoader(schemeId, loader);
     return this;
   }
 
@@ -71,12 +71,12 @@ export default class ChildRegistry<
     return super.clear();
   }
 
-  remove(key: string) {
-    this.parent.remove(key);
+  remove(schemeId: string) {
+    this.parent.remove(schemeId);
     return this;
   }
 
-  _remove(key: string) {
-    return super.remove(key);
+  _remove(schemeId: string) {
+    return super.remove(schemeId);
   }
 }

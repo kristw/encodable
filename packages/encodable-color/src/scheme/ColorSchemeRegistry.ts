@@ -36,8 +36,8 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     this.wrappers = new SyncRegistry<ColorSchemeWrapper>();
   }
 
-  get(key?: string): ColorSchemeWrapper | undefined {
-    const targetKey = key ?? this.getDefaultKey();
+  get(schemeId?: string): ColorSchemeWrapper | undefined {
+    const targetKey = schemeId ?? this.getDefaultKey();
 
     if (typeof targetKey === 'undefined') {
       return undefined;
@@ -50,7 +50,7 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     }
 
     if (this.wrappers.has(targetKey)) {
-      return this.wrappers.get(key);
+      return this.wrappers.get(schemeId);
     }
 
     const wrapper = wrapColorScheme(value);
@@ -67,38 +67,38 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     return this;
   }
 
-  remove(key: string) {
-    super.remove(key);
-    this.categorical._remove(key);
-    this.sequential._remove(key);
-    this.diverging._remove(key);
+  remove(schemeId: string) {
+    super.remove(schemeId);
+    this.categorical._remove(schemeId);
+    this.sequential._remove(schemeId);
+    this.diverging._remove(schemeId);
 
     return this;
   }
 
-  register(value: ColorScheme | ColorScheme[]) {
-    if (Array.isArray(value)) {
-      value.forEach(v => {
+  register(scheme: ColorScheme | ColorScheme[]) {
+    if (Array.isArray(scheme)) {
+      scheme.forEach(v => {
         this.registerValue(v.id, v);
       });
       return this;
     }
-    return this.registerValue(value.id, value);
+    return this.registerValue(scheme.id, scheme);
   }
 
-  registerValue(key: string, value: ColorScheme) {
-    switch (value.type) {
+  registerValue(schemeId: string, scheme: ColorScheme) {
+    switch (scheme.type) {
       case 'categorical':
-        super.registerValue(key, value);
-        this.categorical._registerValue(key, value);
+        super.registerValue(schemeId, scheme);
+        this.categorical._registerValue(schemeId, scheme);
         break;
       case 'sequential':
-        super.registerValue(key, value);
-        this.sequential._registerValue(key, value);
+        super.registerValue(schemeId, scheme);
+        this.sequential._registerValue(schemeId, scheme);
         break;
       case 'diverging':
-        super.registerValue(key, value);
-        this.diverging._registerValue(key, value);
+        super.registerValue(schemeId, scheme);
+        this.diverging._registerValue(schemeId, scheme);
         break;
       default:
     }
@@ -106,21 +106,21 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     return this;
   }
 
-  registerLoader(key: string, loader: () => ColorScheme) {
+  registerLoader(schemeId: string, loader: () => ColorScheme) {
     const value = loader();
 
     switch (value.type) {
       case 'categorical':
-        super.registerLoader(key, loader);
-        this.categorical._registerLoader(key, loader as () => CategoricalScheme);
+        super.registerLoader(schemeId, loader);
+        this.categorical._registerLoader(schemeId, loader as () => CategoricalScheme);
         break;
       case 'sequential':
-        super.registerLoader(key, loader);
-        this.sequential._registerLoader(key, loader as () => SequentialScheme);
+        super.registerLoader(schemeId, loader);
+        this.sequential._registerLoader(schemeId, loader as () => SequentialScheme);
         break;
       case 'diverging':
-        super.registerLoader(key, loader);
-        this.diverging._registerLoader(key, loader as () => DivergingScheme);
+        super.registerLoader(schemeId, loader);
+        this.diverging._registerLoader(schemeId, loader as () => DivergingScheme);
         break;
       default:
     }
