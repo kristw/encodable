@@ -1423,19 +1423,6 @@
   dependencies:
     find-up "^2.1.0"
 
-"@encodable/color@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@encodable/color/-/color-0.3.1.tgz#1d753716a5873b4a60b46976025ebbf570dd4aea"
-  integrity sha512-9ewkD7K2Ba/bVeC7SuaNcPbVKxie98Zg7navKJgKuwS0mejMn2XYEsPu36qRHXaaTFfG8wE69T/jcymZFCI++A==
-  dependencies:
-    "@encodable/registry" "^0.5.0"
-    "@types/d3-interpolate" "^1.3.1"
-    "@types/d3-scale" "^2.2.0"
-    "@types/d3-scale-chromatic" "^1.2.0"
-    d3-interpolate "^1.4.0"
-    d3-scale "^3.2.1"
-    d3-scale-chromatic "^1.5.0"
-
 "@evocateur/libnpmaccess@^3.1.2":
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/@evocateur/libnpmaccess/-/libnpmaccess-3.1.2.tgz#ecf7f6ce6b004e9f942b098d92200be4a4b1c845"
@@ -6342,10 +6329,10 @@ glob@^7.0.0, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-global-box@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/global-box/-/global-box-1.1.1.tgz#6016ec5fde14c4811b5e4821d8f3b307a198f78a"
-  integrity sha512-Vo0DG6HmZmxwkA0S0DLWxrOp/9bBjSqscpo8yH63Bc2EYfHWVmiZrPBbjzCMbFbliqyrrs+OilpW7PDJ5B9mNA==
+global-box@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/global-box/-/global-box-1.2.0.tgz#009f681e6fef6eb6f8aff00be732d23de4be0acd"
+  integrity sha512-IgpqqAYWNG3eluK1tsCkI8Uxff16+OYWLEhDS/QrfkfmbRQ/tVlBXZfURn5tSoPPT6wtmeJp7VKhXrcc5jl/1A==
 
 global-dirs@^0.1.1:
   version "0.1.1"
