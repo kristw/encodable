@@ -1,6 +1,6 @@
 {
   "name": "@encodable/color",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Encodable color",
   "sideEffects": false,
   "main": "lib/index.js",

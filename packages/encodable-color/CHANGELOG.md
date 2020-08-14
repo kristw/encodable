@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/apache-superset/encodable/compare/@encodable/color@0.3.0...@encodable/color@0.3.1) (2020-08-14)
+
+
+### Bug Fixes
+
+* **color:** use child defaultKey ([#60](https://github.com/apache-superset/encodable/issues/60)) ([a292b00](https://github.com/apache-superset/encodable/commit/a292b00879b2e04117379fc9db4daa362cb0fa7e))
+
+
+
+
+
 # [0.3.0](https://github.com/apache-superset/encodable/compare/@encodable/color@0.2.0...@encodable/color@0.3.0) (2020-08-14)
 
 
