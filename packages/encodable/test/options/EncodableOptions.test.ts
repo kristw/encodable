@@ -1,13 +1,14 @@
 import { scaleOrdinal } from 'd3-scale';
-import { OptionsManager, StringLike } from '../../src';
+import { ColorScheme } from '@encodable/color';
+import { EncodableOptions, StringLike } from '../../src';
 
 const dummyFormatter = () => 'haha';
 const dummyScaleResolver = () => scaleOrdinal<StringLike, string>(['haha']);
 
-describe('OptionsManager', () => {
+describe('EncodableOptions', () => {
   afterEach(() => {
     // reset all resolvers
-    OptionsManager.setNumberFormatResolver(undefined)
+    EncodableOptions.setNumberFormatResolver(undefined)
       .setTimeFormatResolver(undefined)
       .setCategoricalColorScaleResolver(undefined)
       .setColorSchemeResolver(undefined);
@@ -15,75 +16,77 @@ describe('OptionsManager', () => {
 
   describe('.getNumberFormatResolver(resolver)', () => {
     it('returns a resolver', () => {
-      const resolver = OptionsManager.getNumberFormatResolver();
+      const resolver = EncodableOptions.getNumberFormatResolver();
       expect(resolver).toBeDefined();
       expect(typeof resolver('.2f')(200)).toBe('string');
     });
   });
   describe('.setNumberFormatResolver(resolver)', () => {
     it('sets a resolver', () => {
-      OptionsManager.setNumberFormatResolver(() => dummyFormatter);
-      const resolver = OptionsManager.getNumberFormatResolver();
+      EncodableOptions.setNumberFormatResolver(() => dummyFormatter);
+      const resolver = EncodableOptions.getNumberFormatResolver();
       expect(resolver).toBeDefined();
       expect(resolver('.2f')(200)).toEqual('haha');
     });
-    it('returns OptionsManager', () => {
-      expect(OptionsManager.setNumberFormatResolver(() => dummyFormatter)).toBe(OptionsManager);
+    it('returns EncodableOptions', () => {
+      expect(EncodableOptions.setNumberFormatResolver(() => dummyFormatter)).toBe(EncodableOptions);
     });
   });
   describe('.getTimeFormatResolver(resolver)', () => {
     it('returns a resolver', () => {
-      const resolver = OptionsManager.getTimeFormatResolver();
+      const resolver = EncodableOptions.getTimeFormatResolver();
       expect(resolver).toBeDefined();
       expect(typeof resolver({ format: '%Y-%m' })(new Date())).toBe('string');
     });
   });
   describe('.setTimeFormatResolver(resolver)', () => {
     it('sets a resolver', () => {
-      OptionsManager.setTimeFormatResolver(() => dummyFormatter);
-      const resolver = OptionsManager.getTimeFormatResolver();
+      EncodableOptions.setTimeFormatResolver(() => dummyFormatter);
+      const resolver = EncodableOptions.getTimeFormatResolver();
       expect(resolver).toBeDefined();
       expect(resolver({ format: '%Y-%m' })(new Date())).toEqual('haha');
     });
-    it('returns OptionsManager', () => {
-      expect(OptionsManager.setTimeFormatResolver(() => dummyFormatter)).toBe(OptionsManager);
+    it('returns EncodableOptions', () => {
+      expect(EncodableOptions.setTimeFormatResolver(() => dummyFormatter)).toBe(EncodableOptions);
     });
   });
   describe('.getColorScaleResolver()', () => {
     it('returns a resolver', () => {
-      const resolver = OptionsManager.getColorSchemeResolver();
+      const resolver = EncodableOptions.getColorSchemeResolver();
       expect(resolver).toBeDefined();
       expect(resolver({ name: '', type: 'sequential' })).toBeUndefined();
     });
   });
   describe('.setColorScaleResolver(resolver)', () => {
     it('sets a resolver', () => {
-      OptionsManager.setColorSchemeResolver(() => ['#222', '#eee']);
-      const resolver = OptionsManager.getColorSchemeResolver();
+      const output: ColorScheme = { type: 'categorical', id: 'dummy', colors: ['#222', '#eee'] };
+      EncodableOptions.setColorSchemeResolver(() => output);
+      const resolver = EncodableOptions.getColorSchemeResolver();
       expect(resolver).toBeDefined();
-      expect(resolver({ name: '', type: 'sequential' })).toEqual(['#222', '#eee']);
+      expect(resolver({ name: '', type: 'sequential' })).toEqual(output);
     });
-    it('returns OptionsManager', () => {
-      expect(OptionsManager.setColorSchemeResolver(() => [])).toBe(OptionsManager);
+    it('returns EncodableOptions', () => {
+      const output: ColorScheme = { type: 'categorical', id: 'dummy', colors: ['#222', '#eee'] };
+      expect(EncodableOptions.setColorSchemeResolver(() => output)).toBe(EncodableOptions);
     });
   });
   describe('.getCategoricalColorScaleResolver(resolver)', () => {
     it('returns a resolver', () => {
-      const resolver = OptionsManager.getCategoricalColorScaleResolver();
+      const resolver = EncodableOptions.getCategoricalColorScaleResolver();
       expect(resolver).toBeDefined();
-      expect(typeof resolver({})('abc')).toBe('string');
+      expect(typeof resolver()('abc')).toBe('string');
     });
   });
   describe('.setCategoricalColorScaleResolver(resolver)', () => {
     it('sets a resolver', () => {
-      OptionsManager.setCategoricalColorScaleResolver(dummyScaleResolver);
-      const resolver = OptionsManager.getCategoricalColorScaleResolver();
+      EncodableOptions.setCategoricalColorScaleResolver(dummyScaleResolver);
+      const resolver = EncodableOptions.getCategoricalColorScaleResolver();
       expect(resolver).toBeDefined();
       expect(resolver({})('abc')).toEqual('haha');
     });
-    it('returns OptionsManager', () => {
-      expect(OptionsManager.setCategoricalColorScaleResolver(dummyScaleResolver)).toBe(
-        OptionsManager,
+    it('returns EncodableOptions', () => {
+      expect(EncodableOptions.setCategoricalColorScaleResolver(dummyScaleResolver)).toBe(
+        EncodableOptions,
       );
     });
   });

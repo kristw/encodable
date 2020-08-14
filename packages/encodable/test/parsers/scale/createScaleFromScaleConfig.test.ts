@@ -1,42 +1,33 @@
-import {
-  getSequentialSchemeRegistry,
-  SequentialScheme,
-  getCategoricalSchemeRegistry,
-  CategoricalScheme,
-} from '@superset-ui/color';
+import { getColorSchemeRegistry } from '@encodable/color';
 import createScaleFromScaleConfig from '../../../src/parsers/scale/createScaleFromScaleConfig';
 
 describe('createScaleFromScaleConfig(config)', () => {
   beforeAll(() => {
-    getSequentialSchemeRegistry()
-      .registerValue(
-        'test-scheme',
-        new SequentialScheme({
-          id: 'test-scheme',
-          colors: ['#ff0000', '#ffff00'],
-        }),
-      )
-      .registerValue(
-        'red-blue',
-        new SequentialScheme({
-          id: 'red-blue',
-          colors: [
-            '#67001f',
-            '#b2182b',
-            '#d6604d',
-            '#f4a582',
-            '#fddbc7',
-            '#d1e5f0',
-            '#92c5de',
-            '#4393c3',
-            '#2166ac',
-            '#053061',
-          ],
-        }),
-      );
+    getColorSchemeRegistry()
+      .register({
+        type: 'sequential',
+        id: 'test-scheme',
+        colors: ['#ff0000', '#ffff00'],
+      })
+      .register({
+        type: 'sequential',
+        id: 'red-blue',
+        colors: [
+          '#67001f',
+          '#b2182b',
+          '#d6604d',
+          '#f4a582',
+          '#fddbc7',
+          '#d1e5f0',
+          '#92c5de',
+          '#4393c3',
+          '#2166ac',
+          '#053061',
+        ],
+      });
   });
   afterAll(() => {
-    getSequentialSchemeRegistry().remove('test-scheme');
+    getColorSchemeRegistry().remove('test-scheme');
   });
 
   describe('default', () => {
@@ -173,13 +164,13 @@ describe('createScaleFromScaleConfig(config)', () => {
             scheme: { name: 'test-scheme', extent: [0.5, 1] },
           });
 
-          expect(scale(0)).toEqual('rgb(255, 160, 0)');
+          expect(scale(0)).toEqual('rgb(255, 128, 0)');
           expect(scale(10)).toEqual('rgb(255, 255, 0)');
         });
       });
 
       it('uses default range when specified scheme is not available', () => {
-        getSequentialSchemeRegistry().clearDefaultKey();
+        getColorSchemeRegistry().sequential.clearDefaultKey();
 
         const scale = createScaleFromScaleConfig({
           type: 'linear',
@@ -555,8 +546,8 @@ describe('createScaleFromScaleConfig(config)', () => {
 
       expect(scale.range()).toHaveLength(3);
       expect(scale(-1)).toEqual('rgb(255, 0, 0)');
-      expect(scale(0)).toEqual('rgb(255, 160, 0)');
-      expect(scale(0.5)).toEqual('rgb(255, 160, 0)');
+      expect(scale(0)).toEqual('rgb(255, 128, 0)');
+      expect(scale(0.5)).toEqual('rgb(255, 128, 0)');
       expect(scale(1)).toEqual('rgb(255, 255, 0)');
       expect(scale(1000)).toEqual('rgb(255, 255, 0)');
     });
@@ -564,27 +555,23 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('ordinal scale', () => {
     beforeEach(() => {
-      getCategoricalSchemeRegistry()
-        .registerValue(
-          'test-category-scheme',
-          new CategoricalScheme({
-            id: 'test-category-scheme',
-            colors: ['red', 'white', 'green'],
-          }),
-        )
-        .registerValue(
-          'test-category-scheme2',
-          new CategoricalScheme({
-            id: 'test-category-scheme2',
-            colors: ['pink', 'charcoal', 'orange'],
-          }),
-        )
+      getColorSchemeRegistry()
+        .categorical.register({
+          type: 'categorical',
+          id: 'test-category-scheme',
+          colors: ['red', 'white', 'green'],
+        })
+        .register({
+          type: 'categorical',
+          id: 'test-category-scheme2',
+          colors: ['pink', 'charcoal', 'orange'],
+        })
         .setDefaultKey('test-category-scheme');
     });
 
     afterEach(() => {
-      getCategoricalSchemeRegistry()
-        .remove('test-category-scheme')
+      getColorSchemeRegistry()
+        .categorical.remove('test-category-scheme')
         .remove('test-category-scheme2')
         .clearDefaultKey();
     });

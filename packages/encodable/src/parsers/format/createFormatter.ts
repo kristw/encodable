@@ -1,6 +1,6 @@
 import { FormatMixins, Formatter } from '../../types';
 import fallbackFormatter from './fallbackFormatter';
-import OptionsManager from '../../options/OptionsManager';
+import EncodableOptions from '../../options/EncodableOptions';
 
 export default function createFormatter({
   formatType,
@@ -8,7 +8,7 @@ export default function createFormatter({
   formatInLocalTime,
 }: FormatMixins): Formatter {
   if (formatType === 'time') {
-    const formatter = OptionsManager.getTimeFormatResolver()({
+    const formatter = EncodableOptions.getTimeFormatResolver()({
       format,
       formatInLocalTime,
     });
@@ -16,7 +16,7 @@ export default function createFormatter({
     return (value: unknown) => formatter(value as Date | number | null | undefined);
   }
   if (formatType === 'number' || (typeof format !== 'undefined' && format.length > 0)) {
-    const formatter = OptionsManager.getNumberFormatResolver()(format);
+    const formatter = EncodableOptions.getNumberFormatResolver()(format);
 
     return (value: unknown) => formatter(value as number | null | undefined);
   }

@@ -1,28 +1,30 @@
 import { getStore } from 'global-box';
-import defaultNumberFormatResolver from '../parsers/format/defaultNumberFormatResolver';
-import defaultTimeFormatResolver from '../parsers/format/defaultTimeFormatResolver';
-import defaultColorSchemeResolver from '../parsers/scale/defaultColorSchemeResolver';
-import defaultCategoricalColorScaleResolver from '../parsers/scale/defaultCategoricalColorScaleResolver';
 import {
-  EncodableOptions,
+  OptionsState,
   NumberFormatResolver,
   TimeFormatResolver,
   CategoricalColorScaleResolver,
   ColorSchemeResolver,
 } from '../types';
+import {
+  defaultNumberFormatResolver,
+  defaultTimeFormatResolver,
+  defaultCategoricalColorScaleResolver,
+  defaultColorSchemeResolver,
+} from './resolvers';
 
-const CACHE_KEY = 'encodable:options';
+const CACHE_KEY = '@encodable/encodable:options';
 
-let options: EncodableOptions;
+let options: OptionsState;
 
 function getOptions() {
   if (!options) {
-    options = getStore().getOrCreate<EncodableOptions>(CACHE_KEY, () => ({}));
+    options = getStore().getOrCreate<OptionsState>(CACHE_KEY, () => ({}));
   }
   return options;
 }
 
-const OptionsManager = {
+const EncodableOptions = {
   getOptions,
   getNumberFormatResolver(): NumberFormatResolver {
     return getOptions().numberFormatResolver ?? defaultNumberFormatResolver;
@@ -54,4 +56,4 @@ const OptionsManager = {
   },
 };
 
-export default OptionsManager;
+export default EncodableOptions;
