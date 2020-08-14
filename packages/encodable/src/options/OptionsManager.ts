@@ -1,8 +1,4 @@
 import { getStore } from 'global-box';
-import defaultNumberFormatResolver from '../parsers/format/defaultNumberFormatResolver';
-import defaultTimeFormatResolver from '../parsers/format/defaultTimeFormatResolver';
-import defaultColorSchemeResolver from '../parsers/scale/defaultColorSchemeResolver';
-import defaultCategoricalColorScaleResolver from '../parsers/scale/defaultCategoricalColorScaleResolver';
 import {
   EncodableOptions,
   NumberFormatResolver,
@@ -10,8 +6,14 @@ import {
   CategoricalColorScaleResolver,
   ColorSchemeResolver,
 } from '../types';
+import {
+  defaultNumberFormatResolver,
+  defaultTimeFormatResolver,
+  defaultCategoricalColorScaleResolver,
+  defaultColorSchemeResolver,
+} from './resolvers';
 
-const CACHE_KEY = 'encodable:options';
+const CACHE_KEY = '@encodable/encodable:options';
 
 let options: EncodableOptions;
 

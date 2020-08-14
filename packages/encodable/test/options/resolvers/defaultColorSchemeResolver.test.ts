@@ -1,5 +1,5 @@
 import { getColorSchemeRegistry, d3Schemes } from '@encodable/color';
-import defaultColorSchemeResolver from '../../../src/parsers/scale/defaultColorSchemeResolver';
+import { defaultColorSchemeResolver } from '../../../src';
 
 describe('defaultColorSchemeResolver', () => {
   it('returns scale for each type', () => {
