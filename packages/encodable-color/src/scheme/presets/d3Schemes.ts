@@ -138,7 +138,13 @@ const d3CategoricalSchemes: CategoricalScheme[] = [
 const d3DivergingSchemes: DivergingScheme[] = [
   {
     type: 'diverging',
-    id: 'd3.BrBg',
+    id: 'd3.RdBu',
+    interpolator: interpolateRdBu,
+    colors: schemeRdBu,
+  },
+  {
+    type: 'diverging',
+    id: 'd3.BrBG',
     interpolator: interpolateBrBG,
     colors: schemeBrBG,
   },
@@ -159,12 +165,6 @@ const d3DivergingSchemes: DivergingScheme[] = [
     id: 'd3.PuOr',
     interpolator: interpolatePuOr,
     colors: schemePuOr,
-  },
-  {
-    type: 'diverging',
-    id: 'd3.RdBu',
-    interpolator: interpolateRdBu,
-    colors: schemeRdBu,
   },
   {
     type: 'diverging',
