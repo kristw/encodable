@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/apache-superset/encodable/compare/@encodable/registry@0.4.0...@encodable/registry@0.5.0) (2020-08-14)
+
+
+### Features
+
+* **color:** add .register() that automatically use scheme.id as key ([#55](https://github.com/apache-superset/encodable/issues/55)) ([ad7b106](https://github.com/apache-superset/encodable/commit/ad7b106a077310ab295f536046b18e1e5dc811d2))
+
+
+
+
+
 # [0.4.0](https://github.com/apache-superset/encodable/compare/@encodable/registry@0.3.0...@encodable/registry@0.4.0) (2020-08-13)
 
 
