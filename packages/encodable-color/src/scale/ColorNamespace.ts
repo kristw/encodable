@@ -1,29 +1,29 @@
 import { SyncRegistry } from '@encodable/registry';
 import { getCategoricalScheme, getColorSchemeRegistry } from '../scheme';
 import stringifyAndTrim from '../utils/stringifyAndTrim';
-import { ColorNamespaceStore } from './types';
+import { ColorNamespaceState } from './types';
 import ScaleCategoricalColor from './ScaleCategoricalColor';
 
 export default class ColorNamespace {
-  readonly store: ColorNamespaceStore;
+  readonly state: ColorNamespaceState;
 
   readonly scales: SyncRegistry<ScaleCategoricalColor>;
 
-  constructor(nameOrStore: string | ColorNamespaceStore) {
-    this.store =
-      typeof nameOrStore === 'string'
+  constructor(nameOrState: string | ColorNamespaceState) {
+    this.state =
+      typeof nameOrState === 'string'
         ? {
-            name: nameOrStore,
+            name: nameOrState,
             manualColors: {},
             scales: {},
           }
-        : nameOrStore;
+        : nameOrState;
 
     this.scales = new SyncRegistry<ScaleCategoricalColor>();
   }
 
   get name() {
-    return this.store.name;
+    return this.state.name;
   }
 
   /**
@@ -31,7 +31,7 @@ export default class ColorNamespace {
    * @param value
    */
   hasManualColor(value: string) {
-    return typeof this.store.manualColors[stringifyAndTrim(value)] !== 'undefined';
+    return typeof this.state.manualColors[stringifyAndTrim(value)] !== 'undefined';
   }
 
   /**
@@ -42,7 +42,7 @@ export default class ColorNamespace {
    * @param {*} manualColor color
    */
   setColor(value: string, manualColor: string) {
-    this.store.manualColors[stringifyAndTrim(value)] = manualColor;
+    this.state.manualColors[stringifyAndTrim(value)] = manualColor;
 
     return this;
   }
@@ -55,7 +55,7 @@ export default class ColorNamespace {
    * @param {*} manualColor color
    */
   unsetColor(value: string) {
-    delete this.store.manualColors[stringifyAndTrim(value)];
+    delete this.state.manualColors[stringifyAndTrim(value)];
 
     return this;
   }
@@ -64,26 +64,26 @@ export default class ColorNamespace {
    * Clear all manually assigned colors
    */
   clearManualColors() {
-    this.store.manualColors = {};
+    this.state.manualColors = {};
 
     return this;
   }
 
   hasScale(scheme: string) {
-    return typeof this.store.scales[scheme] !== 'undefined';
+    return typeof this.state.scales[scheme] !== 'undefined';
   }
 
   getScale(scheme?: string) {
     const schemeName =
       scheme ?? getColorSchemeRegistry().categorical.getDefaultKey() ?? 'undefined';
-    if (typeof this.store.scales[schemeName] === 'undefined') {
+    if (typeof this.state.scales[schemeName] === 'undefined') {
       // create scale
       const scale = new ScaleCategoricalColor(
         getCategoricalScheme(schemeName)?.colors ?? [],
-        this.store.manualColors,
+        this.state.manualColors,
       );
-      // add store to lookup
-      this.store.scales[schemeName] = scale.store;
+      // add state to lookup
+      this.state.scales[schemeName] = scale.state;
       this.scales.registerValue(schemeName, scale);
       return scale;
     }
@@ -94,8 +94,8 @@ export default class ColorNamespace {
 
     // create scale
     const scale = new ScaleCategoricalColor(
-      this.store.scales[schemeName]!,
-      this.store.manualColors,
+      this.state.scales[schemeName]!,
+      this.state.manualColors,
     );
     this.scales.registerValue(schemeName, scale);
     return scale;

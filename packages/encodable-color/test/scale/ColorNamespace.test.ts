@@ -23,7 +23,7 @@ describe('ColorNamespace', () => {
       expect(namespace).toBeDefined();
       expect(namespace.name).toEqual('hello');
     });
-    it('accepts store', () => {
+    it('accepts state', () => {
       const namespace = new ColorNamespace({
         name: 'hello',
         manualColors: {},
@@ -74,7 +74,7 @@ describe('ColorNamespace', () => {
       expect(scale1).toBe(scale4);
       expect(scale2).toBe(scale3);
     });
-    it('uses the existing base scale in store if exists', () => {
+    it('uses the existing base scale in state if exists', () => {
       const namespace = new ColorNamespace({
         name: 'hello',
         manualColors: {},

@@ -1,7 +1,7 @@
 import OverwritePolicy from '../models/OverwritePolicy';
 
 interface ItemWithValue<V> {
-  /** stored value */
+  /** item value */
   value: V;
 }
 
@@ -10,7 +10,7 @@ interface ItemWithLoader<L> {
   loader: () => L;
 }
 
-export interface RegistryStore<V, L extends V | Promise<V>> {
+export interface RegistryState<V, L extends V | Promise<V>> {
   /**
    * If this is a global registry, it will be defined.
    */

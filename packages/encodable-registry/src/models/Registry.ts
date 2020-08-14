@@ -1,8 +1,8 @@
 /* eslint no-console: 0 */
 import { globalBox } from 'global-box';
 import OverwritePolicy from './OverwritePolicy';
-import { RegistryStore, RegistryConfig } from '../types';
-import createRegistryStore from './createRegistryStore';
+import { RegistryState, RegistryConfig } from '../types';
+import createRegistryState from './createRegistryState';
 
 /**
  * Registry class
@@ -16,14 +16,14 @@ import createRegistryStore from './createRegistryStore';
  * both synchronous and asynchronous loaders.
  */
 export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
-  readonly store: RegistryStore<V, L>;
+  readonly state: RegistryState<V, L>;
 
   constructor(config: RegistryConfig = {}) {
     if (typeof config.globalId === 'undefined') {
-      this.store = createRegistryStore<V, L>(config);
+      this.state = createRegistryState<V, L>(config);
     } else {
-      this.store = globalBox().getOrCreate(config.globalId, () =>
-        createRegistryStore<V, L>(config),
+      this.state = globalBox().getOrCreate(config.globalId, () =>
+        createRegistryState<V, L>(config),
       );
     }
   }
@@ -33,9 +33,9 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * Reset default key to initial default key (if any)
    */
   clear() {
-    this.store.items = {};
-    this.store.promises = {};
-    this.store.defaultKey = this.store.initialDefaultKey;
+    this.state.items = {};
+    this.state.promises = {};
+    this.state.defaultKey = this.state.initialDefaultKey;
 
     return this;
   }
@@ -45,7 +45,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param key the key to look for
    */
   has(key: string) {
-    const item = this.store.items[key];
+    const item = this.state.items[key];
 
     return item !== null && item !== undefined;
   }
@@ -56,24 +56,24 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param value
    */
   registerValue(key: string, value: V) {
-    const item = this.store.items[key];
+    const item = this.state.items[key];
     const willOverwrite =
       this.has(key) && (('value' in item && item.value !== value) || 'loader' in item);
     if (willOverwrite) {
-      if (this.store.overwritePolicy === OverwritePolicy.WARN) {
+      if (this.state.overwritePolicy === OverwritePolicy.WARN) {
         console.warn(`Item with key "${key}" already exists. You are assigning a new value.`);
-      } else if (this.store.overwritePolicy === OverwritePolicy.PROHIBIT) {
+      } else if (this.state.overwritePolicy === OverwritePolicy.PROHIBIT) {
         throw new Error(`Item with key "${key}" already exists. Cannot overwrite.`);
       }
     }
     if (!item || willOverwrite) {
-      this.store.items[key] = { value };
-      delete this.store.promises[key];
+      this.state.items[key] = { value };
+      delete this.state.promises[key];
     }
 
     // If there is no default, set as default
-    if (this.store.setFirstItemAsDefault && !this.store.defaultKey) {
-      this.store.defaultKey = key;
+    if (this.state.setFirstItemAsDefault && !this.state.defaultKey) {
+      this.state.defaultKey = key;
     }
 
     return this;
@@ -85,24 +85,24 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param loader
    */
   registerLoader(key: string, loader: () => L) {
-    const item = this.store.items[key];
+    const item = this.state.items[key];
     const willOverwrite =
       this.has(key) && (('loader' in item && item.loader !== loader) || 'value' in item);
     if (willOverwrite) {
-      if (this.store.overwritePolicy === OverwritePolicy.WARN) {
+      if (this.state.overwritePolicy === OverwritePolicy.WARN) {
         console.warn(`Item with key "${key}" already exists. You are assigning a new value.`);
-      } else if (this.store.overwritePolicy === OverwritePolicy.PROHIBIT) {
+      } else if (this.state.overwritePolicy === OverwritePolicy.PROHIBIT) {
         throw new Error(`Item with key "${key}" already exists. Cannot overwrite.`);
       }
     }
     if (!item || willOverwrite) {
-      this.store.items[key] = { loader };
-      delete this.store.promises[key];
+      this.state.items[key] = { loader };
+      delete this.state.promises[key];
     }
 
     // If there is no default, set as default
-    if (this.store.setFirstItemAsDefault && !this.store.defaultKey) {
-      this.store.defaultKey = key;
+    if (this.state.setFirstItemAsDefault && !this.state.defaultKey) {
+      this.state.defaultKey = key;
     }
 
     return this;
@@ -114,11 +114,11 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param key
    */
   get(key?: string): V | L | undefined {
-    const targetKey = key ?? this.store.defaultKey;
+    const targetKey = key ?? this.state.defaultKey;
 
     if (typeof targetKey === 'undefined') return undefined;
 
-    const item = this.store.items[targetKey];
+    const item = this.state.items[targetKey];
     if (item !== undefined) {
       if ('loader' in item) {
         return item.loader && item.loader();
@@ -136,7 +136,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param key
    */
   getAsPromise(key: string): Promise<V> {
-    const promise = this.store.promises[key];
+    const promise = this.state.promises[key];
 
     if (typeof promise !== 'undefined') {
       return promise;
@@ -144,7 +144,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
     const item = this.get(key);
     if (item !== undefined) {
       const newPromise = Promise.resolve(item) as Promise<V>;
-      this.store.promises[key] = newPromise;
+      this.state.promises[key] = newPromise;
 
       return newPromise;
     }
@@ -157,7 +157,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * Default key is a fallback key to use if `.get()` was called without a key.
    */
   getDefaultKey() {
-    return this.store.defaultKey;
+    return this.state.defaultKey;
   }
 
   /**
@@ -166,7 +166,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param key
    */
   setDefaultKey(key: string) {
-    this.store.defaultKey = key;
+    this.state.defaultKey = key;
 
     return this;
   }
@@ -176,7 +176,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * Default key is a fallback key to use if `.get()` was called without a key.
    */
   clearDefaultKey() {
-    this.store.defaultKey = undefined;
+    this.state.defaultKey = undefined;
 
     return this;
   }
@@ -217,7 +217,7 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * Return all keys in this registry.
    */
   keys(): string[] {
-    return Object.keys(this.store.items);
+    return Object.keys(this.state.items);
   }
 
   /**
@@ -265,8 +265,8 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
    * @param key
    */
   remove(key: string) {
-    delete this.store.items[key];
-    delete this.store.promises[key];
+    delete this.state.items[key];
+    delete this.state.promises[key];
 
     return this;
   }

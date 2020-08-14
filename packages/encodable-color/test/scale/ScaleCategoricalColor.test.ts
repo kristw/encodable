@@ -82,7 +82,7 @@ describe('ScaleCategoricalColor', () => {
     it('does not override parentManualColors', () => {
       const scale1 = new ScaleCategoricalColor(['blue', 'red', 'green']);
       scale1.setColor('pig', 'black');
-      const scale2 = new ScaleCategoricalColor(['blue', 'red', 'green'], scale1.store.manualColors);
+      const scale2 = new ScaleCategoricalColor(['blue', 'red', 'green'], scale1.state.manualColors);
       scale2.setColor('pig', 'pink');
       expect(scale1.getColor('pig')).toBe('black');
       expect(scale2.getColor('pig')).toBe('black');
@@ -97,7 +97,7 @@ describe('ScaleCategoricalColor', () => {
     it('returns correct mapping and parentManualColors and forcedColors are specified', () => {
       const scale1 = new ScaleCategoricalColor(['blue', 'red', 'green']);
       scale1.setColor('cow', 'black');
-      const scale2 = new ScaleCategoricalColor(['blue', 'red', 'green'], scale1.store.manualColors);
+      const scale2 = new ScaleCategoricalColor(['blue', 'red', 'green'], scale1.state.manualColors);
       scale2.setColor('pig', 'pink');
       scale2.getColor('cow');
       scale2.getColor('pig');

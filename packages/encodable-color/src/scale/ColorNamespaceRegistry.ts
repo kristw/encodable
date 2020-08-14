@@ -1,44 +1,44 @@
 import { SyncRegistry, RegistryConfig } from '@encodable/registry';
-import { ColorNamespaceStore } from './types';
+import { ColorNamespaceState } from './types';
 import ColorNamespace from './ColorNamespace';
 
 export const DEFAULT_NAMESPACE = 'DEFAULT_NAMESPACE';
 
 export default class ColorNamespaceRegistry {
-  private readonly namespaceStores: SyncRegistry<ColorNamespaceStore>;
+  private readonly namespaceStates: SyncRegistry<ColorNamespaceState>;
 
   private readonly namespaceInstances: SyncRegistry<ColorNamespace>;
 
   constructor({ name = 'ColorNamespaceRegistry', globalId, ...rest }: RegistryConfig = {}) {
-    // only make the store global is using globalId
-    this.namespaceStores = new SyncRegistry<ColorNamespaceStore>({ name, globalId, ...rest });
+    // only make the state global is using globalId
+    this.namespaceStates = new SyncRegistry<ColorNamespaceState>({ name, globalId, ...rest });
     // the instances are always local since these are wrappers
     this.namespaceInstances = new SyncRegistry<ColorNamespace>({ name, ...rest });
 
-    if (typeof this.namespaceStores.getDefaultKey() === 'undefined') {
+    if (typeof this.namespaceStates.getDefaultKey() === 'undefined') {
       this.setDefaultNamespace(DEFAULT_NAMESPACE);
     }
   }
 
   getDefaultNamespace(): string {
-    return this.namespaceStores.getDefaultKey() ?? DEFAULT_NAMESPACE;
+    return this.namespaceStates.getDefaultKey() ?? DEFAULT_NAMESPACE;
   }
 
   setDefaultNamespace(namespace: string) {
-    this.namespaceStores.setDefaultKey(namespace);
+    this.namespaceStates.setDefaultKey(namespace);
     this.namespaceInstances.setDefaultKey(namespace);
 
     return this;
   }
 
   has(namespace: string) {
-    return this.namespaceStores.has(namespace);
+    return this.namespaceStates.has(namespace);
   }
 
   get(namespace: string = this.getDefaultNamespace()): ColorNamespace {
-    if (!this.namespaceStores.has(namespace)) {
+    if (!this.namespaceStates.has(namespace)) {
       const ns = new ColorNamespace(namespace);
-      this.namespaceStores.registerValue(namespace, ns.store);
+      this.namespaceStates.registerValue(namespace, ns.state);
       this.namespaceInstances.registerValue(namespace, ns);
       return ns;
     }
@@ -47,23 +47,23 @@ export default class ColorNamespaceRegistry {
       return this.namespaceInstances.get(namespace)!;
     }
 
-    const ns = new ColorNamespace(this.namespaceStores.get(namespace)!);
+    const ns = new ColorNamespace(this.namespaceStates.get(namespace)!);
     this.namespaceInstances.registerValue(namespace, ns);
     return ns;
   }
 
   keys() {
-    return this.namespaceStores.keys();
+    return this.namespaceStates.keys();
   }
 
   clear() {
-    this.namespaceStores.clear();
+    this.namespaceStates.clear();
     this.namespaceInstances.clear();
     return this;
   }
 
   remove(namespace: string) {
-    this.namespaceStores.remove(namespace);
+    this.namespaceStates.remove(namespace);
     this.namespaceInstances.remove(namespace);
     return this;
   }

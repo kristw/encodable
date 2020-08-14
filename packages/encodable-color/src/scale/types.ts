@@ -9,15 +9,15 @@ export type ColorLookup = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyOrdinalScale = ScaleOrdinal<any, string>;
 
-export type ScaleStore = {
+export type ScaleState = {
   manualColors: ColorLookup;
   scale: AnyOrdinalScale;
 };
 
-export type ColorNamespaceStore = {
+export type ColorNamespaceState = {
   name: string;
   manualColors: ColorLookup;
   scales: {
-    [scheme: string]: ScaleStore;
+    [scheme: string]: ScaleState;
   };
 };

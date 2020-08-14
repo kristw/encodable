@@ -17,11 +17,11 @@ export default class ChildRegistry<
       name,
       defaultKey,
       globalId:
-        typeof parent.store.globalId === 'undefined'
+        typeof parent.state.globalId === 'undefined'
           ? undefined
-          : `${parent.store.globalId}:${name}`,
-      overwritePolicy: parent.store.overwritePolicy,
-      setFirstItemAsDefault: parent.store.setFirstItemAsDefault,
+          : `${parent.state.globalId}:${name}`,
+      overwritePolicy: parent.state.overwritePolicy,
+      setFirstItemAsDefault: parent.state.setFirstItemAsDefault,
     });
 
     this.parent = parent;
@@ -32,6 +32,10 @@ export default class ChildRegistry<
     return typeof targetKey !== 'undefined' && this.has(targetKey)
       ? (this.parent.get(key)! as Wrapper)
       : undefined;
+  }
+
+  register(value: Scheme) {
+    return this.registerValue(value.id, value);
   }
 
   _registerValue(key: string, value: Scheme) {

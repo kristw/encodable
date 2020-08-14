@@ -1,7 +1,7 @@
 /* eslint-disable no-dupe-class-members */
 import { scaleOrdinal } from 'd3-scale';
 import ExtensibleFunction from '../models/ExtensibleFunction';
-import { ScaleStore, ColorLookup, StringLike } from './types';
+import { ScaleState, ColorLookup, StringLike } from './types';
 import stringifyAndTrim from '../utils/stringifyAndTrim';
 
 // Use type augmentation to correct the fact that
@@ -12,7 +12,7 @@ interface ScaleCategoricalColor {
 }
 
 class ScaleCategoricalColor extends ExtensibleFunction {
-  store: ScaleStore;
+  state: ScaleState;
 
   parentManualColors?: ColorLookup;
 
@@ -22,22 +22,22 @@ class ScaleCategoricalColor extends ExtensibleFunction {
    * @param {*} parentmanualColors optional parameter that comes from parent
    * (usually CategoricalColorNamespace) and supersede this.manualColors
    */
-  constructor(storeOrColors: ScaleStore | string[], parentmanualColors?: ColorLookup) {
+  constructor(stateOrColors: ScaleState | string[], parentmanualColors?: ColorLookup) {
     super((value: string) => this.getColor(value));
 
-    if (Array.isArray(storeOrColors)) {
-      this.store = {
+    if (Array.isArray(stateOrColors)) {
+      this.state = {
         manualColors: {},
-        scale: scaleOrdinal<StringLike, string>(storeOrColors),
+        scale: scaleOrdinal<StringLike, string>(stateOrColors),
       };
     } else {
-      this.store = storeOrColors;
+      this.state = stateOrColors;
     }
     this.parentManualColors = parentmanualColors;
   }
 
   get colors() {
-    return this.store.scale.range();
+    return this.state.scale.range();
   }
 
   getColor(value?: string) {
@@ -48,12 +48,12 @@ class ScaleCategoricalColor extends ExtensibleFunction {
       return parentColor;
     }
 
-    const manualColor = this.store.manualColors[cleanedValue];
+    const manualColor = this.state.manualColors[cleanedValue];
     if (manualColor) {
       return manualColor;
     }
 
-    return this.store.scale(cleanedValue);
+    return this.state.scale(cleanedValue);
   }
 
   /**
@@ -62,7 +62,7 @@ class ScaleCategoricalColor extends ExtensibleFunction {
    * @param {*} manualColor manualColor
    */
   setColor(value: string, manualColor: string) {
-    this.store.manualColors[stringifyAndTrim(value)] = manualColor;
+    this.state.manualColors[stringifyAndTrim(value)] = manualColor;
 
     return this;
   }
@@ -73,13 +73,13 @@ class ScaleCategoricalColor extends ExtensibleFunction {
    */
   getColorMap() {
     const colorMap: { [key: string]: string } = {};
-    this.store.scale.domain().forEach(value => {
-      colorMap[String(value)] = this.store.scale(value);
+    this.state.scale.domain().forEach(value => {
+      colorMap[String(value)] = this.state.scale(value);
     });
 
     return {
       ...colorMap,
-      ...this.store.manualColors,
+      ...this.state.manualColors,
       ...this.parentManualColors,
     };
   }
@@ -90,8 +90,8 @@ class ScaleCategoricalColor extends ExtensibleFunction {
   copy() {
     const copy = new ScaleCategoricalColor(
       {
-        manualColors: { ...this.store.manualColors },
-        scale: this.store.scale.copy(),
+        manualColors: { ...this.state.manualColors },
+        scale: this.state.scale.copy(),
       },
       this.parentManualColors,
     );
@@ -111,10 +111,10 @@ class ScaleCategoricalColor extends ExtensibleFunction {
 
   domain(newDomain?: { toString(): string }[]): unknown {
     if (typeof newDomain === 'undefined') {
-      return this.store.scale.domain() as string[];
+      return this.state.scale.domain() as string[];
     }
 
-    this.store.scale.domain(newDomain);
+    this.state.scale.domain(newDomain);
     return this;
   }
 
@@ -136,10 +136,10 @@ class ScaleCategoricalColor extends ExtensibleFunction {
 
   range(newRange?: string[]): unknown {
     if (typeof newRange === 'undefined') {
-      return this.store.scale.range();
+      return this.state.scale.range();
     }
 
-    this.store.scale.range(newRange);
+    this.state.scale.range(newRange);
     return this;
   }
 
@@ -158,10 +158,10 @@ class ScaleCategoricalColor extends ExtensibleFunction {
 
   unknown(value?: string | { name: 'implicit' }): unknown {
     if (typeof value === 'undefined') {
-      return this.store.scale.unknown();
+      return this.state.scale.unknown();
     }
 
-    this.store.scale.unknown(value);
+    this.state.scale.unknown(value);
     return this;
   }
 }
