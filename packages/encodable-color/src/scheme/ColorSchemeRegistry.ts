@@ -2,14 +2,21 @@
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
 import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from '../types';
 import ChildRegistry from './ChildRegistry';
-import createWrapper from './createWrapper';
+import createWrapper from './wrappers/createWrapper';
+import CategoricalSchemeWrapper from './wrappers/CategoricalSchemeWrapper';
+import SequentialSchemeWrapper from './wrappers/SequentialSchemeWrapper';
+import DivergingSchemeWrapper from './wrappers/DivergingSchemeWrapper';
+
+type ColorSchemeWrapper = ReturnType<typeof createWrapper>;
 
 export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
-  categorical: ChildRegistry<CategoricalScheme>;
+  readonly categorical: ChildRegistry<CategoricalScheme, CategoricalSchemeWrapper>;
 
-  sequential: ChildRegistry<SequentialScheme>;
+  readonly sequential: ChildRegistry<SequentialScheme, SequentialSchemeWrapper>;
 
-  diverging: ChildRegistry<DivergingScheme>;
+  readonly diverging: ChildRegistry<DivergingScheme, DivergingSchemeWrapper>;
+
+  private readonly wrappers: SyncRegistry<ColorSchemeWrapper>;
 
   constructor({
     name = 'ColorScheme',
@@ -19,14 +26,32 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   }: RegistryConfig = {}) {
     super({ name, overwritePolicy, setFirstItemAsDefault, ...rest });
 
-    this.categorical = new ChildRegistry<CategoricalScheme>(this, { name: 'categorical' });
-    this.sequential = new ChildRegistry<SequentialScheme>(this, { name: 'sequential' });
-    this.diverging = new ChildRegistry<DivergingScheme>(this, { name: 'diverging' });
+    this.categorical = new ChildRegistry<CategoricalScheme, CategoricalSchemeWrapper>(this, {
+      name: 'categorical',
+    });
+    this.sequential = new ChildRegistry<SequentialScheme, SequentialSchemeWrapper>(this, {
+      name: 'sequential',
+    });
+    this.diverging = new ChildRegistry<DivergingScheme, DivergingSchemeWrapper>(this, {
+      name: 'diverging',
+    });
+    this.wrappers = new SyncRegistry<ColorSchemeWrapper>();
   }
 
-  get(key?: string) {
+  get(key?: string): ColorSchemeWrapper {
     const value = super.get(key);
-    return typeof value === 'undefined' ? value : createWrapper(value);
+
+    if (typeof value === 'undefined') {
+      return value;
+    }
+
+    if (this.wrappers.has(key)) {
+      return this.wrappers.get(key);
+    }
+
+    const wrapper = createWrapper(value);
+    this.wrappers.registerValue(key, wrapper);
+    return wrapper;
   }
 
   clear() {

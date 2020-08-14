@@ -5,9 +5,9 @@ import ColorNamespace from './ColorNamespace';
 export const DEFAULT_NAMESPACE = 'DEFAULT_NAMESPACE';
 
 export default class ColorNamespaceRegistry {
-  private namespaceStores: SyncRegistry<ColorNamespaceStore>;
+  private readonly namespaceStores: SyncRegistry<ColorNamespaceStore>;
 
-  private namespaceInstances: SyncRegistry<ColorNamespace>;
+  private readonly namespaceInstances: SyncRegistry<ColorNamespace>;
 
   constructor({ name = 'ColorNamespaceRegistry', globalId, ...rest }: RegistryConfig = {}) {
     // only make the store global is using globalId
@@ -43,13 +43,13 @@ export default class ColorNamespaceRegistry {
       return ns;
     }
 
-    if (!this.namespaceInstances.has(namespace)) {
-      const ns = new ColorNamespace(this.namespaceStores.get(namespace)!);
-      this.namespaceInstances.registerValue(namespace, ns);
-      return ns;
+    if (this.namespaceInstances.has(namespace)) {
+      return this.namespaceInstances.get(namespace)!;
     }
 
-    return this.namespaceInstances.get(namespace)!;
+    const ns = new ColorNamespace(this.namespaceStores.get(namespace)!);
+    this.namespaceInstances.registerValue(namespace, ns);
+    return ns;
   }
 
   keys() {
