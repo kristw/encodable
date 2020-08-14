@@ -7,7 +7,7 @@ describe('ColorNamespaceRegistry', () => {
       const registry = new ColorNamespaceRegistry();
       expect(registry).toBeDefined();
     });
-    it('with existing store', () => {
+    it('with existing state', () => {
       const registry1 = new ColorNamespaceRegistry({ globalId: '@encodable/test-namespace-reg' });
       registry1.setDefaultNamespace('haha');
       const registry2 = new ColorNamespaceRegistry({ globalId: '@encodable/test-namespace-reg' });
@@ -21,7 +21,7 @@ describe('ColorNamespaceRegistry', () => {
       registry1.setDefaultNamespace('haha');
       const registry2 = new ColorNamespaceRegistry({ globalId: '@encodable/test-namespace-reg2' });
       // @ts-ignore
-      registry1.namespaceStores.store.defaultKey = undefined;
+      registry1.namespaceStates.state.defaultKey = undefined;
       expect(registry2.getDefaultNamespace()).toEqual(DEFAULT_NAMESPACE);
     });
   });
@@ -37,11 +37,11 @@ describe('ColorNamespaceRegistry', () => {
     });
   });
   describe('.get(namespace)', () => {
-    it('creates store and instance if both do not exist', () => {
+    it('create state and instance if both do not exist', () => {
       const registry = new ColorNamespaceRegistry();
       expect(registry.get('test1')).toBeDefined();
     });
-    it('creates only instance if store exist', () => {
+    it('creates only instance if state exist', () => {
       const registry1 = new ColorNamespaceRegistry({
         globalId: '@encodable/test-namespace-reg-get',
       });

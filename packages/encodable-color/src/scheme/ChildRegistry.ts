@@ -17,11 +17,11 @@ export default class ChildRegistry<
       name,
       defaultKey,
       globalId:
-        typeof parent.store.globalId === 'undefined'
+        typeof parent.state.globalId === 'undefined'
           ? undefined
-          : `${parent.store.globalId}:${name}`,
-      overwritePolicy: parent.store.overwritePolicy,
-      setFirstItemAsDefault: parent.store.setFirstItemAsDefault,
+          : `${parent.state.globalId}:${name}`,
+      overwritePolicy: parent.state.overwritePolicy,
+      setFirstItemAsDefault: parent.state.setFirstItemAsDefault,
     });
 
     this.parent = parent;

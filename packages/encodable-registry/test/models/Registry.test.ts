@@ -23,7 +23,7 @@ describe('Registry', () => {
     it('can create a new registry when config.name is given', () => {
       registry = new Registry({ name: 'abc' });
       expect(registry).toBeInstanceOf(Registry);
-      expect(registry.store.name).toBe('abc');
+      expect(registry.state.name).toBe('abc');
     });
   });
 
@@ -31,8 +31,8 @@ describe('Registry', () => {
     it('clears all registered items', () => {
       registry.registerValue('a', 'testValue');
       registry.clear();
-      expect(Object.keys(registry.store.items)).toHaveLength(0);
-      expect(Object.keys(registry.store.promises)).toHaveLength(0);
+      expect(Object.keys(registry.state.items)).toHaveLength(0);
+      expect(Object.keys(registry.state.promises)).toHaveLength(0);
     });
     it('also resets default key', () => {
       registry.setDefaultKey('abc');
@@ -216,7 +216,7 @@ describe('Registry', () => {
   describe('.setDefaultKey(key)', () => {
     it('set the default key', () => {
       registry.setDefaultKey('abc');
-      expect(registry.store.defaultKey).toEqual('abc');
+      expect(registry.state.defaultKey).toEqual('abc');
     });
     it('returns itself', () => {
       expect(registry.setDefaultKey('ghi')).toBe(registry);
@@ -226,7 +226,7 @@ describe('Registry', () => {
   describe('.clearDefaultKey()', () => {
     it('set the default key to undefined', () => {
       registry.clearDefaultKey();
-      expect(registry.store.defaultKey).toBeUndefined();
+      expect(registry.state.defaultKey).toBeUndefined();
     });
     it('returns itself', () => {
       expect(registry.clearDefaultKey()).toBe(registry);
@@ -402,7 +402,7 @@ describe('Registry', () => {
   describe('config.defaultKey', () => {
     describe('when not set', () => {
       it(`After creation, default key is undefined`, () => {
-        expect(registry.store.defaultKey).toBeUndefined();
+        expect(registry.state.defaultKey).toBeUndefined();
       });
       it('.clear() reset defaultKey to undefined', () => {
         registry.setDefaultKey('abc');
@@ -415,7 +415,7 @@ describe('Registry', () => {
         defaultKey: 'def',
       });
       it(`After creation, default key is undefined`, () => {
-        expect(registry2.store.defaultKey).toEqual('def');
+        expect(registry2.state.defaultKey).toEqual('def');
       });
       it('.clear() reset defaultKey to this config.defaultKey', () => {
         registry2.setDefaultKey('abc');
@@ -427,13 +427,13 @@ describe('Registry', () => {
 
   describe('config.version', () => {
     it('sets to 0.x.x by default', () => {
-      expect(registry.store.version).toEqual('0.x.x');
+      expect(registry.state.version).toEqual('0.x.x');
     });
     it('sets to specified version', () => {
       const registry2 = new Registry({
         version: '1.x.x',
       });
-      expect(registry2.store.version).toEqual('1.x.x');
+      expect(registry2.state.version).toEqual('1.x.x');
     });
   });
 
@@ -478,10 +478,10 @@ describe('Registry', () => {
       describe('.registerValue(key, value)', () => {
         it('does not modify default key', () => {
           registry2.registerValue('abc', 100);
-          expect(registry2.store.defaultKey).toBeUndefined();
+          expect(registry2.state.defaultKey).toBeUndefined();
           registry2.setDefaultKey('def');
           registry2.registerValue('ghi', 300);
-          expect(registry2.store.defaultKey).toEqual('def');
+          expect(registry2.state.defaultKey).toEqual('def');
         });
         it('returns itself', () => {
           expect(registry2.registerValue('ghi', 300)).toBe(registry2);
@@ -490,10 +490,10 @@ describe('Registry', () => {
       describe('.registerLoader(key, loader)', () => {
         it('does not modify default key', () => {
           registry2.registerValue('abc', () => 100);
-          expect(registry2.store.defaultKey).toBeUndefined();
+          expect(registry2.state.defaultKey).toBeUndefined();
           registry2.setDefaultKey('def');
           registry2.registerValue('ghi', () => 300);
-          expect(registry2.store.defaultKey).toEqual('def');
+          expect(registry2.state.defaultKey).toEqual('def');
         });
         it('returns itself', () => {
           expect(registry2.registerLoader('ghi', () => 300)).toBe(registry2);
