@@ -24,7 +24,7 @@ export type ColorSchemeResolver = (params?: {
 /**
  * All fields are optional.
  */
-export type OptionsState = Partial<{
+export type EncodableState = Partial<{
   numberFormatResolver: NumberFormatResolver;
   timeFormatResolver: TimeFormatResolver;
   categoricalColorScaleResolver: CategoricalColorScaleResolver;
