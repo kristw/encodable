@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/apache-superset/encodable/compare/@encodable/color@0.2.0...@encodable/color@0.3.0) (2020-08-14)
+
+
+### Bug Fixes
+
+* **color:** duplicate schemes ([#58](https://github.com/apache-superset/encodable/issues/58)) ([fea905c](https://github.com/apache-superset/encodable/commit/fea905c7a0a996e2aaf7ca4232c5fd0670e38a5a))
+
+
+### Features
+
+* **color:** include d3 schemes by default ([#59](https://github.com/apache-superset/encodable/issues/59)) ([74a72cf](https://github.com/apache-superset/encodable/commit/74a72cf183007b8cfa433180198d3bc81b5bd4d4))
+
+
+
+
+
 # [0.2.0](https://github.com/apache-superset/encodable/compare/@encodable/color@0.1.0...@encodable/color@0.2.0) (2020-08-14)
 
 
