@@ -2,14 +2,19 @@
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
 import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from '../types';
 import ChildRegistry from './ChildRegistry';
-import createWrapper from './createWrapper';
+import wrapColorScheme, { ColorSchemeWrapper } from './wrappers/wrapColorScheme';
+import CategoricalSchemeWrapper from './wrappers/CategoricalSchemeWrapper';
+import SequentialSchemeWrapper from './wrappers/SequentialSchemeWrapper';
+import DivergingSchemeWrapper from './wrappers/DivergingSchemeWrapper';
 
 export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
-  categorical: ChildRegistry<CategoricalScheme>;
+  readonly categorical: ChildRegistry<CategoricalScheme, CategoricalSchemeWrapper>;
 
-  sequential: ChildRegistry<SequentialScheme>;
+  readonly sequential: ChildRegistry<SequentialScheme, SequentialSchemeWrapper>;
 
-  diverging: ChildRegistry<DivergingScheme>;
+  readonly diverging: ChildRegistry<DivergingScheme, DivergingSchemeWrapper>;
+
+  private readonly wrappers: SyncRegistry<ColorSchemeWrapper>;
 
   constructor({
     name = 'ColorScheme',
@@ -19,14 +24,38 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   }: RegistryConfig = {}) {
     super({ name, overwritePolicy, setFirstItemAsDefault, ...rest });
 
-    this.categorical = new ChildRegistry<CategoricalScheme>(this, { name: 'categorical' });
-    this.sequential = new ChildRegistry<SequentialScheme>(this, { name: 'sequential' });
-    this.diverging = new ChildRegistry<DivergingScheme>(this, { name: 'diverging' });
+    this.categorical = new ChildRegistry<CategoricalScheme, CategoricalSchemeWrapper>(this, {
+      name: 'categorical',
+    });
+    this.sequential = new ChildRegistry<SequentialScheme, SequentialSchemeWrapper>(this, {
+      name: 'sequential',
+    });
+    this.diverging = new ChildRegistry<DivergingScheme, DivergingSchemeWrapper>(this, {
+      name: 'diverging',
+    });
+    this.wrappers = new SyncRegistry<ColorSchemeWrapper>();
   }
 
-  get(key?: string) {
-    const value = super.get(key);
-    return typeof value === 'undefined' ? value : createWrapper(value);
+  get(key?: string): ColorSchemeWrapper | undefined {
+    const targetKey = key ?? this.getDefaultKey();
+
+    if (typeof targetKey === 'undefined') {
+      return undefined;
+    }
+
+    const value = super.get(targetKey);
+
+    if (typeof value === 'undefined') {
+      return value;
+    }
+
+    if (this.wrappers.has(targetKey)) {
+      return this.wrappers.get(key);
+    }
+
+    const wrapper = wrapColorScheme(value);
+    this.wrappers.registerValue(targetKey, wrapper);
+    return wrapper;
   }
 
   clear() {

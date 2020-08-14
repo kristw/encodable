@@ -28,6 +28,7 @@ describe('ColorSchemeRegistry', () => {
         expect(registry.get('something')).toBeDefined();
       });
       it('returns undefined otherwise', () => {
+        expect(registry.get()).toBeUndefined();
         expect(registry.get('nothing')).toBeUndefined();
       });
     });
@@ -52,7 +53,7 @@ describe('ColorSchemeRegistry', () => {
           type: 'categorical',
           colors,
         });
-        expect(registry.get('abc')?.colors).toEqual(colors);
+        expect(registry.get('abc')?.id).toEqual('abc');
         expect(registry.categorical.get('abc')?.colors).toEqual(colors);
       });
       it('does nothing for invalid scheme', () => {
@@ -75,7 +76,7 @@ describe('ColorSchemeRegistry', () => {
           type: 'categorical',
           colors,
         }));
-        expect(registry.get('abc')?.colors).toEqual(colors);
+        expect(registry.get('abc')?.id).toEqual('abc');
         expect(registry.categorical.get('abc')?.colors).toEqual(colors);
       });
       it('does nothing for invalid scheme', () => {
@@ -114,6 +115,7 @@ describe('ColorSchemeRegistry', () => {
           expect(registry.categorical.get('something')).toBeDefined();
         });
         it('returns undefined otherwise', () => {
+          expect(registry.categorical.get()).toBeUndefined();
           expect(registry.categorical.get('nothing')).toBeUndefined();
         });
       });

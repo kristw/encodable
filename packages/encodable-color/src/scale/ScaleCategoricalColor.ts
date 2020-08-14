@@ -74,7 +74,7 @@ class ScaleCategoricalColor extends ExtensibleFunction {
   getColorMap() {
     const colorMap: { [key: string]: string } = {};
     this.store.scale.domain().forEach(value => {
-      colorMap[value.toString()] = this.store.scale(value);
+      colorMap[String(value)] = this.store.scale(value);
     });
 
     return {
@@ -111,7 +111,7 @@ class ScaleCategoricalColor extends ExtensibleFunction {
 
   domain(newDomain?: { toString(): string }[]): unknown {
     if (typeof newDomain === 'undefined') {
-      return this.store.scale.domain();
+      return this.store.scale.domain() as string[];
     }
 
     this.store.scale.domain(newDomain);

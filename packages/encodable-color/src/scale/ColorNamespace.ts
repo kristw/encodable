@@ -5,9 +5,9 @@ import { ColorNamespaceStore } from './types';
 import ScaleCategoricalColor from './ScaleCategoricalColor';
 
 export default class ColorNamespace {
-  store: ColorNamespaceStore;
+  readonly store: ColorNamespaceStore;
 
-  scales: SyncRegistry<ScaleCategoricalColor>;
+  readonly scales: SyncRegistry<ScaleCategoricalColor>;
 
   constructor(nameOrStore: string | ColorNamespaceStore) {
     this.store =
@@ -87,16 +87,17 @@ export default class ColorNamespace {
       this.scales.registerValue(schemeName, scale);
       return scale;
     }
-    if (!this.scales.has(schemeName)) {
-      // create scale
-      const scale = new ScaleCategoricalColor(
-        this.store.scales[schemeName]!,
-        this.store.manualColors,
-      );
-      this.scales.registerValue(schemeName, scale);
-      return scale;
+
+    if (this.scales.has(schemeName)) {
+      return this.scales.get(schemeName)!;
     }
 
-    return this.scales.get(schemeName)!;
+    // create scale
+    const scale = new ScaleCategoricalColor(
+      this.store.scales[schemeName]!,
+      this.store.manualColors,
+    );
+    this.scales.registerValue(schemeName, scale);
+    return scale;
   }
 }

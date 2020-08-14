@@ -1,14 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 import { SyncRegistry, RegistryConfig } from '@encodable/registry';
 import { ColorScheme } from '../types';
-import createWrapper from './createWrapper';
 
 type ChildRegistryConfig = Pick<RegistryConfig, 'defaultKey'> & {
   name: string;
 };
 
-export default class ChildRegistry<V extends ColorScheme> extends SyncRegistry<V> {
-  parent: SyncRegistry<ColorScheme>;
+export default class ChildRegistry<
+  Scheme extends ColorScheme,
+  Wrapper extends Scheme
+> extends SyncRegistry<Scheme> {
+  private readonly parent: SyncRegistry<ColorScheme>;
 
   constructor(parent: SyncRegistry<ColorScheme>, { name, defaultKey }: ChildRegistryConfig) {
     super({
@@ -25,25 +27,27 @@ export default class ChildRegistry<V extends ColorScheme> extends SyncRegistry<V
     this.parent = parent;
   }
 
-  get(key?: string) {
-    const value = super.get(key);
-    return typeof value === 'undefined' ? value : createWrapper(value);
+  get(key?: string): Wrapper | undefined {
+    const targetKey = key ?? this.getDefaultKey();
+    return typeof targetKey !== 'undefined' && this.has(targetKey)
+      ? (this.parent.get(key)! as Wrapper)
+      : undefined;
   }
 
-  _registerValue(key: string, value: V) {
+  _registerValue(key: string, value: Scheme) {
     return super.registerValue(key, value);
   }
 
-  registerValue(key: string, value: V) {
+  registerValue(key: string, value: Scheme) {
     this.parent.registerValue(key, value);
     return this;
   }
 
-  _registerLoader(key: string, loader: () => V) {
+  _registerLoader(key: string, loader: () => Scheme) {
     return super.registerLoader(key, loader);
   }
 
-  registerLoader(key: string, loader: () => V) {
+  registerLoader(key: string, loader: () => Scheme) {
     this.parent.registerLoader(key, loader);
     return this;
   }
