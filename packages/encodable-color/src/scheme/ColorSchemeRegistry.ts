@@ -38,19 +38,25 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     this.wrappers = new SyncRegistry<ColorSchemeWrapper>();
   }
 
-  get(key?: string): ColorSchemeWrapper {
-    const value = super.get(key);
+  get(key?: string): ColorSchemeWrapper | undefined {
+    const targetKey = key ?? this.getDefaultKey();
+
+    if (typeof targetKey === 'undefined') {
+      return undefined;
+    }
+
+    const value = super.get(targetKey);
 
     if (typeof value === 'undefined') {
       return value;
     }
 
-    if (this.wrappers.has(key)) {
+    if (this.wrappers.has(targetKey)) {
       return this.wrappers.get(key);
     }
 
     const wrapper = createWrapper(value);
-    this.wrappers.registerValue(key, wrapper);
+    this.wrappers.registerValue(targetKey, wrapper);
     return wrapper;
   }
 
