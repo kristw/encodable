@@ -30,7 +30,7 @@ export default class ChildRegistry<
   get(schemeId?: string): Wrapper | undefined {
     const targetKey = schemeId ?? this.getDefaultKey();
     return typeof targetKey !== 'undefined' && this.has(targetKey)
-      ? (this.parent.get(schemeId)! as Wrapper)
+      ? (this.parent.get(targetKey)! as Wrapper)
       : undefined;
   }
 
