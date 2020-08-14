@@ -6,17 +6,17 @@ export type NumberFormatter = (value: number | null | undefined) => string;
 export type NumberFormatResolver = (format?: string) => NumberFormatter;
 
 export type TimeFormatter = (value: Date | number | null | undefined) => string;
-export type TimeFormatResolver = (params: {
+export type TimeFormatResolver = (params?: {
   format?: string;
   formatInLocalTime?: boolean;
 }) => TimeFormatter;
 
-export type CategoricalColorScaleResolver = (params: {
+export type CategoricalColorScaleResolver = (params?: {
   name?: string;
   namespace?: string;
 }) => ScaleOrdinal<StringLike, string>;
 
-export type ColorSchemeResolver = (params: {
+export type ColorSchemeResolver = (params?: {
   name?: string;
   type?: 'sequential' | 'diverging' | 'categorical';
 }) => ColorScheme | undefined;

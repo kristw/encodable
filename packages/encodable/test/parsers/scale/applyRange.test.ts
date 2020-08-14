@@ -11,7 +11,7 @@ describe('applyRange()', () => {
   describe('undefined range', () => {
     describe('with scheme', () => {
       beforeEach(() => {
-        OptionsManager.setColorSchemeResolver(({ name }) =>
+        OptionsManager.setColorSchemeResolver(({ name } = {}) =>
           typeof name === 'undefined' || name === 'test-scheme'
             ? { type: 'sequential', id: 'test-scheme', colors: ['#fee087', '#fa5c2e', '#800026'] }
             : undefined,

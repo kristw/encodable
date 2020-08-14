@@ -1,9 +1,18 @@
+import { getColorSchemeRegistry, d3Schemes } from '@encodable/color';
 import defaultColorSchemeResolver from '../../../src/parsers/scale/defaultColorSchemeResolver';
 
 describe('defaultColorSchemeResolver', () => {
-  it('only handles sequential scale', () => {
+  it('returns scale for each type', () => {
+    getColorSchemeRegistry().register(d3Schemes);
     expect(defaultColorSchemeResolver({ type: 'sequential' })).toBeDefined();
-    expect(defaultColorSchemeResolver({ type: 'diverging' })).toBeUndefined();
-    expect(defaultColorSchemeResolver({ type: 'categorical' })).toBeUndefined();
+    expect(defaultColorSchemeResolver({ type: 'diverging' })).toBeDefined();
+    expect(defaultColorSchemeResolver({ type: 'categorical' })).toBeDefined();
+    getColorSchemeRegistry().clear();
+  });
+  it('handles default case', () => {
+    getColorSchemeRegistry().register(d3Schemes);
+    expect(defaultColorSchemeResolver({})).toBeDefined();
+    expect(defaultColorSchemeResolver()).toBeDefined();
+    getColorSchemeRegistry().clear();
   });
 });
