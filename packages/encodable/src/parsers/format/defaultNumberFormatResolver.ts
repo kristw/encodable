@@ -1,3 +1,3 @@
-import { getNumberFormatter } from '@superset-ui/number-format';
+import { getNumberFormatter } from '@encodable/format';
 
 export default getNumberFormatter;

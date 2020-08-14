@@ -1,9 +1,18 @@
-import { getTimeFormatter, LOCAL_PREFIX } from '@superset-ui/time-format';
+import {
+  getTimeFormatter,
+  getTimeFormatterRegistry,
+  LOCAL_TIME_PREFIX,
+  addPrefix,
+  TimeFormats,
+} from '@encodable/format';
 import { TimeFormatResolver } from '../../types';
 
 const defaultTimeFormatResolver: TimeFormatResolver = ({ format, formatInLocalTime = false }) => {
   const formatString = formatInLocalTime
-    ? LOCAL_PREFIX + format?.replace(LOCAL_PREFIX, '')
+    ? addPrefix(
+        LOCAL_TIME_PREFIX,
+        format ?? getTimeFormatterRegistry().getDefaultKey() ?? TimeFormats.DATABASE_DATETIME,
+      )
     : format;
   return getTimeFormatter(formatString);
 };

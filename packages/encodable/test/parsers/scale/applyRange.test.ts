@@ -13,7 +13,7 @@ describe('applyRange()', () => {
       beforeEach(() => {
         OptionsManager.setColorSchemeResolver(({ name }) =>
           typeof name === 'undefined' || name === 'test-scheme'
-            ? ['#fee087', '#fa5c2e', '#800026']
+            ? { type: 'sequential', id: 'test-scheme', colors: ['#fee087', '#fa5c2e', '#800026'] }
             : undefined,
         );
       });

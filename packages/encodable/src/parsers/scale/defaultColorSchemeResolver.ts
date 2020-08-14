@@ -1,11 +1,7 @@
-import { getSequentialSchemeRegistry } from '@superset-ui/color';
+import { getColorSchemeRegistry } from '@encodable/color';
 import { ColorSchemeResolver } from '../../types';
 
-const defaultColorSchemeResolver: ColorSchemeResolver = ({ name, type }) => {
-  if (type === 'sequential') {
-    return getSequentialSchemeRegistry().get(name)?.colors;
-  }
-  return undefined;
-};
+const defaultColorSchemeResolver: ColorSchemeResolver = ({ name, type = 'categorical' }) =>
+  getColorSchemeRegistry()[type].get(name);
 
 export default defaultColorSchemeResolver;

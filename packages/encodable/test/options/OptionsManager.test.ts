@@ -1,4 +1,5 @@
 import { scaleOrdinal } from 'd3-scale';
+import { ColorScheme } from '@encodable/color';
 import { OptionsManager, StringLike } from '../../src';
 
 const dummyFormatter = () => 'haha';
@@ -58,13 +59,15 @@ describe('OptionsManager', () => {
   });
   describe('.setColorScaleResolver(resolver)', () => {
     it('sets a resolver', () => {
-      OptionsManager.setColorSchemeResolver(() => ['#222', '#eee']);
+      const output: ColorScheme = { type: 'categorical', id: 'dummy', colors: ['#222', '#eee'] };
+      OptionsManager.setColorSchemeResolver(() => output);
       const resolver = OptionsManager.getColorSchemeResolver();
       expect(resolver).toBeDefined();
-      expect(resolver({ name: '', type: 'sequential' })).toEqual(['#222', '#eee']);
+      expect(resolver({ name: '', type: 'sequential' })).toEqual(output);
     });
     it('returns OptionsManager', () => {
-      expect(OptionsManager.setColorSchemeResolver(() => [])).toBe(OptionsManager);
+      const output: ColorScheme = { type: 'categorical', id: 'dummy', colors: ['#222', '#eee'] };
+      expect(OptionsManager.setColorSchemeResolver(() => output)).toBe(OptionsManager);
     });
   });
   describe('.getCategoricalColorScaleResolver(resolver)', () => {

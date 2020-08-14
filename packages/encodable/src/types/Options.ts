@@ -1,3 +1,4 @@
+import { ColorScheme } from '@encodable/color';
 import { ScaleOrdinal } from 'd3-scale';
 import { StringLike } from './Core';
 
@@ -18,7 +19,7 @@ export type CategoricalColorScaleResolver = (params: {
 export type ColorSchemeResolver = (params: {
   name?: string;
   type?: 'sequential' | 'diverging' | 'categorical';
-}) => string[] | undefined;
+}) => ColorScheme | undefined;
 
 /**
  * All fields are optional.

@@ -1,11 +1,7 @@
-import { CategoricalColorNamespace } from '@superset-ui/color';
+import { getScale } from '@encodable/color';
 import { CategoricalColorScaleResolver } from '../../types/Options';
 
-const defaultCategoricalColorScaleResolver: CategoricalColorScaleResolver = ({
-  name,
-  namespace,
-}) => {
-  return CategoricalColorNamespace.getScale(name, namespace);
-};
+const defaultCategoricalColorScaleResolver: CategoricalColorScaleResolver = ({ name, namespace }) =>
+  getScale(name, namespace);
 
 export default defaultCategoricalColorScaleResolver;
