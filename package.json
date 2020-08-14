@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "postpublish": "git push; git push --tags",
-    "build": "yarn babel && yarn type && yarn build:assets",
+    "build": "NODE_OPTIONS=\"--max-old-space-size=8192\" yarn babel && yarn type && yarn build:assets",
     "babel": "yarn babel:cjs && yarn babel:esm",
     "babel:cjs": "nimbus babel --clean --workspaces=\"(encodable|@encodable/*)\"",
     "babel:esm": "nimbus babel --clean --workspaces=\"(encodable|@encodable/*)\" --esm",
