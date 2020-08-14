@@ -2,12 +2,10 @@
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
 import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from '../types';
 import ChildRegistry from './ChildRegistry';
-import createWrapper from './wrappers/createWrapper';
+import createWrapper, { ColorSchemeWrapper } from './wrappers/createWrapper';
 import CategoricalSchemeWrapper from './wrappers/CategoricalSchemeWrapper';
 import SequentialSchemeWrapper from './wrappers/SequentialSchemeWrapper';
 import DivergingSchemeWrapper from './wrappers/DivergingSchemeWrapper';
-
-type ColorSchemeWrapper = ReturnType<typeof createWrapper>;
 
 export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
   readonly categorical: ChildRegistry<CategoricalScheme, CategoricalSchemeWrapper>;

@@ -36,4 +36,26 @@ describe('createWrapper()', () => {
       expect(() => createWrapper({ type: 'haha' })).toThrow('Unknown scheme type: haha');
     });
   });
+  describe('creates wrapper only when necessary', () => {
+    it('categorical', () => {
+      const wrapper = createWrapper({
+        type: 'categorical',
+        id: 'test',
+        colors: ['red', 'green', 'blue'],
+      });
+      expect(createWrapper(wrapper)).toBe(wrapper);
+    });
+    it('sequential', () => {
+      const wrapper = createWrapper({ type: 'sequential', id: 'test', colors: ['red', 'white'] });
+      expect(createWrapper(wrapper)).toBe(wrapper);
+    });
+    it('diverging', () => {
+      const wrapper = createWrapper({
+        type: 'diverging',
+        id: 'test',
+        colors: ['red', 'white', 'blue'],
+      });
+      expect(createWrapper(wrapper)).toBe(wrapper);
+    });
+  });
 });
