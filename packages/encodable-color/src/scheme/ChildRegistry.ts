@@ -34,6 +34,10 @@ export default class ChildRegistry<
       : undefined;
   }
 
+  register(value: Scheme) {
+    return this.registerValue(value.id, value);
+  }
+
   _registerValue(key: string, value: Scheme) {
     return super.registerValue(key, value);
   }

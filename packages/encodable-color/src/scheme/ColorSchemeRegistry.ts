@@ -76,6 +76,10 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     return this;
   }
 
+  register(value: ColorScheme) {
+    return this.registerValue(value.id, value);
+  }
+
   registerValue(key: string, value: ColorScheme) {
     switch (value.type) {
       case 'categorical':
