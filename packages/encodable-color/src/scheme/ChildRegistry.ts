@@ -34,7 +34,13 @@ export default class ChildRegistry<
       : undefined;
   }
 
-  register(value: Scheme) {
+  register(value: Scheme | Scheme[]) {
+    if (Array.isArray(value)) {
+      value.forEach(v => {
+        this.registerValue(v.id, v);
+      });
+      return this;
+    }
     return this.registerValue(value.id, value);
   }
 
