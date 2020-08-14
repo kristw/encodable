@@ -279,11 +279,6 @@ const d3MultiHueSchemes: SequentialScheme[] = [
   },
   {
     type: 'sequential',
-    id: 'd3.cubehelixDefault',
-    interpolator: interpolateCubehelixDefault,
-  },
-  {
-    type: 'sequential',
     id: 'd3.BuGn',
     interpolator: interpolateBuGn,
     colors: schemeBuGn,
