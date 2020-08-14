@@ -1423,10 +1423,10 @@
   dependencies:
     find-up "^2.1.0"
 
-"@encodable/color@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@encodable/color/-/color-0.3.0.tgz#f701671610b6ebee50087bce414c570ee8cd817f"
-  integrity sha512-/3SMjIWstKP8+kFRCoXZzl/ezUN6of/F5S6mjK+VVhC3vyzy0DP6B5rwX0mhfRdFygMaf07pSRaE+b2+iTm9nQ==
+"@encodable/color@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@encodable/color/-/color-0.3.1.tgz#1d753716a5873b4a60b46976025ebbf570dd4aea"
+  integrity sha512-9ewkD7K2Ba/bVeC7SuaNcPbVKxie98Zg7navKJgKuwS0mejMn2XYEsPu36qRHXaaTFfG8wE69T/jcymZFCI++A==
   dependencies:
     "@encodable/registry" "^0.5.0"
     "@types/d3-interpolate" "^1.3.1"
