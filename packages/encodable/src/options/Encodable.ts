@@ -16,18 +16,18 @@ import {
 const CACHE_KEY = '@encodable/encodable:options';
 
 class OptionsManager {
-  options: EncodableState;
+  state: EncodableState;
 
   constructor() {
-    this.options = getStore().getOrCreate<EncodableState>(CACHE_KEY, () => ({}));
+    this.state = getStore().getOrCreate<EncodableState>(CACHE_KEY, () => ({}));
   }
 
   getNumberFormatResolver(): NumberFormatResolver {
-    return this.options.numberFormatResolver ?? defaultNumberFormatResolver;
+    return this.state.numberFormatResolver ?? defaultNumberFormatResolver;
   }
 
   setNumberFormatResolver(resolver: NumberFormatResolver | undefined) {
-    this.options.numberFormatResolver = resolver;
+    this.state.numberFormatResolver = resolver;
     return this;
   }
 
@@ -40,11 +40,11 @@ class OptionsManager {
   }
 
   getTimeFormatResolver(): TimeFormatResolver {
-    return this.options.timeFormatResolver ?? defaultTimeFormatResolver;
+    return this.state.timeFormatResolver ?? defaultTimeFormatResolver;
   }
 
   setTimeFormatResolver(resolver: TimeFormatResolver | undefined) {
-    this.options.timeFormatResolver = resolver;
+    this.state.timeFormatResolver = resolver;
     return this;
   }
 
@@ -57,11 +57,11 @@ class OptionsManager {
   }
 
   getCategoricalColorScaleResolver(): CategoricalColorScaleResolver {
-    return this.options.categoricalColorScaleResolver ?? defaultCategoricalColorScaleResolver;
+    return this.state.categoricalColorScaleResolver ?? defaultCategoricalColorScaleResolver;
   }
 
   setCategoricalColorScaleResolver(resolver: CategoricalColorScaleResolver | undefined) {
-    this.options.categoricalColorScaleResolver = resolver;
+    this.state.categoricalColorScaleResolver = resolver;
     return this;
   }
 
@@ -74,11 +74,11 @@ class OptionsManager {
   }
 
   getColorSchemeResolver(): ColorSchemeResolver {
-    return this.options.colorSchemeResolver ?? defaultColorSchemeResolver;
+    return this.state.colorSchemeResolver ?? defaultColorSchemeResolver;
   }
 
   setColorSchemeResolver(resolver: ColorSchemeResolver | undefined) {
-    this.options.colorSchemeResolver = resolver;
+    this.state.colorSchemeResolver = resolver;
     return this;
   }
 
