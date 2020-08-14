@@ -9,6 +9,7 @@ describe('defaultFormatResolver', () => {
       expect(
         defaultTimeFormatResolver({ format: '%Y-%m-%d', formatInLocalTime: true }),
       ).toBeDefined();
+      expect(defaultTimeFormatResolver({ formatInLocalTime: true })).toBeDefined();
     });
     it('handles default case', () => {
       expect(defaultTimeFormatResolver()).toBeDefined();
