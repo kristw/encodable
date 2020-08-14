@@ -7,17 +7,17 @@ export default class ContinuousSchemeWrapper<
   T extends SequentialScheme | DivergingScheme
 > extends SchemeWrapper<T> {
   get colors() {
-    if ('colors' in this.scheme) {
+    if ('colors' in this.scheme && typeof this.scheme.colors !== 'undefined') {
       return this.scheme.colors;
     }
     return this.getColors();
   }
 
   get interpolator() {
-    if ('interpolator' in this.scheme) {
+    if ('interpolator' in this.scheme && typeof this.scheme.interpolator !== 'undefined') {
       return this.scheme.interpolator;
     }
-    return piecewise(interpolateRgb, this.scheme.colors) as ColorInterpolator;
+    return piecewise(interpolateRgb, this.scheme.colors!) as ColorInterpolator;
   }
 
   /**
@@ -31,6 +31,7 @@ export default class ContinuousSchemeWrapper<
   getColors(numColors: number = 2, extent: number[] = [0, 1]): string[] {
     if (
       'colors' in this.scheme &&
+      typeof this.scheme.colors !== 'undefined' &&
       numColors === this.scheme.colors.length &&
       extent[0] === 0 &&
       extent[1] === 1

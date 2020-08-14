@@ -3,7 +3,7 @@ export type ColorSchemeType = 'categorical' | 'sequential' | 'diverging';
 type BaseColorScheme<T extends ColorSchemeType> = {
   /** scheme type */
   type: T;
-  /** id of this palette */
+  /** id of this scheme */
   id: string;
   /** human-friendly name to refer to */
   label?: string;

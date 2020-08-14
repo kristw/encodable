@@ -28,7 +28,7 @@ export default class ChildRegistry<
   }
 
   get(key?: string): Wrapper | undefined {
-    return this.has(key) ? (this.parent.get(key) as Wrapper) : undefined;
+    return this.has(key) ? (this.parent.get(key)! as Wrapper) : undefined;
   }
 
   _registerValue(key: string, value: Scheme) {
