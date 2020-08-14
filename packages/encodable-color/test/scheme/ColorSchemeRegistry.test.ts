@@ -45,6 +45,18 @@ describe('ColorSchemeRegistry', () => {
         expect(registry.categorical.keys()).toHaveLength(0);
       });
     });
+    describe('.register()', () => {
+      it('registers scheme', () => {
+        const colors = ['red', 'green', 'blue'];
+        registry.register({
+          id: 'abc',
+          type: 'categorical',
+          colors,
+        });
+        expect(registry.get('abc')?.id).toEqual('abc');
+        expect(registry.categorical.get('abc')?.colors).toEqual(colors);
+      });
+    });
     describe('.registerValue()', () => {
       it('registers to both registry and child registry', () => {
         const colors = ['red', 'green', 'blue'];
@@ -152,6 +164,18 @@ describe('ColorSchemeRegistry', () => {
           registry.diverging.clear();
           expect(registry.diverging.keys()).toHaveLength(0);
           expect(registry.keys()).toHaveLength(2);
+        });
+      });
+      describe('.register()', () => {
+        it('registers value', () => {
+          const colors = ['red', 'green', 'blue'];
+          registry.categorical.register({
+            id: 'abc',
+            type: 'categorical',
+            colors,
+          });
+          expect(registry.has('abc')).toBeTruthy();
+          expect(registry.categorical.has('abc')).toBeTruthy();
         });
       });
       describe('.registerValue()', () => {
