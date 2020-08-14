@@ -34,7 +34,7 @@ import {
 
 import createScaleFromScaleType from './createScaleFromScaleType';
 import updateScale from './updateScale';
-import EncodableOptions from '../../options/EncodableOptions';
+import Encodable from '../../options/Encodable';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
 import applyDomain from './applyDomain';
 
@@ -90,7 +90,7 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
   // is assumed to be a color scale.
   if (config.type === ScaleType.ORDINAL && typeof range === 'undefined') {
     const scheme = 'scheme' in config ? config.scheme : undefined;
-    const resolve = EncodableOptions.getCategoricalColorScaleResolver();
+    const resolve = Encodable.getCategoricalColorScaleResolver();
 
     let colorScale: ScaleOrdinal<StringLike, string>;
     if (typeof scheme === 'undefined') {

@@ -1,6 +1,6 @@
 import { scaleLinear } from 'd3-scale';
 import applyRange from '../../../src/parsers/scale/applyRange';
-import { EncodableOptions } from '../../../src';
+import { Encodable } from '../../../src';
 
 describe('applyRange()', () => {
   it('sets range', () => {
@@ -11,14 +11,14 @@ describe('applyRange()', () => {
   describe('undefined range', () => {
     describe('with scheme', () => {
       beforeEach(() => {
-        EncodableOptions.setColorSchemeResolver(({ name } = {}) =>
+        Encodable.setColorSchemeResolver(({ name } = {}) =>
           typeof name === 'undefined' || name === 'test-scheme'
             ? { type: 'sequential', id: 'test-scheme', colors: ['#fee087', '#fa5c2e', '#800026'] }
             : undefined,
         );
       });
       afterEach(() => {
-        EncodableOptions.setColorSchemeResolver(undefined);
+        Encodable.setColorSchemeResolver(undefined);
       });
 
       it('interpolates range to match items in domain', () => {

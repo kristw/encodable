@@ -5,7 +5,7 @@ export { default as completeChannelDef } from './fillers/completeChannelDef';
 export { default as createScaleFromScaleConfig } from './parsers/scale/createScaleFromScaleConfig';
 export { default as mergeEncoding } from './utils/mergeEncoding';
 
-export { default as EncodableOptions } from './options/EncodableOptions';
+export { default as Encodable } from './options/Encodable';
 export * from './options/resolvers';
 
 // Export type guards
