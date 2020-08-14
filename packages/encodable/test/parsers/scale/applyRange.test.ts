@@ -40,20 +40,20 @@ describe('applyRange()', () => {
         it('handle undefined name correctly', () => {
           const scale = scaleLinear();
           applyRange({ type: 'linear', scheme: {} }, scale);
-          expect(scale.range()).toEqual(['#fee087', '#fa5c2e', '#800026']);
+          expect(scale.range()).toEqual(['rgb(254, 224, 135)', 'rgb(128, 0, 38)']);
         });
         it('passes name correctly', () => {
           const scale = scaleLinear();
           applyRange({ type: 'linear', scheme: { name: 'test-scheme' } }, scale);
-          expect(scale.range()).toEqual(['#fee087', '#fa5c2e', '#800026']);
+          expect(scale.range()).toEqual(['rgb(254, 224, 135)', 'rgb(128, 0, 38)']);
         });
         it('passes count correctly', () => {
           const scale = scaleLinear();
           applyRange({ type: 'linear', scheme: { name: 'test-scheme', count: 4 } }, scale);
           expect(scale.range()).toEqual([
             'rgb(254, 224, 135)',
-            'rgb(251, 144, 60)',
-            'rgb(211, 60, 48)',
+            'rgb(251, 136, 76)',
+            'rgb(209, 61, 43)',
             'rgb(128, 0, 38)',
           ]);
         });

@@ -1,5 +1,5 @@
 import { scaleOrdinal } from 'd3-scale';
-import { ColorScheme } from '@encodable/color';
+import { ColorScheme, getColorSchemeRegistry, d3CategoricalSchemes } from '@encodable/color';
 import { OptionsManager, StringLike } from '../../src';
 
 const dummyFormatter = () => 'haha';
@@ -72,9 +72,11 @@ describe('OptionsManager', () => {
   });
   describe('.getCategoricalColorScaleResolver(resolver)', () => {
     it('returns a resolver', () => {
+      getColorSchemeRegistry().register(d3CategoricalSchemes[0]);
       const resolver = OptionsManager.getCategoricalColorScaleResolver();
       expect(resolver).toBeDefined();
-      expect(typeof resolver({})('abc')).toBe('string');
+      expect(typeof resolver()('abc')).toBe('string');
+      getColorSchemeRegistry().clear();
     });
   });
   describe('.setCategoricalColorScaleResolver(resolver)', () => {

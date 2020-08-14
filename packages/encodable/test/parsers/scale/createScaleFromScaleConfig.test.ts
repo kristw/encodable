@@ -164,7 +164,7 @@ describe('createScaleFromScaleConfig(config)', () => {
             scheme: { name: 'test-scheme', extent: [0.5, 1] },
           });
 
-          expect(scale(0)).toEqual('rgb(255, 160, 0)');
+          expect(scale(0)).toEqual('rgb(255, 128, 0)');
           expect(scale(10)).toEqual('rgb(255, 255, 0)');
         });
       });
@@ -546,8 +546,8 @@ describe('createScaleFromScaleConfig(config)', () => {
 
       expect(scale.range()).toHaveLength(3);
       expect(scale(-1)).toEqual('rgb(255, 0, 0)');
-      expect(scale(0)).toEqual('rgb(255, 160, 0)');
-      expect(scale(0.5)).toEqual('rgb(255, 160, 0)');
+      expect(scale(0)).toEqual('rgb(255, 128, 0)');
+      expect(scale(0.5)).toEqual('rgb(255, 128, 0)');
       expect(scale(1)).toEqual('rgb(255, 255, 0)');
       expect(scale(1000)).toEqual('rgb(255, 255, 0)');
     });
