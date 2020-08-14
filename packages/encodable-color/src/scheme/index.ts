@@ -1,6 +1,5 @@
 import { makeSingleton } from '@encodable/registry';
 import ColorSchemeRegistry from './ColorSchemeRegistry';
-import wrapColorScheme from './wrappers/wrapColorScheme';
 
 export const getColorSchemeRegistry = makeSingleton(
   () =>
@@ -25,4 +24,6 @@ export function getDivergingScheme(key?: string) {
   return getColorSchemeRegistry().diverging.get(key);
 }
 
-export { ColorSchemeRegistry, wrapColorScheme };
+export { ColorSchemeRegistry };
+export { default as wrapColorScheme } from './wrappers/wrapColorScheme';
+export * from './presets/d3Schemes';
