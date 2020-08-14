@@ -28,6 +28,7 @@ describe('ColorSchemeRegistry', () => {
         expect(registry.get('something')).toBeDefined();
       });
       it('returns undefined otherwise', () => {
+        expect(registry.get()).toBeUndefined();
         expect(registry.get('nothing')).toBeUndefined();
       });
     });
@@ -114,6 +115,7 @@ describe('ColorSchemeRegistry', () => {
           expect(registry.categorical.get('something')).toBeDefined();
         });
         it('returns undefined otherwise', () => {
+          expect(registry.categorical.get()).toBeUndefined();
           expect(registry.categorical.get('nothing')).toBeUndefined();
         });
       });
