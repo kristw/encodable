@@ -1,3 +1,20 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.6.0](https://github.com/apache-superset/encodable/compare/encodable@0.5.4...encodable@0.6.0) (2020-08-14)
+
+
+### Features
+
+* **encodable:** add resolve functions ([#61](https://github.com/apache-superset/encodable/issues/61)) ([d5f40e1](https://github.com/apache-superset/encodable/commit/d5f40e1cd464589a3055b9fbadaeb198bb0c1d6f))
+* **encodable:** remove superset-ui from dependencies ([#57](https://github.com/apache-superset/encodable/issues/57)) ([58238c5](https://github.com/apache-superset/encodable/commit/58238c56777be41c1f182413ad0fac32b9acb749))
+
+
+
+
+
 ## [0.5.4](https://github.com/apache-superset/encodable/compare/encodable@0.5.4...encodable@0.5.4) (2020-08-01)
 
 
@@ -250,6 +267,3 @@
 ### Features
 
 * initial commit ([1e2c50a](https://github.com/apache-superset/encodable/commit/1e2c50abd7d1b88e94d5f4a90ef1ccc58d7cc352))
-
-
-
