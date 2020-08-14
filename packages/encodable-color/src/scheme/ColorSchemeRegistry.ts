@@ -76,7 +76,13 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
     return this;
   }
 
-  register(value: ColorScheme) {
+  register(value: ColorScheme | ColorScheme[]) {
+    if (Array.isArray(value)) {
+      value.forEach(v => {
+        this.registerValue(v.id, v);
+      });
+      return this;
+    }
     return this.registerValue(value.id, value);
   }
 

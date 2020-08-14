@@ -56,6 +56,24 @@ describe('ColorSchemeRegistry', () => {
         expect(registry.get('abc')?.id).toEqual('abc');
         expect(registry.categorical.get('abc')?.colors).toEqual(colors);
       });
+      it('registers multiple schemes', () => {
+        registry.register([
+          {
+            id: 'abc',
+            type: 'categorical',
+            colors: ['red', 'green', 'blue'],
+          },
+          {
+            id: 'def',
+            type: 'categorical',
+            colors: ['yellow', 'green', 'purple'],
+          },
+        ]);
+        expect(registry.get('abc')?.id).toEqual('abc');
+        expect(registry.get('def')?.id).toEqual('def');
+        expect(registry.categorical.get('abc')?.id).toEqual('abc');
+        expect(registry.categorical.get('def')?.id).toEqual('def');
+      });
     });
     describe('.registerValue()', () => {
       it('registers to both registry and child registry', () => {
@@ -167,7 +185,7 @@ describe('ColorSchemeRegistry', () => {
         });
       });
       describe('.register()', () => {
-        it('registers value', () => {
+        it('registers scheme', () => {
           const colors = ['red', 'green', 'blue'];
           registry.categorical.register({
             id: 'abc',
@@ -176,6 +194,24 @@ describe('ColorSchemeRegistry', () => {
           });
           expect(registry.has('abc')).toBeTruthy();
           expect(registry.categorical.has('abc')).toBeTruthy();
+        });
+        it('registers multiple schemes', () => {
+          registry.categorical.register([
+            {
+              id: 'abc',
+              type: 'categorical',
+              colors: ['red', 'green', 'blue'],
+            },
+            {
+              id: 'def',
+              type: 'categorical',
+              colors: ['yellow', 'green', 'purple'],
+            },
+          ]);
+          expect(registry.get('abc')?.id).toEqual('abc');
+          expect(registry.get('def')?.id).toEqual('def');
+          expect(registry.categorical.get('abc')?.id).toEqual('abc');
+          expect(registry.categorical.get('def')?.id).toEqual('def');
         });
       });
       describe('.registerValue()', () => {

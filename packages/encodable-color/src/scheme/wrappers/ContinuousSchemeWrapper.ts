@@ -3,6 +3,12 @@ import { scaleSequential, scaleLinear, ScaleLinear } from 'd3-scale';
 import { ColorInterpolator, SequentialScheme, DivergingScheme } from '../../types';
 import SchemeWrapper from './SchemeWrapper';
 
+function isArrayOfArray(
+  x: readonly string[] | readonly (readonly string[])[],
+): x is readonly (readonly string[])[] {
+  return Array.isArray(x[x.length - 1]);
+}
+
 export default class ContinuousSchemeWrapper<
   T extends SequentialScheme | DivergingScheme
 > extends SchemeWrapper<T> {
@@ -17,7 +23,11 @@ export default class ContinuousSchemeWrapper<
     if ('interpolator' in this.scheme && typeof this.scheme.interpolator !== 'undefined') {
       return this.scheme.interpolator;
     }
-    return piecewise(interpolateRgb, this.scheme.colors!) as ColorInterpolator;
+    const colors = this.scheme.colors!;
+    return piecewise(
+      interpolateRgb,
+      (isArrayOfArray(colors) ? colors[colors.length - 1] : colors).slice(),
+    ) as ColorInterpolator;
   }
 
   /**
@@ -32,11 +42,17 @@ export default class ContinuousSchemeWrapper<
     if (
       'colors' in this.scheme &&
       typeof this.scheme.colors !== 'undefined' &&
-      numColors === this.scheme.colors.length &&
       extent[0] === 0 &&
       extent[1] === 1
     ) {
-      return this.scheme.colors;
+      const { colors } = this.scheme;
+      if (isArrayOfArray(colors)) {
+        if (typeof colors[numColors] !== 'undefined') {
+          return colors[numColors].slice();
+        }
+      } else if (numColors === colors.length) {
+        return colors.slice();
+      }
     }
 
     const { interpolator } = this;

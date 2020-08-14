@@ -25,3 +25,5 @@ export function getDivergingScheme(key?: string) {
 }
 
 export { ColorSchemeRegistry };
+export { default as wrapColorScheme } from './wrappers/wrapColorScheme';
+export * from './presets/d3Schemes';
