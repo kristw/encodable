@@ -79,7 +79,7 @@ export default class ColorNamespace {
     if (typeof this.state.scales[schemeName] === 'undefined') {
       // create scale
       const scale = new ScaleCategoricalColor(
-        getCategoricalScheme(schemeName)?.colors ?? [],
+        getCategoricalScheme(schemeName)?.colors.slice() ?? [],
         this.state.manualColors,
       );
       // add state to lookup

@@ -17,18 +17,18 @@ export type ContinuousScheme<T extends ColorSchemeType> = BaseColorScheme<T> &
   (
     | {
         /** color palette */
-        colors: string[];
+        colors: readonly string[] | readonly (readonly string[])[];
         /** color interpolator function */
         interpolator?: ColorInterpolator;
       }
     | {
-        colors?: string[];
+        colors?: readonly string[] | readonly (readonly string[])[];
         interpolator: ColorInterpolator;
       }
   );
 
 export type CategoricalScheme = BaseColorScheme<'categorical'> & {
-  colors: string[];
+  colors: readonly string[];
 };
 
 export type SequentialScheme = ContinuousScheme<'sequential'>;
