@@ -22,12 +22,15 @@ export type ContinuousScheme<T extends ColorSchemeType> = BaseColorScheme<T> &
         interpolator?: ColorInterpolator;
       }
     | {
+        /** color palette */
         colors?: readonly string[] | readonly (readonly string[])[];
+        /** color interpolator function */
         interpolator: ColorInterpolator;
       }
   );
 
 export type CategoricalScheme = BaseColorScheme<'categorical'> & {
+  /** color palette */
   colors: readonly string[];
 };
 
