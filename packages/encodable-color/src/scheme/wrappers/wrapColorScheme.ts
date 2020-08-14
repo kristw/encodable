@@ -8,12 +8,12 @@ export type ColorSchemeWrapper =
   | SequentialSchemeWrapper
   | DivergingSchemeWrapper;
 
-function createWrapper(scheme: CategoricalScheme): CategoricalSchemeWrapper;
-function createWrapper(scheme: SequentialScheme): SequentialSchemeWrapper;
-function createWrapper(scheme: DivergingScheme): DivergingSchemeWrapper;
-function createWrapper(scheme: ColorScheme): ColorSchemeWrapper;
+function wrapColorScheme(scheme: CategoricalScheme): CategoricalSchemeWrapper;
+function wrapColorScheme(scheme: SequentialScheme): SequentialSchemeWrapper;
+function wrapColorScheme(scheme: DivergingScheme): DivergingSchemeWrapper;
+function wrapColorScheme(scheme: ColorScheme): ColorSchemeWrapper;
 
-function createWrapper<T extends ColorScheme>(scheme: T) {
+function wrapColorScheme<T extends ColorScheme>(scheme: T) {
   switch (scheme.type) {
     case 'categorical':
       return scheme instanceof CategoricalSchemeWrapper
@@ -32,4 +32,4 @@ function createWrapper<T extends ColorScheme>(scheme: T) {
   }
 }
 
-export default createWrapper;
+export default wrapColorScheme;

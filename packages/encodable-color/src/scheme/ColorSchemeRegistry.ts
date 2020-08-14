@@ -2,7 +2,7 @@
 import { SyncRegistry, OverwritePolicy, RegistryConfig } from '@encodable/registry';
 import { ColorScheme, CategoricalScheme, SequentialScheme, DivergingScheme } from '../types';
 import ChildRegistry from './ChildRegistry';
-import createWrapper, { ColorSchemeWrapper } from './wrappers/createWrapper';
+import wrapColorScheme, { ColorSchemeWrapper } from './wrappers/wrapColorScheme';
 import CategoricalSchemeWrapper from './wrappers/CategoricalSchemeWrapper';
 import SequentialSchemeWrapper from './wrappers/SequentialSchemeWrapper';
 import DivergingSchemeWrapper from './wrappers/DivergingSchemeWrapper';
@@ -53,7 +53,7 @@ export default class ColorSchemeRegistry extends SyncRegistry<ColorScheme> {
       return this.wrappers.get(key);
     }
 
-    const wrapper = createWrapper(value);
+    const wrapper = wrapColorScheme(value);
     this.wrappers.registerValue(targetKey, wrapper);
     return wrapper;
   }

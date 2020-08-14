@@ -1,8 +1,8 @@
-import createWrapper from '../../../src/scheme/wrappers/createWrapper';
+import wrapColorScheme from '../../../src/scheme/wrappers/wrapColorScheme';
 
-describe('createWrapper()', () => {
+describe('wrapColorScheme()', () => {
   it('returns wrapper with getters', () => {
-    const wrapper = createWrapper({
+    const wrapper = wrapColorScheme({
       type: 'categorical',
       id: 'test',
       colors: ['red', 'green', 'blue'],
@@ -18,44 +18,44 @@ describe('createWrapper()', () => {
   describe('support all scheme types', () => {
     it('categorical', () => {
       expect(
-        createWrapper({ type: 'categorical', id: 'test', colors: ['red', 'green', 'blue'] }),
+        wrapColorScheme({ type: 'categorical', id: 'test', colors: ['red', 'green', 'blue'] }),
       ).toBeDefined();
     });
     it('sequential', () => {
       expect(
-        createWrapper({ type: 'sequential', id: 'test', colors: ['red', 'white'] }),
+        wrapColorScheme({ type: 'sequential', id: 'test', colors: ['red', 'white'] }),
       ).toBeDefined();
     });
     it('diverging', () => {
       expect(
-        createWrapper({ type: 'diverging', id: 'test', colors: ['red', 'white', 'blue'] }),
+        wrapColorScheme({ type: 'diverging', id: 'test', colors: ['red', 'white', 'blue'] }),
       ).toBeDefined();
     });
     it('otherwise', () => {
       // @ts-ignore
-      expect(() => createWrapper({ type: 'haha' })).toThrow('Unknown scheme type: haha');
+      expect(() => wrapColorScheme({ type: 'haha' })).toThrow('Unknown scheme type: haha');
     });
   });
   describe('creates wrapper only when necessary', () => {
     it('categorical', () => {
-      const wrapper = createWrapper({
+      const wrapper = wrapColorScheme({
         type: 'categorical',
         id: 'test',
         colors: ['red', 'green', 'blue'],
       });
-      expect(createWrapper(wrapper)).toBe(wrapper);
+      expect(wrapColorScheme(wrapper)).toBe(wrapper);
     });
     it('sequential', () => {
-      const wrapper = createWrapper({ type: 'sequential', id: 'test', colors: ['red', 'white'] });
-      expect(createWrapper(wrapper)).toBe(wrapper);
+      const wrapper = wrapColorScheme({ type: 'sequential', id: 'test', colors: ['red', 'white'] });
+      expect(wrapColorScheme(wrapper)).toBe(wrapper);
     });
     it('diverging', () => {
-      const wrapper = createWrapper({
+      const wrapper = wrapColorScheme({
         type: 'diverging',
         id: 'test',
         colors: ['red', 'white', 'blue'],
       });
-      expect(createWrapper(wrapper)).toBe(wrapper);
+      expect(wrapColorScheme(wrapper)).toBe(wrapper);
     });
   });
 });
