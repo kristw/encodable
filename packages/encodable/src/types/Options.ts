@@ -1,4 +1,4 @@
-import { ColorScheme } from '@encodable/color';
+import { ColorScheme, ColorSchemeType } from '@encodable/color';
 import { ScaleOrdinal } from 'd3-scale';
 import { StringLike } from './Core';
 
@@ -18,13 +18,13 @@ export type CategoricalColorScaleResolver = (params?: {
 
 export type ColorSchemeResolver = (params?: {
   name?: string;
-  type?: 'sequential' | 'diverging' | 'categorical';
+  type?: ColorSchemeType;
 }) => ColorScheme | undefined;
 
 /**
  * All fields are optional.
  */
-export type EncodableOptions = Partial<{
+export type OptionsState = Partial<{
   numberFormatResolver: NumberFormatResolver;
   timeFormatResolver: TimeFormatResolver;
   categoricalColorScaleResolver: CategoricalColorScaleResolver;

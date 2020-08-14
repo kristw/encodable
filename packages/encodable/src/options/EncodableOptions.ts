@@ -1,6 +1,6 @@
 import { getStore } from 'global-box';
 import {
-  EncodableOptions,
+  OptionsState,
   NumberFormatResolver,
   TimeFormatResolver,
   CategoricalColorScaleResolver,
@@ -15,16 +15,16 @@ import {
 
 const CACHE_KEY = '@encodable/encodable:options';
 
-let options: EncodableOptions;
+let options: OptionsState;
 
 function getOptions() {
   if (!options) {
-    options = getStore().getOrCreate<EncodableOptions>(CACHE_KEY, () => ({}));
+    options = getStore().getOrCreate<OptionsState>(CACHE_KEY, () => ({}));
   }
   return options;
 }
 
-const OptionsManager = {
+const EncodableOptions = {
   getOptions,
   getNumberFormatResolver(): NumberFormatResolver {
     return getOptions().numberFormatResolver ?? defaultNumberFormatResolver;
@@ -56,4 +56,4 @@ const OptionsManager = {
   },
 };
 
-export default OptionsManager;
+export default EncodableOptions;

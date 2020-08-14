@@ -1,6 +1,6 @@
 import SequentialSchemeWrapper from '@encodable/color/lib/scheme/wrappers/SequentialSchemeWrapper';
 import { Value, D3Scale, ScaleConfig } from '../../types';
-import OptionsManager from '../../options/OptionsManager';
+import EncodableOptions from '../../options/EncodableOptions';
 import { isContinuousScaleConfig } from '../../typeGuards/ScaleConfig';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
 
@@ -31,7 +31,7 @@ export default function applyRange<Output extends Value>(
         name = scheme;
       }
 
-      const schemeObject = OptionsManager.getColorSchemeResolver()({ name, type: 'sequential' });
+      const schemeObject = EncodableOptions.getColorSchemeResolver()({ name, type: 'sequential' });
       if (typeof schemeObject !== 'undefined' && schemeObject.type === 'sequential') {
         const wrappedScheme = new SequentialSchemeWrapper(schemeObject);
         scale.range(wrappedScheme.getColors(count, extent) as Output[]);
