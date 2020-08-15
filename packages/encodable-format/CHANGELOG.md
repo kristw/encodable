@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.4](https://github.com/apache-superset/encodable/compare/@encodable/format@0.4.3...@encodable/format@0.4.4) (2020-08-15)
+
+**Note:** Version bump only for package @encodable/format
+
+
+
+
+
 ## [0.4.3](https://github.com/apache-superset/encodable/compare/@encodable/format@0.4.2...@encodable/format@0.4.3) (2020-08-14)
 
 **Note:** Version bump only for package @encodable/format
