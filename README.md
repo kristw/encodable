@@ -26,6 +26,12 @@
 
 [more demo...](https://github.com/apache-superset/encodable/blob/master/DEMO.md)
 
+### Install
+
+```sh
+npm install encodable global-box
+```
+
 ### Why use `encodable`?
 
 This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite`
