@@ -3,17 +3,40 @@
 [![Version](https://img.shields.io/npm/v/@encodable/format.svg?style=flat)](https://img.shields.io/npm/v/@encodable/format.svg?style=flat)
 [![David (path)](https://img.shields.io/david/apache-superset/encodable.svg?path=packages%2Fencodable-format&style=flat-square)](https://david-dm.org/apache-superset/encodable?path=packages/encodable-format)
 
-Description
+Utilities for managing time and number formats.
+Built on top of D3 formats and support customizing your own formatters.
 
-#### Example usage
+### Install
 
-```js
-import { xxx } from '@encodable/format';
+```sh
+npm install @encodable/format global-box
 ```
 
-#### API
+### Example usage
 
-`fn(args)`
+```ts
+import {
+  getTimeFormat,
+  formatTime,
+  getNumberFormat,
+  formatNumber,
+  getNumberFormatterRegistry,
+} from '@encodable/format';
 
-- Do something
+// Get number format function
+const numFormatFn = getNumberFormat('.2f');
+// Get time format function
+const timeFormatFn = getTimeFormat('%Y-%m-%d');
 
+// or just format directly
+
+formatNumber('.2f', 200); // 200.00
+formatTime('%Y-%m-%d', new Date()); // 2020-08-15
+
+// can customize by adding your own formatters
+// or override the d3 ones
+
+getNumberFormatterRegistry().registerValue('my-format', (x) => `haha:${x}`);
+formatNumber('my-format', 200); // haha:200
+
+```

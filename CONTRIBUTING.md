@@ -51,9 +51,9 @@ committing. You can use `npm run commit` to help you create a commit message.
 ### Publishing (via ci)
 
 ```sh
-npm run changelog
-git cm "docs: update changelog"
-npm run bump-version
+npm run bump-version -- --conventional-commits
+# or manual
+npm run bump-version -- --force-publish
 # Then follow the prompt to pick new versions for each package
 ```
 
