@@ -1,7 +1,7 @@
 {
   "name": "encodable",
   "version": "0.6.0",
-  "description": "almost-vega-lite grammar for custom visualization component",
+  "description": "configurable grammar for custom visualization components",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "esm/index.js",

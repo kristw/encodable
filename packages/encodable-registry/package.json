@@ -1,7 +1,7 @@
 {
   "name": "@encodable/registry",
   "version": "0.5.0",
-  "description": "Reusable registry models",
+  "description": "All-purpose map data structure on steroids.",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "esm/index.js",

@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/npm/v/@encodable/color.svg?style=flat)](https://img.shields.io/npm/v/@encodable/color.svg?style=flat)
 [![David (path)](https://img.shields.io/david/apache-superset/encodable.svg?path=packages%2Fencodable-color&style=flat-square)](https://david-dm.org/apache-superset/encodable?path=packages/encodable-color)
 
-Utilities for managing color schemes and color scale.
+Utilities for managing color schemes and color scales.
 Built on top of D3.
 
 ### Install
@@ -35,4 +35,3 @@ getColorSchemeRegistry().register({
 ```
 
 The library also includes all schemes from `d3-scale-chromatic` by default.
-

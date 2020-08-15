@@ -1,7 +1,7 @@
 {
   "name": "@encodable/color",
   "version": "0.3.1",
-  "description": "Encodable color",
+  "description": "Utilities for managing color schemes and color scales.",
   "sideEffects": false,
   "main": "lib/index.js",
   "module": "esm/index.js",
