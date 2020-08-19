@@ -4,7 +4,6 @@ export { default as createEncoderFactory } from './encoders/createEncoderFactory
 export { default as completeChannelDef } from './fillers/completeChannelDef';
 export { default as createScaleFromScaleConfig } from './parsers/scale/createScaleFromScaleConfig';
 export { default as mergeEncoding } from './utils/mergeEncoding';
-
 export { default as Encodable } from './options/Encodable';
 export * from './options/resolvers';
 
@@ -22,3 +21,7 @@ export { isCompleteFieldDef, isCompleteValueDef } from './typeGuards/CompleteCha
 
 // Export types
 export * from './types';
+
+// Re-export color and formatter registries
+export * from '@encodable/format';
+export * from '@encodable/color';
