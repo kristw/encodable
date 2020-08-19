@@ -1,11 +1,10 @@
 import { ColorScheme, ColorSchemeType } from '@encodable/color';
+import { NumberFormatter, TimeFormatter } from '@encodable/format';
 import { ScaleOrdinal } from 'd3-scale';
 import { StringLike } from './Core';
 
-export type NumberFormatter = (value: number | null | undefined) => string;
 export type NumberFormatResolver = (format?: string) => NumberFormatter;
 
-export type TimeFormatter = (value: Date | number | null | undefined) => string;
 export type TimeFormatResolver = (params?: {
   format?: string;
   formatInLocalTime?: boolean;
