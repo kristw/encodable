@@ -1,6 +1,6 @@
 {
   "name": "generator-encodable",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Scaffolder for encodable",
   "bugs": {
     "url": "https://github.com/apache-superset/encodable/issues"

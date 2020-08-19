@@ -1,6 +1,6 @@
 {
   "name": "@encodable/color",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "Utilities for managing color schemes and color scales.",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -28,7 +28,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@encodable/registry": "^0.5.1",
+    "@encodable/registry": "^1.0.0",
     "@types/d3-interpolate": "^1.3.1",
     "@types/d3-scale": "^2.2.0",
     "@types/d3-scale-chromatic": "^1.2.0",
