@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/apache-superset/encodable/compare/encodable@0.6.2...encodable@0.7.0) (2020-08-19)
+
+
+### Features
+
+* **encodable:** export apis for color and formatters ([#62](https://github.com/apache-superset/encodable/issues/62)) ([9219356](https://github.com/apache-superset/encodable/commit/92193563dbcee2c5990f24b6367b87881a2ea9ad))
+
+
+
+
+
 ## [0.6.1](https://github.com/apache-superset/encodable/compare/encodable@0.6.0...encodable@0.6.1) (2020-08-15)
 
 **Note:** Version bump only for package encodable
