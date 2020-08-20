@@ -1,6 +1,6 @@
 {
   "name": "@encodable/format",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilities for managing time and number formats.",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -28,7 +28,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@encodable/registry": "^1.0.0",
+    "@encodable/registry": "^1.0.1",
     "@types/d3-format": "^1.3.1",
     "@types/d3-time": "^1.0.10",
     "@types/d3-time-format": "^2.1.1",

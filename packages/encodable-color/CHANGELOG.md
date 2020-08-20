@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/kristw/encodable/compare/@encodable/color@1.0.0...@encodable/color@1.0.1) (2020-08-20)
+
+**Note:** Version bump only for package @encodable/color
+
+
+
+
+
 ## [0.3.2](https://github.com/kristw/encodable/compare/@encodable/color@0.3.1...@encodable/color@0.3.2) (2020-08-15)
 
 **Note:** Version bump only for package @encodable/color
