@@ -3,14 +3,16 @@
   "version": "0.1.2",
   "description": "Scaffolder for encodable",
   "bugs": {
-    "url": "https://github.com/apache-superset/encodable/issues"
+    "url": "https://github.com/kristw/encodable/issues"
   },
-  "homepage": "https://github.com/apache-superset/encodable#readme",
+  "homepage": "https://github.com/kristw/encodable#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apache-superset/encodable.git"
+    "url": "git+https://github.com/kristw/encodable.git"
   },
-  "author": "Superset",
+  "authors": [
+    "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
+  ],
   "files": [
     "generators"
   ],
@@ -18,7 +20,7 @@
   "keywords": [
     "yeoman",
     "generator",
-    "superset",
+    "encodable",
     "yeoman-generator"
   ],
   "devDependencies": {

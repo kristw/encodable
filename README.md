@@ -1,8 +1,8 @@
 # 🎭 encodable
 
-[![Codecov branch](https://img.shields.io/codecov/c/github/apache-superset/encodable/master.svg?style=flat-square)](https://codecov.io/gh/apache-superset/encodable/branch/master)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/apache-superset/encodable/build-and-test-workflow?style=flat-square)
-[![David](https://img.shields.io/david/dev/apache-superset/encodable.svg?style=flat-square)](https://david-dm.org/apache-superset/encodable?type=dev)
+[![Codecov branch](https://img.shields.io/codecov/c/github/kristw/encodable/master.svg?style=flat-square)](https://codecov.io/gh/kristw/encodable/branch/master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kristw/encodable/build-and-test-workflow?style=flat-square)
+[![David](https://img.shields.io/david/dev/kristw/encodable.svg?style=flat-square)](https://david-dm.org/kristw/encodable?type=dev)
 [![TypeScript](https://badges.frapsoft.com/typescript/awesome/typescript.png?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
 > **tl;dr.** When you have a visualization component, this library helps you defines the visual
@@ -13,18 +13,18 @@
 
 | Package                                                                                                      | Version                                                                                                                                                      |                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| [encodable](https://github.com/apache-superset/encodable/tree/master/packages/encodable)                     | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square)                     | [changelog](https://github.com/apache-superset/encodable/tree/master/packages/encodable/CHANGELOG.md)          |
-| [@encodable\/color](https://github.com/apache-superset/encodable/tree/master/packages/encodable-color)       | [![Version](https://img.shields.io/npm/v/@encodable/color.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/color.svg?style=flat-square)       | [changelog](https://github.com/apache-superset/encodable/tree/master/packages/encodable-color/CHANGELOG.md)    |
-| [@encodable\/format](https://github.com/apache-superset/encodable/tree/master/packages/encodable-format)     | [![Version](https://img.shields.io/npm/v/@encodable/format.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/format.svg?style=flat-square)     | [changelog](https://github.com/apache-superset/encodable/tree/master/packages/encodable-format/CHANGELOG.md)   |
-| [@encodable\/registry](https://github.com/apache-superset/encodable/tree/master/packages/encodable-registry) | [![Version](https://img.shields.io/npm/v/@encodable/registry.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/registry.svg?style=flat-square) | [changelog](https://github.com/apache-superset/encodable/tree/master/packages/encodable-registry/CHANGELOG.md) |
+| [encodable](https://github.com/kristw/encodable/tree/master/packages/encodable)                     | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square)                     | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable/CHANGELOG.md)          |
+| [@encodable\/color](https://github.com/kristw/encodable/tree/master/packages/encodable-color)       | [![Version](https://img.shields.io/npm/v/@encodable/color.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/color.svg?style=flat-square)       | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable-color/CHANGELOG.md)    |
+| [@encodable\/format](https://github.com/kristw/encodable/tree/master/packages/encodable-format)     | [![Version](https://img.shields.io/npm/v/@encodable/format.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/format.svg?style=flat-square)     | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable-format/CHANGELOG.md)   |
+| [@encodable\/registry](https://github.com/kristw/encodable/tree/master/packages/encodable-registry) | [![Version](https://img.shields.io/npm/v/@encodable/registry.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/registry.svg?style=flat-square) | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable-registry/CHANGELOG.md) |
 
 ## Example
 
-![Preview](https://raw.githubusercontent.com/apache-superset/encodable/master/images/preview.png)
+![Preview](https://raw.githubusercontent.com/kristw/encodable/master/images/preview.png)
 
 [![Edit encodable Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/encodable-demo-wvhj3?fontsize=14&hidenavigation=1&theme=dark)
 
-[more demo...](https://github.com/apache-superset/encodable/blob/master/DEMO.md)
+[more demo...](https://github.com/kristw/encodable/blob/master/DEMO.md)
 
 ### Install
 
@@ -138,9 +138,9 @@ More specifically, the `encodable` package
 
 <!-- ## Demo
 
-Most recent release: https://apache-superset.github.io/encodable
+Most recent release: https://kristw.github.io/encodable
 
-Current master: https://superset-ui.netlify.com -->
+-->
 
 ## API documentation
 

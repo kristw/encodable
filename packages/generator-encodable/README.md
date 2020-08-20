@@ -1,7 +1,7 @@
 # generator-encodable
 
 [![Version](https://img.shields.io/npm/v/generator-encodable.svg?style=flat)](https://img.shields.io/npm/v/generator-encodable.svg?style=flat-square)
-[![David (path)](https://img.shields.io/david/apache-superset/encodable.svg?path=packages%2Fgenerator-encodable&style=flat-square)](https://david-dm.org/apache-superset/encodable?path=packages/generator-encodable)
+[![David (path)](https://img.shields.io/david/kristw/encodable.svg?path=packages%2Fgenerator-encodable&style=flat-square)](https://david-dm.org/kristw/encodable?path=packages/generator-encodable)
 
 > Scaffolder for encodable
 
