@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apache-superset/encodable.git"
+    "url": "git+https://github.com/kristw/encodable.git"
   },
   "keywords": [
     "superset"
@@ -21,9 +21,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/apache-superset/encodable/issues"
+    "url": "https://github.com/kristw/encodable/issues"
   },
-  "homepage": "https://github.com/apache-superset/encodable#readme",
+  "homepage": "https://github.com/kristw/encodable#readme",
   "publishConfig": {
     "access": "public"
   },

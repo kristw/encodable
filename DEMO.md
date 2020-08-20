@@ -1,6 +1,6 @@
 ## Encodable examples
 
-![Preview](https://raw.githubusercontent.com/apache-superset/encodable/master/images/preview.png)
+![Preview](https://raw.githubusercontent.com/kristw/encodable/master/images/preview.png)
 
 [![Edit encodable Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/encodable-demo-wvhj3?fontsize=14&hidenavigation=1&theme=dark)
 
