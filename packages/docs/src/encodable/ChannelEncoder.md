@@ -1,4 +1,9 @@
-## 🎭 encodable / API / `ChannelEncoder`
+---
+name: ChannelEncoder
+menu: encodable API
+---
+
+# `ChannelEncoder`
 
 `ChannelEncoder` takes user-defined channel definition, complete and parse into an object with set
 of utility functions useful for rendering that channel.
@@ -8,7 +13,7 @@ figure out how to implement the rendering themselves. `ChannelEncoder` acts as a
 standardize chart component consumer API, then translate the configuration into actionable
 functions.
 
-#### Example usage
+## Example usage
 
 ```ts
 const encoder = new ChannelEncoder({

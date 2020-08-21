@@ -21,7 +21,9 @@
     "serve": "docz serve"
   },
   "dependencies": {
-    "docz": "latest",
+    "docz": "^2.3.1",
+    "gatsby": "^2.24.47",
+    "gatsby-theme-docz": "^2.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "universal-console": "^0.1.3"

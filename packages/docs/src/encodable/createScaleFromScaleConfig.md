@@ -1,4 +1,9 @@
-## 🎭 encodable / API / `createScaleFromScaleConfig(...)`
+---
+name: createScaleFromScaleConfig()
+menu: encodable API
+---
+
+# `createScaleFromScaleConfig(...)`
 
 Function for parsing scales from configuration object into D3 scales as well as connecting to
 `@encodable/color` to get color schemes by name. Support all types of scale that D3 has.
@@ -51,7 +56,7 @@ The following scale properties are supported. (See `Scale.ts`.)
 'clamp';
 'constant';
 'exponent';
-'interpolate'; // add placeholder to be implemented
+'interpolate';
 'nice';
 'padding';
 'paddingInner';

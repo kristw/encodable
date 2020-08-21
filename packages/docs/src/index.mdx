@@ -1,22 +1,49 @@
 ---
-name: Getting Started
-route: /
+name: 'Getting started'
 ---
 
-# Getting Started
+# 🎭 encodable
 
-Design systems enable teams to build better products faster by making design reusable—reusability makes scale possible. This is the heart and primary value of design systems. A design system is a collection of reusable components, guided by clear standards, that can be assembled together to build any number of applications.
+[![Codecov branch](https://img.shields.io/codecov/c/github/kristw/encodable/master.svg?style=flat-square)](https://codecov.io/gh/kristw/encodable/branch/master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kristw/encodable/build-and-test-workflow?style=flat-square)
+[![David](https://img.shields.io/david/dev/kristw/encodable.svg?style=flat-square)](https://david-dm.org/kristw/encodable?type=dev)
 
-Regardless of the technologies and tools behind them, a successful design system follows these guiding principles:
+> **tl;dr.** When you have a visualization component, this library helps you defines the visual
+> channels that you can encode data into and provide API similar to `vega-lite`'s grammar for
+> consumers to customize the visual encoding.
 
-- **It’s consistent**. The way components are built and managed follows a predictable pattern.
-- **It’s self-contained**. Your design system is treated as a standalone dependency.
-- **It’s reusable**. You’ve built components so they can be reused in many contexts.
-- **It’s accessible**. Applications built with your design system are usable by as many people as possible, no matter how they access the web.
-- **It’s robust**. No matter the product or platform to which your design system is applied, it should perform with grace and minimal bugs.
+## Install
 
-## Consistency
+```sh
+npm install encodable global-box
+```
 
-Your first, most important task when starting out is to define the rules of your system, document them, and ensure that everyone follows them. When you have clearly documented code standards and best practices in place, designers and developers from across your organization can easily use and, more importantly, contribute to your design system.
+## Example
 
-ok
+![Preview](https://raw.githubusercontent.com/kristw/encodable/master/images/preview.png)
+
+[![Edit encodable Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/encodable-demo-wvhj3?fontsize=14&hidenavigation=1&theme=dark)
+
+[more demo...](https://github.com/kristw/encodable/blob/master/DEMO.md)
+
+## Packages
+
+| Package                                                                                                      | Version                                                                                                                                                      |                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| [encodable](https://github.com/kristw/encodable/tree/master/packages/encodable)                     | [![Version](https://img.shields.io/npm/v/encodable.svg?style=flat-square)](https://img.shields.io/npm/v/encodable.svg?style=flat-square)                     | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable/CHANGELOG.md)          |
+| [@encodable/color](https://github.com/kristw/encodable/tree/master/packages/encodable-color)       | [![Version](https://img.shields.io/npm/v/@encodable/color.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/color.svg?style=flat-square)       | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable-color/CHANGELOG.md)    |
+| [@encodable/format](https://github.com/kristw/encodable/tree/master/packages/encodable-format)     | [![Version](https://img.shields.io/npm/v/@encodable/format.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/format.svg?style=flat-square)     | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable-format/CHANGELOG.md)   |
+| [@encodable/registry](https://github.com/kristw/encodable/tree/master/packages/encodable-registry) | [![Version](https://img.shields.io/npm/v/@encodable/registry.svg?style=flat-square)](https://img.shields.io/npm/v/@encodable/registry.svg?style=flat-square) | [changelog](https://github.com/kristw/encodable/tree/master/packages/encodable-registry/CHANGELOG.md) |
+
+import VersionTable from './components/VersionTable';
+
+<VersionTable packages={[
+  { name: 'encodable', codePath: 'packages/encodable' },
+  { name: '@encodable/color', codePath: 'packages/encodable-color' },
+  { name: '@encodable/format', codePath: 'packages/encodable-format' },
+  { name: '@encodable/registry', codePath: 'packages/encodable-registry' },
+]} />
+
+### License
+
+Apache-2.0

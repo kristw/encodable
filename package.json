@@ -27,6 +27,7 @@
     "release": "yarn prepare-release && lerna publish --exact && yarn postrelease",
     "postrelease": "lerna run deploy-demo",
     "storybook": "cd packages/encodable-demo && yarn storybook",
+    "docs:clean": "cd packages/docs && rm -rf .docz",
     "docs:dev": "cd packages/docs && yarn dev",
     "docs:build": "cd packages/docs && yarn build",
     "docs:serve": "cd packages/docs && yarn serve",
@@ -145,6 +146,7 @@
         {
           "files": "*.{js,jsx,ts,tsx}",
           "rules": {
+            "react/jsx-noliterals": "off",
             "@typescript-eslint/no-explicit-any": [
               "warn",
               {
