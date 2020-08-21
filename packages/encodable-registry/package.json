@@ -14,7 +14,12 @@
     "url": "git+https://github.com/kristw/encodable.git"
   },
   "keywords": [
-    "superset"
+    "encodable",
+    "registry",
+    "key-value",
+    "map",
+    "global",
+    "store"
   ],
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"

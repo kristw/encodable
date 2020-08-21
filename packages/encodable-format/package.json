@@ -14,7 +14,9 @@
     "url": "git+https://github.com/kristw/encodable.git"
   },
   "keywords": [
-    "superset"
+    "encodable",
+    "format",
+    "formatter"
   ],
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
