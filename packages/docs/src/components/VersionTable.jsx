@@ -48,7 +48,10 @@ export default function VersionTable({
             </td>
             <td style={tdStyle}>
               <a style={linkStyle} href={`https://www.npmjs.com/package/${name}`}>
-                <img src={`https://img.shields.io/npm/v/${name}.svg?style=flat-square`} />
+                <img
+                  alt="npm badge"
+                  src={`https://img.shields.io/npm/v/${name}.svg?style=flat-square`}
+                />
               </a>
             </td>
             <td style={tdStyle}>

@@ -146,13 +146,19 @@
         {
           "files": "*.{js,jsx,ts,tsx}",
           "rules": {
-            "react/jsx-noliterals": "off",
+            "react/jsx-no-literals": "off",
             "@typescript-eslint/no-explicit-any": [
               "warn",
               {
                 "fixToUnknown": false
               }
             ]
+          }
+        },
+        {
+          "files": "packages/docs/src/**/*.{js,jsx,ts,tsx}",
+          "rules": {
+            "react/require-default-props": "off"
           }
         }
       ]
