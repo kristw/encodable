@@ -1,6 +1,6 @@
 {
   "name": "@encodable/registry",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "All-purpose map data structure on steroids.",
   "sideEffects": false,
   "main": "lib/index.js",
