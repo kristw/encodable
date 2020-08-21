@@ -1,4 +1,9 @@
-## 🎭 encodable / API / `Encoder`
+---
+name: Define encoding for your component
+menu: Guides
+---
+
+## `Encoder`
 
 An `Encoder` is a utility class created once per chart type.
 
@@ -6,7 +11,7 @@ An `Encoder` is a utility class created once per chart type.
 - It takes users' definitions of the channels (`vega-lite` syntax), then resolves ambiguity and
   produce complete definition and actionable utility functions.
 
-#### Example Usage
+## Define encoding type and factory
 
 The component developer creates an encoder factory once.
 
@@ -79,11 +84,11 @@ encoder.channels.x.encodeDatum({ speed: 100 }); // 1
 encoder.getGroupBys(); // ['brand', 'make', 'model']
 ```
 
-### Legend
+## Legend
 
 `encoder.getLegendInformation(dataset)` generates metadata for rendering legend.
 
-#### Example usage
+### Example usage
 
 ```ts
 const legendInfo = factory

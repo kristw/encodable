@@ -27,6 +27,10 @@
     "release": "yarn prepare-release && lerna publish --exact && yarn postrelease",
     "postrelease": "lerna run deploy-demo",
     "storybook": "cd packages/encodable-demo && yarn storybook",
+    "docs:clean": "cd packages/docs && rm -rf .docz",
+    "docs:dev": "cd packages/docs && yarn dev",
+    "docs:build": "cd packages/docs && yarn build",
+    "docs:serve": "cd packages/docs && yarn serve",
     "bump-version": "lerna version",
     "bump-version-force": "lerna version --force-publish",
     "bump-version-auto": "lerna version --conventional-commits",
@@ -67,7 +71,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.7"
   },
   "engines": {
     "node": ">=10.10.0",
@@ -108,6 +112,11 @@
         "node_modules/(?!(vega-lite|lodash-es))"
       ],
       "testPathIgnorePatterns": [
+        "packages/docs",
+        "packages/generator-encodable/generators"
+      ],
+      "coveragePathIgnorePatterns":[
+        "packages/docs",
         "packages/generator-encodable/generators"
       ],
       "projects": [
@@ -142,12 +151,19 @@
         {
           "files": "*.{js,jsx,ts,tsx}",
           "rules": {
+            "react/jsx-no-literals": "off",
             "@typescript-eslint/no-explicit-any": [
               "warn",
               {
                 "fixToUnknown": false
               }
             ]
+          }
+        },
+        {
+          "files": "packages/docs/src/**/*.{js,jsx,ts,tsx}",
+          "rules": {
+            "react/require-default-props": "off"
           }
         }
       ]
@@ -167,13 +183,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  },
-  "lint-staged": {
-    "./packages/*/{src,test,storybook}/**/*.{js,jsx,ts,tsx,json,md}": [
-      "yarn prettier --write"
-    ]
   }
 }
