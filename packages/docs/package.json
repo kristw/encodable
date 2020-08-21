@@ -1,0 +1,30 @@
+{
+  "name": "encodable-docs",
+  "private": true,
+  "workspaces": [
+    "../../packages/**/*",
+    "../../../packages/**/*"
+  ],
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "authors": [
+    "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
+  ],
+  "files": [
+    "src/",
+    "doczrc.js",
+    "package.json"
+  ],
+  "scripts": {
+    "dev": "docz dev",
+    "build": "docz build",
+    "serve": "docz serve"
+  },
+  "dependencies": {
+    "docz": "latest",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "universal-console": "^0.1.3"
+  }
+}
