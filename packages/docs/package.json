@@ -25,6 +25,10 @@
     "encodable": "^0.7.3",
     "gatsby": "^2.24.47",
     "gatsby-theme-docz": "^2.3.1",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "lodash": "^4.17.20",
+    "@theme-ui/typography": "^0.3.0",
+    "typography-theme-ocean-beach": "^0.16.19",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "universal-console": "^0.1.3"
