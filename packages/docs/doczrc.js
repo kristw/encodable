@@ -14,7 +14,7 @@ export default {
     'Why use Encodable?',
     { name: 'Gallery', menu: ['Gallery'] },
     'Guides',
-    'encodable API',
+    'Encodable API',
     '@encodable/color',
     '@encodable/format',
     '@encodable/registry',

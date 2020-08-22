@@ -10,9 +10,10 @@ import {
 const wrapper = {
   ...wrapper_,
   /* fallback for old browsers */
-  backgroundColor: '#C6FFDD',
+  backgroundColor: '#F5AA36',
   // background: '-webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);'
-  background: 'linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);',
+  // background: 'linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);',
+  background: 'linear-gradient(to right, #F57D39, #F5AA36, #F5AA36);',
 };
 
 const innerContainer = {
