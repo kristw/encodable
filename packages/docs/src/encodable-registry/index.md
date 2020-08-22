@@ -33,7 +33,8 @@ const registry = new Registry<string>();
 // global registry
 const globalRegistry = new Registry({ globalId: 'my-global-key' });
 
-const singleton = makeSingleton(() => new Registry({ globalId: 'my-global-key' }));
+// create a singleton factory function
+const getSingleton = makeSingleton(() => new Registry({ globalId: 'my-global-key' }));
 
 ```
 
