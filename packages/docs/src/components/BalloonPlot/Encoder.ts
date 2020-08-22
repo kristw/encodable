@@ -9,7 +9,6 @@ type BalloonPlotConfig = {
   y: ['Y', number];
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const balloonPlotEncoderFactory = createEncoderFactory<BalloonPlotConfig>({
   channelTypes: {
     color: 'Color',

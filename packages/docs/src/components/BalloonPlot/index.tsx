@@ -16,8 +16,8 @@ export default function BalloonPlot({ data = [], encoding, width, height }: Ball
 
   encoder.setDomainFromDataset(data);
   const padding = 60;
-  encoder.channels.x.scale?.range([padding, width - padding]);
-  encoder.channels.y.scale?.range([height - padding, padding]);
+  encoder.channels.x.scale!.range([padding, width - padding]);
+  encoder.channels.y.scale!.range([height - padding, padding]);
 
   const { x, y, text, text2, size, color } = encoder.channels;
 
