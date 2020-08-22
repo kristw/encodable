@@ -16,16 +16,16 @@ export default function BalloonPlot({ data = [], encoding, width, height }: Ball
 
   encoder.setDomainFromDataset(data);
   const padding = 60;
-  encoder.channels.x.scale.range([padding, width - padding]);
-  encoder.channels.y.scale.range([height - padding, padding]);
+  encoder.channels.x.scale?.range([padding, width - padding]);
+  encoder.channels.y.scale?.range([height - padding, padding]);
 
   const { x, y, text, text2, size, color } = encoder.channels;
 
   return (
     <svg width={width} height={height}>
       {data.map(d => {
-        const colorValue = color.encodeDatum(d);
-        const area = size.encodeDatum(d);
+        const colorValue = color.encodeDatum(d, 'none');
+        const area = size.encodeDatum(d, 0);
         const length = Math.sqrt(area);
         return (
           <>
@@ -59,9 +59,9 @@ export default function BalloonPlot({ data = [], encoding, width, height }: Ball
               </text>
             </g>
             <line
-              x1={x.encodeDatum(d)}
-              y1={y.encodeDatum(d) + length}
-              x2={x.encodeDatum(d)}
+              x1={x.encodeDatum(d, 0)}
+              y1={y.encodeDatum(d, 0) + length}
+              x2={x.encodeDatum(d, 0)}
               y2={height}
               strokeDasharray="4 4"
               stroke="#999"

@@ -29,7 +29,7 @@ export default function CoffeeChart({ data = [], encoding, width, height }: Coff
       <div
         style={{
           textAlign: 'right',
-          marginTop: height / 2 - 25 - 20,
+          marginTop: height / 2 - 40 - 20,
           marginRight: 16,
           marginBottom: 16,
         }}

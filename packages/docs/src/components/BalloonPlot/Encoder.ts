@@ -24,8 +24,8 @@ export const balloonPlotEncoderFactory = createEncoderFactory<BalloonPlotConfig>
     size: { value: 40 },
     text: { value: '' },
     text2: { value: '' },
-    x: { field: 'x' },
-    y: { field: 'y' },
+    x: { type: 'quantitative', field: 'x' },
+    y: { type: 'quantitative', field: 'y' },
   },
 });
 
