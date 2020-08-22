@@ -20,7 +20,7 @@
     "prettier": "nimbus prettier",
     "test": "NODE_OPTIONS=\"--max-old-space-size=8192\" yarn jest",
     "test:watch": "yarn lint:fix && yarn jest --watch",
-    "type": "nimbus typescript --build --reference-workspaces",
+    "type": "nimbus typescript --build --workspaces=\"(encodable|@encodable/*)\"",
     "prepare-release": "git checkout master && git pull --rebase origin master && yarn && yarn test",
     "prerelease": "yarn build",
     "pretest": "yarn lint",
