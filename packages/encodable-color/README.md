@@ -12,26 +12,6 @@ Built on top of D3.
 npm install @encodable/color global-box
 ```
 
-### Example usage
+### Documentation
 
-```ts
-import { getColorSchemeRegistry } from '@encodable/color';
-
-/* Get color schemes by name */
-getColorSchemeRegistry().get(schemeName);
-// Get categorical scheme
-getColorSchemeRegistry().categorical.get(schemeName);
-// Get sequential scheme
-getColorSchemeRegistry().sequential.get(schemeName);
-// Get diverging scheme
-getColorSchemeRegistry().diverging.get(schemeName);
-
-// Register color scheme
-getColorSchemeRegistry().register({
-  type: 'categorical',
-  id: 'my-scheme',
-  colors: [...],
-});
-```
-
-The library also includes all schemes from `d3-scale-chromatic` by default.
+[See documentation and more examples here.](https://encodable.vercel.app/)
