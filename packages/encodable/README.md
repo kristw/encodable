@@ -10,3 +10,7 @@ This package provides standardized API for encodable components and adopts the g
 ```sh
 npm install encodable global-box
 ```
+
+### Documentation
+
+[See documentation and more examples here.](https://encodable.vercel.app/)
