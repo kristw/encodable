@@ -1,3 +1,5 @@
+const docComponents = /docs\/src\/components\/*.tsx?/;
+
 export default {
   typescript: true,
   title: 'Encodable',
@@ -13,4 +15,5 @@ export default {
     '@encodable/registry',
     'Contributing guidelines',
   ],
+  filterComponents: files => files.filter(filepath => docComponents.test(filepath)),
 };

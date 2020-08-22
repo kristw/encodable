@@ -17,4 +17,4 @@ npm install @encodable/registry global-box
 
 ### Documentation
 
-[See documentation and more examples here.](https://encodable.vercel.app/)
+[See documentation and more examples here.](https://encodable.vercel.app/encodable-registry)
