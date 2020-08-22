@@ -5,6 +5,7 @@ route: '/gallery'
 ---
 
 import Frame from '../components/Frame.tsx';
+import BalloonPlot from '../components/BalloonPlot/index.tsx';
 import CoffeeChart from '../components/CoffeeChart/index.tsx';
 
 <Frame width={400} height={400} background="#FFF4F1">
@@ -37,3 +38,51 @@ import CoffeeChart from '../components/CoffeeChart/index.tsx';
   />
 </Frame>
 
+<Frame width={400} height={400} background="#D3EEEF">
+  <BalloonPlot
+    width={400}
+    height={400}
+    encoding={{
+      x: { field: "category", type: "nominal", scale: { type: "point" } },
+      y: {
+        field: "profit",
+        type: "quantitative"
+      },
+      size: {
+        field: "marketingCost",
+        type: "quantitative",
+        scale: { zero: true, range: [0, 2500] }
+      },
+      color: { field: "category", type: "nominal" },
+      text: { field: "category" },
+      text2: { field: "profit", format: ",d" }
+    }}
+    data={[
+      {
+        category: "Toys",
+        marketingCost: 100,
+        profit: 4000
+      },
+      {
+        category: "Office supplies",
+        marketingCost: 200,
+        profit: 3000
+      },
+      {
+        category: "Grocery",
+        marketingCost: 400,
+        profit: 2000
+      },
+      {
+        category: "Electronics",
+        marketingCost: 300,
+        profit: 6000
+      },
+      {
+        category: "Clothing",
+        marketingCost: 400,
+        profit: 1500
+      }
+    ]}
+  />
+</Frame>

@@ -1,4 +1,4 @@
-const docComponents = /docs\/src\/components\/*.tsx?/;
+const docComponents = /docs\/src\/components(\/.+)+\.tsx?/;
 
 export default {
   typescript: true,
