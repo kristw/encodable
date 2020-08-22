@@ -1,5 +1,6 @@
 ---
 name: "@encodable/registry"
+route: "/encodable-registry"
 ---
 
 # @encodable/registry
