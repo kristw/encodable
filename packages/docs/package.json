@@ -5,7 +5,7 @@
     "../../packages/**/*",
     "../../../packages/**/*"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "Apache-2.0",
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
@@ -21,16 +21,16 @@
     "serve": "docz serve"
   },
   "dependencies": {
-    "docz": "^2.3.1",
-    "encodable": "^0.7.3",
-    "gatsby": "^2.24.47",
-    "gatsby-theme-docz": "^2.3.1",
-    "gatsby-plugin-google-fonts": "^1.0.1",
-    "lodash": "^4.17.20",
     "@theme-ui/typography": "^0.3.0",
-    "typography-theme-ocean-beach": "^0.16.19",
+    "docz": "^2.3.1",
+    "encodable": "^0.7.4",
+    "gatsby": "^2.24.47",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-theme-docz": "^2.3.1",
+    "lodash": "^4.17.20",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "typography-theme-ocean-beach": "^0.16.19",
     "universal-console": "^0.1.3"
   }
 }
