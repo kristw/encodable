@@ -11,10 +11,18 @@ export type VersionTableProps = {
 };
 
 const tdStyle: CSSProperties = {
+  fontSize: '0.9em',
   paddingLeft: 0,
   paddingRight: 8,
   paddingTop: 4,
   paddingBottom: 4,
+};
+
+const tdImgStyle: CSSProperties = {
+  paddingLeft: 0,
+  paddingRight: 8,
+  paddingTop: 6,
+  paddingBottom: 0,
 };
 
 const linkStyle: CSSProperties = {
@@ -46,7 +54,7 @@ export default function VersionTable({
                 {name}
               </a>
             </td>
-            <td style={tdStyle}>
+            <td style={tdImgStyle}>
               <a style={linkStyle} href={`https://www.npmjs.com/package/${name}`}>
                 <img
                   alt="npm badge"

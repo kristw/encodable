@@ -2,7 +2,7 @@
 
 export default {
   typescript: true,
-  title: '🎭 Encodable',
+  title: 'Encodable',
   description: 'Configurable grammar for visualization components',
   repository: 'https://github.com/kristw/encodable',
   codeSandbox: true,
@@ -14,7 +14,7 @@ export default {
     'Why use Encodable?',
     { name: 'Gallery', menu: ['Gallery'] },
     'Guides',
-    'encodable API',
+    'Encodable API',
     '@encodable/color',
     '@encodable/format',
     '@encodable/registry',

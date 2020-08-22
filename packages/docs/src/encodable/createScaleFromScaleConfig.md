@@ -1,6 +1,6 @@
 ---
 name: createScaleFromScaleConfig()
-menu: encodable API
+menu: Encodable API
 ---
 
 # `createScaleFromScaleConfig(...)`

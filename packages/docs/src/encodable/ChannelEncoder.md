@@ -1,6 +1,6 @@
 ---
 name: ChannelEncoder
-menu: encodable API
+menu: Encodable API
 ---
 
 # `ChannelEncoder`
