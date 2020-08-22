@@ -1,0 +1,39 @@
+---
+name: 'Gallery'
+menu: 'Gallery'
+route: '/gallery'
+---
+
+import Frame from '../components/Frame.tsx';
+import CoffeeChart from '../components/CoffeeChart/index.tsx';
+
+<Frame width={400} height={400} background="#FFF4F1">
+  <CoffeeChart
+    width={400}
+    height={400}
+    encoding={{
+      label: { field: "day" },
+      drinkLevel: { field: "numCoffee", type: "quantitative" },
+      drinkColor: {
+        field: "productivity",
+        type: "quantitative",
+        scale: {
+          type: "ordinal",
+          domain: [1, 2, 3, 4],
+          range: ["#EAC8C1", "#DFAB6D", "#B26C4D", "#623D2B"]
+        }
+      },
+      useToGoCup: { field: "goToOffice", type: "nominal" }
+    }}
+    data={[
+      { day: "MON", numCoffee: 2, productivity: 4, goToOffice: true },
+      { day: "TUE", numCoffee: 3, productivity: 4, goToOffice: true },
+      { day: "WED", numCoffee: 2, productivity: 4, goToOffice: false },
+      { day: "THU", numCoffee: 4, productivity: 3, goToOffice: true },
+      { day: "FRI", numCoffee: 3, productivity: 2, goToOffice: true },
+      { day: "SAT", numCoffee: 1, productivity: 1, goToOffice: false },
+      { day: "SUN", numCoffee: 1, productivity: 1, goToOffice: false }
+    ]}
+  />
+</Frame>
+
