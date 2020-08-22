@@ -10,7 +10,7 @@ from it. For example, this is how you create a
 [bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in
 `vega-lite`:
 
-```js
+```json
 {
   "mark": "bar",
   "encoding": {

@@ -3,8 +3,8 @@ import { toTheme } from '@theme-ui/typography';
 import { merge } from 'lodash/fp';
 
 import * as modes from 'gatsby-theme-docz/src/theme/modes';
-import prism from 'gatsby-theme-docz/src/theme/prism';
 import styles from 'gatsby-theme-docz/src/theme/styles';
+import prism from './prism';
 
 oceanBeach.headerWeight = 700;
 const typography = toTheme(oceanBeach);
