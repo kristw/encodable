@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 interface Package {
   name: string;
@@ -6,23 +6,23 @@ interface Package {
 }
 
 export type VersionTableProps = {
-  packages: Package[],
-  baseUrl?: string,
+  packages: Package[];
+  baseUrl?: string;
 };
 
-const tdStyle = {
+const tdStyle: CSSProperties = {
   paddingLeft: 0,
   paddingRight: 8,
   paddingTop: 4,
   paddingBottom: 4,
 };
 
-const linkStyle = {
+const linkStyle: CSSProperties = {
   textDecoration: 'none',
   color: '#0B5FFF',
 };
 
-const thStyle = { ...tdStyle, textAlign: 'left' };
+const thStyle: CSSProperties = { ...tdStyle, textAlign: 'left' };
 
 export default function VersionTable({
   packages,

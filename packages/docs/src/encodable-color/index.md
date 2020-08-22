@@ -1,5 +1,6 @@
 ---
 name: "@encodable/color"
+route: "/encodable-color"
 ---
 
 # @encodable/color

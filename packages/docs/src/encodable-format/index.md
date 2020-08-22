@@ -1,5 +1,6 @@
 ---
 name: "@encodable/format"
+route: "/encodable-format"
 ---
 
 # @encodable/format
