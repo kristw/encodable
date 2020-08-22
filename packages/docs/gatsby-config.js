@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 // eslint-disable-next-line no-undef
 module.exports = {
   plugins: [

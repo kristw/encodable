@@ -18,13 +18,22 @@ export default merge(typography, {
   // Show editor when a playground is rendered
   showPlaygroundEditor: true,
   // Show dark/light mode switch toggle in header
-  showDarkModeSwitch: true,
+  showDarkModeSwitch: false,
   // Display edit this page button on every page
   showMarkdownEditButton: true,
   // Wrap the playground editor and preview in iframes to avoid style/script collisions
   useScopingInPlayground: false,
   colors: {
     ...modes.light,
+    border: 'transparent',
+    sidebar: {
+      ...modes.light.sidebar,
+      bg: '#F5F7F9',
+    },
+    header: {
+      ...modes.light.header,
+      text: '#222',
+    },
     modes: {
       dark: modes.dark,
     },

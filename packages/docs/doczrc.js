@@ -2,7 +2,7 @@
 
 export default {
   typescript: true,
-  title: '🎭 Encodable',
+  title: 'Encodable',
   description: 'Configurable grammar for visualization components',
   repository: 'https://github.com/kristw/encodable',
   codeSandbox: true,
