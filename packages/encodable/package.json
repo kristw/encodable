@@ -1,6 +1,6 @@
 {
   "name": "encodable",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "description": "Configurable grammar for visualization components",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@encodable/color": "^1.0.3",
-    "@encodable/format": "^1.0.4",
+    "@encodable/format": "^1.0.5",
     "@types/d3-array": "^2.0.0",
     "@types/d3-interpolate": "^1.3.1",
     "@types/d3-scale": "^2.1.1",

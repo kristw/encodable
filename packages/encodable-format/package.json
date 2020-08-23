@@ -1,6 +1,6 @@
 {
   "name": "@encodable/format",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Utilities for managing time and number formats.",
   "sideEffects": false,
   "main": "lib/index.js",
