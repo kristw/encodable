@@ -1,7 +1,7 @@
 import { getColorSchemeRegistry } from '@encodable/color';
-import createScaleFromScaleConfig from '../../../src/parsers/scale/createScaleFromScaleConfig';
+import createScale from '../../../src/parsers/scale/createScale';
 
-describe('createScaleFromScaleConfig(config)', () => {
+describe('createScale(config)', () => {
   beforeAll(() => {
     getColorSchemeRegistry()
       .register({
@@ -33,14 +33,14 @@ describe('createScaleFromScaleConfig(config)', () => {
   describe('default', () => {
     it('returns linear scale', () => {
       // @ts-ignore
-      const scale = createScaleFromScaleConfig({});
+      const scale = createScale({});
       expect(scale(1)).toEqual(1);
     });
   });
 
   describe('linear scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 10],
         range: [0, 100],
@@ -48,7 +48,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(10)).toEqual(100);
     });
     it('with reverse domain', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 10],
         range: [0, 100],
@@ -59,7 +59,7 @@ describe('createScaleFromScaleConfig(config)', () => {
     describe('does not set domain if domain has undefined or null', () => {
       describe('undefined', () => {
         it('min', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [null, 30],
             range: [0, 100],
@@ -67,7 +67,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           expect(scale(10)).toEqual(1000);
         });
         it('max', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [0, null],
             range: [0, 100],
@@ -75,7 +75,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           expect(scale(10)).toEqual(1000);
         });
         it('both', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             range: [0, 100],
           });
@@ -84,7 +84,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       });
       describe('null', () => {
         it('min', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [null, 30],
             range: [0, 100],
@@ -92,7 +92,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           expect(scale(10)).toEqual(1000);
         });
         it('max', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [0, null],
             range: [0, 100],
@@ -100,7 +100,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           expect(scale(10)).toEqual(1000);
         });
         it('both', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [null, null],
             range: [0, 100],
@@ -111,7 +111,7 @@ describe('createScaleFromScaleConfig(config)', () => {
     });
     describe('with color scheme specified', () => {
       it('uses color scheme as range', () => {
-        const scale = createScaleFromScaleConfig({
+        const scale = createScale({
           type: 'linear',
           domain: [0, 10],
           scheme: 'test-scheme',
@@ -123,7 +123,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
       describe('creates piecewise scale', () => {
         it('domain has more elements', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [0, 5, 10],
             scheme: { name: 'test-scheme' },
@@ -134,7 +134,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           expect(scale(10)).toEqual('rgb(255, 255, 0)');
         });
         it('range has more elements', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [0, 5, 10],
             scheme: { name: 'red-blue' },
@@ -148,7 +148,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
       describe('when scheme is SchemeParams object', () => {
         it('handles scheme name correctly', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [0, 10],
             scheme: { name: 'test-scheme' },
@@ -158,7 +158,7 @@ describe('createScaleFromScaleConfig(config)', () => {
           expect(scale(10)).toEqual('rgb(255, 255, 0)');
         });
         it('handles scheme extent', () => {
-          const scale = createScaleFromScaleConfig({
+          const scale = createScale({
             type: 'linear',
             domain: [0, 10],
             scheme: { name: 'test-scheme', extent: [0.5, 1] },
@@ -172,7 +172,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       it('uses default range when specified scheme is not available', () => {
         getColorSchemeRegistry().sequential.clearDefaultKey();
 
-        const scale = createScaleFromScaleConfig({
+        const scale = createScale({
           type: 'linear',
           domain: [0, 10],
           scheme: 'test-invalid-scheme',
@@ -184,7 +184,7 @@ describe('createScaleFromScaleConfig(config)', () => {
     });
 
     it('with nice', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 9.9],
         range: [0, 100],
@@ -193,7 +193,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(10)).toEqual(100);
     });
     it('with nice=false', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 9.9],
         range: [0, 100],
@@ -202,7 +202,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(Number(scale(10)).toFixed(2)).toEqual('101.01');
     });
     it('with nice is number', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 9.9],
         range: [0, 100],
@@ -211,7 +211,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale.ticks(3)).toEqual([0, 5, 10]);
     });
     it('with clamp', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 10],
         range: [0, 100],
@@ -221,7 +221,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(10000)).toEqual(100);
     });
     it('with round', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [0, 10],
         range: [0, 10],
@@ -230,7 +230,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(9.9)).toEqual(10);
     });
     it('with zero', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'linear',
         domain: [2, 10],
         range: [0, 10],
@@ -242,7 +242,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('log scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'log',
         domain: [1, 100],
         range: [1, 10],
@@ -251,7 +251,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(100)).toEqual(10);
     });
     it('with base', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'log',
         domain: [1, 16],
         base: 2,
@@ -262,7 +262,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('power scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'pow',
         domain: [0, 100],
       });
@@ -270,7 +270,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(100)).toEqual(1);
     });
     it('with exponent', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'pow',
         exponent: 2,
       });
@@ -281,7 +281,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('sqrt scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'sqrt',
       });
       expect(scale(4)).toEqual(2);
@@ -291,7 +291,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('symlog scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'symlog',
       });
       expect(scale(0)).toEqual(0);
@@ -301,7 +301,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('time scale', () => {
     it('basic - does not nice by default', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'time',
         domain: [
           {
@@ -322,7 +322,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(new Date(2019, 6, 30))).toEqual(100);
     });
     it('with nice=true', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'time',
         domain: [
           {
@@ -344,7 +344,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(new Date(2019, 6, 31))).toEqual(100);
     });
     it('with nice is string', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'time',
         domain: [
           {
@@ -364,7 +364,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale.domain()).toEqual([new Date(2019, 6, 1), new Date(2019, 7, 1)]);
     });
     it('with nice is interval object', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'time',
         domain: [
           {
@@ -387,7 +387,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('UTC scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'utc',
         domain: [
           {
@@ -410,7 +410,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(new Date(Date.UTC(2019, 6, 31)))).toEqual(100);
     });
     it('with nice is string', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'utc',
         domain: [
           {
@@ -435,7 +435,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       ]);
     });
     it('with nice is interval object', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'utc',
         domain: [
           {
@@ -460,7 +460,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       ]);
     });
     it('with nice is interval object that has invalid step', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'utc',
         domain: [
           {
@@ -488,7 +488,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('quantile scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'quantile',
         domain: [0, 100],
         range: [0, 1, 2, 3],
@@ -504,7 +504,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('quantize scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'quantize',
         domain: [10, 100],
         range: [1, 2, 4],
@@ -514,7 +514,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(80)).toEqual(4);
     });
     it('with string range', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'quantize',
         domain: [0, 1],
         range: ['calm-brown', 'shocking-pink'],
@@ -526,7 +526,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('threshold scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'threshold',
         domain: [0, 1],
         range: ['red', 'white', 'green'],
@@ -538,7 +538,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale(1000)).toEqual('green');
     });
     it('handles scheme count', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'threshold',
         domain: [0, 1],
         scheme: { name: 'test-scheme', count: 3 },
@@ -577,7 +577,7 @@ describe('createScaleFromScaleConfig(config)', () => {
     });
 
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'ordinal',
       });
       expect(scale('fish')).toEqual('red');
@@ -585,7 +585,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('whale')).toEqual('green');
     });
     it('with range', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'ordinal',
         domain: ['fish', 'dinosaur'],
         range: ['red', 'white', 'green'],
@@ -596,7 +596,7 @@ describe('createScaleFromScaleConfig(config)', () => {
     });
     describe('with color scheme', () => {
       it('scheme is string', () => {
-        const scale = createScaleFromScaleConfig({
+        const scale = createScale({
           type: 'ordinal',
           scheme: 'test-category-scheme',
         });
@@ -605,7 +605,7 @@ describe('createScaleFromScaleConfig(config)', () => {
         expect(scale('whale')).toEqual('green');
       });
       it('scheme is SchemeParams object', () => {
-        const scale = createScaleFromScaleConfig({
+        const scale = createScale({
           type: 'ordinal',
           scheme: { name: 'test-category-scheme' },
         });
@@ -615,7 +615,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       });
     });
     it('with color scheme and domain', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'ordinal',
         domain: ['fish', 'dinosaur'],
         scheme: 'test-category-scheme2',
@@ -625,7 +625,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('whale')).toEqual('orange');
     });
     it('with color scheme and reversed domain', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'ordinal',
         domain: ['pig', 'panda'],
         reverse: true,
@@ -635,15 +635,15 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('panda')).toEqual('pink');
     });
     it('with namespace', () => {
-      const scale1 = createScaleFromScaleConfig({
+      const scale1 = createScale({
         type: 'ordinal',
         scheme: { namespace: 'abc' },
       });
-      const scale2 = createScaleFromScaleConfig({
+      const scale2 = createScale({
         type: 'ordinal',
         scheme: { namespace: 'def' },
       });
-      const scale3 = createScaleFromScaleConfig({
+      const scale3 = createScale({
         type: 'ordinal',
         scheme: { namespace: 'def' },
       });
@@ -664,7 +664,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('bin-ordinal scale', () => {
     it('is not supported yet', () => {
-      expect(() => createScaleFromScaleConfig({ type: 'bin-ordinal' })).toThrow(
+      expect(() => createScale({ type: 'bin-ordinal' })).toThrow(
         '"type = bin-ordinal" is not supported yet.',
       );
     });
@@ -672,7 +672,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('point scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'point',
         domain: ['fish', 'dinosaur', 'whale'],
         range: [0, 100],
@@ -682,7 +682,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('whale')).toEqual(100);
     });
     it('with padding', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'point',
         domain: ['fish', 'dinosaur', 'whale'],
         range: [0, 100],
@@ -693,7 +693,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('whale')).toEqual(75);
     });
     it('with round', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'point',
         domain: ['fish', 'dinosaur', 'whale'],
         range: [0, 100],
@@ -708,7 +708,7 @@ describe('createScaleFromScaleConfig(config)', () => {
 
   describe('band scale', () => {
     it('basic', () => {
-      const scale = createScaleFromScaleConfig({
+      const scale = createScale({
         type: 'band',
         domain: ['fish', 'dinosaur'],
         range: [0, 100],
@@ -717,7 +717,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('dinosaur')).toEqual(50);
     });
     it('with paddingInner', () => {
-      const scale = createScaleFromScaleConfig<number>({
+      const scale = createScale<number>({
         type: 'band',
         domain: ['fish', 'dinosaur', 'whale'],
         range: [0, 100],
@@ -728,7 +728,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('whale')).toEqual(80);
     });
     it('with paddingOuter', () => {
-      const scale = createScaleFromScaleConfig<number>({
+      const scale = createScale<number>({
         type: 'band',
         domain: ['fish', 'dinosaur', 'whale'],
         range: [0, 100],
@@ -739,7 +739,7 @@ describe('createScaleFromScaleConfig(config)', () => {
       expect(scale('whale')).toEqual(62.5);
     });
     it('with align', () => {
-      const scale = createScaleFromScaleConfig<number>({
+      const scale = createScale<number>({
         type: 'band',
         domain: ['fish', 'dinosaur', 'whale'],
         range: [0, 100],

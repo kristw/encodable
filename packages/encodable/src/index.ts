@@ -2,7 +2,7 @@ export { default as Encoder } from './encoders/Encoder';
 export { default as ChannelEncoder } from './encoders/ChannelEncoder';
 export { default as createEncoderFactory } from './encoders/createEncoderFactory';
 export { default as completeChannelDef } from './fillers/completeChannelDef';
-export { default as createScaleFromScaleConfig } from './parsers/scale/createScaleFromScaleConfig';
+export { default as createScale } from './parsers/scale/createScale';
 export { default as mergeEncoding } from './utils/mergeEncoding';
 export { default as Encodable } from './options/Encodable';
 export * from './options/resolvers';
