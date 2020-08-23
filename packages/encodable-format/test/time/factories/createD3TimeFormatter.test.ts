@@ -54,7 +54,6 @@ describe('createD3TimeFormatter(config)', () => {
         useLocalTime: true,
       });
       const offset = new Date().getTimezoneOffset();
-      // eslint-disable-next-line jest/no-if
       if (offset === 0) {
         expect(formatter(PREVIEW_TIME)).toEqual('2017-02-14 11:22:33');
       } else {
@@ -79,7 +78,6 @@ describe('createD3TimeFormatter(config)', () => {
         useLocalTime: true,
       });
       const offset = new Date().getTimezoneOffset();
-      // eslint-disable-next-line jest/no-if
       if (offset === 0) {
         expect(formatter(TEST_TIME)).toEqual('อา. 20 ธ.ค. 2015 00:00:00');
       } else {

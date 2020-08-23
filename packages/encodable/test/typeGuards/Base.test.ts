@@ -46,7 +46,6 @@ describe('type guards: Base', () => {
       expect(isEveryElementDefined(['a', 'b'])).toBeTruthy();
       expect(isEveryElementDefined([])).toBeTruthy();
       const array: (string | undefined)[] = ['a', 'b'];
-      // eslint-disable-next-line jest/no-if
       if (isEveryElementDefined(array)) {
         expect(array.every(a => a.length === 1)).toBeTruthy();
       }
