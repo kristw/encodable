@@ -38,51 +38,45 @@ import Encodable from '../../options/Encodable';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
 import applyDomain from './applyDomain';
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: LinearScaleConfig<Output>,
 ): ScaleLinear<Output, Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: LogScaleConfig<Output> | SymlogScaleConfig<Output>,
 ): ScaleLogarithmic<Output, Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: PowScaleConfig<Output> | SqrtScaleConfig<Output>,
 ): ScalePower<Output, Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: TimeScaleConfig<Output> | UtcScaleConfig<Output>,
 ): ScaleTime<Output, Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: QuantileScaleConfig<Output>,
 ): ScaleQuantile<Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: QuantizeScaleConfig<Output>,
 ): ScaleQuantize<Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: ThresholdScaleConfig<Output>,
 ): ScaleThreshold<number | string | Date, Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
+function createScale<Output extends Value>(
   config: OrdinalScaleConfig<Output> | BinOrdinalScaleConfig<Output>,
 ): ScaleOrdinal<StringLike, Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(
-  config: PointScaleConfig,
-): ScalePoint<StringLike>;
+function createScale<Output extends Value>(config: PointScaleConfig): ScalePoint<StringLike>;
 
-function createScaleFromScaleConfig<Output extends Value>(
-  config: BandScaleConfig,
-): ScaleBand<StringLike>;
+function createScale<Output extends Value>(config: BandScaleConfig): ScaleBand<StringLike>;
 
-function createScaleFromScaleConfig<Output extends Value>(
-  config: ScaleConfig<Output>,
-): AllScale<Output>;
+function createScale<Output extends Value>(config: ScaleConfig<Output>): AllScale<Output>;
 
-function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Output>) {
+function createScale<Output extends Value>(config: ScaleConfig<Output>) {
   const { range } = config;
 
   // Handle categorical color scales
@@ -112,4 +106,4 @@ function createScaleFromScaleConfig<Output extends Value>(config: ScaleConfig<Ou
   return updateScale(scale, config);
 }
 
-export default createScaleFromScaleConfig;
+export default createScale;

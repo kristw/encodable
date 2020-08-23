@@ -127,7 +127,6 @@ describe('completeAxisConfig(channelDef)', () => {
           labelOverlap: strategy,
         });
         // type guard
-        // eslint-disable-next-line jest/no-if
         if (output !== false) {
           expect(output.labelOverlap).not.toBe(strategy);
         }

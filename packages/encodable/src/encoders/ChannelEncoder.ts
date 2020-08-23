@@ -16,7 +16,7 @@ import { isX, isY, isXOrY } from '../typeGuards/Channel';
 import ChannelEncoderAxis from './ChannelEncoderAxis';
 import createGetterFromChannelDef, { Getter } from '../parsers/createGetterFromChannelDef';
 import completeChannelDef from '../fillers/completeChannelDef';
-import createScaleFromScaleConfig from '../parsers/scale/createScaleFromScaleConfig';
+import createScale from '../parsers/scale/createScale';
 import identity from '../utils/identity';
 import applyDomain from '../parsers/scale/applyDomain';
 import applyRange from '../parsers/scale/applyRange';
@@ -69,7 +69,7 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
       : fallbackFormatter;
 
     if (this.definition.scale) {
-      const scale = createScaleFromScaleConfig(this.definition.scale);
+      const scale = createScale(this.definition.scale);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.encodeFunc = (value: ChannelInput) => scale(value as any) as Output;
       this.scale = scale;
