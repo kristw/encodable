@@ -10,10 +10,11 @@ import {
 const wrapper = {
   ...wrapper_,
   /* fallback for old browsers */
-  backgroundColor: '#F5AA36',
+  // backgroundColor: '#F5AA36',
   // background: '-webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);'
   // background: 'linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);',
-  background: 'linear-gradient(to right, #F57D39, #F5AA36, #F5AA36);',
+  // background: 'linear-gradient(to right, #F57D39, #F5AA36, #F5AA36);',
+  // background: 'linear-gradient(to right, #f5f6f7, #f5f6f7, #ffffff);',
 };
 
 const innerContainer = {

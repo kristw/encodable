@@ -1,15 +1,17 @@
-import oceanBeach from 'typography-theme-ocean-beach';
 import { toTheme } from '@theme-ui/typography';
 import { merge } from 'lodash/fp';
 
 import * as modes from 'gatsby-theme-docz/src/theme/modes';
 import styles from 'gatsby-theme-docz/src/theme/styles';
+import fairyGates from 'typography-theme-fairy-gates';
 import prism from './prism';
 
-oceanBeach.headerWeight = 700;
-const typography = toTheme(oceanBeach);
+const typography = fairyGates;
+typography.headerFontFamily = ['Raleway', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'];
+typography.bodyFontFamily = ['Raleway', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'];
+// typography.headerWeight = 700;
 
-export default merge(typography, {
+export default merge(toTheme(typography), {
   initialColorMode: 'light',
   // Show errors above playground editor
   showLiveError: true,
@@ -25,13 +27,14 @@ export default merge(typography, {
   useScopingInPlayground: false,
   colors: {
     ...modes.light,
-    border: 'transparent',
+    border: '#eee',
     sidebar: {
       ...modes.light.sidebar,
-      bg: '#F5F7F9',
+      bg: '#fff',
     },
     header: {
       ...modes.light.header,
+      border: '#fff',
       text: '#222',
     },
     modes: {
@@ -41,7 +44,7 @@ export default merge(typography, {
   fonts: {
     monospace: 'Inconsolata',
   },
-  fontSizes: [10, 14, 16, 20, 24, 32, 48, 64],
+  fontSizes: [10, 14, 16, 18, 24, 32, 44, 60],
   fontWeights: {
     body: 400,
     heading: 700,
