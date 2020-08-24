@@ -1,4 +1,10 @@
-/* eslint-disable no-useless-escape */
+function getFonts(typography) {
+  return typography.googleFonts.map(
+    // eslint-disable-next-line no-useless-escape
+    ({ name, styles: fontStyles }) => `${name.replace(/ /gi, '+')}\:${fontStyles.join(',')}`,
+  );
+}
+
 // eslint-disable-next-line no-undef
 module.exports = {
   plugins: [
@@ -6,10 +12,18 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Roboto+Slab\:700`,
-          `Roboto\:300,400,400i,700`, // you can also specify font weights and styles
-        ],
+        fonts: getFonts({
+          googleFonts: [
+            {
+              name: 'Work Sans',
+              styles: ['600'],
+            },
+            {
+              name: 'Raleway',
+              styles: ['400', '400i', '700'],
+            },
+          ],
+        }),
         display: 'swap',
       },
     },
