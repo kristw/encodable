@@ -39,6 +39,6 @@
     "@types/d3-scale-chromatic": "^1.2.0",
     "d3-interpolate": "^2.0.1",
     "d3-scale": "^3.2.1",
-    "d3-scale-chromatic": "^1.5.0"
+    "d3-scale-chromatic": "^2.0.0"
   }
 }
