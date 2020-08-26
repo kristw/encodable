@@ -10,7 +10,13 @@ module.exports = {
   plugins: [
     'gatsby-theme-docz',
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-59971789-2',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: getFonts({
           googleFonts: [
