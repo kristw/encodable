@@ -3,6 +3,7 @@ import React, { CSSProperties } from 'react';
 interface Package {
   name: string;
   codePath: string;
+  docPath?: string;
 }
 
 export type VersionTableProps = {
@@ -44,10 +45,11 @@ export default function VersionTable({
           <th style={thStyle}>Version</th>
           <th style={thStyle} />
           <th style={thStyle} />
+          <th style={thStyle} />
         </tr>
       </thead>
       <tbody>
-        {packages.map(({ name, codePath }) => (
+        {packages.map(({ name, codePath, docPath }) => (
           <tr key={name}>
             <td style={tdStyle}>
               <a style={linkStyle} href={`https://www.npmjs.com/package/${name}`}>
@@ -65,6 +67,11 @@ export default function VersionTable({
             <td style={tdStyle}>
               <a style={linkStyle} href={`${baseUrl}/tree/master/${codePath}`}>
                 source
+              </a>
+            </td>
+            <td style={tdStyle}>
+              <a style={linkStyle} href={docPath}>
+                docs
               </a>
             </td>
             <td style={tdStyle}>

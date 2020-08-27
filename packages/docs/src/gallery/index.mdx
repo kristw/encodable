@@ -9,8 +9,10 @@ route: '/gallery'
 These are the examples of components built with Encodable.
 
 import Frame from '../components/Frame.tsx';
-import BalloonPlot from '../components/BalloonPlot/index.tsx';
-import CoffeeChart from '../components/CoffeeChart/index.tsx';
+import BalloonPlot from '../components/BalloonPlot';
+import CoffeeChart from '../components/CoffeeChart';
+import GridMap from '../components/GridMap';
+import alcoholByState from '../data/alcoholByState.json';
 
 <Frame width={400} height={400} background="#FFF4F1">
   <CoffeeChart
@@ -89,4 +91,17 @@ import CoffeeChart from '../components/CoffeeChart/index.tsx';
       }
     ]}
   />
+</Frame>
+
+<!-- https://worldpopulationreview.com/state-rankings/alcohol-consumption-by-state -->
+
+<Frame width={400} height={400} background="#D3FCC8">
+  <GridMap width={400} height={400} data={alcoholByState} encoding={{
+    key: { field: 'State' },
+    fill: {
+      type: 'quantitative',
+      field: 'alcoholConsumptionGallons',
+      scale: { zero: false, scheme: 'd3.YlGn' }
+    }
+  }} />
 </Frame>

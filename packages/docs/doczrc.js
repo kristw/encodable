@@ -6,7 +6,6 @@ export default {
   description: 'Configurable grammar for visualization components',
   repository: 'https://github.com/kristw/encodable',
   codeSandbox: true,
-  src: './src',
   files: ['src/**/*.{md,markdown,mdx}'],
   propsParser: false,
   menu: [
