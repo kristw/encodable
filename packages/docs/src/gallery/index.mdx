@@ -12,6 +12,8 @@ import Frame from '../components/Frame.tsx';
 import BalloonPlot from '../components/BalloonPlot';
 import CoffeeChart from '../components/CoffeeChart';
 import GridMap from '../components/GridMap';
+import WordCloud from '../components/WordCloud';
+import namesData from '../data/namesData.ts';
 import alcoholByState from '../data/alcoholByState.json';
 
 <Frame width={400} height={400} background="#FFF4F1">
@@ -90,6 +92,48 @@ import alcoholByState from '../data/alcoholByState.json';
         profit: 1500
       }
     ]}
+  />
+</Frame>
+
+<Frame width={400} height={400} background="#6393C0">
+  <WordCloud
+    className="word-cloud"
+    width={400}
+    height={400}
+    data={namesData}
+    encoding={{
+      color: {
+        field: "count",
+        scale: {
+          range: ["#6393C0", "#fff"],
+          zero: true
+        },
+        type: "quantitative"
+      },
+      emoji: {
+        field: "count",
+        scale: {
+          type: "threshold",
+          domain: [1000000, 2000000],
+          range: ["", "☃️", "️❄️"]
+        },
+        type: "quantitative"
+      },
+      fontFamily: {
+        value: "Raleway, Helvetica, sans-serif"
+      },
+      fontSize: {
+        field: "count",
+        scale: {
+          range: [0, 40]
+        },
+        type: "quantitative"
+      },
+      fontWeight: {
+        value: "normal"
+      },
+      text: { field: "name" }
+    }}
   />
 </Frame>
 

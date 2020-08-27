@@ -1,7 +1,6 @@
 ---
 name: Creating a legend
 menu: Guides
-route: '/intro'
 ---
 
 # Creating a legend
