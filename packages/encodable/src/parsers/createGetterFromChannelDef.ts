@@ -1,10 +1,12 @@
 import get from 'lodash.get';
 import { isValueDef } from '../typeGuards/ChannelDef';
-import { Value, ChannelInput, ChannelDef, PlainObject } from '../types';
+import { DefaultOutput, ChannelInput, ChannelDef, PlainObject } from '../types';
 
-export type Getter<Output extends Value> = (x?: PlainObject) => ChannelInput | Output | undefined;
+export type Getter<Output extends DefaultOutput> = (
+  x?: PlainObject,
+) => ChannelInput | Output | undefined;
 
-export default function createGetterFromChannelDef<Output extends Value>(
+export default function createGetterFromChannelDef<Output extends DefaultOutput>(
   definition: ChannelDef<Output>,
 ): Getter<Output> {
   if (isValueDef(definition)) {

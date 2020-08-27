@@ -1,6 +1,6 @@
 import { BaseScaleConfig } from './BaseScaleConfig';
 import { ValueOf } from '../internal/Base';
-import { Value, StringLike, NumberLike } from '../Core';
+import { DefaultOutput, StringLike, NumberLike } from '../Core';
 import { NiceTime } from './Nice';
 import { SchemeParams } from './SchemeParams';
 import { DateTime } from '../DateTime';
@@ -34,49 +34,49 @@ type CreateScaleConfig<
   Fields extends keyof ExtendedBaseScaleConfig<T, D, R> = 'type'
 > = Pick<ExtendedBaseScaleConfig<T, D, R>, 'type' | 'domain' | 'range' | 'reverse' | Fields>;
 
-export type LinearScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type LinearScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'linear',
   ContinuousDomain,
   Output[],
   'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
-export type LogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type LogScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'log',
   ContinuousDomain,
   Output[],
   'base' | 'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme'
 >;
 
-export type PowScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type PowScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'pow',
   ContinuousDomain,
   Output[],
   'clamp' | 'exponent' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
-export type SqrtScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type SqrtScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'sqrt',
   ContinuousDomain,
   Output[],
   'clamp' | 'interpolate' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
-export type SymlogScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type SymlogScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'symlog',
   ContinuousDomain,
   Output[],
   'clamp' | 'constant' | 'nice' | 'round' | 'scheme' | 'zero'
 >;
 
-export type QuantileScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type QuantileScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'quantile',
   ContinuousDomain,
   Output[],
   'scheme'
 >;
 
-export type QuantizeScaleConfig<Output extends Value = Value> = CreateScaleConfig<
+export type QuantizeScaleConfig<Output extends DefaultOutput = DefaultOutput> = CreateScaleConfig<
   'quantize',
   [ContinuousInput, ContinuousInput] | Bounds<ContinuousInput>,
   Output[],
@@ -85,7 +85,7 @@ export type QuantizeScaleConfig<Output extends Value = Value> = CreateScaleConfi
 
 export type ThresholdScaleConfig<
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput,
-  Output extends Value = Value
+  Output extends DefaultOutput = DefaultOutput
 > = CreateScaleConfig<'threshold', ThresholdInput[], Output[], 'scheme'>;
 
 // export type BinOrdinalScaleConfig<Output extends Value = Value> = CreateScaleConfig<
@@ -97,7 +97,7 @@ export type ThresholdScaleConfig<
 
 export type OrdinalScaleConfig<
   DiscreteInput extends StringLike = StringLike,
-  Output extends Value = Value
+  Output extends DefaultOutput = DefaultOutput
 > = CreateScaleConfig<'ordinal', DiscreteInput[], Output[], 'scheme' | 'unknown'>;
 
 export type PointScaleConfig<DiscreteInput extends StringLike = StringLike> = CreateScaleConfig<
@@ -114,7 +114,7 @@ export type BandScaleConfig<DiscreteInput extends StringLike = StringLike> = Cre
   'align' | 'padding' | 'paddingInner' | 'paddingOuter' | 'round'
 >;
 
-interface TemporalScaleConfig<T, Output extends Value = Value>
+interface TemporalScaleConfig<T, Output extends DefaultOutput = DefaultOutput>
   extends CreateScaleConfig<T, TimeDomain, Output[], 'clamp' | 'interpolate' | 'round' | 'scheme'> {
   /**
    * Extending the domain so that it starts and ends on nice round values. This method typically modifies the scale’s domain, and may only extend the bounds to the nearest round value. Nicing is useful if the domain is computed from data and may be irregular. For example, for a domain of _[0.201479…, 0.996679…]_, a nice domain might be _[0.2, 1.0]_.
@@ -129,9 +129,15 @@ interface TemporalScaleConfig<T, Output extends Value = Value>
   nice?: boolean | number | NiceTime | { interval: NiceTime; step: number };
 }
 
-export type TimeScaleConfig<Output extends Value = Value> = TemporalScaleConfig<'time', Output>;
+export type TimeScaleConfig<Output extends DefaultOutput = DefaultOutput> = TemporalScaleConfig<
+  'time',
+  Output
+>;
 
-export type UtcScaleConfig<Output extends Value = Value> = TemporalScaleConfig<'utc', Output>;
+export type UtcScaleConfig<Output extends DefaultOutput = DefaultOutput> = TemporalScaleConfig<
+  'utc',
+  Output
+>;
 
 /**
  * Map scale type to D3Scale type
@@ -140,7 +146,7 @@ export type UtcScaleConfig<Output extends Value = Value> = TemporalScaleConfig<'
  * @type `DiscreteInput`: Input type for ordinal, point and band scales
  */
 export interface ScaleTypeToScaleConfig<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > {
@@ -161,20 +167,20 @@ export interface ScaleTypeToScaleConfig<
 }
 
 export type ScaleConfig<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = ValueOf<ScaleTypeToScaleConfig<Output, DiscreteInput, ThresholdInput>>;
 
 export type PickScaleConfig<
   T extends keyof ScaleTypeToScaleConfig<Output>,
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = ValueOf<Pick<ScaleTypeToScaleConfig<Output, DiscreteInput, ThresholdInput>, T>>;
 
 export type ContinuousScaleConfig<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = PickScaleConfig<
@@ -185,7 +191,7 @@ export type ContinuousScaleConfig<
 >;
 
 export type DiscretizingScaleConfig<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = PickScaleConfig<
@@ -196,13 +202,13 @@ export type DiscretizingScaleConfig<
 >;
 
 export type DiscreteScaleConfig<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = PickScaleConfig<'ordinal' | 'point' | 'band', Output, DiscreteInput, ThresholdInput>;
 
 export interface WithScale<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > {

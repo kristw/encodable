@@ -16,7 +16,7 @@ import {
   CountableTimeInterval,
 } from 'd3-time';
 import { ScaleTime } from 'd3-scale';
-import { Value, ScaleType, D3Scale, NiceTime, ScaleConfig } from '../../types';
+import { DefaultOutput, ScaleType, D3Scale, NiceTime, ScaleConfig } from '../../types';
 
 const localTimeIntervals: {
   [key in NiceTime]: CountableTimeInterval;
@@ -42,7 +42,7 @@ const utcIntervals: {
   year: utcYear,
 };
 
-export default function applyNice<Output extends Value>(
+export default function applyNice<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
 ) {

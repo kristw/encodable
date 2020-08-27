@@ -13,9 +13,9 @@ import {
   scaleBand,
   scaleSymlog,
 } from 'd3-scale';
-import { StringLike, ScaleType, Value } from '../../types';
+import { StringLike, ScaleType, DefaultOutput } from '../../types';
 
-export default function createScaleFromScaleType<Output extends Value>(type: ScaleType) {
+export default function createScaleFromScaleType<Output extends DefaultOutput>(type: ScaleType) {
   switch (type) {
     case ScaleType.LINEAR:
       return scaleLinear<Output>();

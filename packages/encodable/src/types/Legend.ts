@@ -1,4 +1,4 @@
-import { Type } from './Core';
+import { FieldType } from './Core';
 import { ChannelInput } from './Channel';
 import { EncodingConfig, DeriveSingleChannelEncoder } from './Encoding';
 
@@ -27,7 +27,7 @@ export interface NominalLegendGroupInformation<Config extends EncodingConfig>
 
 export interface NonNominalLegendGroupInformation<Config extends EncodingConfig>
   extends BaseLegendGroupInformation<Config> {
-  type: Exclude<Type, 'nominal'>;
+  type: Exclude<FieldType, 'nominal'>;
 }
 
 export type LegendGroupInformation<Config extends EncodingConfig> =

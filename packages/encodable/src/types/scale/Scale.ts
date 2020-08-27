@@ -12,7 +12,7 @@ import {
   ScaleSymLog,
 } from 'd3-scale';
 import { ValueOf } from '../internal/Base';
-import { Value, StringLike } from '../Core';
+import { DefaultOutput, StringLike } from '../Core';
 
 export type DefaultThresholdInput = number | string | Date;
 
@@ -26,7 +26,7 @@ export type ScaleCategory = 'continuous' | 'discrete' | 'discretizing';
  * @type `DiscreteInput`: Input type for ordinal, point and band scales
  */
 export interface ScaleTypeToD3Scale<
-  Output = Value,
+  Output = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > {
@@ -56,13 +56,13 @@ export interface ScaleTypeToD3Scale<
 
 export type PickD3Scale<
   T extends keyof ScaleTypeToD3Scale<Output, DiscreteInput, DefaultThresholdInput>,
-  Output = Value,
+  Output = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = ValueOf<Pick<ScaleTypeToD3Scale<Output, DiscreteInput, ThresholdInput>, T>>;
 
 export type D3Scale<
-  Output = Value,
+  Output = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = ValueOf<ScaleTypeToD3Scale<Output, DiscreteInput, ThresholdInput>>;
@@ -84,7 +84,7 @@ export type AnyD3Scale = D3Scale<any, any, any>;
 
 export type InferD3ScaleOutput<Scale extends AnyD3Scale> =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Scale extends D3Scale<infer X, any, any> ? X : Value;
+  Scale extends D3Scale<infer X, any, any> ? X : DefaultOutput;
 
 export type InferD3ScaleDiscreteInput<Scale extends AnyD3Scale> =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,7 +98,7 @@ export type InferD3ScaleThresholdInput<Scale extends AnyD3Scale> =
 export type ScaleInput<Scale extends AnyD3Scale> = Parameters<Scale>[0];
 
 export type ContinuousD3Scale<
-  Output = Value,
+  Output = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = PickD3Scale<
@@ -109,19 +109,19 @@ export type ContinuousD3Scale<
 >;
 
 export type DiscretizingD3Scale<
-  Output = Value,
+  Output = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = PickD3Scale<'quantile' | 'quantize' | 'threshold', Output, DiscreteInput, ThresholdInput>;
 
 export type DiscreteD3Scale<
-  Output = Value,
+  Output = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = PickD3Scale<'ordinal' | 'point' | 'band', Output, DiscreteInput, ThresholdInput>;
 
 export type AllScale<
-  Output extends Value = Value,
+  Output extends DefaultOutput = DefaultOutput,
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > = D3Scale<Output, DiscreteInput, ThresholdInput>;

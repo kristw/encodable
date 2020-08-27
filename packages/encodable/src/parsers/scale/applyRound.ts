@@ -1,10 +1,10 @@
 import { interpolateRound } from 'd3-interpolate';
 import { ScalePoint, ScaleBand, ScaleSymLog } from 'd3-scale';
-import { Value, StringLike } from '../../types';
+import { DefaultOutput, StringLike } from '../../types';
 import { D3Scale, ContinuousD3Scale } from '../../types/scale/Scale';
 import { ScaleConfig } from '../../types/scale/ScaleConfig';
 
-export default function applyRound<Output extends Value>(
+export default function applyRound<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
 ) {

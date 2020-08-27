@@ -1,4 +1,4 @@
-import { FormatMixins, Type, ScaleType, FormatType } from '../types';
+import { FormatMixins, FieldType, ScaleType, FormatType } from '../types';
 
 export interface CompleteFormatConfig {
   formatType: 'time' | 'number' | undefined;
@@ -9,7 +9,7 @@ export interface CompleteFormatConfig {
 export default function completeFormatConfig(
   config: FormatMixins & {
     /** Field type */
-    type?: Type;
+    type?: FieldType;
     scaleType?: ScaleType;
   },
 ): CompleteFormatConfig {

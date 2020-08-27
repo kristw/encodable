@@ -9,10 +9,10 @@ import applyRound from './applyRound';
 import applyDomain from './applyDomain';
 import applyRange from './applyRange';
 import applyPadding from './applyPadding';
-import { D3Scale, ScaleConfig, Value } from '../../types';
+import { D3Scale, ScaleConfig, DefaultOutput } from '../../types';
 
 export default function updateScale<
-  Output extends Value,
+  Output extends DefaultOutput,
   Scale extends D3Scale<Output>,
   Config extends ScaleConfig<Output>
 >(scale: Scale, config: Config) {
