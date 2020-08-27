@@ -1,17 +1,5 @@
 import React from 'react';
 
-// TODO: Note that id and className can collide between Props and ReactifyProps
-// leading to (likely) unexpected behaviors. We should either require Props to not
-// contain an id/className, or not combine them (via intersection), instead preferring
-// wrapping (composition). As an example:
-// interface MyProps {
-//   id: number;
-// }
-// function myRender(container: HTMLDivElement, props: Readonly<MyProps>): void {
-//   props.id // unusable: id is string & number
-// }
-// new (reactify(myRender))({ id: 5 }); // error: id has to be string & number
-
 export type ReactifyProps = {
   id?: string;
   className?: string;
