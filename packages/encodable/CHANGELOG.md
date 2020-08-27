@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.8](https://github.com/kristw/encodable/compare/encodable@0.7.7...encodable@0.7.8) (2020-08-27)
+
+**Note:** Version bump only for package encodable
+
+
+
+
+
 ## [0.7.7](https://github.com/kristw/encodable/compare/encodable@0.7.6...encodable@0.7.7) (2020-08-27)
 
 **Note:** Version bump only for package encodable

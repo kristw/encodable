@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/kristw/encodable/compare/@encodable/color@1.0.5...@encodable/color@1.1.0) (2020-08-27)
+
+
+### Features
+
+* **color:** add labels to d3 color schemes ([#89](https://github.com/kristw/encodable/issues/89)) ([0ff58a6](https://github.com/kristw/encodable/commit/0ff58a6f1d023c82bec4db7c5b3e1d3c413b6e4a))
+
+
+
+
+
 ## [1.0.5](https://github.com/kristw/encodable/compare/@encodable/color@1.0.4...@encodable/color@1.0.5) (2020-08-27)
 
 **Note:** Version bump only for package @encodable/color

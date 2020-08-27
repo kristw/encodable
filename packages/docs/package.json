@@ -5,7 +5,7 @@
     "../../packages/**/*",
     "../../../packages/**/*"
   ],
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "Apache-2.0",
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
@@ -24,7 +24,7 @@
     "@theme-ui/typography": "^0.3.0",
     "d3-array": "^2.6.0",
     "docz": "^2.3.1",
-    "encodable": "^0.7.7",
+    "encodable": "^0.7.8",
     "gatsby": "^2.24.47",
     "gatsby-plugin-google-analytics": "^2.3.13",
     "gatsby-plugin-google-fonts": "^1.0.1",
