@@ -38,19 +38,18 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
     .append('g')
     .attr('transform', `translate(${padding},${padding})`);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const xScale: any = channels.x.scale!;
+  const xScale = channels.x.scale!;
   xScale.range([margin.left, innerWidth - margin.right]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const yScale: any = channels.y.scale!;
+  const yScale = channels.y.scale!;
   yScale.range([innerHeight - margin.bottom, margin.top]);
 
   // xAxis
   svg
     .append('g')
     .attr('transform', `translate(0,${innerHeight - margin.bottom})`)
-    .call(axisBottom(xScale).ticks(innerWidth / 80))
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .call(axisBottom(xScale as any).ticks(innerWidth / 80))
     .call(g =>
       g
         .append('text')
@@ -58,14 +57,15 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
         .attr('x', innerWidth)
         .attr('y', margin.bottom - 4)
         .attr('text-anchor', 'end')
-        .text(channels.x.axis ? channels.x.axis.getTitle() ?? '' : ''),
+        .text(channels.x.axis?.getTitle() ?? ''),
     );
 
   // yAxis
   svg
     .append('g')
     .attr('transform', `translate(${margin.left},0)`)
-    .call(axisLeft(yScale))
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .call(axisLeft(yScale as any))
     .call(g =>
       g
         .append('text')
@@ -73,7 +73,7 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
         .attr('x', -margin.left)
         .attr('y', 10)
         .attr('text-anchor', 'start')
-        .text(channels.y.axis ? channels.y.axis.getTitle() ?? '' : ''),
+        .text(channels.y.axis?.getTitle() ?? ''),
     );
 
   // // grid
@@ -85,10 +85,10 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
       g
         .append('g')
         .selectAll('line')
-        .data(xScale.ticks())
+        .data('ticks' in xScale ? (xScale.ticks() as number[]) : [])
         .join('line')
-        .attr('x1', d => 0.5 + xScale(d))
-        .attr('x2', d => 0.5 + xScale(d))
+        .attr('x1', d => 0.5 + channels.x.encodeValue(d, 0))
+        .attr('x2', d => 0.5 + channels.x.encodeValue(d, 0))
         .attr('y1', margin.top)
         .attr('y2', innerHeight - margin.bottom),
     )
@@ -96,10 +96,10 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
       g
         .append('g')
         .selectAll('line')
-        .data(yScale.ticks())
+        .data('ticks' in yScale ? (yScale.ticks() as number[]) : [])
         .join('line')
-        .attr('y1', d => 0.5 + yScale(d))
-        .attr('y2', d => 0.5 + yScale(d))
+        .attr('y1', d => 0.5 + channels.y.encodeValue(d, 0))
+        .attr('y2', d => 0.5 + channels.y.encodeValue(d, 0))
         .attr('x1', margin.left)
         .attr('x2', innerWidth - margin.right),
     );
@@ -112,8 +112,8 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
     .join('circle')
     .attr('stroke', d => channels.stroke.encodeDatum(d, '#222'))
     .attr('fill', d => channels.fill.encodeDatum(d, 'none'))
-    .attr('cx', d => xScale(d.x))
-    .attr('cy', d => yScale(d.y))
+    .attr('cx', d => channels.x.encodeDatum(d, 0))
+    .attr('cy', d => channels.y.encodeDatum(d, 0))
     .attr('r', 3);
 
   svg
@@ -124,8 +124,8 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
     .data(data)
     .join('text')
     .attr('dy', '0.35em')
-    .attr('x', d => xScale(d.x) + 7)
-    .attr('y', d => yScale(d.y))
+    .attr('cx', d => channels.x.encodeDatum(d, 0) + 7)
+    .attr('cy', d => channels.y.encodeDatum(d, 0))
     .text(d => channels.label.getValueFromDatum(d));
 
   svg.selectAll('path.domain').attr('stroke', '#746F5A');

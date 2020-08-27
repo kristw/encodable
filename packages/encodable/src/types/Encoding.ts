@@ -29,11 +29,11 @@ export type DeriveEncoding<Config extends EncodingConfig> = {
 
 export type DeriveChannelEncoders<Config extends EncodingConfig> = {
   readonly [k in keyof Config]: Config[k]['2'] extends 'multiple'
-    ? ChannelEncoder<ChannelTypeToDefMap<Config[k]['1']>[Config[k]['0']], Config[k]['1']>[]
-    : ChannelEncoder<ChannelTypeToDefMap<Config[k]['1']>[Config[k]['0']], Config[k]['1']>;
+    ? ChannelEncoder<ChannelTypeToDefMap<Config[k]['1']>[Config[k]['0']]>[]
+    : ChannelEncoder<ChannelTypeToDefMap<Config[k]['1']>[Config[k]['0']]>;
 };
 
 export type DeriveSingleChannelEncoder<
   Config extends EncodingConfig,
   k extends keyof Config = keyof Config
-> = ChannelEncoder<ChannelTypeToDefMap<Config[k]['1']>[Config[k]['0']], Config[k]['1']>;
+> = ChannelEncoder<ChannelTypeToDefMap<Config[k]['1']>[Config[k]['0']]>;

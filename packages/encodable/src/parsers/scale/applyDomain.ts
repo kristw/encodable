@@ -40,7 +40,7 @@ export default function applyDomain<Output extends Value>(
       if (isCompleteDomain(config.domain)) {
         // If the config.domain is completed
         // ignores the dataDomain
-        scale.domain(order(parseDateTimeIn(config.domain)));
+        scale.domain(order(parseDateTimeIn(config.domain)) as number[] | Date[]);
       } else if (dataDomain) {
         // If it is incompleted, then try to combine
         // with the dataDomain

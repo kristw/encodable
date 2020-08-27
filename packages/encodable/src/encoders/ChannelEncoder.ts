@@ -1,15 +1,15 @@
 import { extent as d3Extent } from 'd3-array';
 import { IdentityFunction } from '../types/internal/Base';
 import {
-  Value,
   ScaleType,
   PlainObject,
   Dataset,
   AllScale,
   ChannelType,
   ChannelInput,
-  ChannelDef,
   StringLike,
+  AnyChannelDef,
+  InferChannelOutput,
 } from '../types';
 import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
@@ -29,22 +29,25 @@ import createFormatter from '../parsers/format/createFormatter';
 
 type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
-export default class ChannelEncoder<Def extends ChannelDef<Output>, Output extends Value = Value> {
+export default class ChannelEncoder<Def extends AnyChannelDef> {
   readonly name: string | Symbol | number;
 
   readonly channelType: ChannelType;
 
   readonly originalDefinition: Def;
 
-  readonly definition: CompleteChannelDef<Output>;
+  readonly definition: CompleteChannelDef<InferChannelOutput<Def>>;
 
-  readonly scale?: AllScale<Output>;
+  readonly scale?: AllScale<InferChannelOutput<Def>>;
 
-  readonly axis?: ChannelEncoderAxis<Def, Output>;
+  readonly axis?: ChannelEncoderAxis<Def>;
 
-  private readonly getValue: Getter<Output>;
+  private readonly getValue: Getter<InferChannelOutput<Def>>;
 
-  private readonly encodeFunc: IdentityFunction<Output> | EncodeFunction<Output> | (() => Output);
+  private readonly encodeFunc:
+    | IdentityFunction<InferChannelOutput<Def>>
+    | EncodeFunction<InferChannelOutput<Def>>
+    | (() => InferChannelOutput<Def>);
 
   readonly formatValue: (value: ChannelInput | StringLike) => string;
 
@@ -57,13 +60,15 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     channelType: ChannelType;
     definition: Def;
   }) {
+    type Output = InferChannelOutput<Def>;
+
     this.name = name;
     this.channelType = channelType;
 
     this.originalDefinition = originalDefinition;
     this.definition = completeChannelDef(this.channelType, originalDefinition);
 
-    this.getValue = createGetterFromChannelDef(this.definition);
+    this.getValue = createGetterFromChannelDef<Output>(this.definition);
     this.formatValue = isFieldDef(this.definition)
       ? createFormatter(this.definition)
       : fallbackFormatter;
@@ -84,10 +89,13 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   }
 
   encodeValue: {
-    (value: ChannelInput | Output): Output | null | undefined;
-    (value: ChannelInput | Output, otherwise: Output): Output;
+    (value: ChannelInput | InferChannelOutput<Def>): InferChannelOutput<Def> | null | undefined;
+    (
+      value: ChannelInput | InferChannelOutput<Def>,
+      otherwise: InferChannelOutput<Def>,
+    ): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } = (value: ChannelInput | Output, otherwise?: Output): any => {
+  } = (value: ChannelInput | InferChannelOutput<Def>, otherwise?: InferChannelOutput<Def>): any => {
     if (typeof otherwise !== 'undefined' && (value === null || typeof value === 'undefined')) {
       return otherwise;
     }
@@ -97,17 +105,20 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   };
 
   encodeDatum: {
-    (datum: PlainObject): Output | null | undefined;
-    (datum: PlainObject, otherwise: Output): Output;
+    (datum: PlainObject): InferChannelOutput<Def> | null | undefined;
+    (datum: PlainObject, otherwise: InferChannelOutput<Def>): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } = (datum: PlainObject, otherwise?: Output): any =>
+  } = (datum: PlainObject, otherwise?: InferChannelOutput<Def>): any =>
     typeof otherwise === 'undefined'
       ? this.encodeValue(this.getValueFromDatum(datum))
       : this.encodeValue(this.getValueFromDatum(datum), otherwise);
 
   formatDatum = (datum: PlainObject): string => this.formatValue(this.getValueFromDatum(datum));
 
-  getValueFromDatum = <T extends ChannelInput | Output>(datum: PlainObject, otherwise?: T) => {
+  getValueFromDatum = <T extends ChannelInput | InferChannelOutput<Def>>(
+    datum: PlainObject,
+    otherwise?: T,
+  ) => {
     const value = this.getValue(datum);
 
     return otherwise !== undefined && (value === null || value === undefined)

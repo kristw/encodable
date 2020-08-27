@@ -70,5 +70,10 @@ export type NonValueDef<Output extends Value = Value> = Exclude<
   ValueDef<Output>
 >;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyChannelDef = ChannelDef<any>;
+
 /** Pattern for extracting output type from channel definition */
-export type ExtractChannelOutput<Def> = Def extends ChannelDef<infer Output> ? Output : never;
+export type InferChannelOutput<Def extends AnyChannelDef> = Def extends ChannelDef<infer Output>
+  ? Output
+  : Value;

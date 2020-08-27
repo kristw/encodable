@@ -1,22 +1,19 @@
 import ChannelEncoder from './ChannelEncoder';
 import { CompleteAxisConfig } from '../fillers/completeAxisConfig';
-import { Value, ChannelDef, ChannelInput, StringLike } from '../types';
+import { ChannelInput, StringLike, AnyChannelDef } from '../types';
 import parseDateTime from '../parsers/parseDateTime';
 import inferElementTypeFromUnionOfArrayTypes from '../utils/inferElementTypeFromUnionOfArrayTypes';
 import { isDateTime } from '../typeGuards/DateTime';
 import createFormatter from '../parsers/format/createFormatter';
 
-export default class ChannelEncoderAxis<
-  Def extends ChannelDef<Output>,
-  Output extends Value = Value
-> {
-  readonly channelEncoder: ChannelEncoder<Def, Output>;
+export default class ChannelEncoderAxis<Def extends AnyChannelDef> {
+  readonly channelEncoder: ChannelEncoder<Def>;
 
   readonly config: Exclude<CompleteAxisConfig, false>;
 
   readonly formatValue: (value: ChannelInput | StringLike) => string;
 
-  constructor(channelEncoder: ChannelEncoder<Def, Output>) {
+  constructor(channelEncoder: ChannelEncoder<Def>) {
     this.channelEncoder = channelEncoder;
     this.config = channelEncoder.definition.axis as Exclude<CompleteAxisConfig, false>;
     this.formatValue = createFormatter(this.config);

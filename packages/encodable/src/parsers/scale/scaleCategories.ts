@@ -29,7 +29,7 @@ export const continuousDomainScaleTypesSet = new Set(continuousDomainScaleTypes)
 
 export const discreteDomainScaleTypes: ScaleType[] = [
   ScaleType.ORDINAL,
-  ScaleType.BIN_ORDINAL,
+  // ScaleType.BIN_ORDINAL,
   ScaleType.POINT,
   ScaleType.BAND,
 ];
@@ -44,7 +44,7 @@ export const discreteScaleTypes: ScaleType[] = [ScaleType.BAND, ScaleType.POINT,
 export const discreteScaleTypesSet = new Set(discreteScaleTypes);
 
 export const discretizingScaleTypes: ScaleType[] = [
-  ScaleType.BIN_ORDINAL,
+  // ScaleType.BIN_ORDINAL,
   ScaleType.QUANTILE,
   ScaleType.QUANTIZE,
   ScaleType.THRESHOLD,
@@ -67,7 +67,7 @@ export const allScaleTypes = [
   ScaleType.QUANTILE,
   ScaleType.QUANTIZE,
   ScaleType.THRESHOLD,
-  ScaleType.BIN_ORDINAL,
+  // ScaleType.BIN_ORDINAL,
   ScaleType.ORDINAL,
   ScaleType.POINT,
   ScaleType.BAND,

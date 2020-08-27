@@ -26,10 +26,10 @@ import {
   QuantileScaleConfig,
   QuantizeScaleConfig,
   ThresholdScaleConfig,
-  BinOrdinalScaleConfig,
   OrdinalScaleConfig,
   PointScaleConfig,
   BandScaleConfig,
+  DefaultThresholdInput,
 } from '../../types';
 
 import createScaleFromScaleType from './createScaleFromScaleType';
@@ -63,11 +63,11 @@ function createScale<Output extends Value>(
 ): ScaleQuantize<Output>;
 
 function createScale<Output extends Value>(
-  config: ThresholdScaleConfig<Output>,
+  config: ThresholdScaleConfig<DefaultThresholdInput, Output>,
 ): ScaleThreshold<number | string | Date, Output>;
 
 function createScale<Output extends Value>(
-  config: OrdinalScaleConfig<Output> | BinOrdinalScaleConfig<Output>,
+  config: OrdinalScaleConfig<StringLike, Output>, // | BinOrdinalScaleConfig<Output>,
 ): ScaleOrdinal<StringLike, Output>;
 
 function createScale<Output extends Value>(config: PointScaleConfig): ScalePoint<StringLike>;

@@ -662,13 +662,13 @@ describe('createScale(config)', () => {
     });
   });
 
-  describe('bin-ordinal scale', () => {
-    it('is not supported yet', () => {
-      expect(() => createScale({ type: 'bin-ordinal' })).toThrow(
-        '"type = bin-ordinal" is not supported yet.',
-      );
-    });
-  });
+  // describe('bin-ordinal scale', () => {
+  //   it('is not supported yet', () => {
+  //     expect(() => createScale({ type: 'bin-ordinal' })).toThrow(
+  //       '"type = bin-ordinal" is not supported yet.',
+  //     );
+  //   });
+  // });
 
   describe('point scale', () => {
     it('basic', () => {

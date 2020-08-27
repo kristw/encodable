@@ -16,7 +16,7 @@ describe('getScaleCategoryFromScaleType(scaleType)', () => {
     expect(getScaleCategoryFromScaleType('ordinal')).toEqual('discrete');
   });
   it('handles discretizing types', () => {
-    expect(getScaleCategoryFromScaleType('bin-ordinal')).toEqual('discretizing');
+    // expect(getScaleCategoryFromScaleType('bin-ordinal')).toEqual('discretizing');
     expect(getScaleCategoryFromScaleType('quantile')).toEqual('discretizing');
     expect(getScaleCategoryFromScaleType('threshold')).toEqual('discretizing');
   });

@@ -40,7 +40,7 @@ export default function inferScaleType(
       case 'Numeric':
         return ScaleType.LINEAR;
       case 'Color':
-        return bin ? ScaleType.BIN_ORDINAL : ScaleType.LINEAR;
+        return ScaleType.LINEAR; // bin ? ScaleType.BIN_ORDINAL : ScaleType.LINEAR;
       default:
     }
   } else if (fieldType === 'temporal') {
