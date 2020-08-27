@@ -11,10 +11,6 @@ These are the examples of components built with Encodable.
 import Frame from '../components/Frame.tsx';
 import BalloonPlot from '../components/BalloonPlot';
 import CoffeeChart from '../components/CoffeeChart';
-import GridMap from '../components/GridMap';
-import WordCloud from '../components/WordCloud';
-import namesData from '../data/namesData.ts';
-import alcoholByState from '../data/alcoholByState.json';
 
 <Frame width={400} height={400} background="#FFF4F1">
   <CoffeeChart
@@ -95,6 +91,9 @@ import alcoholByState from '../data/alcoholByState.json';
   />
 </Frame>
 
+import WordCloud from '../components/WordCloud';
+import namesData from '../data/namesData.ts';
+
 <Frame width={400} height={400} background="#6393C0">
   <WordCloud
     className="word-cloud"
@@ -137,15 +136,43 @@ import alcoholByState from '../data/alcoholByState.json';
   />
 </Frame>
 
-<!-- https://worldpopulationreview.com/state-rankings/alcohol-consumption-by-state -->
+import GridMap from '../components/GridMap';
+import alcoholByState from '../data/alcoholByState.json';
 
-<Frame width={400} height={400} background="#D3FCC8">
+<Frame width={400} height={400} background="#FFF897">
   <GridMap width={400} height={400} data={alcoholByState} encoding={{
     key: { field: 'State' },
     fill: {
       type: 'quantitative',
       field: 'alcoholConsumptionGallons',
-      scale: { zero: false, scheme: 'd3.YlGn' }
+      scale: {
+        zero: false,
+        interpolate: 'hsl',
+        range: ['#FAE96F', '#C96E12']
+      }
     }
   }} />
 </Frame>
+
+import ScatterPlot from '../components/ScatterPlot';
+import cars from '../data/cars.json';
+
+<Playground>
+  <Frame width={400} height={400} background="#FFE6B4">
+    <ScatterPlot width={400} height={400} data={cars} encoding={{
+      x: {
+        type: 'quantitative',
+        field: 'x',
+        scale: { type: 'linear', nice: true },
+        axis: { title: 'Miles per gallon →' }
+      },
+      y: {
+        type: 'quantitative',
+        field: 'y',
+        axis: { title: '↑ Horsepower' }
+      },
+      stroke: { value: '#FB664B' },
+      fill: { value: 'none' }
+    }} />
+  </Frame>
+</Playground>

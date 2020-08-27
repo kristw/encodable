@@ -1,0 +1,36 @@
+---
+name: 'Scatter Plot'
+menu: 'Gallery'
+---
+
+# Scatter Plot
+
+See the component [source code](https://github.com/kristw/encodable/tree/master/packages/docs/src/components/ScatterPlot).
+or play with the component API by editing the code below.
+
+import { Playground } from 'docz';
+import Frame from '../components/Frame.tsx';
+import ScatterPlot from '../components/ScatterPlot';
+import cars from '../data/cars.json';
+
+<!-- https://worldpopulationreview.com/state-rankings/alcohol-consumption-by-state -->
+
+<Playground>
+  <Frame width={400} height={400} background="#FFE6B4">
+    <ScatterPlot width={400} height={400} data={cars} encoding={{
+      x: {
+        type: 'quantitative',
+        field: 'x',
+        scale: { type: 'linear', nice: true },
+        axis: { title: 'Miles per gallon →' }
+      },
+      y: {
+        type: 'quantitative',
+        field: 'y',
+        axis: { title: '↑ Horsepower' }
+      },
+      stroke: { value: '#FB664B' },
+      fill: { value: 'none' }
+    }} />
+  </Frame>
+</Playground>
