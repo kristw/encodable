@@ -1,0 +1,202 @@
+[
+  {
+    "State": "New Hampshire",
+    "alcoholConsumptionGallons": 4.7600
+  },
+  {
+    "State": "Delaware",
+    "alcoholConsumptionGallons": 3.7200
+  },
+  {
+    "State": "Nevada",
+    "alcoholConsumptionGallons": 3.4600
+  },
+  {
+    "State": "North Dakota",
+    "alcoholConsumptionGallons": 3.2600
+  },
+  {
+    "State": "Montana",
+    "alcoholConsumptionGallons": 3.1100
+  },
+  {
+    "State": "Vermont",
+    "alcoholConsumptionGallons": 3.0800
+  },
+  {
+    "State": "Wisconsin",
+    "alcoholConsumptionGallons": 2.9800
+  },
+  {
+    "State": "Alaska",
+    "alcoholConsumptionGallons": 2.9400
+  },
+  {
+    "State": "Idaho",
+    "alcoholConsumptionGallons": 2.9200
+  },
+  {
+    "State": "South Dakota",
+    "alcoholConsumptionGallons": 2.8700
+  },
+  {
+    "State": "Maine",
+    "alcoholConsumptionGallons": 2.8100
+  },
+  {
+    "State": "Colorado",
+    "alcoholConsumptionGallons": 2.8100
+  },
+  {
+    "State": "Minnesota",
+    "alcoholConsumptionGallons": 2.7700
+  },
+  {
+    "State": "Oregon",
+    "alcoholConsumptionGallons": 2.7500
+  },
+  {
+    "State": "Wyoming",
+    "alcoholConsumptionGallons": 2.6700
+  },
+  {
+    "State": "Florida",
+    "alcoholConsumptionGallons": 2.6500
+  },
+  {
+    "State": "Hawaii",
+    "alcoholConsumptionGallons": 2.6300
+  },
+  {
+    "State": "Louisiana",
+    "alcoholConsumptionGallons": 2.5900
+  },
+  {
+    "State": "Rhode Island",
+    "alcoholConsumptionGallons": 2.5700
+  },
+  {
+    "State": "Massachusetts",
+    "alcoholConsumptionGallons": 2.5700
+  },
+  {
+    "State": "Missouri",
+    "alcoholConsumptionGallons": 2.4900
+  },
+  {
+    "State": "Connecticut",
+    "alcoholConsumptionGallons": 2.4500
+  },
+  {
+    "State": "Iowa",
+    "alcoholConsumptionGallons": 2.4000
+  },
+  {
+    "State": "Pennsylvania",
+    "alcoholConsumptionGallons": 2.3600
+  },
+  {
+    "State": "Texas",
+    "alcoholConsumptionGallons": 2.3400
+  },
+  {
+    "State": "New Jersey",
+    "alcoholConsumptionGallons": 2.3400
+  },
+  {
+    "State": "Michigan",
+    "alcoholConsumptionGallons": 2.3400
+  },
+  {
+    "State": "California",
+    "alcoholConsumptionGallons": 2.3300
+  },
+  {
+    "State": "Illinois",
+    "alcoholConsumptionGallons": 2.3200
+  },
+  {
+    "State": "Arizona",
+    "alcoholConsumptionGallons": 2.3100
+  },
+  {
+    "State": "New Mexico",
+    "alcoholConsumptionGallons": 2.2700
+  },
+  {
+    "State": "Washington",
+    "alcoholConsumptionGallons": 2.2600
+  },
+  {
+    "State": "Nebraska",
+    "alcoholConsumptionGallons": 2.2300
+  },
+  {
+    "State": "Mississippi",
+    "alcoholConsumptionGallons": 2.2300
+  },
+  {
+    "State": "South Carolina",
+    "alcoholConsumptionGallons": 2.2200
+  },
+  {
+    "State": "New York",
+    "alcoholConsumptionGallons": 2.2200
+  },
+  {
+    "State": "Indiana",
+    "alcoholConsumptionGallons": 2.1700
+  },
+  {
+    "State": "Maryland",
+    "alcoholConsumptionGallons": 2.1500
+  },
+  {
+    "State": "Virginia",
+    "alcoholConsumptionGallons": 2.1400
+  },
+  {
+    "State": "Tennessee",
+    "alcoholConsumptionGallons": 2.1400
+  },
+  {
+    "State": "North Carolina",
+    "alcoholConsumptionGallons": 2.1300
+  },
+  {
+    "State": "Ohio",
+    "alcoholConsumptionGallons": 2.0400
+  },
+  {
+    "State": "Alabama",
+    "alcoholConsumptionGallons": 2.0100
+  },
+  {
+    "State": "Kentucky",
+    "alcoholConsumptionGallons": 1.9800
+  },
+  {
+    "State": "Georgia",
+    "alcoholConsumptionGallons": 1.9400
+  },
+  {
+    "State": "Kansas",
+    "alcoholConsumptionGallons": 1.9200
+  },
+  {
+    "State": "Oklahoma",
+    "alcoholConsumptionGallons": 1.8800
+  },
+  {
+    "State": "Arkansas",
+    "alcoholConsumptionGallons": 1.8000
+  },
+  {
+    "State": "West Virginia",
+    "alcoholConsumptionGallons": 1.7600
+  },
+  {
+    "State": "Utah",
+    "alcoholConsumptionGallons": 1.3400
+  }
+]

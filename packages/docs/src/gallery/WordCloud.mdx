@@ -1,0 +1,60 @@
+---
+name: 'Word Cloud'
+menu: 'Gallery'
+---
+
+# Word Cloud
+
+See the component [source code](https://github.com/kristw/encodable/tree/master/packages/docs/src/components/WordCloud).
+or play with the component API by editing the code below.
+
+import { Playground } from 'docz';
+import Frame from '../components/Frame.tsx';
+import WordCloud from '../components/WordCloud';
+import namesData from '../data/namesData.ts';
+
+<!-- https://worldpopulationreview.com/state-rankings/alcohol-consumption-by-state -->
+
+<Playground>
+  <Frame width={400} height={400} background="#6393C0">
+    <WordCloud
+      className="word-cloud"
+      width={400}
+      height={400}
+      data={namesData}
+      encoding={{
+        color: {
+          field: "count",
+          scale: {
+            range: ["#6393C0", "#fff"],
+            zero: true
+          },
+          type: "quantitative"
+        },
+        emoji: {
+          field: "count",
+          scale: {
+            type: "threshold",
+            domain: [1000000, 2000000],
+            range: ["", "☃️", "️❄️"]
+          },
+          type: "quantitative"
+        },
+        fontFamily: {
+          value: "Raleway, Helvetica, sans-serif"
+        },
+        fontSize: {
+          field: "count",
+          scale: {
+            range: [0, 40]
+          },
+          type: "quantitative"
+        },
+        fontWeight: {
+          value: "normal"
+        },
+        text: { field: "name" }
+      }}
+    />
+  </Frame>
+</Playground>
