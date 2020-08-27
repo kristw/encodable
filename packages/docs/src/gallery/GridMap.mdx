@@ -16,13 +16,17 @@ import alcoholByState from '../data/alcoholByState.json';
 <!-- https://worldpopulationreview.com/state-rankings/alcohol-consumption-by-state -->
 
 <Playground>
-  <Frame width={400} height={400} background="#D3FCC8">
+  <Frame width={400} height={400} background="#FFF897">
     <GridMap width={400} height={400} data={alcoholByState} encoding={{
       key: { field: 'State' },
       fill: {
         type: 'quantitative',
         field: 'alcoholConsumptionGallons',
-        scale: { zero: false, scheme: 'd3.YlGn' }
+        scale: {
+          zero: false,
+          interpolate: 'hsl',
+          range: ['#FAE96F', '#C96E12'],
+        }
       }
     }} />
   </Frame>
