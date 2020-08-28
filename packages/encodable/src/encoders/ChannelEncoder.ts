@@ -1,15 +1,14 @@
 import { extent as d3Extent } from 'd3-array';
-import { IdentityFunction } from '../types/internal/Base';
 import {
-  Value,
   ScaleType,
   PlainObject,
   Dataset,
-  AllScale,
+  D3Scale,
   ChannelType,
   ChannelInput,
-  ChannelDef,
   StringLike,
+  AnyChannelDef,
+  InferChannelOutput,
 } from '../types';
 import { isTypedFieldDef, isValueDef, isFieldDef } from '../typeGuards/ChannelDef';
 import { isX, isY, isXOrY } from '../typeGuards/Channel';
@@ -17,7 +16,6 @@ import ChannelEncoderAxis from './ChannelEncoderAxis';
 import createGetterFromChannelDef, { Getter } from '../parsers/createGetterFromChannelDef';
 import completeChannelDef from '../fillers/completeChannelDef';
 import createScale from '../parsers/scale/createScale';
-import identity from '../utils/identity';
 import applyDomain from '../parsers/scale/applyDomain';
 import applyRange from '../parsers/scale/applyRange';
 import applyZero from '../parsers/scale/applyZero';
@@ -27,24 +25,22 @@ import { CompleteChannelDef } from '../types/internal/CompleteChannelDef';
 import fallbackFormatter from '../parsers/format/fallbackFormatter';
 import createFormatter from '../parsers/format/createFormatter';
 
-type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
-
-export default class ChannelEncoder<Def extends ChannelDef<Output>, Output extends Value = Value> {
+export default class ChannelEncoder<Def extends AnyChannelDef> {
   readonly name: string | Symbol | number;
 
   readonly channelType: ChannelType;
 
   readonly originalDefinition: Def;
 
-  readonly definition: CompleteChannelDef<Output>;
+  readonly definition: CompleteChannelDef<InferChannelOutput<Def>>;
 
-  readonly scale?: AllScale<Output>;
+  readonly scale?: D3Scale<InferChannelOutput<Def>>;
 
-  readonly axis?: ChannelEncoderAxis<Def, Output>;
+  readonly axis?: ChannelEncoderAxis<Def>;
 
-  private readonly getValue: Getter<Output>;
+  private readonly getValue: Getter;
 
-  private readonly encodeFunc: IdentityFunction<Output> | EncodeFunction<Output> | (() => Output);
+  private readonly encodeFunc: (input?: ChannelInput) => InferChannelOutput<Def> | undefined;
 
   readonly formatValue: (value: ChannelInput | StringLike) => string;
 
@@ -57,25 +53,33 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
     channelType: ChannelType;
     definition: Def;
   }) {
+    type Output = InferChannelOutput<Def>;
+
     this.name = name;
     this.channelType = channelType;
 
     this.originalDefinition = originalDefinition;
     this.definition = completeChannelDef(this.channelType, originalDefinition);
 
-    this.getValue = createGetterFromChannelDef(this.definition);
+    this.getValue = createGetterFromChannelDef<Output>(this.definition);
     this.formatValue = isFieldDef(this.definition)
       ? createFormatter(this.definition)
       : fallbackFormatter;
 
     if (this.definition.scale) {
       const scale = createScale(this.definition.scale);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.encodeFunc = (value: ChannelInput) => scale(value as any) as Output;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
+      this.encodeFunc = input => scale(input as any) as Output;
       this.scale = scale;
     } else {
       const { definition } = this;
-      this.encodeFunc = isCompleteValueDef(definition) ? () => definition.value : identity;
+      this.encodeFunc = isCompleteValueDef(definition)
+        ? // for ValueDef, just return
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          () => definition.value
+        : // otherwise for FieldDef without scale, assume that the input is used directly as output.
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          x => x as Output;
     }
 
     if (this.definition.axis) {
@@ -84,30 +88,32 @@ export default class ChannelEncoder<Def extends ChannelDef<Output>, Output exten
   }
 
   encodeValue: {
-    (value: ChannelInput | Output): Output | null | undefined;
-    (value: ChannelInput | Output, otherwise: Output): Output;
+    (value: ChannelInput): InferChannelOutput<Def> | null | undefined;
+    (value: ChannelInput, otherwise: InferChannelOutput<Def>): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } = (value: ChannelInput | Output, otherwise?: Output): any => {
+  } = (value: ChannelInput | InferChannelOutput<Def>, otherwise?: InferChannelOutput<Def>): any => {
     if (typeof otherwise !== 'undefined' && (value === null || typeof value === 'undefined')) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return otherwise;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.encodeFunc(value as any);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.encodeFunc(value);
   };
 
   encodeDatum: {
-    (datum: PlainObject): Output | null | undefined;
-    (datum: PlainObject, otherwise: Output): Output;
+    (datum: PlainObject): InferChannelOutput<Def> | null | undefined;
+    (datum: PlainObject, otherwise: InferChannelOutput<Def>): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } = (datum: PlainObject, otherwise?: Output): any =>
+  } = (datum: PlainObject, otherwise?: InferChannelOutput<Def>): any =>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     typeof otherwise === 'undefined'
       ? this.encodeValue(this.getValueFromDatum(datum))
       : this.encodeValue(this.getValueFromDatum(datum), otherwise);
 
   formatDatum = (datum: PlainObject): string => this.formatValue(this.getValueFromDatum(datum));
 
-  getValueFromDatum = <T extends ChannelInput | Output>(datum: PlainObject, otherwise?: T) => {
+  getValueFromDatum = <T extends ChannelInput>(datum: PlainObject, otherwise?: T) => {
     const value = this.getValue(datum);
 
     return otherwise !== undefined && (value === null || value === undefined)

@@ -1,13 +1,15 @@
 import inferScaleType from './inferScaleType';
 import { isTypedFieldDef } from '../typeGuards/ChannelDef';
 import { isContinuousScaleConfig, isScaleConfigWithZero } from '../typeGuards/ScaleConfig';
-import { ScaleConfig, ChannelDef, Value, ChannelType } from '../types';
+import { ScaleConfig, ChannelDef, DefaultOutput, ChannelType } from '../types';
 import isEnabled from '../utils/isEnabled';
 import { timeScaleTypesSet } from '../parsers/scale/scaleCategories';
 
-export type CompleteScaleConfig<Output extends Value = Value> = false | ScaleConfig<Output>;
+export type CompleteScaleConfig<Output extends DefaultOutput = DefaultOutput> =
+  | false
+  | ScaleConfig<Output>;
 
-export default function completeScaleConfig<Output extends Value>(
+export default function completeScaleConfig<Output extends DefaultOutput>(
   channelType: ChannelType,
   channelDef: ChannelDef<Output>,
 ): CompleteScaleConfig<Output> {

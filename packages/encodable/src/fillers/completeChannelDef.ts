@@ -1,4 +1,4 @@
-import { ChannelDef, ChannelType, Value } from '../types';
+import { ChannelDef, ChannelType, DefaultOutput } from '../types';
 import { CompleteChannelDef } from '../types/internal/CompleteChannelDef';
 import { isFieldDef, isValueDef, isTypedFieldDef } from '../typeGuards/ChannelDef';
 import completeAxisConfig from './completeAxisConfig';
@@ -7,7 +7,7 @@ import completeLegendConfig from './completeLegendConfig';
 import completeScaleConfig from './completeScaleConfig';
 import inferFieldType from './inferFieldType';
 
-export default function completeChannelDef<Output extends Value>(
+export default function completeChannelDef<Output extends DefaultOutput>(
   channelType: ChannelType,
   channelDef: ChannelDef<Output>,
 ): CompleteChannelDef<Output> {

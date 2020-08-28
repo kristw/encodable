@@ -1,4 +1,4 @@
-import { Value, D3Scale, ChannelInput, ScaleConfig, Bounds } from '../../types';
+import { DefaultOutput, D3Scale, ChannelInput, ScaleConfig, Bounds } from '../../types';
 import { isContinuousScale, isDiscretizingScale, isDiscreteScale } from '../../typeGuards/Scale';
 import {
   isContinuousScaleConfig,
@@ -20,7 +20,7 @@ function isCompleteDomain<T>(domain: T[] | Bounds<T>): domain is T[] {
   return domain.length !== 2 || (domain[0] != null && domain[1] != null);
 }
 
-export default function applyDomain<Output extends Value>(
+export default function applyDomain<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
   /** domain from dataset */
@@ -40,7 +40,7 @@ export default function applyDomain<Output extends Value>(
       if (isCompleteDomain(config.domain)) {
         // If the config.domain is completed
         // ignores the dataDomain
-        scale.domain(order(parseDateTimeIn(config.domain)));
+        scale.domain(order(parseDateTimeIn(config.domain)) as number[] | Date[]);
       } else if (dataDomain) {
         // If it is incompleted, then try to combine
         // with the dataDomain

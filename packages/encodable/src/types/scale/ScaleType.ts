@@ -18,7 +18,7 @@ export const ScaleType = {
   QUANTILE: 'quantile',
   QUANTIZE: 'quantize',
   THRESHOLD: 'threshold',
-  BIN_ORDINAL: 'bin-ordinal',
+  // BIN_ORDINAL: 'bin-ordinal',
 
   // Discrete scales
   ORDINAL: 'ordinal',

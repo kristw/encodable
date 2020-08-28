@@ -1,5 +1,5 @@
 import { XFieldDef, YFieldDef, MarkPropChannelDef, TextChannelDef } from './ChannelDef';
-import { Value } from './Core';
+import { DefaultOutput } from './Core';
 
 /** Possible input for a channel */
 export type ChannelInput = number | string | boolean | null | Date | undefined;
@@ -7,7 +7,7 @@ export type ChannelInput = number | string | boolean | null | Date | undefined;
 /**
  * Define all channel types and mapping to channel definition grammar
  */
-export interface ChannelTypeToDefMap<Output extends Value = Value> {
+export interface ChannelTypeToDefMap<Output extends DefaultOutput = DefaultOutput> {
   /** position on x-axis */
   X: XFieldDef<Output>;
   /** position on y-axis */

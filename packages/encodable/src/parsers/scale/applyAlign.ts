@@ -1,6 +1,6 @@
-import { Value, D3Scale, ScaleConfig } from '../../types';
+import { DefaultOutput, D3Scale, ScaleConfig } from '../../types';
 
-export default function applyAlign<Output extends Value>(
+export default function applyAlign<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
 ) {

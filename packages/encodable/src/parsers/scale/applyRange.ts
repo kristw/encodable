@@ -1,10 +1,10 @@
 import { wrapColorScheme } from '@encodable/color';
-import { Value, D3Scale, ScaleConfig } from '../../types';
+import { DefaultOutput, D3Scale, ScaleConfig } from '../../types';
 import Encodable from '../../options/Encodable';
 import { isContinuousScaleConfig } from '../../typeGuards/ScaleConfig';
 import { isSchemeParams } from '../../typeGuards/SchemeParams';
 
-export default function applyRange<Output extends Value>(
+export default function applyRange<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
 ) {

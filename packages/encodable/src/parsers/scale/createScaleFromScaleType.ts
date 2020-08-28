@@ -13,9 +13,9 @@ import {
   scaleBand,
   scaleSymlog,
 } from 'd3-scale';
-import { StringLike, ScaleType, Value } from '../../types';
+import { StringLike, ScaleType, DefaultOutput } from '../../types';
 
-export default function createScaleFromScaleType<Output extends Value>(type: ScaleType) {
+export default function createScaleFromScaleType<Output extends DefaultOutput>(type: ScaleType) {
   switch (type) {
     case ScaleType.LINEAR:
       return scaleLinear<Output>();
@@ -43,9 +43,9 @@ export default function createScaleFromScaleType<Output extends Value>(type: Sca
       return scaleBand<StringLike>();
     case ScaleType.SYMLOG:
       return scaleSymlog<Output, Output>();
-    case ScaleType.BIN_ORDINAL:
-      // TODO: Pending scale.bins implementation
-      throw new Error(`"type = ${type}" is not supported yet.`);
+    // case ScaleType.BIN_ORDINAL:
+    // TODO: Pending scale.bins implementation
+    // throw new Error(`"type = ${type}" is not supported yet.`);
     default:
       return scaleLinear<Output>();
   }

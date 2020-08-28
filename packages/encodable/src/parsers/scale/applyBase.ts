@@ -1,6 +1,6 @@
-import { Value, D3Scale, ScaleConfig } from '../../types';
+import { DefaultOutput, D3Scale, ScaleConfig } from '../../types';
 
-export default function applyBase<Output extends Value>(
+export default function applyBase<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
 ) {

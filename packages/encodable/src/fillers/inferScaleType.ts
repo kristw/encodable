@@ -1,4 +1,4 @@
-import { Type, ScaleType, ChannelType } from '../types';
+import { FieldType, ScaleType, ChannelType } from '../types';
 
 /**
  * Sometimes scale type is not specified but can be inferred
@@ -10,7 +10,7 @@ import { Type, ScaleType, ChannelType } from '../types';
  */
 export default function inferScaleType(
   channelType: ChannelType,
-  fieldType?: Type,
+  fieldType?: FieldType,
   bin: boolean = false,
 ): ScaleType | undefined {
   if (fieldType === 'nominal' || fieldType === 'ordinal') {
@@ -40,7 +40,7 @@ export default function inferScaleType(
       case 'Numeric':
         return ScaleType.LINEAR;
       case 'Color':
-        return bin ? ScaleType.BIN_ORDINAL : ScaleType.LINEAR;
+        return ScaleType.LINEAR; // bin ? ScaleType.BIN_ORDINAL : ScaleType.LINEAR;
       default:
     }
   } else if (fieldType === 'temporal') {

@@ -17,7 +17,7 @@ describe('type guards: ScaleConfig', () => {
     it('returns true if continuous', () => {
       expect(isDiscretizingScaleConfig({ type: 'quantile' })).toBeTruthy();
       expect(isDiscretizingScaleConfig({ type: 'quantize' })).toBeTruthy();
-      expect(isDiscretizingScaleConfig({ type: 'bin-ordinal' })).toBeTruthy();
+      // expect(isDiscretizingScaleConfig({ type: 'bin-ordinal' })).toBeTruthy();
       expect(isDiscretizingScaleConfig({ type: 'threshold' })).toBeTruthy();
     });
     it('returns false otherwise', () => {

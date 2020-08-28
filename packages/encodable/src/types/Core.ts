@@ -1,15 +1,25 @@
-// Same with vega-lite version
-/** Possible values */
-export type Value = number | string | boolean | null;
+//
+/**
+ * Possible types of output values for each channel.
+ * Includes `null` but does not include `undefined` so it can be stored as JSON
+ *
+ * *vega-lite* codebase calls this type `Value`.
+ */
+export type DefaultOutput = number | string | boolean | null;
 
 // Override: exclude geojson type
-/** field type */
-export type Type = 'quantitative' | 'ordinal' | 'temporal' | 'nominal';
+/**
+ * field type
+ *
+ * *vega-lite* codebase calls this type `Type`
+ */
+export type FieldType = 'quantitative' | 'ordinal' | 'temporal' | 'nominal';
+
+/** A value that has .valueOf() function */
+export type NumberLike = { valueOf(): number };
 
 /** A value that has .toString() function */
 export type StringLike = { toString(): string };
-
-export type NumberLike = { valueOf(): number };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PlainObject<Key extends string = string, Value extends any = any> = {

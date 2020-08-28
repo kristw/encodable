@@ -23,9 +23,9 @@ describe('inferScaleType(channelType, fieldType, isBinned)', () => {
       expect(inferScaleType('Y', 'quantitative')).toEqual('linear');
       expect(inferScaleType('Numeric', 'quantitative')).toEqual('linear');
     });
-    it('return bin-ordinal for binned color', () => {
-      expect(inferScaleType('Color', 'quantitative', true)).toEqual('bin-ordinal');
-    });
+    // it('return bin-ordinal for binned color', () => {
+    //   expect(inferScaleType('Color', 'quantitative', true)).toEqual('bin-ordinal');
+    // });
     it('return linear for color', () => {
       expect(inferScaleType('Color', 'quantitative')).toEqual('linear');
     });

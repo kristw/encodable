@@ -12,30 +12,30 @@ import {
   discretizingScaleTypesSet,
   discreteScaleTypesSet,
 } from '../parsers/scale/scaleCategories';
-import { Value } from '../types/Core';
+import { DefaultOutput } from '../types/Core';
 
-export function isContinuousScale<Output extends Value = Value>(
+export function isContinuousScale<Output extends DefaultOutput = DefaultOutput>(
   scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is ContinuousD3Scale<Output> {
   return scale && continuousScaleTypesSet.has(scaleType);
 }
 
-export function isDiscretizingScale<Output extends Value = Value>(
+export function isDiscretizingScale<Output extends DefaultOutput = DefaultOutput>(
   scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is DiscretizingD3Scale<Output> {
   return scale && discretizingScaleTypesSet.has(scaleType);
 }
 
-export function isDiscreteScale<Output extends Value = Value>(
+export function isDiscreteScale<Output extends DefaultOutput = DefaultOutput>(
   scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is DiscreteD3Scale<Output> {
   return scale && discreteScaleTypesSet.has(scaleType);
 }
 
-export function isTimeScale<Output extends Value = Value>(
+export function isTimeScale<Output extends DefaultOutput = DefaultOutput>(
   scale: D3Scale<Output>,
   scaleType: ScaleType,
 ): scale is ScaleTime<Output, Output> {

@@ -1,9 +1,9 @@
-import { Value, Legend, ChannelType, ChannelDef } from '../types';
+import { DefaultOutput, Legend, ChannelType, ChannelDef } from '../types';
 import { isXOrY } from '../typeGuards/Channel';
 
 export type CompleteLegendConfig = false | Legend;
 
-export default function completeLegendConfig<Output extends Value = Value>(
+export default function completeLegendConfig<Output extends DefaultOutput = DefaultOutput>(
   channelType: ChannelType,
   channelDef: ChannelDef<Output>,
 ): CompleteLegendConfig {

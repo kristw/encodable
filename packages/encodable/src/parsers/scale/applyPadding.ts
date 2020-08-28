@@ -1,6 +1,6 @@
-import { Value, D3Scale, ScaleConfig } from '../../types';
+import { DefaultOutput, D3Scale, ScaleConfig } from '../../types';
 
-export default function applyPadding<Output extends Value>(
+export default function applyPadding<Output extends DefaultOutput>(
   config: ScaleConfig<Output>,
   scale: D3Scale<Output>,
 ) {

@@ -1,16 +1,17 @@
 import get from 'lodash.get';
 import { isValueDef } from '../typeGuards/ChannelDef';
-import { Value, ChannelInput, ChannelDef, PlainObject } from '../types';
+import { DefaultOutput, ChannelInput, ChannelDef, PlainObject } from '../types';
 
-export type Getter<Output extends Value> = (x?: PlainObject) => ChannelInput | Output | undefined;
+export type Getter = (x?: PlainObject) => ChannelInput | undefined;
 
-export default function createGetterFromChannelDef<Output extends Value>(
+export default function createGetterFromChannelDef<Output extends DefaultOutput>(
   definition: ChannelDef<Output>,
-): Getter<Output> {
+): Getter {
   if (isValueDef(definition)) {
     return () => definition.value;
   }
   if (typeof definition.field !== 'undefined') {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return (x?: PlainObject) => get(x, definition.field);
   }
 
