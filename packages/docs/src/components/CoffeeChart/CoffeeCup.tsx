@@ -15,8 +15,8 @@ export default function CoffeeCup({ drinkLevel, drinkColor, isToGo, label }: Cof
     <svg
       key={label}
       style={{ display: 'inline-block', marginLeft: 4, marginRight: 4 }}
-      width="46"
-      height="70"
+      width="40.25"
+      height="61.25"
       viewBox="0 0 46 70"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
