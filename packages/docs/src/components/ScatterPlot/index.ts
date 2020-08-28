@@ -48,8 +48,7 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
   svg
     .append('g')
     .attr('transform', `translate(0,${innerHeight - margin.bottom})`)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .call(axisBottom(xScale as any).ticks(innerWidth / 80))
+    .call(axisBottom(xScale as Parameters<typeof axisBottom>[0]).ticks(innerWidth / 80))
     .call(g =>
       g
         .append('text')
@@ -64,8 +63,7 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
   svg
     .append('g')
     .attr('transform', `translate(${margin.left},0)`)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .call(axisLeft(yScale as any))
+    .call(axisLeft(yScale as Parameters<typeof axisLeft>[0]))
     .call(g =>
       g
         .append('text')
