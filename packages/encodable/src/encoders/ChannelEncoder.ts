@@ -1,10 +1,9 @@
 import { extent as d3Extent } from 'd3-array';
-import { IdentityFunction } from '../types/internal/Base';
 import {
   ScaleType,
   PlainObject,
   Dataset,
-  AllScale,
+  D3Scale,
   ChannelType,
   ChannelInput,
   StringLike,
@@ -17,7 +16,6 @@ import ChannelEncoderAxis from './ChannelEncoderAxis';
 import createGetterFromChannelDef, { Getter } from '../parsers/createGetterFromChannelDef';
 import completeChannelDef from '../fillers/completeChannelDef';
 import createScale from '../parsers/scale/createScale';
-import identity from '../utils/identity';
 import applyDomain from '../parsers/scale/applyDomain';
 import applyRange from '../parsers/scale/applyRange';
 import applyZero from '../parsers/scale/applyZero';
@@ -26,8 +24,6 @@ import { isCompleteValueDef, isCompleteFieldDef } from '../typeGuards/CompleteCh
 import { CompleteChannelDef } from '../types/internal/CompleteChannelDef';
 import fallbackFormatter from '../parsers/format/fallbackFormatter';
 import createFormatter from '../parsers/format/createFormatter';
-
-type EncodeFunction<Output> = (value: ChannelInput) => Output | null | undefined;
 
 export default class ChannelEncoder<Def extends AnyChannelDef> {
   readonly name: string | Symbol | number;
@@ -38,16 +34,13 @@ export default class ChannelEncoder<Def extends AnyChannelDef> {
 
   readonly definition: CompleteChannelDef<InferChannelOutput<Def>>;
 
-  readonly scale?: AllScale<InferChannelOutput<Def>>;
+  readonly scale?: D3Scale<InferChannelOutput<Def>>;
 
   readonly axis?: ChannelEncoderAxis<Def>;
 
-  private readonly getValue: Getter<InferChannelOutput<Def>>;
+  private readonly getValue: Getter;
 
-  private readonly encodeFunc:
-    | IdentityFunction<InferChannelOutput<Def>>
-    | EncodeFunction<InferChannelOutput<Def>>
-    | (() => InferChannelOutput<Def>);
+  private readonly encodeFunc: (input?: ChannelInput) => InferChannelOutput<Def> | undefined;
 
   readonly formatValue: (value: ChannelInput | StringLike) => string;
 
@@ -75,12 +68,18 @@ export default class ChannelEncoder<Def extends AnyChannelDef> {
 
     if (this.definition.scale) {
       const scale = createScale(this.definition.scale);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.encodeFunc = (value: ChannelInput) => scale(value as any) as Output;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
+      this.encodeFunc = input => scale(input as any) as Output;
       this.scale = scale;
     } else {
       const { definition } = this;
-      this.encodeFunc = isCompleteValueDef(definition) ? () => definition.value : identity;
+      this.encodeFunc = isCompleteValueDef(definition)
+        ? // for ValueDef, just return
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          () => definition.value
+        : // otherwise for FieldDef without scale, assume that the input is used directly as output.
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          x => x as Output;
     }
 
     if (this.definition.axis) {
@@ -89,19 +88,17 @@ export default class ChannelEncoder<Def extends AnyChannelDef> {
   }
 
   encodeValue: {
-    (value: ChannelInput | InferChannelOutput<Def>): InferChannelOutput<Def> | null | undefined;
-    (
-      value: ChannelInput | InferChannelOutput<Def>,
-      otherwise: InferChannelOutput<Def>,
-    ): InferChannelOutput<Def>;
+    (value: ChannelInput): InferChannelOutput<Def> | null | undefined;
+    (value: ChannelInput, otherwise: InferChannelOutput<Def>): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = (value: ChannelInput | InferChannelOutput<Def>, otherwise?: InferChannelOutput<Def>): any => {
     if (typeof otherwise !== 'undefined' && (value === null || typeof value === 'undefined')) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return otherwise;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return this.encodeFunc(value as any);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.encodeFunc(value);
   };
 
   encodeDatum: {
@@ -109,16 +106,14 @@ export default class ChannelEncoder<Def extends AnyChannelDef> {
     (datum: PlainObject, otherwise: InferChannelOutput<Def>): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = (datum: PlainObject, otherwise?: InferChannelOutput<Def>): any =>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     typeof otherwise === 'undefined'
       ? this.encodeValue(this.getValueFromDatum(datum))
       : this.encodeValue(this.getValueFromDatum(datum), otherwise);
 
   formatDatum = (datum: PlainObject): string => this.formatValue(this.getValueFromDatum(datum));
 
-  getValueFromDatum = <T extends ChannelInput | InferChannelOutput<Def>>(
-    datum: PlainObject,
-    otherwise?: T,
-  ) => {
+  getValueFromDatum = <T extends ChannelInput>(datum: PlainObject, otherwise?: T) => {
     const value = this.getValue(datum);
 
     return otherwise !== undefined && (value === null || value === undefined)
