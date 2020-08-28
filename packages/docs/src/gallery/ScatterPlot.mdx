@@ -11,11 +11,11 @@ or play with the component API by editing the code below.
 import { Playground } from 'docz';
 import Frame from '../components/Frame.tsx';
 import ScatterPlot from '../components/ScatterPlot';
-import cars from '../data/cars.json';
+import cars from '../data/cars';
 
 <Playground>
-  <Frame width={400} height={400} background="#FFE6B4">
-    <ScatterPlot width={400} height={400} data={cars} encoding={{
+  <Frame width={360} height={270} background="#FFE6B4">
+    <ScatterPlot width={360} height={270} data={cars} encoding={{
       x: {
         type: 'quantitative',
         field: 'x',

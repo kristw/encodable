@@ -14,7 +14,6 @@ export default function ({ width, height, children, inline = true, background }:
       width,
       height,
       borderRadius: 8,
-      margin: 4,
       verticalAlign: 'middle',
     };
     if (inline) output.display = 'inline-block';

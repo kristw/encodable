@@ -28,7 +28,7 @@ export default function WordCloud({
       style={{
         width,
         height: height - 32,
-        paddingTop: 16,
+        paddingTop: 12,
         paddingBottom: 16,
         textAlign: 'center',
         overflow: 'hidden',
