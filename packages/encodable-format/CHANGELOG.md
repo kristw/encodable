@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/kristw/encodable/compare/@encodable/format@1.0.5...@encodable/format@1.0.6) (2020-08-28)
+
+**Note:** Version bump only for package @encodable/format
+
+
+
+
+
 ## [1.0.5](https://github.com/kristw/encodable/compare/@encodable/format@1.0.4...@encodable/format@1.0.5) (2020-08-23)
 
 **Note:** Version bump only for package @encodable/format
