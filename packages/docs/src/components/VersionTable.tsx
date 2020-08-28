@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import { Link } from 'gatsby';
 
 interface Package {
   name: string;
@@ -70,9 +71,11 @@ export default function VersionTable({
               </a>
             </td>
             <td style={tdStyle}>
-              <a style={linkStyle} href={docPath}>
-                docs
-              </a>
+              {docPath && (
+                <Link style={linkStyle} to={docPath}>
+                  docs
+                </Link>
+              )}
             </td>
             <td style={tdStyle}>
               <a style={linkStyle} href={`${baseUrl}/tree/master/${codePath}/CHANGELOG.md`}>

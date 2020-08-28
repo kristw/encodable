@@ -11,13 +11,13 @@ or play with the component API by editing the code below.
 import { Playground } from 'docz';
 import Frame from '../components/Frame.tsx';
 import GridMap from '../components/GridMap';
-import alcoholByState from '../data/alcoholByState.json';
+import alcoholByState from '../data/alcoholByState';
 
 <!-- https://worldpopulationreview.com/state-rankings/alcohol-consumption-by-state -->
 
 <Playground>
-  <Frame width={400} height={400} background="#FFF897">
-    <GridMap width={400} height={400} data={alcoholByState} encoding={{
+  <Frame width={360} height={270} background="#FFF897">
+    <GridMap width={360} height={270} data={alcoholByState} encoding={{
       key: { field: 'State' },
       fill: {
         type: 'quantitative',
