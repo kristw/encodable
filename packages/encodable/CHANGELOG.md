@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/kristw/encodable/compare/encodable@0.7.8...encodable@0.8.0) (2020-08-28)
+
+
+### Features
+
+* improve scale and output types ([#91](https://github.com/kristw/encodable/issues/91)) ([a2eb449](https://github.com/kristw/encodable/commit/a2eb44943582e343023216bd37f68c6f68cbae9a))
+
+
+
+
+
 ## [0.7.8](https://github.com/kristw/encodable/compare/encodable@0.7.7...encodable@0.7.8) (2020-08-27)
 
 **Note:** Version bump only for package encodable

@@ -1,6 +1,6 @@
 {
   "name": "encodable",
-  "version": "0.7.8",
+  "version": "0.8.0",
   "description": "Configurable grammar for visualization components",
   "sideEffects": false,
   "main": "lib/index.js",
