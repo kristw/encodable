@@ -14,7 +14,7 @@ describe('ChannelEncoder', () => {
       expect(encoder).toBeDefined();
       expect(encoder.definition.scale !== false && encoder.definition.scale.type).toEqual('linear');
     });
-    it('creates a new encoder without scale', () => {
+    it('creates a new encoder without ValueDef', () => {
       const encoder = new ChannelEncoder({
         name: 'x',
         channelType: 'X',
@@ -23,6 +23,19 @@ describe('ChannelEncoder', () => {
         },
       });
       expect(encoder).toBeDefined();
+    });
+    it('creates a new encoder with FieldDef without scale', () => {
+      const encoder = new ChannelEncoder({
+        name: 'x',
+        channelType: 'X',
+        definition: {
+          type: 'quantitative',
+          field: 'speed',
+          scale: false,
+        },
+      });
+      expect(encoder).toBeDefined();
+      expect(encoder.encodeDatum({ speed: 1 })).toEqual(1);
     });
   });
 
