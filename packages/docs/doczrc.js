@@ -18,6 +18,7 @@ export default {
     '@encodable/format',
     '@encodable/registry',
     'Contributing guidelines',
+    'About',
   ],
   filterComponents: files => files.filter(() => false),
 };
