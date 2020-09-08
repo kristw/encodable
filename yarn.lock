@@ -1226,7 +1226,7 @@
     "@boost/event" "^1.3.1"
     "@types/prettier" "*"
 
-"@beemo/driver-typescript@^1.3.2":
+"@beemo/driver-typescript@^1.3.2", "@beemo/driver-typescript@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@beemo/driver-typescript/-/driver-typescript-1.4.1.tgz#1f23be828905a456b6615abff61b012d7b3143ef"
   integrity sha512-L0vgYeEb0207dp/O462cPaJK7cecRjes1W5g4VMNu0s13/0zzWwvF/z50MzgS/K1YXdN2tDigv3uA6EHXffWOw==
