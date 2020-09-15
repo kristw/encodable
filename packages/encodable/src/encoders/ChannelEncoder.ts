@@ -92,13 +92,17 @@ export default class ChannelEncoder<Def extends AnyChannelDef> {
     (value: ChannelInput, otherwise: InferChannelOutput<Def>): InferChannelOutput<Def>;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = (value: ChannelInput | InferChannelOutput<Def>, otherwise?: InferChannelOutput<Def>): any => {
-    if (typeof otherwise !== 'undefined' && (value === null || typeof value === 'undefined')) {
+    const encodedValue = this.encodeFunc(value);
+    if (
+      typeof otherwise !== 'undefined' &&
+      (encodedValue === null || typeof encodedValue === 'undefined')
+    ) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return otherwise;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return this.encodeFunc(value);
+    return encodedValue;
   };
 
   encodeDatum: {

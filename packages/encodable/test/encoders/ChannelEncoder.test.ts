@@ -56,9 +56,20 @@ describe('ChannelEncoder', () => {
     it('encodes value from datum', () => {
       expect(encoder.encodeDatum({ speed: 100 })).toEqual(1);
     });
-    it('returns fallback value if value is null or undefined', () => {
-      expect(encoder.encodeDatum({ speed: null }, 20)).toEqual(20);
-      expect(encoder.encodeDatum({}, 20)).toEqual(20);
+    it('returns fallback value if encoded value is null or undefined', () => {
+      const enc = new ChannelEncoder({
+        name: 'x',
+        channelType: 'XBand',
+        definition: {
+          type: 'nominal',
+          field: 'category',
+          scale: {
+            type: 'abc',
+          },
+        },
+      });
+      expect(enc.encodeDatum({ speed: null }, 20)).toEqual(20);
+      expect(enc.encodeDatum({}, 20)).toEqual(20);
     });
   });
 
