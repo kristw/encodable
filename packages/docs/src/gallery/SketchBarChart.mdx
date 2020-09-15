@@ -1,0 +1,58 @@
+---
+name: 'Sketch Bar Chart'
+menu: 'Gallery'
+---
+
+# Sketch Bar Chart
+
+See the component [source code](https://github.com/kristw/encodable/tree/master/packages/docs/src/components/SketchBarChart).
+or play with the component API by editing the code below.
+
+import { Playground } from 'docz';
+import Frame from '../components/Frame.tsx';
+import SketchBarChart from '../components/SketchBarChart';
+
+<Playground>
+  <Frame width={360} height={270} background="#D3EEEF">
+    <SketchBarChart
+      width={360}
+      height={270}
+      encoding={{
+        x: {
+          field: "profit",
+          type: "quantitative"
+        },
+        y: { field: "category", type: "nominal", scale: { type: "band" } },
+        color: { field: "category", type: "nominal" },
+        label: { field: "category" }
+      }}
+      data={[
+        {
+          category: "Toys",
+          marketingCost: 100,
+          profit: 4000
+        },
+        {
+          category: "Office supplies",
+          marketingCost: 200,
+          profit: 3000
+        },
+        {
+          category: "Grocery",
+          marketingCost: 400,
+          profit: 2000
+        },
+        {
+          category: "Electronics",
+          marketingCost: 300,
+          profit: 6000
+        },
+        {
+          category: "Clothing",
+          marketingCost: 400,
+          profit: 1500
+        }
+      ]}
+    />
+  </Frame>
+</Playground>
