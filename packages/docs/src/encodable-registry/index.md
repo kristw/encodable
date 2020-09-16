@@ -1,5 +1,6 @@
 ---
 name: "@encodable/registry"
+menu: Encodable API
 route: "/encodable-registry"
 ---
 
