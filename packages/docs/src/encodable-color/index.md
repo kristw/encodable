@@ -1,5 +1,6 @@
 ---
 name: "@encodable/color"
+menu: Encodable API
 route: "/encodable-color"
 ---
 

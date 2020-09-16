@@ -4,37 +4,11 @@ name: 'Why use Encodable?'
 
 # Why use Encodable?
 
-This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite`
-gives you a grammar and rendering engine that you can use to create many different visualizations
-from it. For example, this is how you create a
-[bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in
-`vega-lite`:
+## Motivation
 
-```json
-{
-  "mark": "bar",
-  "encoding": {
-    "x": {"field": "country", "type": "ordinal"},
-    "y": {"field": "population", "type": "quantitative"}
-  }
-}
-```
+> Developing reusable components with consistent APIs is challenging.
 
-Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s
-[channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for
-full syntax explanation. For those who are less familiar with `vega-lite`, this visualization
-grammar is already supported on known platforms such as [Observable](https://observablehq.com/) or
-Jupyter Notebook (via [Altair](https://altair-viz.github.io/), its python port).
-
-Although the grammar is very flexible and covers the definitions of the most common visualizations
-already, what you can created are still limited by what `vega-lite` renderer supports. (`vega-lite`
-has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional
-component that cannot be described in `vega-lite`, or a traditional component with many subtle
-details that you struggle to describe the visualization and its interactions in `vega-lite`'s
-channels and grammar.
-
-At this point, many people, including those who are not aware of `vega-lite` in the first place,
-choose to develop their own standalone components. Each component ends up having very different API.
+Each component ends up having very different API.
 If you develop a word cloud component, how would you let user specify the `fontSize`, `color`,
 `text` etc.?
 
@@ -57,7 +31,40 @@ common properties or naming conventions, so all of your visualization components
 similarly. After all, this is likely to be yet another standard that only applies to your
 components.
 
-#### Wouldn't it be nice if I can easily develop a component which provides an API that looks like `vega-lite` grammar?
+## Inspiration
+
+This library was heavily inspired by [`vega-lite`](https://github.com/vega/vega-lite). `vega-lite`
+gives you a grammar and rendering engine that you can use to create many different visualizations
+from it. For example, this is how you create a
+[bar chart](https://vega.github.io/vega-lite/examples/bar.html) of population by country in
+`vega-lite`:
+
+```json
+{
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "country", "type": "ordinal"},
+    "y": {"field": "population", "type": "quantitative"}
+  }
+}
+```
+
+Notice how the encoding for channels `x` and `y` are described. See `vega-lite`'s
+[channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition) for
+full syntax explanation. For those who are less familiar with `vega-lite`, this visualization
+grammar is already supported on known platforms such as [Observable](https://observablehq.com/) or
+Jupyter Notebook (via [Altair](https://altair-viz.github.io/), its python port).
+
+> Could I develop a component which provides an API that looks like `vega-lite` grammar?
+
+Although the grammar is very flexible and covers the definitions of the most common visualizations
+already, what you can created are still limited by what `vega-lite` renderer supports. (`vega-lite`
+has a fixed set of channels.) You hit a roadblock when you want to develop a non-traditional
+component that cannot be described in `vega-lite`, or a traditional component with many subtle
+details that you struggle to describe the visualization and its interactions in `vega-lite`'s
+channels and grammar.
+
+## Enter Encodable
 
 `encodable` was created to address this need. When you already have a specific visualization in mind
 and know how to build it, this library helps you **make the component "encodable"** and provide
@@ -93,7 +100,7 @@ word cloud component that is powered by `encodable`.
 See the full
 [example code](https://codesandbox.io/s/encodable-wordcloud-demo-k66ui?fontsize=14&hidenavigation=1&theme=dark).
 
-More specifically, the `encodable` package
+More specifically, Encodable
 
 - provides configuration for defining your own grammar for the encoding channels of your component.
   The resulting grammar is a TypeScript type, which can be used to type-check the specification from
@@ -102,9 +109,9 @@ More specifically, the `encodable` package
   [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition)
   grammar from `vega-lite` (only key features) to define visual encoding channels as well as logic
   for determining smart defaults (e.g. choosing scale type based on data type, etc.)
-- parses incoming specification from component users into utility functions that helps you render
+- does NOT render the component. It only parses incoming specification from component users into utility functions that helps you render
   the visualization component.
-- does NOT render the component. You can use anything you want (D3, React, Vue, etc.).
+- framework agnostic: You can use anything you want (D3, React, Vue, etc.).
 
 <!-- ## Demo
 

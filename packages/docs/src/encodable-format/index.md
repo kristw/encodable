@@ -1,5 +1,6 @@
 ---
 name: "@encodable/format"
+menu: Encodable API
 route: "/encodable-format"
 ---
 
