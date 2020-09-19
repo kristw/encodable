@@ -23,5 +23,6 @@ export { isCompleteFieldDef, isCompleteValueDef } from './typeGuards/CompleteCha
 export * from './types';
 
 // Re-export color and formatter registries
-export * from '@encodable/format';
 export * from '@encodable/color';
+export * from '@encodable/dimension';
+export * from '@encodable/format';
