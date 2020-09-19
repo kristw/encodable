@@ -1,6 +1,6 @@
 {
   "name": "@encodable/dimension",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Utilities for handling dimension",
   "sideEffects": false,
   "main": "lib/index.js",
@@ -13,7 +13,9 @@
     "type": "git",
     "url": "git+https://github.com/kristw/encodable.git"
   },
-  "keywords": ["encodable"],
+  "keywords": [
+    "encodable"
+  ],
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
   ],

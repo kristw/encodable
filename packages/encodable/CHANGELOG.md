@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/kristw/encodable/compare/encodable@0.8.2...encodable@0.9.0) (2020-09-19)
+
+
+### Features
+
+* export dimension functions as part of main package ([#114](https://github.com/kristw/encodable/issues/114)) ([ad197a0](https://github.com/kristw/encodable/commit/ad197a07ed2f84f575613524fc43ac06fbf471fc))
+
+
+
+
+
 ## [0.8.2](https://github.com/kristw/encodable/compare/encodable@0.8.1...encodable@0.8.2) (2020-09-16)
 
 
