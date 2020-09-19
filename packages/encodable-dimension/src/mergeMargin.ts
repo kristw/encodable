@@ -5,7 +5,7 @@ function mergeSide(
   a: number | null | undefined,
   b: number | null | undefined,
   defaultValue: number,
-): number | undefined {
+): number {
   const hasA = a != null && !Number.isNaN(a);
   const hasB = b != null && !Number.isNaN(b);
 
@@ -13,10 +13,10 @@ function mergeSide(
     return operation(a, b);
   }
   if (hasA) {
-    return a;
+    return a as number;
   }
   if (hasB) {
-    return b;
+    return b as number;
   }
   return defaultValue;
 }
