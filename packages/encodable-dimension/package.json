@@ -1,0 +1,28 @@
+{
+  "name": "@encodable/dimension",
+  "version": "0.0.0",
+  "description": "Utilities for handling dimension",
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "esm",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristw/encodable.git"
+  },
+  "keywords": ["encodable"],
+  "authors": [
+    "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kristw/encodable/issues"
+  },
+  "homepage": "https://github.com/kristw/encodable#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
