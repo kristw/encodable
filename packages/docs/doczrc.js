@@ -14,6 +14,7 @@ export default {
     { name: 'Gallery', menu: ['Gallery'] },
     'Guides',
     'Encodable API',
+    'Submodule API',
     'Contributing guidelines',
     'About',
   ],

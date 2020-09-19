@@ -3,7 +3,7 @@ name: Encoder
 menu: Encodable API
 ---
 
-# `Encoder`
+# Encoder
 
 An `Encoder` is a utility class created once per chart type.
 

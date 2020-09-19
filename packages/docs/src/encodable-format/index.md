@@ -1,6 +1,6 @@
 ---
 name: "@encodable/format"
-menu: Encodable API
+menu: Submodule API
 route: "/encodable-format"
 ---
 

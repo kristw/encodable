@@ -100,22 +100,19 @@ word cloud component that is powered by `encodable`.
 See the full
 [example code](https://codesandbox.io/s/encodable-wordcloud-demo-k66ui?fontsize=14&hidenavigation=1&theme=dark).
 
+## Features
+
 More specifically, Encodable
 
 - provides configuration for defining your own grammar for the encoding channels of your component.
-  The resulting grammar is a TypeScript type, which can be used to type-check the specification from
+  The resulting grammar is a TypeScript type, which can be used to type-check the *specification* from
   component users.
-- adopts the
-  [channel definition](https://vega.github.io/vega-lite/docs/encoding.html#channel-definition)
-  grammar from `vega-lite` (only key features) to define visual encoding channels as well as logic
+- provides a parse to parse the incoming *specification* into utilities that are useful for implementing the component as well as logic
   for determining smart defaults (e.g. choosing scale type based on data type, etc.)
 - does NOT render the component. It only parses incoming specification from component users into utility functions that helps you render
   the visualization component.
 - framework agnostic: You can use anything you want (D3, React, Vue, etc.).
 
-<!-- ## Demo
+## More details
 
-Most recent release: https://kristw.github.io/encodable
-
--->
-
+Please refer to [the paper](https://arxiv.org/abs/2009.00722) for more details.

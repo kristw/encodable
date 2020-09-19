@@ -3,7 +3,21 @@ name: ChannelType
 menu: Encodable API
 ---
 
-# `ChannelType`
+# ChannelType
+
+When creating a configuration for a component, the component author needs to list all channels for the component with its type.
+
+```ts
+type EncodingConfig = {
+  [k in string]: [ChannelType, Output, 'multiple'];
+}
+```
+
+## ChannelType and Output types
+
+These are the possible values for `ChannelType` and their corresponding `Output` have to be subset of the output types in the table below.
+
+To make a channel accepts an array of definitions, such as *tooltip* channel that may take multiple fields, add `'multiple'` as the third item in the array.
 
 | ChannelType | Example channel                                                                              | Output types                          |
 | ----------- | -------------------------------------------------------------------------------------------- | ------------------------------------- |
@@ -16,3 +30,20 @@ menu: Encodable API
 | `Text`      | bubble chart's bubble label                                                                  | `string \| null`                      |
 | `Category`  | bubble chart's fill or not (`boolean`), pattern (`string`), font weight (`string \| number`) | `string \| boolean \| number \| null` |
 
+## Example
+
+```ts
+import { DeriveEncoding } from 'encodable';
+
+type WordCloudEncodingConfig = {
+  color: ['Color', string];
+  emoji: ['Category', string];
+  fontFamily: ['Category', string];
+  fontSize: ['Numeric', number];
+  fontWeight: ['Category', number | 'bold' | 'normal' | 'bolder' | 'lighter'];
+  text: ['Text', string];
+};
+
+// Then an encoding type can be derived from the config.
+type WordCloudEncoding = DeriveEncoding<WordCloudEncodingConfig>;
+```
