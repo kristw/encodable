@@ -1,6 +1,6 @@
 ---
 name: "@encodable/registry"
-menu: Encodable API
+menu: Submodule API
 route: "/encodable-registry"
 ---
 

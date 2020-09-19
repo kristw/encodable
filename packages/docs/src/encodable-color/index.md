@@ -1,6 +1,6 @@
 ---
 name: "@encodable/color"
-menu: Encodable API
+menu: Submodule API
 route: "/encodable-color"
 ---
 

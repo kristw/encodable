@@ -3,9 +3,9 @@ name: ChannelEncoder
 menu: Encodable API
 ---
 
-# `ChannelEncoder`
+# ChannelEncoder
 
-`ChannelEncoder` takes user-defined channel definition, complete and parse into an object with set
+`ChannelEncoder` constructor takes user-defined channel definition, complete and parse into an object with set
 of utility functions useful for rendering that channel.
 
 The "rendering" mention here is framework-independent. Chart component developer is required to
