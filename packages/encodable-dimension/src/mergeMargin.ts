@@ -1,24 +1,19 @@
 import { MarginOrPadding } from './types';
 
+function isNumber(x: number | null | undefined): x is number {
+  return x != null && !Number.isNaN(x);
+}
+
 function mergeSide(
   operation: (a: number, b: number) => number,
   a: number | null | undefined,
   b: number | null | undefined,
   defaultValue: number,
 ): number {
-  const hasA = a != null && !Number.isNaN(a);
-  const hasB = b != null && !Number.isNaN(b);
-
-  if (hasA && hasB) {
-    return operation(a, b);
+  if (isNumber(a)) {
+    return isNumber(b) ? operation(a, b) : a;
   }
-  if (hasA) {
-    return a as number;
-  }
-  if (hasB) {
-    return b as number;
-  }
-  return defaultValue;
+  return isNumber(b) ? b : defaultValue;
 }
 
 function mergeMarginOrPadding(
