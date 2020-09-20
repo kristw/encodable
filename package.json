@@ -115,7 +115,7 @@
         "packages/docs",
         "packages/generator-encodable/generators"
       ],
-      "coveragePathIgnorePatterns":[
+      "coveragePathIgnorePatterns": [
         "packages/docs",
         "packages/generator-encodable/generators"
       ],
@@ -170,7 +170,12 @@
     },
     "babel": {
       "plugins": [
-        ["@babel/plugin-proposal-private-methods", { "loose": false }]
+        [
+          "@babel/plugin-proposal-private-methods",
+          {
+            "loose": false
+          }
+        ]
       ]
     },
     "typescript": {
