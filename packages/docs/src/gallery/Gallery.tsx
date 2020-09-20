@@ -267,7 +267,6 @@ const items = [
 
 export default function Gallery({ count }: { count?: number }) {
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {(count ? items.slice(0, count) : items).map(({ key, component }) => (
         <Link key={key} to={`/src-gallery-${key}`}>

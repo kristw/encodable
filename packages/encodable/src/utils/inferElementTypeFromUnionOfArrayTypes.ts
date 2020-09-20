@@ -5,7 +5,6 @@ type ArrayElement<A> = A extends Array<infer Elem> ? Elem : never;
  * to avoid error "Cannot invoke an expression whose type lacks a call signature"
  * when using array.map
  */
-export default function inferElementTypeFromUnionOfArrayTypes<T>(array: T): ArrayElement<T>[] {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return array as any;
+export default function inferElementTypeFromUnionOfArrayTypes<T>(array: T) {
+  return (array as unknown) as ArrayElement<T>[];
 }

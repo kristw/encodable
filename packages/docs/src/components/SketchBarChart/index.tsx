@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { PlainObject } from 'encodable';
+import { PlainObject, mergePadding, Padding } from 'encodable';
 import ReactRough, { Rectangle } from 'react-rough';
 import { BarChartEncoding, barChartEncoderFactory } from './Encoder';
 
@@ -9,22 +9,18 @@ export interface BarChartProps {
   encoding?: Partial<BarChartEncoding>;
   height: number;
   width: number;
-  padding?: {
-    top?: number;
-    right?: number;
-    left?: number;
-    bottom?: number;
-  };
+  padding?: Partial<Padding>;
 }
 
-export default function BarChart({
-  data = [],
-  padding = {},
-  encoding,
-  width,
-  height,
-}: BarChartProps) {
-  const { top = 30, left = 162, bottom = 30, right = 60 } = padding;
+const DEFAULT_PADDING: Padding = {
+  top: 30,
+  left: 162,
+  bottom: 30,
+  right: 60,
+};
+
+export default function BarChart({ data = [], padding, encoding, width, height }: BarChartProps) {
+  const { top, left, bottom, right } = mergePadding(padding, DEFAULT_PADDING);
   // Parse encoding and create encoder
   const encoder = useMemo(() => barChartEncoderFactory.create(encoding), [encoding]);
 

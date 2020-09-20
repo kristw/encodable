@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { select as d3Select } from 'd3-selection';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { PlainObject } from 'encodable';
