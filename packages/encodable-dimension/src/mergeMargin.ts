@@ -21,7 +21,7 @@ function mergeMarginOrPadding(
   margin2: Partial<MarginOrPadding> = {},
   mode: 'max' | 'min' = 'max',
   defaultValue: number = 0,
-) {
+): MarginOrPadding {
   const { top, left, bottom, right } = margin1;
   const operation = mode === 'max' ? Math.max : Math.min;
 

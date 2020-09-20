@@ -2,10 +2,11 @@ import createEncoderFactory from '../../src/encoders/createEncoderFactory';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function stripFunction(legendInfo: any[]) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
   return legendInfo.map((legendGroup: any) => {
     const { createLegendItems, channelEncoders, ...rest } = legendGroup;
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return { ...rest };
   });
 }
