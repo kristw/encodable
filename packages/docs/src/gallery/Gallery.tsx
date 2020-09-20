@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
+import shakespeare from '@vx/mock-data/lib/mocks/shakespeare';
 import Frame from '../components/Frame';
 import BalloonPlot from '../components/BalloonPlot';
 import CoffeeChart from '../components/CoffeeChart';
@@ -15,6 +16,8 @@ import ScatterPlot from '../components/ScatterPlot';
 import cars from '../data/cars';
 
 import SketchBarChart from '../components/SketchBarChart';
+
+import Treemap from '../components/Treemap';
 
 const width = 360;
 const height = 270;
@@ -211,7 +214,7 @@ const items = [
   {
     key: 'sketch-bar-chart',
     component: (
-      <Frame width={360} height={270} background="#C1121E">
+      <Frame width={360} height={270} background="#B6312A">
         <SketchBarChart
           width={360}
           height={270}
@@ -226,7 +229,7 @@ const items = [
               type: 'nominal',
               scale: { type: 'band' },
             },
-            color: { value: '#EDEF2B' },
+            color: { value: '#E1D453' },
             label: { field: 'menu' },
           }}
           data={[
@@ -259,6 +262,30 @@ const items = [
               calories: 230,
             },
           ]}
+        />
+      </Frame>
+    ),
+  },
+  {
+    key: 'treemap',
+    component: (
+      <Frame width={360} height={270} background="#606060">
+        <Treemap
+          width={360}
+          height={270}
+          padding={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          // squarify, dice, slice, slice-dice, resquarify, binary
+          tileMethod="squarify"
+          encoding={{
+            color: {
+              type: 'quantitative',
+              field: 'size',
+              scale: { type: 'linear', range: ['#606060', '#A8C96B'] },
+            },
+            label: { field: 'id' },
+            size: { type: 'quantitative', field: 'size' },
+          }}
+          data={shakespeare}
         />
       </Frame>
     ),
