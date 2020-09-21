@@ -19,6 +19,9 @@ import SketchBarChart from '../components/SketchBarChart';
 
 import Treemap from '../components/Treemap';
 
+import AreaChart from '../components/AreaChart';
+import appleStock from '../data/stock';
+
 const width = 360;
 const height = 270;
 
@@ -286,6 +289,22 @@ const items = [
             size: { type: 'quantitative', field: 'size' },
           }}
           data={shakespeare}
+        />
+      </Frame>
+    ),
+  },
+  {
+    key: 'area-chart',
+    component: (
+      <Frame width={360} height={270} background="transparent">
+        <AreaChart
+          width={360}
+          height={270}
+          encoding={{
+            x: { type: 'temporal', field: 'date', scale: { type: 'utc' } },
+            y: { type: 'quantitative', field: 'close' },
+          }}
+          data={appleStock}
         />
       </Frame>
     ),

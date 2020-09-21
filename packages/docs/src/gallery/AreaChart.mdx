@@ -1,0 +1,28 @@
+---
+name: 'Area Chart'
+menu: 'Gallery'
+---
+
+# Area Chart
+
+See the component [source code](https://github.com/kristw/encodable/tree/master/packages/docs/src/components/AreaChart).
+or play with the component API by editing the code below.
+
+import { Playground } from 'docz';
+import Frame from '../components/Frame.tsx';
+import AreaChart from '../components/AreaChart';
+import appleStock from '../data/stock';
+
+<Playground>
+  <Frame width={360} height={270} background="transparent">
+    <AreaChart
+      width={360}
+      height={270}
+      encoding={{
+        x: { type: 'temporal', field: 'date', scale: { type: 'utc' } },
+        y: { type: 'quantitative', field: 'close' }
+      }}
+      data={appleStock}
+    />
+  </Frame>
+</Playground>
