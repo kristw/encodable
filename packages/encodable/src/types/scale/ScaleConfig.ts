@@ -212,5 +212,5 @@ export interface WithScale<
   DiscreteInput extends StringLike = StringLike,
   ThresholdInput extends DefaultThresholdInput = DefaultThresholdInput
 > {
-  scale?: Partial<ScaleConfig<Output, DiscreteInput, ThresholdInput>>;
+  scale?: Partial<ScaleConfig<Output, DiscreteInput, ThresholdInput>> | false;
 }
