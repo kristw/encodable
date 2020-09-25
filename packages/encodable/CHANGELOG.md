@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/kristw/encodable/compare/encodable@0.9.2...encodable@0.9.3) (2020-09-25)
+
+
+### Bug Fixes
+
+* allow scale to be disabled ([#123](https://github.com/kristw/encodable/issues/123)) ([5bee580](https://github.com/kristw/encodable/commit/5bee5808bb5f169119e7884ec52de9341b8190d7))
+
+
+
+
+
 ## [0.9.2](https://github.com/kristw/encodable/compare/encodable@0.9.1...encodable@0.9.2) (2020-09-25)
 
 **Note:** Version bump only for package encodable
