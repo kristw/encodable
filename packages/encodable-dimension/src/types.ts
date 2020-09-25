@@ -16,7 +16,15 @@ export type MarginOrPadding = {
 
 export type Margin = MarginOrPadding;
 
+export type WithMargin = {
+  margin?: Partial<Margin>;
+};
+
 export type Padding = MarginOrPadding;
+
+export type WithPadding = {
+  padding?: Partial<Padding>;
+};
 
 export interface Dimension {
   width: number;
