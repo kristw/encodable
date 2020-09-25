@@ -8,7 +8,7 @@ export interface DonutChartProps {
   encoding?: Partial<DonutChartEncoding>;
   height: number;
   width: number;
-  padding: Padding;
+  padding?: Partial<Padding>;
 }
 
 const DEFAULT_PADDING = { top: 40, right: 80, bottom: 40, left: 80 };

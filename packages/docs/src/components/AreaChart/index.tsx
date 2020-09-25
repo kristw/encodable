@@ -22,9 +22,9 @@ const DEFAULT_PADDING: Padding = {
   right: 0,
 };
 
-const background = '#490A3D';
-const background2 = '#BD1550';
-const accentColor = '#F8CA00';
+const background = '#6AC09F';
+const background2 = background;
+const accentColor = '#D9DDAF';
 
 export default function AreaChart({ data = [], padding, encoding, width, height }: AreaChartProps) {
   const { top, left, bottom, right } = mergePadding(padding, DEFAULT_PADDING);

@@ -65,7 +65,7 @@ const items = [
   {
     key: 'balloon-plot',
     component: (
-      <Frame width={width} height={height} background="#D3EEEF">
+      <Frame width={width} height={height} background="#A8E6FF">
         <BalloonPlot
           width={width}
           height={height}
@@ -80,7 +80,13 @@ const items = [
               type: 'quantitative',
               scale: { zero: true, range: [0, 2500] },
             },
-            color: { field: 'category', type: 'nominal' },
+            color: {
+              field: 'category',
+              type: 'nominal',
+              scale: {
+                range: ['#42B537', '#F08900', '#E5090B', '#9E4DFF'],
+              },
+            },
             text: { field: 'category' },
             text2: { field: 'profit', format: ',d' },
           }}
@@ -119,7 +125,7 @@ const items = [
   {
     key: 'word-cloud',
     component: (
-      <Frame width={width} height={height} background="#6393C0">
+      <Frame width={width} height={height} background="#7375A5">
         <WordCloud
           className="word-cloud"
           width={width}
@@ -129,7 +135,7 @@ const items = [
             color: {
               field: 'count',
               scale: {
-                range: ['#6393C0', '#fff'],
+                range: ['#7375A5', '#fff'],
                 zero: true,
               },
               type: 'quantitative',
@@ -191,7 +197,7 @@ const items = [
   {
     key: 'scatter-plot',
     component: (
-      <Frame width={width} height={height} background="#FFE6B4">
+      <Frame width={width} height={height} background="#FED92A">
         <ScatterPlot
           width={width}
           height={height}
@@ -208,14 +214,95 @@ const items = [
               field: 'y',
               axis: { title: '↑ Horsepower' },
             },
-            stroke: { value: '#FB664B' },
+            stroke: { value: '#333' },
             fill: { value: 'none' },
           }}
         />
       </Frame>
     ),
   },
-
+  {
+    key: 'donut-chart',
+    component: (
+      <Frame width={360} height={270} background="#556270">
+        <DonutChart
+          width={360}
+          height={270}
+          encoding={{
+            color: {
+              type: 'nominal',
+              field: 'id',
+              scale: {
+                type: 'ordinal',
+                range: ['#4ECDC4', '#C7F464', '#FF6B6B', '#C44D58'],
+              },
+            },
+            pattern: { value: 'lines' },
+            size: { type: 'quantitative', field: 'value' },
+            label: { field: 'id' },
+          }}
+          data={[
+            {
+              id: 'python',
+              value: 376,
+            },
+            {
+              id: 'javascript',
+              value: 392,
+            },
+            {
+              id: 'ruby',
+              value: 331,
+            },
+            {
+              id: 'scala',
+              value: 184,
+            },
+          ]}
+        />
+      </Frame>
+    ),
+  },
+  {
+    key: 'treemap',
+    component: (
+      <Frame width={360} height={270} background="#606060">
+        <Treemap
+          width={360}
+          height={270}
+          padding={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          // squarify, dice, slice, slice-dice, resquarify, binary
+          tileMethod="squarify"
+          encoding={{
+            color: {
+              type: 'quantitative',
+              field: 'size',
+              scale: { type: 'linear', range: ['#606060', '#A8C96B'] },
+            },
+            label: { field: 'id' },
+            size: { type: 'quantitative', field: 'size' },
+          }}
+          data={shakespeare}
+        />
+      </Frame>
+    ),
+  },
+  {
+    key: 'area-chart',
+    component: (
+      <Frame width={360} height={270} background="transparent">
+        <AreaChart
+          width={360}
+          height={270}
+          encoding={{
+            x: { type: 'temporal', field: 'date', scale: { type: 'utc' } },
+            y: { type: 'quantitative', field: 'close' },
+          }}
+          data={appleStock}
+        />
+      </Frame>
+    ),
+  },
   {
     key: 'sketch-bar-chart',
     component: (
@@ -265,88 +352,6 @@ const items = [
             {
               menu: 'French Fries',
               calories: 230,
-            },
-          ]}
-        />
-      </Frame>
-    ),
-  },
-  {
-    key: 'treemap',
-    component: (
-      <Frame width={360} height={270} background="#606060">
-        <Treemap
-          width={360}
-          height={270}
-          padding={{ top: 20, bottom: 20, left: 20, right: 20 }}
-          // squarify, dice, slice, slice-dice, resquarify, binary
-          tileMethod="squarify"
-          encoding={{
-            color: {
-              type: 'quantitative',
-              field: 'size',
-              scale: { type: 'linear', range: ['#606060', '#A8C96B'] },
-            },
-            label: { field: 'id' },
-            size: { type: 'quantitative', field: 'size' },
-          }}
-          data={shakespeare}
-        />
-      </Frame>
-    ),
-  },
-  {
-    key: 'area-chart',
-    component: (
-      <Frame width={360} height={270} background="transparent">
-        <AreaChart
-          width={360}
-          height={270}
-          encoding={{
-            x: { type: 'temporal', field: 'date', scale: { type: 'utc' } },
-            y: { type: 'quantitative', field: 'close' },
-          }}
-          data={appleStock}
-        />
-      </Frame>
-    ),
-  },
-  {
-    key: 'donut-chart',
-    component: (
-      <Frame width={360} height={270} background="#556270">
-        <DonutChart
-          width={360}
-          height={270}
-          encoding={{
-            color: {
-              type: 'nominal',
-              field: 'id',
-              scale: {
-                type: 'ordinal',
-                range: ['#4ECDC4', '#C7F464', '#FF6B6B', '#C44D58'],
-              },
-            },
-            pattern: { value: 'lines' },
-            size: { type: 'quantitative', field: 'value' },
-            label: { type: 'nominal', field: 'id' },
-          }}
-          data={[
-            {
-              id: 'python',
-              value: 376,
-            },
-            {
-              id: 'javascript',
-              value: 392,
-            },
-            {
-              id: 'ruby',
-              value: 331,
-            },
-            {
-              id: 'scala',
-              value: 184,
             },
           ]}
         />

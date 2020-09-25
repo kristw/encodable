@@ -19,7 +19,7 @@ export default function BalloonPlot({ data = [], encoding, width, height }: Ball
 
   encoder.setDomainFromDataset(data);
   encoder.channels.x.scale!.range([padding, width - padding]);
-  encoder.channels.y.scale!.range([height - padding, padding]);
+  encoder.channels.y.scale!.range([height - padding, padding + 10]);
 
   const { x, y, text, text2, size, color } = encoder.channels;
 

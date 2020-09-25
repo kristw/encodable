@@ -59,6 +59,7 @@ export default function BarChart({ data = [], padding, encoding, width, height }
             <text
               key={label.formatDatum(d)}
               dy=".3em"
+              fontSize=".9em"
               x={left - 10}
               y={top + y.encodeDatum(d, 0) + band / 2}
               fill={color.encodeDatum(d, 'none')}
@@ -69,6 +70,7 @@ export default function BarChart({ data = [], padding, encoding, width, height }
             <text
               key={label.formatDatum(d)}
               dy=".3em"
+              fontSize=".9em"
               x={left + x.encodeDatum(d, 0) + 10}
               y={top + y.encodeDatum(d, 0) + band / 2}
               fill={color.encodeDatum(d, 'none')}
