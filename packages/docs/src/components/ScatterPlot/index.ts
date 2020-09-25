@@ -14,6 +14,9 @@ type ScatterPlotProps = {
 const padding = 8;
 const margin = { top: 24, right: 20, bottom: 36, left: 40 };
 
+const LABEL_COLOR = '#333';
+const GRID_COLOR = 'rgba(0,0,0,0.1)';
+
 function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
   const { width, height, encoding, data } = props;
   const encoder = scatterPlotEncoderFactory.create(encoding);
@@ -74,7 +77,7 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
   // // grid
   svg
     .append('g')
-    .attr('stroke', '#DBD1AA')
+    .attr('stroke', GRID_COLOR)
     .attr('stroke-opacity', 0.5)
     .call(g =>
       g
@@ -123,17 +126,17 @@ function ScatterPlot(container: HTMLDivElement, props: ScatterPlotProps) {
     .attr('cy', d => channels.y.encodeDatum(d, 0))
     .text(d => channels.label.getValueFromDatum(d));
 
-  svg.selectAll('path.domain').attr('stroke', '#746F5A');
-  svg.selectAll('g.tick line').attr('stroke', '#746F5A');
+  svg.selectAll('path.domain').attr('stroke', LABEL_COLOR);
+  svg.selectAll('g.tick line').attr('stroke', LABEL_COLOR);
   svg
     .selectAll('g.tick text')
     .style('font-family', 'Raleway, "Helvetica Neue", Helvetica, sans-serif')
-    .attr('fill', '#746F5A');
+    .attr('fill', LABEL_COLOR);
   svg
     .selectAll('text.axis-title')
     .style('font-family', 'Raleway, "Helvetica Neue", Helvetica, sans-serif')
     .style('font-weight', '700')
-    .attr('fill', '#746F5A');
+    .attr('fill', LABEL_COLOR);
 }
 
 export default reactify(ScatterPlot);

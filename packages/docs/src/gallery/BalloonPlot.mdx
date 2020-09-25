@@ -13,7 +13,7 @@ import Frame from '../components/Frame.tsx';
 import BalloonPlot from '../components/BalloonPlot';
 
 <Playground>
-  <Frame width={360} height={270} background="#D3EEEF">
+  <Frame width={360} height={270} background="#A8E6FF">
     <BalloonPlot
       width={360}
       height={270}
@@ -28,7 +28,13 @@ import BalloonPlot from '../components/BalloonPlot';
           type: "quantitative",
           scale: { zero: true, range: [0, 2500] }
         },
-        color: { field: "category", type: "nominal" },
+        color: {
+          field: 'category',
+          type: 'nominal',
+          scale: {
+            range: ['#42B537', '#F08900', '#E5090B', '#9E4DFF'],
+          },
+        },
         text: { field: "category" },
         text2: { field: "profit", format: ",d" }
       }}

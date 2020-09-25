@@ -38,6 +38,7 @@ export default function CoffeeChart({ data = [], encoding, width, height }: Coff
         <span
           style={{
             textTransform: 'capitalize',
+            color: '#222',
             fontSize: 12,
             marginRight: 4,
             verticalAlign: 'middle',

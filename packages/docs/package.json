@@ -29,6 +29,7 @@
     "@types/d3-selection": "^1.4.2",
     "@types/react": "*",
     "@types/react-dom": "*",
+    "@nivo/pie": "^0.62.0",
     "@vx/gradient": "^0.0.199",
     "@vx/grid": "^0.0.199",
     "@vx/curve": "^0.0.199",
