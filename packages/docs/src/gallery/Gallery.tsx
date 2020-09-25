@@ -337,10 +337,6 @@ const items = [
               value: 376,
             },
             {
-              id: 'go',
-              value: 115,
-            },
-            {
               id: 'javascript',
               value: 392,
             },
