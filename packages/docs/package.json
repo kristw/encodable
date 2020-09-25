@@ -5,7 +5,7 @@
     "../../packages/**/*",
     "../../../packages/**/*"
   ],
-  "version": "0.2.4",
+  "version": "0.2.5",
   "license": "Apache-2.0",
   "authors": [
     "Krist Wongsuphasawat (http://kristw.yellowpigz.com)"
@@ -21,6 +21,7 @@
     "serve": "docz serve"
   },
   "dependencies": {
+    "@nivo/pie": "^0.62.0",
     "@theme-ui/typography": "^0.3.0",
     "@types/d3-array": "^2.0.0",
     "@types/d3-axis": "^1.0.12",
@@ -29,10 +30,9 @@
     "@types/d3-selection": "^1.4.2",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "@nivo/pie": "^0.62.0",
+    "@vx/curve": "^0.0.199",
     "@vx/gradient": "^0.0.199",
     "@vx/grid": "^0.0.199",
-    "@vx/curve": "^0.0.199",
     "@vx/mock-data": "^0.0.199",
     "@vx/shape": "^0.0.199",
     "d3-array": "^2.6.0",
@@ -41,7 +41,7 @@
     "d3-scale": "^3.2.2",
     "d3-selection": "^2.0.0",
     "docz": "^2.3.1",
-    "encodable": "^0.9.1",
+    "encodable": "^0.9.2",
     "gatsby": "^2.24.47",
     "gatsby-plugin-google-analytics": "^2.3.13",
     "gatsby-plugin-google-fonts": "^1.0.1",

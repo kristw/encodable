@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/kristw/encodable/compare/@encodable/dimension@0.1.1...@encodable/dimension@0.2.0) (2020-09-25)
+
+
+### Features
+
+* add WithPadding and WithMargin ([#122](https://github.com/kristw/encodable/issues/122)) ([6ccb6ee](https://github.com/kristw/encodable/commit/6ccb6ee85857bd7bd598f2d700162a11b8bcc9c7))
+
+
+
+
+
 ## [0.1.1](https://github.com/kristw/encodable/compare/@encodable/dimension@0.1.0...@encodable/dimension@0.1.1) (2020-09-20)
 
 
