@@ -57,7 +57,7 @@ export default class ContinuousSchemeWrapper<
 
     const { interpolator } = this;
     const adjustExtent = scaleLinear().range(extent).clamp(true);
-    return quantize<string>(t => interpolator(adjustExtent(t)), numColors);
+    return quantize<string>(t => interpolator(adjustExtent(t)!), numColors);
   }
 
   createScaleLinear() {

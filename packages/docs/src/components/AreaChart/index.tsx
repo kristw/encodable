@@ -58,7 +58,9 @@ export default function AreaChart({ data = [], padding, encoding, width, height 
       <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.1} />
       <g transform={`translate(${left},${top})`}>
         <GridRows
-          scale={y.scale!}
+          // use any until new visx released with updated @types/d3-scale
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          scale={y.scale! as any}
           width={innerWidth}
           strokeDasharray="3,3"
           stroke={accentColor}
@@ -66,7 +68,9 @@ export default function AreaChart({ data = [], padding, encoding, width, height 
           pointerEvents="none"
         />
         <GridColumns
-          scale={x.scale!}
+          // use any until new visx released with updated @types/d3-scale
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          scale={x.scale! as any}
           height={innerHeight}
           strokeDasharray="3,3"
           stroke={accentColor}
@@ -77,7 +81,9 @@ export default function AreaChart({ data = [], padding, encoding, width, height 
           data={data}
           x={d => x.encodeDatum(d, 0)}
           y={d => y.encodeDatum(d, 0)}
-          yScale={y.scale!}
+          // use any until new visx released with updated @types/d3-scale
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          yScale={y.scale! as any}
           strokeWidth={1}
           stroke="url(#area-gradient)"
           fill="url(#area-gradient)"

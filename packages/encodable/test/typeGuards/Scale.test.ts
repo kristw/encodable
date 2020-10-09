@@ -13,7 +13,7 @@ import { StringLike } from '../../src/types';
 describe('type guards', () => {
   describe('isContinuousScale(scale, type)', () => {
     it('returns true if type is one of the continuous scale types', () => {
-      expect(isContinuousScale(scaleLinear(), 'linear')).toBeTruthy();
+      expect(isContinuousScale(scaleLinear<number>(), 'linear')).toBeTruthy();
     });
     it('returns false otherwise', () => {
       expect(isContinuousScale(scaleOrdinal<StringLike, string>(), 'ordinal')).toBeFalsy();
@@ -28,17 +28,17 @@ describe('type guards', () => {
       expect(isDiscretizingScale<number>(scaleQuantile<number>(), 'quantile')).toBeTruthy();
     });
     it('returns false otherwise', () => {
-      expect(isDiscretizingScale(scaleLinear(), 'linear')).toBeFalsy();
+      expect(isDiscretizingScale(scaleLinear<number>(), 'linear')).toBeFalsy();
     });
   });
   describe('isTimeScale(scale, type)', () => {
     it('returns true if type is one of the time scale types', () => {
-      expect(isTimeScale(scaleTime(), 'time')).toBeTruthy();
-      expect(isTimeScale(scaleTime(), 'utc')).toBeTruthy();
+      expect(isTimeScale(scaleTime<number>(), 'time')).toBeTruthy();
+      expect(isTimeScale(scaleTime<number>(), 'utc')).toBeTruthy();
     });
     it('returns false otherwise', () => {
-      expect(isTimeScale(scaleLinear(), 'linear')).toBeFalsy();
-      expect(isTimeScale(scaleLog(), 'log')).toBeFalsy();
+      expect(isTimeScale(scaleLinear<number>(), 'linear')).toBeFalsy();
+      expect(isTimeScale(scaleLog<number>(), 'log')).toBeFalsy();
     });
   });
 });
