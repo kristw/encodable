@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/kristw/encodable/compare/encodable-docs@0.2.6...encodable-docs@0.2.7) (2020-10-09)
+
+
+### Bug Fixes
+
+* bump d3-scale-type ([#124](https://github.com/kristw/encodable/issues/124)) ([68eb5d8](https://github.com/kristw/encodable/commit/68eb5d873ea956a6603213e08968eadb763bad93))
+
+
+
+
+
 ## [0.2.6](https://github.com/kristw/encodable/compare/encodable-docs@0.2.5...encodable-docs@0.2.6) (2020-09-25)
 
 **Note:** Version bump only for package encodable-docs

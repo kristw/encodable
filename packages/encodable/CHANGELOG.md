@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.4](https://github.com/kristw/encodable/compare/encodable@0.9.3...encodable@0.9.4) (2020-10-09)
+
+
+### Bug Fixes
+
+* bump d3-scale-type ([#124](https://github.com/kristw/encodable/issues/124)) ([68eb5d8](https://github.com/kristw/encodable/commit/68eb5d873ea956a6603213e08968eadb763bad93))
+
+
+
+
+
 ## [0.9.3](https://github.com/kristw/encodable/compare/encodable@0.9.2...encodable@0.9.3) (2020-09-25)
 
 

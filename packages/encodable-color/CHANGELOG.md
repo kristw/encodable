@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/kristw/encodable/compare/@encodable/color@1.1.0...@encodable/color@1.1.1) (2020-10-09)
+
+
+### Bug Fixes
+
+* bump d3-scale-type ([#124](https://github.com/kristw/encodable/issues/124)) ([68eb5d8](https://github.com/kristw/encodable/commit/68eb5d873ea956a6603213e08968eadb763bad93))
+
+
+
+
+
 # [1.1.0](https://github.com/kristw/encodable/compare/@encodable/color@1.0.5...@encodable/color@1.1.0) (2020-08-27)
 
 
