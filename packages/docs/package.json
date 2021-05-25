@@ -24,7 +24,7 @@
     "@nivo/pie": "^0.62.0",
     "@theme-ui/typography": "^0.3.0",
     "@types/d3-array": "^2.0.0",
-    "@types/d3-axis": "^1.0.12",
+    "@types/d3-axis": "^2.1.0",
     "@types/d3-hierarchy": "^1.1.6",
     "@types/d3-scale": "^3.1.0",
     "@types/d3-selection": "^1.4.2",
