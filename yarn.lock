@@ -3333,10 +3333,10 @@
   resolved "https://registry.yarnpkg.com/@types/d3-array/-/d3-array-2.0.0.tgz#a0d63a296a2d8435a9ec59393dcac746c6174a96"
   integrity sha512-rGqfPVowNDTszSFvwoZIXvrPG7s/qKzm9piCRIH6xwTTRu7pPZ3ootULFnPkTt74B6i5lN0FpLQL24qGOw1uZA==
 
-"@types/d3-axis@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@types/d3-axis/-/d3-axis-1.0.12.tgz#8c124edfcc02f3b3a9cdaa2a28b8a20341401799"
-  integrity sha512-BZISgSD5M8TgURyNtcPAmUB9sk490CO1Thb6/gIn0WZTt3Y50IssX+2Z0vTccoqZksUDTep0b+o4ofXslvNbqg==
+"@types/d3-axis@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/d3-axis/-/d3-axis-3.0.0.tgz#665a500ae6bd12e9f95d8e5d0575d74b290f92f6"
+  integrity sha512-BF9yBgmAC9+PN5SvvkFUrs9dbzTmgBh6dmMy0L2yhTDrLAmY0PbPy8tV/meGPDmU6eJUWKt5O+tMKbwO/W9r3A==
   dependencies:
     "@types/d3-selection" "*"
 
@@ -3666,10 +3666,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-test-renderer@^16.9.2":
-  version "16.9.3"
-  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.3.tgz#96bab1860904366f4e848b739ba0e2f67bcae87e"
-  integrity sha512-wJ7IlN5NI82XMLOyHSa+cNN4Z0I+8/YaLl04uDgcZ+W+ExWCmCiVTLT/7fRNqzy4OhStZcUwIqLNF7q+AdW43Q==
+"@types/react-test-renderer@^17.0.1":
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-17.0.1.tgz#3120f7d1c157fba9df0118dae20cb0297ee0e06b"
+  integrity sha512-3Fi2O6Zzq/f3QR9dRnlnHso9bMl7weKCviFmfF6B4LS1Uat6Hkm15k0ZAQuDz+UBq6B3+g+NM6IT2nr5QgPzCw==
   dependencies:
     "@types/react" "*"
 
@@ -6164,9 +6164,9 @@ color-name@^1.0.0, color-name@~1.1.4:
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
 color-string@^1.5.2:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
-  integrity sha512-dC2C5qeWoYkxki5UAXapdjqO672AM4vZuPGRQfO8b5HKuKGBbKWpITyDYN7TOFKvRW7kOgAn3746clDBMDJyQw==
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.5.tgz#65474a8f0e7439625f3d27a6a19d89fc45223014"
+  integrity sha512-jgIoum0OfQfq9Whcfc2z/VhCNcmQjWbey6qBX0vqt7YICflUmBCh9E9CiQD5GSJ+Uehixm3NUwHVhqUAWRivZg==
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
