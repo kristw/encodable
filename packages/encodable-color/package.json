@@ -1,6 +1,6 @@
 {
   "name": "@encodable/color",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Utilities for managing color schemes and color scales.",
   "sideEffects": false,
   "main": "lib/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@encodable/dimension",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Utilities for handling dimension",
   "sideEffects": false,
   "main": "lib/index.js",
