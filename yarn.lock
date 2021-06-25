@@ -3333,10 +3333,10 @@
   resolved "https://registry.yarnpkg.com/@types/d3-array/-/d3-array-2.0.0.tgz#a0d63a296a2d8435a9ec59393dcac746c6174a96"
   integrity sha512-rGqfPVowNDTszSFvwoZIXvrPG7s/qKzm9piCRIH6xwTTRu7pPZ3ootULFnPkTt74B6i5lN0FpLQL24qGOw1uZA==
 
-"@types/d3-axis@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@types/d3-axis/-/d3-axis-1.0.12.tgz#8c124edfcc02f3b3a9cdaa2a28b8a20341401799"
-  integrity sha512-BZISgSD5M8TgURyNtcPAmUB9sk490CO1Thb6/gIn0WZTt3Y50IssX+2Z0vTccoqZksUDTep0b+o4ofXslvNbqg==
+"@types/d3-axis@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/d3-axis/-/d3-axis-3.0.1.tgz#6afc20744fa5cc0cbc3e2bd367b140a79ed3e7a8"
+  integrity sha512-zji/iIbdd49g9WN0aIsGcwcTBUkgLsCSwB+uH+LPVDAiKWENMtI3cJEWt+7/YYwelMoZmbBfzA3qCdrZ2XFNnw==
   dependencies:
     "@types/d3-selection" "*"
 
@@ -3524,14 +3524,14 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
-"@types/jsdom@^12.2.4":
-  version "12.2.4"
-  resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-12.2.4.tgz#845cd4d43f95b8406d9b724ec30c03edadcd9528"
-  integrity sha512-q+De3S/Ri6U9uPx89YA1XuC+QIBgndIfvBaaJG0pRT8Oqa75k4Mr7G9CRZjIvlbLGIukO/31DFGFJYlQBmXf/A==
+"@types/jsdom@^16.2.12":
+  version "16.2.12"
+  resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-16.2.12.tgz#2d47f5c9f7e40b4d5d9b5f0534c736dc475f9569"
+  integrity sha512-rD68Q2XSKBYOl38Tb9jbPuqZeTtpw09dFeuKWi7yhlZVfY8rV4xnQmISNQQZfhkQJGpJWp2qCmmrWjhiqDFNvA==
   dependencies:
     "@types/node" "*"
+    "@types/parse5" "*"
     "@types/tough-cookie" "*"
-    parse5 "^4.0.0"
 
 "@types/json-schema@^7.0.3", "@types/json-schema@^7.0.4":
   version "7.0.5"
@@ -3625,6 +3625,11 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
+
+"@types/parse5@*":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/parse5/-/parse5-6.0.0.tgz#38590dc2c3cf5717154064e3ee9b6947ee21b299"
+  integrity sha512-oPwPSj4a1wu9rsXTEGIJz91ISU725t0BmSnUhb57sI+M8XEmvUop84lzuiYdq0Y5M6xLY8DBPg0C2xEQKLyvBA==
 
 "@types/parse5@^5.0.0":
   version "5.0.3"
@@ -15387,11 +15392,6 @@ parse5@^3.0.1:
   integrity sha512-rgO9Zg5LLLkfJF9E6CCmXlSE4UVceloys8JrFqCcHloC3usd/kJCyPDwH2SOlzix2j3xaP9sUX3e8+kvkuleAA==
   dependencies:
     "@types/node" "*"
-
-parse5@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
-  integrity sha512-VrZ7eOd3T1Fk4XWNXMgiGBK/z0MG48BWG2uQNU4I72fkQuKUTZpl+u9k+CxEG0twMVzSmXEEz12z5Fnw1jIQFA==
 
 parse5@^6.0.0:
   version "6.0.1"
