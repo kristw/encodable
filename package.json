@@ -23,7 +23,6 @@
     "type": "nimbus typescript --build --reference-workspaces",
     "prepare-release": "git checkout master && git pull --rebase origin master && yarn && yarn test",
     "prerelease": "yarn build",
-    "pretest": "yarn lint",
     "release": "yarn prepare-release && lerna publish --exact && yarn postrelease",
     "postrelease": "lerna run deploy-demo",
     "storybook": "cd packages/encodable-demo && yarn storybook",
@@ -74,7 +73,7 @@
     "typescript": "^3.9.7"
   },
   "engines": {
-    "node": ">=10.10.0",
+    "node": ">=12.10.0",
     "npm": ">=6.8.0",
     "yarn": ">=1.13.0"
   },

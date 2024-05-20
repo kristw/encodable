@@ -44,6 +44,19 @@ describe('Registry', () => {
     });
   });
 
+  describe('.apply(func)', () => {
+    it('applies a function to the registry', () => {
+      function testFunc(reg: Registry<unknown>) {
+        reg.registerValue('xyz', 'testValue');
+      }
+      registry.apply(testFunc);
+      expect(registry.get('xyz')).toBe('testValue');
+    });
+    it('returns the registry itself', () => {
+      expect(registry.apply(() => {})).toBe(registry);
+    });
+  });
+
   describe('.has(key)', () => {
     it('returns true if an item with the given key exists', () => {
       registry.registerValue('a', 'testValue');

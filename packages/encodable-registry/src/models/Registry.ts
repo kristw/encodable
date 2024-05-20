@@ -31,12 +31,23 @@ export default class Registry<V, L extends V | Promise<V> = V | Promise<V>> {
   /**
    * Clear all item in the registry.
    * Reset default key to initial default key (if any)
+   * @returns the registry itself
    */
   clear() {
     this.state.items = {};
     this.state.promises = {};
     this.state.defaultKey = this.state.initialDefaultKey;
 
+    return this;
+  }
+
+  /**
+   * Apply a function to this registry.
+   * @param func Function that takes this registry as an argument
+   * @returns the registry itself
+   */
+  apply(func: (registry: this) => void) {
+    func(this);
     return this;
   }
 
