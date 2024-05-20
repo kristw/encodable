@@ -18204,6 +18204,15 @@ shelljs@^0.8.3:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
+shelljs@^0.8.4:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.5.tgz#de055408d8361bed66c669d2f000538ced8ee20c"
+  integrity sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
+
 shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
@@ -21123,10 +21132,10 @@ yeoman-environment@^2.10.3, yeoman-environment@^2.9.5:
     untildify "^3.0.3"
     yeoman-generator "^4.8.2"
 
-yeoman-generator@^4.0.0, yeoman-generator@^4.11.0, yeoman-generator@^4.8.2:
-  version "4.12.0"
-  resolved "https://registry.yarnpkg.com/yeoman-generator/-/yeoman-generator-4.12.0.tgz#512e783a38b004c49265e71826a09ff7f1939f4b"
-  integrity sha512-lozwklVQHwUXMM1o8BgxEB8F5BB7vkHW4pjAo1Zt5sJ7FOlWhd6DJ4ZxJ2OK0w+gNYkY/ocPMkUV7DTz/uqEEg==
+yeoman-generator@^4.0.0, yeoman-generator@^4.12.0, yeoman-generator@^4.8.2:
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/yeoman-generator/-/yeoman-generator-4.13.0.tgz#a6caeed8491fceea1f84f53e31795f25888b4672"
+  integrity sha512-f2/5N5IR3M2Ozm+QocvZQudlQITv2DwI6Mcxfy7R7gTTzaKgvUpgo/pQMJ+WQKm0KN0YMWCFOZpj0xFGxevc1w==
   dependencies:
     async "^2.6.2"
     chalk "^2.4.2"
@@ -21150,23 +21159,23 @@ yeoman-generator@^4.0.0, yeoman-generator@^4.11.0, yeoman-generator@^4.8.2:
     rimraf "^2.6.3"
     run-async "^2.0.0"
     semver "^7.2.1"
-    shelljs "^0.8.3"
+    shelljs "^0.8.4"
     text-table "^0.2.0"
     through2 "^3.0.1"
   optionalDependencies:
     grouped-queue "^1.1.0"
     yeoman-environment "^2.9.5"
 
-yeoman-test@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/yeoman-test/-/yeoman-test-3.0.0.tgz#18c10b7dc7b4c3716f7795301fae6feb42f48fb7"
-  integrity sha512-L8+m6u3enXxL2czVAN/+M2oCuVgDuNqAlegY4+RcO4xD8Fd9/9hdMfoMd83YtVXNUBJvvMdYBRSYj4kd7nsp3A==
+yeoman-test@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/yeoman-test/-/yeoman-test-4.0.1.tgz#1e8ae991333fa9663c9ff8596110ad8eb37d46c4"
+  integrity sha512-AQn4jimTm5tJ7uZVM1viS6Z1Cghz05SDrmzrfDRAARD8bxxaUYJ/b+BskyWw27ibS9InEbJNzr6jljH0F7B3Lw==
   dependencies:
     inquirer "^7.3.3"
     lodash "^4.17.19"
     sinon "^9.0.2"
     yeoman-environment "^2.10.3"
-    yeoman-generator "^4.11.0"
+    yeoman-generator "^4.12.0"
 
 yoga-layout-prebuilt@^1.9.3, yoga-layout-prebuilt@^1.9.6:
   version "1.9.6"
