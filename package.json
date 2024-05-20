@@ -18,6 +18,7 @@
     "lint": "NODE_OPTIONS=\"--max-old-space-size=8192\" nimbus eslint",
     "lint:fix": "yarn lint --fix",
     "prettier": "nimbus prettier",
+    "pretest": "yarn lint",
     "test": "NODE_OPTIONS=\"--max-old-space-size=8192\" yarn jest",
     "test:watch": "yarn lint:fix && yarn jest --watch",
     "type": "nimbus typescript --build --reference-workspaces",

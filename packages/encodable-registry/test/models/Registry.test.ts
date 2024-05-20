@@ -5,6 +5,10 @@ import { Registry, OverwritePolicy } from '../../src';
 
 const loader = () => 'testValue';
 
+function testFunc(reg: Registry<unknown>) {
+  reg.registerValue('xyz', 'testValue');
+}
+
 describe('Registry', () => {
   let registry: Registry<unknown>;
 
@@ -46,9 +50,6 @@ describe('Registry', () => {
 
   describe('.apply(func)', () => {
     it('applies a function to the registry', () => {
-      function testFunc(reg: Registry<unknown>) {
-        reg.registerValue('xyz', 'testValue');
-      }
       registry.apply(testFunc);
       expect(registry.get('xyz')).toBe('testValue');
     });
