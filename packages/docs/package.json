@@ -16,9 +16,9 @@
     "package.json"
   ],
   "scripts": {
-    "dev": "docz dev",
-    "build": "docz build",
-    "serve": "docz serve"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider docz dev",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider docz build",
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider docz serve"
   },
   "dependencies": {
     "@nivo/pie": "^0.62.0",
