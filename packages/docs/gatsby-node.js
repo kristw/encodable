@@ -1,18 +1,15 @@
-// /* eslint-disable no-undef */
-// module.exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
-//   const config = getConfig();
+const path = require('path');
 
-//   const newRules = config.module.rules.filter(
-//     rule =>
-//       !(
-//         rule.use &&
-//         rule.use[0] &&
-//         rule.use[0].options &&
-//         rule.use[0].options.useEslintrc !== undefined
-//       ),
-//   );
-
-//   config.module.rules = newRules;
-
-//   actions.replaceWebpackConfig(config);
-// };
+module.exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        encodable: path.resolve(__dirname, '../../encodable/src'),
+        '@encodable/color': path.resolve(__dirname, '../../encodable-color/src'),
+        '@encodable/dimension': path.resolve(__dirname, '../../encodable-dimension/src'),
+        '@encodable/format': path.resolve(__dirname, '../../encodable-format/src'),
+        '@encodable/registry': path.resolve(__dirname, '../../encodable-registry/src'),
+      },
+    },
+  });
+};
